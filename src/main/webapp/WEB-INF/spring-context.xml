@@ -20,7 +20,7 @@
     <!-- DispatcherServletin (front-controllerin) konfiguraatio, jolla määritellään pyynnön kulku. -->
  
     <!-- Sovelluksemme lähdekooditiedostot sijaitsevat pakkauksessa wad tai sen alipakkauksissa-->
-    <context:component-scan base-package="wad" />
+    <context:component-scan base-package="ohtu" />
 
     <!-- Käytetään Spring MVC:tä annotaatioiden avulla -->
     <mvc:annotation-driven /> 

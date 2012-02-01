@@ -35,7 +35,7 @@ public class JPAProductDBDao implements ProductDBDao {
 
     @Override
     public List<Product> list() {
-        Query q = entityManager.createQuery("SELECT e FROM Esine e");
+        Query q = entityManager.createQuery("SELECT e FROM Product e");
         return q.getResultList();
     }
 }

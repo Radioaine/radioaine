@@ -24,7 +24,9 @@
 
     <!-- Käytetään Spring MVC:tä annotaatioiden avulla -->
     <mvc:annotation-driven /> 
-       
+    
+    <mvc:resources mapping="/css/**" location="WEB-INF/css/*" />
+    
     <!-- Mahdollistetaan konfigurointi annotaatioilla -->
     <context:annotation-config />
     

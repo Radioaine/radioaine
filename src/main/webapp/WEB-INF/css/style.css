@@ -1,0 +1,64 @@
+h1 {
+	font-size: 1.5em;
+}
+
+th {
+	border-style:solid;
+	border-bottom:thick solid;
+	border-bottom-width:1px;
+	text-align: left;
+}
+
+#nav {
+	padding: 20px;
+	padding-top: 80px;
+	width: 100px;
+	float: left;
+	display: block;
+}
+
+#sisalto {
+	padding: 20px;
+	float: left;
+	display: block
+}
+
+#listaus {
+	padding-left: 20px;
+	width: 500px;
+	margin-left: auto;
+	margin-right: auto;
+	text-align: left;
+}
+
+#reunaton {
+	padding-left: 20px;
+	width: 500px;
+	margin-left: auto;
+	margin-right: auto;
+	text-align: left;
+	border-style: none;
+}
+
+
+#wrapper {
+	padding: 50px;
+	text-align: left;
+	float: left;
+}
+
+
+
+.warning {
+	background-color: yellow;
+}
+
+.red {
+	background-color: red;
+}
+
+.maara {
+	width: 50px;
+	text-align: center;
+}
+

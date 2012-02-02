@@ -20,6 +20,12 @@ public class FrontPageController {
     public String nayta() {
         return "redirect:/list";
     }
+    
+    //Proto by rmjheino
+    @RequestMapping("add")
+    public String lisaysProto() {
+        return "addToProduct";
+    }
 
     @RequestMapping("list")
     public String listaa(Model model) {

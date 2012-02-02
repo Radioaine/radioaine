@@ -62,3 +62,7 @@ th {
 	text-align: center;
 }
 
+:invalid{
+        border-color: red;
+}
+

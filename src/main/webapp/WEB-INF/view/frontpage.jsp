@@ -10,16 +10,9 @@
 	</head>
 	<body>
 		
-			<div id="nav">
-				<a href="index.html">Etusivu</a><br>
-				<a href="hallinta.html">Valmista lääke</a><br>
-				<a href="hallinta.html">Valmista eluaatti</a><br>
-				<a href="hallinta.html">Historia</a><br>
-				<a href="hallinta.html">Hallinta</a>
+			<%@include file="menu.jsp" %>
 
-			</div>
-
-			<div id="sisalto">
+		<div id="sisalto">
 			<h1>Kitit</h1>
 			<table id="listaus">
 				<tr>

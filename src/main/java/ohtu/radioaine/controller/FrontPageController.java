@@ -17,20 +17,24 @@ public class FrontPageController {
     private ProductService esinePalvelu;
 
     @RequestMapping("*")
-    public String nayta() {
+    public String list() {
         return "redirect:/list";
     }
     
     //Proto by rmjheino
     @RequestMapping("add")
-    public String lisaysProto() {
+    public String addProduct() {
         return "addToProduct";
     }
 
     @RequestMapping("createRadioDrug")
-    public String listaa() {
-        
+    public String createRadioDrug() {
         return "createRadioDrug";
+    }
+    
+    @RequestMapping("list")
+    public String frontpage() {
+        return "frontpage";
     }
 
     @RequestMapping(value = "lisaa", method = RequestMethod.POST)

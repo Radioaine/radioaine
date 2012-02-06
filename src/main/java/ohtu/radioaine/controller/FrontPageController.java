@@ -27,10 +27,10 @@ public class FrontPageController {
         return "addToProduct";
     }
 
-    @RequestMapping("list")
-    public String listaa(Model model) {
-        model.addAttribute("esineet", esinePalvelu.listaa());
-        return "frontpage";
+    @RequestMapping("createRadioDrug")
+    public String listaa() {
+        
+        return "createRadioDrug";
     }
 
     @RequestMapping(value = "lisaa", method = RequestMethod.POST)

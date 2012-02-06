@@ -1,2 +1,2 @@
 *.war
-/target/
+/target/*

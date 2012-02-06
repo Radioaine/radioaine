@@ -32,6 +32,11 @@ public class FrontPageController {
         return "createRadioDrug";
     }
     
+    @RequestMapping("createEluate")
+    public String createEluate() {
+        return "createEluate";
+    }
+    
     @RequestMapping("list")
     public String frontpage() {
         return "frontpage";

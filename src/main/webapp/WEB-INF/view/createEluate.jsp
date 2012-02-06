@@ -1,19 +1,14 @@
-<%-- 
-    Document   : createRadioDrug
-    Created on : 6.2.2012, 9:35:08
-    Author     : rmjheino
---%>
 
 <%@include file="header.jsp" %>
 
 <div id="sisalto">
-    <h1>Radiol‰‰kkeen kirjaus</h1>
-    <form action="addRadioDrug" method="POST">
+    <h1>Eluaatin kirjaus</h1>
+    <form action="addEluate" method="POST">
     <!-- Lista eluaateista luetaan kannasta -->
-       Eluaatti: <select>
-        <option>Nr 1. tehty 7.35 aktiivisuus 23.7 tilavuus 11 eluoija LR sijainti alakerta</option>
-        <option>Nr 2. tehty 7.35 aktiivisuus 23.7 tilavuus 11 eluoija LR sijainti alakerta</option>
-        <option>Nr 3. tehty 7.35 aktiivisuus 23.7 tilavuus 11 eluoija LR sijainti alakerta</option>
+       Generaattori: <select>
+        <option>Molybdeeni 99</option>
+        <option>Polybdeeni 89</option>
+        <option>Omnibdeeni 79</option>
        </select>
        <select>
         <option>Er‰ 1234567</option>
@@ -21,10 +16,10 @@
         <option>Er‰ 1234569</option>
        </select><br/>
        <!-- Lista kiteista luetaan kannasta -->
-       Kitti: <select>
-        <option>Myoview</option>
-        <option>Yourview</option>
-        <option>Ourview</option>
+       Liuotin: <select>
+        <option>NaCl</option>
+        <option>h2o</option>
+        <option>HCl</option>
        </select>
        <select>
         <option>Er‰ 1234567</option>
@@ -32,20 +27,15 @@
         <option>Er‰ 1234569</option>
        </select><br/>
        <!-- Lista liuottimista luetaan kannasta -->
-       Liuotin: <select>
-        <option>NaCl</option>
-        <option>h2o</option>
-        <option>HCl</option>
-       </select><br/><br/>
+       Aktiivisuus:<input required type="text" name="activity"><br/>
        <!-- Tarvitaan viela kellonaika, varmaan lisataan automaagisesti? -->
        Tekij‰:<input autofocus required type="text" name="makerInitials"><br/>
        S‰ilytyspaikka:<br/>
        <textarea required rows="3"  name="storageLocation" ></textarea><br/> 
        Huomautuksia:<br/>
        <textarea rows="3" name="comments" ></textarea><br/>
-       <input type="submit" value="Kirjaa luotu l‰‰ke kantaan">            
+       <input type="submit" value="Kirjaa luotu eluaatti kantaan">            
       </form>
     </div>
 
-<%@include file="history.jsp" %>
 <%@include file="footer.jsp" %>

@@ -41,6 +41,21 @@ public class FrontPageController {
     public String frontpage() {
         return "frontpage";
     }
+    
+    @RequestMapping("history")
+    public String history() {
+        return "history";
+    }
+    
+    @RequestMapping("product")
+    public String productView() {
+        return "productView";
+    }
+    
+    @RequestMapping("batch")
+    public String batchView() {
+        return "batchView";
+    }
 
     @RequestMapping(value = "lisaa", method = RequestMethod.POST)
     public String lisaa(@ModelAttribute Product esine) {

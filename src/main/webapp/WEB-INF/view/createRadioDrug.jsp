@@ -1,9 +1,4 @@
-<%-- 
-    Document   : createRadioDrug
-    Created on : 6.2.2012, 9:35:08
-    Author     : rmjheino
---%>
-
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@include file="header.jsp" %>
 
 <div id="sisalto">

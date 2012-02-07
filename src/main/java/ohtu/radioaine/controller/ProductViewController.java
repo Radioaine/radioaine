@@ -18,8 +18,9 @@ public class ProductViewController {
         return "productView";
     }
 
+    // This is how you use parameters in request
     @RequestMapping(value = "product/{productId}", method = RequestMethod.GET)
-    public String lisaa(@PathVariable Integer productId) {
+    public String showProductById(@PathVariable Integer productId) {
         // getProduct(productId);
         return "productView";
     }

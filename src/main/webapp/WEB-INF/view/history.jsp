@@ -1,3 +1,7 @@
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+
+<h1>Tapahtumat</h1>
 <table id="listaus">
     <tr>
         <th>Eluaatti</th>
@@ -18,3 +22,4 @@
         <td>8.9</td>
     </tr>
 </table>
+

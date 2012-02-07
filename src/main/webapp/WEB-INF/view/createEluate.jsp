@@ -3,7 +3,7 @@
 <div id="sisalto">
     <h1>Eluaatin kirjaus</h1>
     <form action="addEluate" method="POST">
-    <!-- Lista eluaateista luetaan kannasta -->
+        <!-- Lista eluaateista luetaan kannasta -->
         Generaattori: 
         <select>
             <option>Molybdeeni 99</option>

@@ -18,7 +18,7 @@
             <th>Huom</th>
         </tr>
         <tr>
-            <td><a href="era.html">2342464682112</a></td>
+            <td><a href="batch">2342464682112</a></td>
             <td>2</td>
             <td>20</td>
             <td>23</td>
@@ -30,7 +30,7 @@
         </tr>
 
         <tr>
-            <td><a href="era.html">2342464256477</a></td>
+            <td><a href="batch">2342464256477</a></td>
             <td>2</td>
             <td>20</td>
             <td>23</td>
@@ -42,7 +42,7 @@
         </tr>
 
         <tr>
-            <td><a href="era.html">2342464683456</a></td>
+            <td><a href="batch">2342464683456</a></td>
             <td>2</td>
             <td>20</td>
             <td>23</td>

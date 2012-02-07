@@ -10,6 +10,6 @@
             <a href="list">Etusivu</a><br>
             <a href="createRadioDrug">Valmista l‰‰ke</a><br>
             <a href="createEluate">Valmista eluaatti</a><br>
-            <a href="history">Historia</a><br>
-        <a href="hallinta.html">Hallinta</a>
-    </div>
+            <a href="historyView">Historia</a><br>
+            <a href="admin">Hallinta</a>
+        </div>

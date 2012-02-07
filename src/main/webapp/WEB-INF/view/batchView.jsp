@@ -8,8 +8,8 @@
 
     <table id="reunaton">
         <tr>
-            <td><a href="laake.html">Aine</a></td>
-            <td>Nanocollioidi</td>
+            <td>Aine</td>
+            <td><a href="product">Nanocollioidi</a></td>
         </tr>
 
         <tr>

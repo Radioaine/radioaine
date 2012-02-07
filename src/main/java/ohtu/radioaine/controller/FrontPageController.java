@@ -42,9 +42,9 @@ public class FrontPageController {
         return "frontpage";
     }
     
-    @RequestMapping("history")
+    @RequestMapping("historyView")
     public String history() {
-        return "history";
+        return "historyView";
     }
     
     @RequestMapping("product")
@@ -56,6 +56,12 @@ public class FrontPageController {
     public String batchView() {
         return "batchView";
     }
+    
+    @RequestMapping("admin")
+    public String adminView() {
+        return "admin";
+    }
+    
 
     @RequestMapping(value = "lisaa", method = RequestMethod.POST)
     public String lisaa(@ModelAttribute Product esine) {

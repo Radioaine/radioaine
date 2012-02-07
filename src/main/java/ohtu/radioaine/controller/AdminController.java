@@ -6,14 +6,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import ohtu.radioaine.service.ProductService;
 
 @Controller
-public class HistoryViewController {
+public class AdminController {
 
     @Autowired
     private ProductService esinePalvelu;
-    
-    @RequestMapping("historyView")
-    public String history() {
-        return "historyView";
+  
+    @RequestMapping("admin")
+    public String adminView() {
+        return "admin";
     }
-
 }

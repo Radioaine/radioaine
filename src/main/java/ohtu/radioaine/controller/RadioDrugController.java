@@ -6,13 +6,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import ohtu.radioaine.service.ProductService;
 
 @Controller
-public class BatchViewController {
+public class RadioDrugController {
 
     @Autowired
     private ProductService esinePalvelu;
 
-    @RequestMapping("batch")
-    public String batchView() {
-        return "batchView";
+    @RequestMapping("createRadioDrug")
+    public String createRadioDrug() {
+        return "createRadioDrug";
     }
+
 }

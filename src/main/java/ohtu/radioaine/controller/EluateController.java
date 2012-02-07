@@ -6,14 +6,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import ohtu.radioaine.service.ProductService;
 
 @Controller
-public class AddBatchViewController {
+public class EluateController {
 
     @Autowired
     private ProductService esinePalvelu;
 
-    @RequestMapping("add")
-    public String addBatch() {
-        return "addBatchView";
+    @RequestMapping("createEluate")
+    public String createEluate() {
+        return "createEluate";
     }
 
 }

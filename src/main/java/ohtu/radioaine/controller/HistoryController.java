@@ -6,14 +6,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import ohtu.radioaine.service.ProductService;
 
 @Controller
-public class CreateEluateController {
+public class HistoryController {
 
     @Autowired
     private ProductService esinePalvelu;
-
-    @RequestMapping("createEluate")
-    public String createEluate() {
-        return "createEluate";
+    
+    @RequestMapping("historyView")
+    public String history() {
+        return "historyView";
     }
 
 }

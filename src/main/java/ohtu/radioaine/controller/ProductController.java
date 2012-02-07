@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
-public class ProductViewController {
+public class ProductController {
 
     @Autowired
     private ProductService esinePalvelu;

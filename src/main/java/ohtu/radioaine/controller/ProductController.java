@@ -3,7 +3,7 @@ package ohtu.radioaine.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import ohtu.radioaine.service.ProductService;
+import ohtu.radioaine.service.SubstanceService;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class ProductController {
 
     @Autowired
-    private ProductService esinePalvelu;
+    private SubstanceService esinePalvelu;
 
     @RequestMapping("product")
     public String productView() {

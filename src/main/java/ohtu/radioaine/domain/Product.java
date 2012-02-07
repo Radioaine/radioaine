@@ -1,66 +1,58 @@
 package ohtu.radioaine.domain;
 
 import java.io.Serializable;
-import javax.persistence.*;
+import java.util.Date;
+import javax.persistence.Column;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
-@Entity
-public class Product implements Serializable {
-
+public class Product implements Serializable{
+    
     @Id
     @GeneratedValue(strategy = GenerationType.TABLE)
     @Column(nullable=false)
-    private int id;
+    private long id;
     @Column(nullable=false)
     private String name;
-    private int alertLimit1;
-    private int alertLimit2;
-    private boolean hasBeenOrdered;
-    private boolean needsColdStorage;
+    @Column
+    private String preparer;
+    @Column
+    private Date timeCreated;
 
     public Product() {
     }
 
-    public int getId() {
+    public long getId() {
         return id;
-    }
-
-    public int getAlertLimit1() {
-        return alertLimit1;
-    }
-
-    public void setAlertLimit1(int alertLimit1) {
-        this.alertLimit1 = alertLimit1;
-    }
-
-    public int getAlertLimit2() {
-        return alertLimit2;
-    }
-
-    public void setAlertLimit2(int alertLimit2) {
-        this.alertLimit2 = alertLimit2;
-    }
-
-    public boolean isHasBeenOrdered() {
-        return hasBeenOrdered;
-    }
-
-    public void setHasBeenOrdered(boolean hasBeenOrdered) {
-        this.hasBeenOrdered = hasBeenOrdered;
     }
 
     public String getName() {
         return name;
     }
 
+    public String getPreparer() {
+        return preparer;
+    }
+
+    public Date getTimeCreated() {
+        return timeCreated;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
     public void setName(String name) {
         this.name = name;
     }
 
-    public boolean isNeedsColdStorage() {
-        return needsColdStorage;
+    public void setPreparer(String preparer) {
+        this.preparer = preparer;
     }
 
-    public void setNeedsColdStorage(boolean needsColdStorage) {
-        this.needsColdStorage = needsColdStorage;
+    public void setTimeCreated(Date timeCreated) {
+        this.timeCreated = timeCreated;
     }
+    
 }

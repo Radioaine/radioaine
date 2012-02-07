@@ -5,36 +5,36 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import org.springframework.stereotype.Repository;
-import ohtu.radioaine.domain.Product;
+import ohtu.radioaine.domain.Substance;
 
 @Repository
-public class JPAProductDBDao implements ProductDBDao {
+public class JPASubstanceDBDao implements SubstanceDBDao {
 
     @PersistenceContext
     EntityManager entityManager;
 
     @Override
-    public void create(Product instance) {
+    public void create(Substance instance) {
         entityManager.merge(instance);
     }
 
     @Override
-    public Product read(int id) {
-        return entityManager.find(Product.class, id);
+    public Substance read(int id) {
+        return entityManager.find(Substance.class, id);
     }
 
     @Override
-    public void delete(Product instance) {
+    public void delete(Substance instance) {
         entityManager.remove(instance);
     }
 
     @Override
-    public Product update(Product instance) {
+    public Substance update(Substance instance) {
         return entityManager.merge(instance);
     }
 
     @Override
-    public List<Product> list() {
+    public List<Substance> list() {
         Query q = entityManager.createQuery("SELECT e FROM Product e");
         return q.getResultList();
     }

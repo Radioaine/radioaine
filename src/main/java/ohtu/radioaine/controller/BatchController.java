@@ -3,13 +3,15 @@ package ohtu.radioaine.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import ohtu.radioaine.service.ProductService;
+import ohtu.radioaine.service.SubstanceService;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
 public class BatchController {
 
     @Autowired
-    private ProductService esinePalvelu;
+    private SubstanceService esinePalvelu;
 
     @RequestMapping("add")
     public String addBatch() {
@@ -20,4 +22,13 @@ public class BatchController {
     public String batchView() {
         return "batchView";
     }
+    
+    @RequestMapping(value = "batch/batchId", method = RequestMethod.GET)
+    public String getBatchById(@PathVariable Integer productId) {
+        
+        //getbatch(batchId);
+        return "batchView";
+    }
+    
+    
 }

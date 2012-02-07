@@ -4,31 +4,31 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import ohtu.radioaine.database.ProductDBDao;
-import ohtu.radioaine.domain.Product;
+import ohtu.radioaine.database.SubstanceDBDao;
+import ohtu.radioaine.domain.Substance;
 
 @Service
-public class SimpleProductService implements ProductService {
+public class SimpleSubstanceService implements SubstanceService {
 
     @Autowired
-    private ProductDBDao varastoDao;
+    private SubstanceDBDao varastoDao;
 
     @Override
     @Transactional
-    public void lisaa(Product esine) {
+    public void lisaa(Substance esine) {
         varastoDao.create(esine);
     }
 
     @Override
     @Transactional(readOnly = true)
-    public List<Product> listaa() {
+    public List<Substance> listaa() {
         return varastoDao.list();
     }
 
     @Override
     @Transactional
     public void poista(int esineId) {
-        Product e = varastoDao.read(esineId);
+        Substance e = varastoDao.read(esineId);
         if (e != null) {
             varastoDao.delete(e);
         }

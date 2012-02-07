@@ -6,10 +6,4 @@
         <title>Radioaine</title>
     </head>
     <body>
-        <div id="nav">
-            <a href="list">Etusivu</a><br>
-            <a href="createRadioDrug">Valmista l‰‰ke</a><br>
-            <a href="createEluate">Valmista eluaatti</a><br>
-            <a href="historyView">Historia</a><br>
-            <a href="admin">Hallinta</a>
-        </div>
+        <%@include file="mainMenu.jsp" %>

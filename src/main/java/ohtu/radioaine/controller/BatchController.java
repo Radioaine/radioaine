@@ -26,24 +26,26 @@ public class BatchController {
         return "batchView";
     }
     
-    @RequestMapping(value = "batch/batchId", method = RequestMethod.GET)
-    public String getBatchById(@PathVariable Integer productId) {
-        
+    @RequestMapping(value = "batch/{id}", method = RequestMethod.GET)
+    public String getBatchById(@PathVariable Integer id, Model model) {
+        model.addAttribute("batch", esinePalvelu.lue(id));
+        System.out.println("ID: " + esinePalvelu.lue(id));
         //getbatch(batchId);
         return "batchView";
     }
+    
     @RequestMapping("batchList")
     public String listaa(Model model) {
         System.out.println("listaus");
         model.addAttribute("batches", esinePalvelu.listaa());
         return "batchView";
     }
+    
     @RequestMapping(value = "lisaa", method = RequestMethod.POST)
     public String lisaa(@ModelAttribute Batch batch) {
-        System.out.println("lisaus");
-        esinePalvelu.lisaa(batch);
-        System.out.println("Eränumero : " + batch.getStrength());
-        return "redirect:/batchList";
+        batch = esinePalvelu.lisaa(batch);
+        return "redirect:/batch/"+batch.getId();
+        //return "redirect:/batchList";
     }
     
     

@@ -12,14 +12,15 @@ public class JPABatchDBDao implements BatchDBDao {
 
     @PersistenceContext
     EntityManager entityManager;
-
+    
     @Override
-    public void create(Batch instance) {
-        entityManager.merge(instance);
+    public Batch create(Batch instance) {
+       return entityManager.merge(instance);
     }
 
     @Override
     public Batch read(int id) {
+        System.out.println("db id: " + id);
         return entityManager.find(Batch.class, id);
     }
 

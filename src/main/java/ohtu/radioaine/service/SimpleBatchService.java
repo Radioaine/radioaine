@@ -15,14 +15,20 @@ public class SimpleBatchService implements BatchService {
 
     @Override
     @Transactional
-    public void lisaa(Batch esine) {
-        varastoDao.create(esine);
+    public Batch lisaa(Batch esine) {
+        return varastoDao.create(esine);
     }
 
     @Override
     @Transactional(readOnly = true)
     public List<Batch> listaa() {
         return varastoDao.list();
+    }
+    
+    @Override
+    @Transactional(readOnly = true)
+    public Batch lue(int id) {
+        return varastoDao.read(id);
     }
 
     @Override

@@ -8,9 +8,9 @@ import javax.persistence.*;
 public class Batch implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.TABLE)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(nullable = false)
-    private Long id;
+    private int id;
     @Column(nullable = false)
     private int batchNumber;
     private Substance substance;
@@ -22,6 +22,10 @@ public class Batch implements Serializable {
 
     public int getBatchNumber() {
         return batchNumber;
+    }
+    
+    public int getId() {
+        return id;
     }
 
     public void setBatchNumber(int batchNumber) {

@@ -7,6 +7,11 @@
     <h1>Erä 2342464682112</h1>
 
     <table id="reunaton">
+        <ul>
+            <c:forEach var="batch" items="${batches}">
+                <li>${batch.batchNumber}</li>
+            </c:forEach>
+        </ul>
         <tr>
             <td>Aine</td>
             <td><a href="product">Nanocollioidi</a></td>

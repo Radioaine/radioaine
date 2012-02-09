@@ -12,8 +12,8 @@ public class Eluate extends Product {
     private Long id;
     @Column
     private double strength;
-    @Column
-    private List<StorageItem> itemUsed;
+//    @Column
+//    private List<StorageItem> itemUsed;
 
     public long getId() {
         return id;
@@ -31,11 +31,11 @@ public class Eluate extends Product {
         this.strength = strength;
     }
 
-    public List<StorageItem> getItemUsed() {
-        return itemUsed;
-    }
-
-    public void setItemUsed(StorageItem itemUsed) {
-        this.itemUsed.add(itemUsed);
-    }
+//    public List<StorageItem> getItemUsed() {
+//        return itemUsed;
+//    }
+//
+//    public void setItemUsed(StorageItem itemUsed) {
+//        this.itemUsed.add(itemUsed);
+//    }
 }

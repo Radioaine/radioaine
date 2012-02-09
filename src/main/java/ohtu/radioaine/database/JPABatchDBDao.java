@@ -1,20 +1,13 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package ohtu.radioaine.database;
 
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import org.springframework.stereotype.Repository;
 import ohtu.radioaine.domain.Batch;
-import ohtu.radioaine.domain.Substance;
 
-/**
- *
- * @author Juuso
- */
+@Repository
 public class JPABatchDBDao implements BatchDBDao {
 
     @PersistenceContext

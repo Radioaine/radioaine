@@ -2,11 +2,7 @@ package ohtu.radioaine.domain;
 
 import java.io.Serializable;
 import java.util.Date;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class Batch implements Serializable {
@@ -18,7 +14,7 @@ public class Batch implements Serializable {
     @Column(nullable = false)
     private int batchNumber;
     private Substance substance;
-    private Date useBefore;
+//    private Date useBefore;
     private boolean qualityCheck;
     private double strength;
     private String manufacturer;
@@ -72,11 +68,11 @@ public class Batch implements Serializable {
         this.supplier = supplier;
     }
 
-    public Date getUseBefore() {
-        return useBefore;
-    }
-
-    public void setUseBefore(Date useBefore) {
-        this.useBefore = useBefore;
-    }
+//    public Date getUseBefore() {
+//        return useBefore;
+//    }
+//
+//    public void setUseBefore(Date useBefore) {
+//        this.useBefore = useBefore;
+//    }
 }

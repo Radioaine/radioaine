@@ -16,8 +16,8 @@ public class RadioMedicine extends Product {
     private Long id;
     @Column
     private double volume;
-    @Column
-    private List<Eluate> eluate;
+//    @Column
+//    private List<Eluate> eluate;
 
     public long getId() {
         return id;
@@ -35,11 +35,11 @@ public class RadioMedicine extends Product {
         this.volume = volume;
     }
 
-    public List<Eluate> getEluate() {
-        return eluate;
-    }
-
-    public void setEluate(Eluate eluate) {
-        this.eluate.add(eluate);
-    }
+//    public List<Eluate> getEluate() {
+//        return eluate;
+//    }
+//
+//    public void setEluate(Eluate eluate) {
+//        this.eluate.add(eluate);
+//    }
 }

@@ -17,8 +17,8 @@ public class Product implements Serializable{
     private String name;
     @Column
     private String preparer;
-    @Column
-    private Date timeCreated;
+//    @Column
+//    private Date timeCreated;
 
     public Product() {
     }
@@ -35,9 +35,9 @@ public class Product implements Serializable{
         return preparer;
     }
 
-    public Date getTimeCreated() {
-        return timeCreated;
-    }
+//    public Date getTimeCreated() {
+//        return timeCreated;
+//    }
 
     public void setId(long id) {
         this.id = id;
@@ -51,8 +51,8 @@ public class Product implements Serializable{
         this.preparer = preparer;
     }
 
-    public void setTimeCreated(Date timeCreated) {
-        this.timeCreated = timeCreated;
-    }
+//    public void setTimeCreated(Date timeCreated) {
+//        this.timeCreated = timeCreated;
+//    }
     
 }

@@ -11,40 +11,40 @@ public class StorageItem {
     @Column(nullable = false)
     private Long id;
     
-    @Column
-    private List<Batch> batchesList;
+//    @Column
+//    private List<Batch> batchesList;
     @Column
     private String whereIsItStored;
     @Column
     private String openText;
-    @Column
-    private Date dateArrived;
-    @Column
-    private Date dateToRemove;
+//    @Column
+//    private Date dateArrived;
+//    @Column
+//    private Date dateToRemove;
 
-    public List<Batch> getBatchesList() {
-        return batchesList;
-    }
+//    public List<Batch> getBatchesList() {
+//        return batchesList;
+//    }
+//
+//    public void setBatchesList(List<Batch> batchesList) {
+//        this.batchesList = batchesList;
+//    }
 
-    public void setBatchesList(List<Batch> batchesList) {
-        this.batchesList = batchesList;
-    }
-
-    public Date getDateArrived() {
-        return dateArrived;
-    }
-
-    public void setDateArrived(Date dateArrived) {
-        this.dateArrived = dateArrived;
-    }
-
-    public Date getDateToRemove() {
-        return dateToRemove;
-    }
-
-    public void setDateToRemove(Date dateToRemove) {
-        this.dateToRemove = dateToRemove;
-    }
+//    public Date getDateArrived() {
+//        return dateArrived;
+//    }
+//
+//    public void setDateArrived(Date dateArrived) {
+//        this.dateArrived = dateArrived;
+//    }
+//
+//    public Date getDateToRemove() {
+//        return dateToRemove;
+//    }
+//
+//    public void setDateToRemove(Date dateToRemove) {
+//        this.dateToRemove = dateToRemove;
+//    }
 
     public Long getId() {
         return id;

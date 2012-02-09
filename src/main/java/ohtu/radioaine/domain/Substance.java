@@ -1,4 +1,4 @@
-package ohtu.radioaine.domain;
+ package ohtu.radioaine.domain;
 
 import java.io.Serializable;
 import javax.persistence.*;

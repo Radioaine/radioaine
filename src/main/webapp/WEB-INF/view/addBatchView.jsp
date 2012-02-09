@@ -7,7 +7,7 @@
     <h1>Lisäyssivu</h1>
     <form action="lisaa" method="POST">
         <!-- Lista tuotteista automaagisesti? -->
-        Tuote: <select>
+        Tuote: <select name="">
             <option>Bridatec</option>
             <option>Stamicis</option>
             <option>Nanocolli</option>
@@ -15,7 +15,7 @@
         Eränumero: <input autofocus required type="text" name="batchNumber"><br/>
         Saapumispäivämäärä: <input required placeholder="Muodossa DD/MM/YYYY" type="date" name="arrivalDate"><br/>
         Vanhenemispäivämäärä: <input required placeholder="Muodossa DD/MM/YYYY" type="date" name="expDate"><br/>
-        Lukumäärä: <input required type="number" step="1" min="1" max="999" /><br />
+        Lukumäärä: <input name="strength" required type="number" step="1" min="1" max="999" /><br />
         <!-- Määritetään tuotteen mukaan automaagisesti? -->
         Säilytettävä kylmässä: <select>
             <option>Kyllä</option>

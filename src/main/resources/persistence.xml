@@ -3,6 +3,11 @@
   <persistence-unit name="persistenceUnitEclipseLink" transaction-type="RESOURCE_LOCAL">
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
     <class>ohtu.radioaine.domain.Product</class>
+    <class>ohtu.radioaine.domain.Batch</class>
+    <class>ohtu.radioaine.domain.Eluate</class>
+    <class>ohtu.radioaine.domain.RadioMedicine</class>
+    <class>ohtu.radioaine.domain.StorageItem</class>
+    <class>ohtu.radioaine.domain.Substance</class>
     <exclude-unlisted-classes>true</exclude-unlisted-classes>
     <properties>
       <property name="showSql" value="true"/>

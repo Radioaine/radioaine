@@ -21,6 +21,7 @@
         Huomioita: <form:textarea path="note" type="text"/><form:errors path="note"/><br/>
         <input type="submit">
 
+        oijoijoi
     </form:form>
     <!--    <form action="add" method="POST">
              Lista tuotteista automaagisesti? 

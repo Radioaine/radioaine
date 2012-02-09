@@ -16,7 +16,7 @@ public class BatchController {
     @Autowired
     private BatchService esinePalvelu;
 
-    @RequestMapping("add")
+    @RequestMapping("addBatch")
     public String addBatch() {
         return "addBatchView";
     }
@@ -29,21 +29,21 @@ public class BatchController {
     @RequestMapping(value = "batch/{id}", method = RequestMethod.GET)
     public String getBatchById(@PathVariable Integer id, Model model) {
         model.addAttribute("batch", esinePalvelu.lue(id));
-        System.out.println("ID: " + esinePalvelu.lue(id));
-        //getbatch(batchId);
+        
         return "batchView";
     }
     
     @RequestMapping("batchList")
-    public String listaa(Model model) {
-        System.out.println("listaus");
+    public String list(Model model) {
         model.addAttribute("batches", esinePalvelu.listaa());
+        
         return "batchView";
     }
     
-    @RequestMapping(value = "lisaa", method = RequestMethod.POST)
-    public String lisaa(@ModelAttribute Batch batch) {
+    @RequestMapping(value = "add", method = RequestMethod.POST)
+    public String add(@ModelAttribute Batch batch) {
         batch = esinePalvelu.lisaa(batch);
+        
         return "redirect:/batch/"+batch.getId();
         //return "redirect:/batchList";
     }

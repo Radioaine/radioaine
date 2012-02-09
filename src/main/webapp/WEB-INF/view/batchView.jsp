@@ -25,7 +25,7 @@
 
         <tr>
             <td>Vahvuus</td>
-            <td>23</td>
+            <td>${batch.strength}</td>
         </tr>
 
         <tr>
@@ -35,17 +35,17 @@
 
         <tr>
             <td>Valmistaja</td>
-            <td></td>
+            <td>${batch.manufacturer}</td>
         </tr>
 
         <tr>
             <td>Tukkuliike</td>
-            <td></td>
+            <td>${batch.supplier}</td>
         </tr>
 
         <tr>
             <td>Laadunvarmistus</td>
-            <td>Suoritettu (MK)</td>
+            <td>Suoritettu (MK) ${batch.qualityCheck}</td>
         </tr>
 
     </table>

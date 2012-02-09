@@ -19,6 +19,15 @@ public class Batch implements Serializable {
     private double strength;
     private String manufacturer;
     private String supplier;
+    private String note;
+
+    public String getNote() {
+        return note;
+    }
+
+    public void setNote(String note) {
+        this.note = note;
+    }
 
     public int getBatchNumber() {
         return batchNumber;
@@ -40,7 +49,7 @@ public class Batch implements Serializable {
         this.manufacturer = manufacturer;
     }
 
-    public boolean qualityCheckDone() {
+    public boolean getQualityCheck() {
         return qualityCheck;
     }
 

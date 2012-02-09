@@ -10,11 +10,11 @@
         
         <tr>
             <td>Aine</td>
-            <td><a href="product">Nanocollioidi</a></td>
+            <td>${batch.substance}</a></td>
         </tr>
         <tr>
             <td>Jäljellä</td>
-            <td>2kpl</td>
+            <td>${batch.amount}kpl</td>
         </tr>
         <tr>
             <td>Pakkauskoko</td>
@@ -25,8 +25,12 @@
             <td>${batch.strength}</td>
         </tr>
         <tr>
+            <td>Saapunut</td>
+            <td>${batch.arrivalDate}</td>
+        </tr>
+        <tr>
             <td>Vanhenee</td>
-            <td></td>
+            <td>${batch.expDate}</td>
         </tr>
         <tr>
             <td>Valmistaja</td>

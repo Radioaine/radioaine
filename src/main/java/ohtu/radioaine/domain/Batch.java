@@ -1,6 +1,7 @@
 package ohtu.radioaine.domain;
 
 import java.io.Serializable;
+import java.sql.Timestamp;
 import java.util.Date;
 import javax.persistence.*;
 
@@ -13,13 +14,40 @@ public class Batch implements Serializable {
     private int id;
     @Column(nullable = false)
     private int batchNumber;
+    private int amount;
     private Substance substance;
-//    private Date useBefore;
+    private Timestamp arrivalDate;
+    private Timestamp expDate;
     private boolean qualityCheck;
     private double strength;
     private String manufacturer;
     private String supplier;
     private String note;
+
+    
+    public int getAmount() {
+        return amount;
+    }
+
+    public void setAmount(int amount) {
+        this.amount = amount;
+    }
+    
+    public Timestamp getArrivalDate() {
+        return arrivalDate;
+    }
+
+    public void setArrivalDate(Timestamp arrivalDate) {
+        this.arrivalDate = arrivalDate;
+    }
+
+    public Timestamp getExpDate() {
+        return expDate;
+    }
+
+    public void setExpDate(Timestamp expDate) {
+        this.expDate = expDate;
+    }
 
     public String getNote() {
         return note;

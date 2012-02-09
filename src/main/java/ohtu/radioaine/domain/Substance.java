@@ -16,8 +16,38 @@ public class Substance implements Serializable {
     private int alertLimit2;
     private boolean ordered;
     private boolean needsColdStorage;
+    private String manufacturer;
+    private String supplier;
+
+    public String getSupplier() {
+        return supplier;
+    }
+
+    public void setSupplier(String supplier) {
+        this.supplier = supplier;
+    }
+
+    public String getManufacturer() {
+        return manufacturer;
+    }
+
+    public void setManufacturer(String manufacturer) {
+        this.manufacturer = manufacturer;
+    }
+
+    public boolean isOrdered() {
+        return ordered;
+    }
+
+    public void setOrdered(boolean ordered) {
+        this.ordered = ordered;
+    }
 
     public Substance() {
+    }
+    
+    public Substance(String name) {
+        this.name = name;
     }
 
     public int getId() {
@@ -62,5 +92,10 @@ public class Substance implements Serializable {
 
     public void setNeedsColdStorage(boolean needsColdStorage) {
         this.needsColdStorage = needsColdStorage;
+    }
+    
+    @Override
+    public String toString() {
+        return name;
     }
 }

@@ -11,26 +11,32 @@ import ohtu.radioaine.domain.Substance;
 public class SimpleSubstanceService implements SubstanceService<Substance> {
 
     @Autowired
-    private SubstanceDBDao varastoDao;
+    private SubstanceDBDao storageDao;
 
     @Override
     @Transactional
     public Substance lisaa(Substance esine) {
-        return varastoDao.create(esine);
+        return storageDao.create(esine);
     }
 
     @Override
     @Transactional(readOnly = true)
     public List<Substance> listaa() {
-        return varastoDao.list();
+        return storageDao.list();
     }
 
     @Override
     @Transactional
     public void poista(int esineId) {
-        Substance e = varastoDao.read(esineId);
+        Substance e = storageDao.read(esineId);
         if (e != null) {
-            varastoDao.delete(e);
+            storageDao.delete(e);
         }
+    }
+    
+    @Override
+    @Transactional(readOnly = true)
+    public Substance get(Long id) {
+        return storageDao.read(id);
     }
 }

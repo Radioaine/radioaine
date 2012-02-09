@@ -1,14 +1,13 @@
 package ohtu.radioaine.domain;
 
-import java.util.Date;
 import javax.validation.constraints.NotNull;
 
 public class BatchFormObject {
 
     @NotNull(message = "Eränumero ei saa olla tyhjä")
-    private int batchNumber;
+    private long batchNumber;
     @NotNull(message = "Aine ei saa olla tyhjä")
-    private int substance;
+    private long substance;
     @NotNull(message = "Määrä ei saa olla tyhjä")
     private int amount;
     @NotNull(message = "Saapumispäivä ei saa olla tyhjä")
@@ -41,11 +40,11 @@ public class BatchFormObject {
         this.expDate = expDate;
     }
 
-    public int getBatchNumber() {
+    public long getBatchNumber() {
         return batchNumber;
     }
 
-    public void setBatchNumber(int batchNumber) {
+    public void setBatchNumber(long batchNumber) {
         this.batchNumber = batchNumber;
     }
 
@@ -58,11 +57,11 @@ public class BatchFormObject {
     }
 
 
-    public int getSubstance() {
+    public long getSubstance() {
         return substance;
     }
 
-    public void setSubstance(int substance) {
+    public void setSubstance(long substance) {
         this.substance = substance;
     }
 }

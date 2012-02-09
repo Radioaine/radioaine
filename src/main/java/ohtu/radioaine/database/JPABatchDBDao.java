@@ -19,7 +19,7 @@ public class JPABatchDBDao implements BatchDBDao {
     }
 
     @Override
-    public Batch read(int id) {
+    public Batch read(long id) {
         System.out.println("db id: " + id);
         return entityManager.find(Batch.class, id);
     }

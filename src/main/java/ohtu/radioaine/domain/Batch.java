@@ -11,9 +11,9 @@ public class Batch implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(nullable = false)
-    private int id;
+    private long id;
     @Column(nullable = false)
-    private int batchNumber;
+    private long batchNumber;
     private int amount;
     private Substance substance;
     private Timestamp arrivalDate;
@@ -57,15 +57,15 @@ public class Batch implements Serializable {
         this.note = note;
     }
 
-    public int getBatchNumber() {
+    public long getBatchNumber() {
         return batchNumber;
     }
     
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setBatchNumber(int batchNumber) {
+    public void setBatchNumber(long batchNumber) {
         this.batchNumber = batchNumber;
     }
 

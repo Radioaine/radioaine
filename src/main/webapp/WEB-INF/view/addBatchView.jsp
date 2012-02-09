@@ -16,7 +16,7 @@
         Eränumero: <input name="batchNumber" autofocus required type="text"><br/>
         Saapumispäivämäärä: <input name="arrivalDate" placeholder="Muodossa DD/MM/YYYY" type="date"><br/>
         Vanhenemispäivämäärä: <input name="expDate" placeholder="Muodossa DD/MM/YYYY" type="date"><br/>
-        Sisällön lukumäärä: <input name="strength" required type="number" step="1" min="1" max="999" /><br />
+        Sisällön lukumäärä: <input name="substanceCount" required type="number" step="1" min="1" max="999" /><br />
         <!-- Määritetään tuotteen mukaan automaagisesti? -->
         Säilytettävä kylmässä: <select>
             <option>Kyllä</option>

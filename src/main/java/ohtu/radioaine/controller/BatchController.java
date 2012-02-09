@@ -61,7 +61,7 @@ public class BatchController {
         batch.setNote(bfm.getNote());
         batch.setArrivalDate(Time.getTimestamp());
         batch.setExpDate((Time.getTimestamp()));
-        batch.setAmount(bfm.getAmount());
+        batch.setSubstanceCount(bfm.getAmount());
         Substance substance = createTestSubstance(bfm); //luodaan testiaine testausta varten
         batch.setSubstance(substance);
         batch.setManufacturer(substance.getManufacturer());

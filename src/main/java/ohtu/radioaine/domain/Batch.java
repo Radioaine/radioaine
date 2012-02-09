@@ -23,14 +23,14 @@ public class Batch implements Serializable {
     private String manufacturer;
     private String supplier;
     private String note;
+    private int substanceCount;
 
-    
-    public int getAmount() {
-        return amount;
+    public int getSubstanceCount() {
+        return substanceCount;
     }
 
-    public void setAmount(int amount) {
-        this.amount = amount;
+    public void setSubstanceCount(int substanceCount) {
+        this.substanceCount = substanceCount;
     }
     
     public Timestamp getArrivalDate() {

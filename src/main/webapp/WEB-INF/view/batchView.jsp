@@ -14,7 +14,7 @@
         </tr>
         <tr>
             <td>Jäljellä</td>
-            <td>${batch.amount}kpl</td>
+            <td>${batch.substanceCount}kpl</td>
         </tr>
         <tr>
             <td>Pakkauskoko</td>

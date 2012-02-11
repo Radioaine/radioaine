@@ -8,7 +8,7 @@
     <h1>Lisää lähetys</h1>
 
 
-    <form:form commandName="batch" action="add" method="POST">
+    <form:form commandName="batch" action="batch" method="POST">
         Aine: <form:select path="substance">
             <form:option value="1">Bridatec</form:option>
             <form:option value="2">Stamicis</form:option>

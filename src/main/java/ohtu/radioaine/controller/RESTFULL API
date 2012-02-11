@@ -1,12 +1,13 @@
 REST API
 
 GET
-    radioaine                   Get frontpage
-    	/
+    radioaine   Get frontpage
+    /
         Batch 
             GET
                 batch           Get all the batches
                 batch/{id}      Get batch by id
+                addBatch		Get add batch page
             POST
                 batch           Create new batch
             PUT
@@ -18,6 +19,7 @@ GET
             GET
                 substance       Get all the substances
                 substance/{id}  Get substance by id
+                addSubstance	Get add substance page
             POST
                 substance       Create new substance
             PUT
@@ -35,3 +37,15 @@ GET
                 product/{id}  	Update existing product
             DELETE
                 product/{id} 	Delete product by id
+
+        Radio drug
+            GET
+                addRadioDrug	Get add radio drug page
+
+        Eluate
+            GET
+                addEluate       Get add eluate page
+
+       	Admin
+            GET
+       		admin           Get admin page

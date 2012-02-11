@@ -36,6 +36,13 @@ public class BatchController {
         return "batchView";
     }
 
+    @RequestMapping(value = "addBatch", method = RequestMethod.GET)
+    public String addbatchView(Model model) {
+        BatchFormObject bfm = new BatchFormObject();
+        model.addAttribute("batch", bfm);
+        return "addBatchView";
+    }
+
     @RequestMapping(value = "batch", method = RequestMethod.POST)
     public String addBatch(@Valid @ModelAttribute("batch") BatchFormObject bfm, BindingResult result) {
         if (result.hasErrors()) {
@@ -52,14 +59,14 @@ public class BatchController {
         batch.setArrivalDate(Time.getTimestamp());
         batch.setExpDate((Time.getTimestamp()));
         batch.setSubstanceCount(bfm.getAmount());
-      //  Substance substance = substanceService.get(bfm.getSubstance());
+        //  Substance substance = substanceService.get(bfm.getSubstance());
         Substance substance = createTestSubstance(bfm); //luodaan testiaine testausta varten
         batch.setSubstance(substance);
         batch.setManufacturer(substance.getManufacturer());
         batch.setSupplier(substance.getSupplier());
         return batch;
     }
-    
+
     private Substance createTestSubstance(BatchFormObject bfm) {
         Substance substance = new Substance("" + bfm.getSubstance());
         substance.setName("LääkeaineX");

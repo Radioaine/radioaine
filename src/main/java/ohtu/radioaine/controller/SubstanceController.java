@@ -15,19 +15,19 @@ public class SubstanceController {
     @Autowired
     private SubstanceService substanceService;
 
-    @RequestMapping("addSubstance")
+    @RequestMapping(value = "substance/{id}", method = RequestMethod.GET)
     public String substanceView(Model model) {
         model.addAttribute("substance", new Substance());
         return "addSubstanceView";
     }
 
-    @RequestMapping(value = "addSubstance", method = RequestMethod.POST)
+    @RequestMapping(value = "substance", method = RequestMethod.POST)
     public String addSubstance(@ModelAttribute Substance substance) {
         substanceService.lisaa(substance);
         return "redirect:/substanceList";
     }
     
-    @RequestMapping("substanceList")
+    @RequestMapping(value = "substance", method = RequestMethod.GET)
     public String listaa(Model model) {
         System.out.println("listaus");
         model.addAttribute("substances", substanceService.listaa());

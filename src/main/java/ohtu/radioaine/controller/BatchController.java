@@ -24,31 +24,20 @@ public class BatchController {
     @Autowired
     private SubstanceService substanceService;
 
-    @RequestMapping("addBatch")
-    public String addBatch(Model model) {
-        model.addAttribute("batch", new BatchFormObject());
-        return "addBatchView";
-    }
-
-    @RequestMapping("batch")
-    public String batchView() {
-        return "batchView";
-    }
-
     @RequestMapping(value = "batch/{id}", method = RequestMethod.GET)
     public String getBatchById(@PathVariable Integer id, Model model) {
         model.addAttribute("batch", batchService.read(id));
         return "batchView";
     }
 
-    @RequestMapping("batchList")
-    public String list(Model model) {
+    @RequestMapping(value = "batch", method = RequestMethod.GET)
+    public String batchList(Model model) {
         model.addAttribute("batches", batchService.listaa());
         return "batchView";
     }
 
-    @RequestMapping(value = "add", method = RequestMethod.POST)
-    public String add(@Valid @ModelAttribute("batch") BatchFormObject bfm, BindingResult result) {
+    @RequestMapping(value = "batch", method = RequestMethod.POST)
+    public String addBatch(@Valid @ModelAttribute("batch") BatchFormObject bfm, BindingResult result) {
         if (result.hasErrors()) {
             return "addBatchView";
         }

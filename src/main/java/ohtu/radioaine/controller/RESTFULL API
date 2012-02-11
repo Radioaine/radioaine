@@ -1,0 +1,37 @@
+REST API
+
+GET
+    radioaine                   Get frontpage
+    	/
+        Batch 
+            GET
+                batch           Get all the batches
+                batch/{id}      Get batch by id
+            POST
+                batch           Create new batch
+            PUT
+                batch/{id}      Update existing batch
+            DELETE
+                batch/{id}      Delete batch by id
+
+        Substance
+            GET
+                substance       Get all the substances
+                substance/{id}  Get substance by id
+            POST
+                substance       Create new substance
+            PUT
+                substance/{id}  Update existing substance
+            DELETE
+                substance/{id}  Delete substance by id
+
+        Product
+            GET
+                product       	Get all the products
+                product/{id}	Get product by id
+            POST
+                product      	Create new product
+            PUT
+                product/{id}  	Update existing product
+            DELETE
+                product/{id} 	Delete product by id

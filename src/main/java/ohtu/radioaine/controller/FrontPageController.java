@@ -24,7 +24,7 @@ public class FrontPageController {
     
     @RequestMapping(value = "list", method = RequestMethod.GET)
     public String batchList(Model model) {
-        model.addAttribute("substances", substanceService.listaa());
+        model.addAttribute("substances", substanceService.list());
         return "frontpage";
     }
 

@@ -40,7 +40,7 @@ public class BatchController {
     public String addbatchView(Model model) {
         BatchFormObject bfm = new BatchFormObject();
         model.addAttribute("batch", bfm);
-        model.addAttribute("substances", substanceService.listaa());
+        model.addAttribute("substances", substanceService.list());
         return "addBatchView";
     }
 

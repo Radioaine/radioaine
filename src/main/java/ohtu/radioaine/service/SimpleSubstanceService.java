@@ -21,7 +21,7 @@ public class SimpleSubstanceService implements SubstanceService<Substance> {
 
     @Override
     @Transactional(readOnly = true)
-    public List<Substance> listaa() {
+    public List<Substance> list() {
         return storageDao.list();
     }
 

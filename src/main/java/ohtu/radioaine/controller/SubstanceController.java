@@ -30,7 +30,7 @@ public class SubstanceController {
     @RequestMapping(value = "substance", method = RequestMethod.GET)
     public String listaa(Model model) {
         System.out.println("listaus");
-        model.addAttribute("substances", substanceService.listaa());
+        model.addAttribute("substances", substanceService.list());
         return "substanceViewTest";
     }
     

@@ -12,36 +12,16 @@
             <th>Vanhimman päiväys</th>
             <th>Huom</th>
         </tr>
-        <tr>
-            <td><a href="product">Nanocollioidi</a></td>
-            <td class="maara">4</td>
-            <td>1.7.2012</td>
-            <td></td>
-        </tr>
-        <tr>
-            <td><a href="product">Lääke2</a></td>
-            <td class="maara">8</td>
-            <td>1.7.2012</td>
-            <td></td>
-        </tr>
-        <tr>
-            <td><a href="product">Lääke3</a></td>
-            <td class="maara">0</td>
-            <td>1.7.2012</td>
-            <td class="red">LOPPU</td>
-        </tr>
-        <tr>
-            <td><a href="product">Lääke4</a></td>
-            <td class="maara">6</td>
-            <td>1.7.2012</td>
-            <td></td>
-        </tr>
-        <tr>
-            <td><a href="product">Lääke5</a></td>
-            <td class="maara">2</td>
-            <td>1.7.2012</td>
-            <td class="warning">VÄHISSÄ</td>
-        </tr>
+
+        <c:forEach var="substance" items="${substances}">
+            <tr>
+                <td><a href="substance/"${substance.id}>${substance.name}</a></td>
+                <td class="maara">${substance.totalAmount}</td>
+                <td>${substance.oldestDate}</td>
+                <td></td>
+            </tr>
+        </c:forEach>
+
     </table>
 
     <h1>Generaattorit</h1>

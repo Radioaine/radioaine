@@ -7,7 +7,7 @@ import javax.persistence.*;
 
 /**
  * Entity for a batch of products. Used to create table BATCH to database.
- * @author rmjheino
+ * @author radioaine
  */
 @Entity
 public class Batch implements Serializable {
@@ -18,9 +18,8 @@ public class Batch implements Serializable {
     @Column(nullable = false)
     private long id;
     @Column(nullable = false)
-    private long batchNumber;
-    
-    //Number of products in this batch
+
+    private String batchNumber;
     private int amount;
     
     //Products of this batch are made of this substance
@@ -34,6 +33,14 @@ public class Batch implements Serializable {
     private String manufacturer;
     private String supplier;
     private String note;
+
+    public int getAmount() {
+        return amount;
+    }
+
+    public void setAmount(int amount) {
+        this.amount = amount;
+    }
     
     public Timestamp getArrivalDate() {
         return arrivalDate;
@@ -59,7 +66,7 @@ public class Batch implements Serializable {
         this.note = note;
     }
 
-    public long getBatchNumber() {
+    public String getBatchNumber() {
         return batchNumber;
     }
     
@@ -67,7 +74,7 @@ public class Batch implements Serializable {
         return id;
     }
 
-    public void setBatchNumber(long batchNumber) {
+    public void setBatchNumber(String batchNumber) {
         this.batchNumber = batchNumber;
     }
 
@@ -114,12 +121,4 @@ public class Batch implements Serializable {
     public void setSupplier(String supplier) {
         this.supplier = supplier;
     }
-
-//    public Date getUseBefore() {
-//        return useBefore;
-//    }
-//
-//    public void setUseBefore(Date useBefore) {
-//        this.useBefore = useBefore;
-//    }
 }

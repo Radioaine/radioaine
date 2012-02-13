@@ -7,7 +7,7 @@ GET
             GET
                 batch           Get all the batches
                 batch/{id}      Get batch by id
-                addBatch		Get add batch page
+                addBatch	Get add batch page
             POST
                 batch           Create new batch
             PUT
@@ -40,7 +40,7 @@ GET
 
         Radio drug
             GET
-                addRadioDrug	Get add radio drug page
+                addRadioMedicine Get add radio drug page
 
         Eluate
             GET

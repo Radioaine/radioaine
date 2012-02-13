@@ -55,6 +55,7 @@ public class BatchController {
     public String addbatchView(Model model) {
         BatchFormObject bfm = new BatchFormObject();
         model.addAttribute("batch", bfm);
+        model.addAttribute("substances", substanceService.list());
         return "addBatchView";
     }
 
@@ -78,6 +79,8 @@ public class BatchController {
         batch.setNote(bfm.getNote());
         batch.setArrivalDate(Time.getTimestamp());
         batch.setExpDate((Time.getTimestamp()));
+        batch.setAmount(bfm.getAmount());
+
         //  Substance substance = substanceService.get(bfm.getSubstance());
         Substance substance = createTestSubstance(bfm); //luodaan testiaine testausta varten
         batch.setSubstance(substance);

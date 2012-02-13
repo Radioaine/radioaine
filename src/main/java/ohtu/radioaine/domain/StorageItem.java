@@ -6,11 +6,12 @@ import javax.persistence.*;
 
 @Entity
 public class StorageItem {
+    
     @Id
     @GeneratedValue(strategy = GenerationType.TABLE)
     @Column(nullable = false)
     private Long id;
-    
+
 //    @Column
 //    private List<Batch> batchesList;
     @Column
@@ -18,9 +19,9 @@ public class StorageItem {
     @Column
     private String openText;
 //    @Column
-//    private Date dateArrived;
+//    private Timestamp dateArrived;
 //    @Column
-//    private Date dateToRemove;
+//    private Timestamp dateToRemove;
 
 //    public List<Batch> getBatchesList() {
 //        return batchesList;

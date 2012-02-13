@@ -5,6 +5,10 @@ import java.sql.Timestamp;
 import java.util.Date;
 import javax.persistence.*;
 
+/**
+ * 
+ * @author radioaine
+ */
 @Entity
 public class Batch implements Serializable {
 
@@ -13,7 +17,7 @@ public class Batch implements Serializable {
     @Column(nullable = false)
     private long id;
     @Column(nullable = false)
-    private long batchNumber;
+    private String batchNumber;
     private int amount;
     private Substance substance;
     private Timestamp arrivalDate;
@@ -23,14 +27,13 @@ public class Batch implements Serializable {
     private String manufacturer;
     private String supplier;
     private String note;
-    private int substanceCount;
 
-    public int getSubstanceCount() {
-        return substanceCount;
+    public int getAmount() {
+        return amount;
     }
 
-    public void setSubstanceCount(int substanceCount) {
-        this.substanceCount = substanceCount;
+    public void setAmount(int amount) {
+        this.amount = amount;
     }
     
     public Timestamp getArrivalDate() {
@@ -57,7 +60,7 @@ public class Batch implements Serializable {
         this.note = note;
     }
 
-    public long getBatchNumber() {
+    public String getBatchNumber() {
         return batchNumber;
     }
     
@@ -65,7 +68,7 @@ public class Batch implements Serializable {
         return id;
     }
 
-    public void setBatchNumber(long batchNumber) {
+    public void setBatchNumber(String batchNumber) {
         this.batchNumber = batchNumber;
     }
 
@@ -108,12 +111,4 @@ public class Batch implements Serializable {
     public void setSupplier(String supplier) {
         this.supplier = supplier;
     }
-
-//    public Date getUseBefore() {
-//        return useBefore;
-//    }
-//
-//    public void setUseBefore(Date useBefore) {
-//        this.useBefore = useBefore;
-//    }
 }

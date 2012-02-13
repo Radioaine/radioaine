@@ -1,6 +1,7 @@
  package ohtu.radioaine.domain;
 
 import java.io.Serializable;
+import java.sql.Timestamp;
 import javax.persistence.*;
 
 @Entity
@@ -18,6 +19,24 @@ public class Substance implements Serializable {
     private boolean needsColdStorage;
     private String manufacturer;
     private String supplier;
+    private int totalAmount;
+    private Timestamp oldestDate;
+
+    public Timestamp getOldestDate() {
+        return oldestDate;
+    }
+
+    public void setOldestDate(Timestamp oldestDate) {
+        this.oldestDate = oldestDate;
+    }
+
+    public int getTotalAmount() {
+        return totalAmount;
+    }
+
+    public void setTotalAmount(int totalAmount) {
+        this.totalAmount = totalAmount;
+    }
 
     public String getSupplier() {
         return supplier;

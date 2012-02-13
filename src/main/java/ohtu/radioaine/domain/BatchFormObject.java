@@ -5,7 +5,7 @@ import javax.validation.constraints.NotNull;
 public class BatchFormObject {
 
     @NotNull(message = "Eränumero ei saa olla tyhjä")
-    private long batchNumber;
+    private String batchNumber;
     @NotNull(message = "Aine ei saa olla tyhjä")
     private long substance;
     @NotNull(message = "Määrä ei saa olla tyhjä")
@@ -40,11 +40,11 @@ public class BatchFormObject {
         this.expDate = expDate;
     }
 
-    public long getBatchNumber() {
+    public String getBatchNumber() {
         return batchNumber;
     }
 
-    public void setBatchNumber(long batchNumber) {
+    public void setBatchNumber(String batchNumber) {
         this.batchNumber = batchNumber;
     }
 

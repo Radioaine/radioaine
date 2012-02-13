@@ -9,6 +9,7 @@ import ohtu.radioaine.domain.Substance;
 
 /**
  * DB methods for Substance
+ *
  * @author rmjheino
  */
 @Repository
@@ -23,7 +24,7 @@ public class JPASubstanceDBDao implements SubstanceDBDao {
     }
 
     @Override
-    public Substance read(long id) {
+    public Substance read(int id) {
         return entityManager.find(Substance.class, id);
     }
 

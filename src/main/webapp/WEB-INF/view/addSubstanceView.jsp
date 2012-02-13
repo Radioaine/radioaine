@@ -8,19 +8,19 @@
     <h1>Lisää lähetys</h1>
 
 
-    <form:form commandName="batch" action="batch" method="POST">
-        Aine: <form:select path="substance">
-            <form:option value="1">Bridatec</form:option>
-            <form:option value="2">Stamicis</form:option>
-            <form:option value="3">Nanocolli</form:option>
+    <form:form commandName="substance" action="substance" method="POST">
+        Aine: <form:input path="name" type="text"/><form:errors path="name"/><br/>
+        Valmistaja: <form:input path="manufacturer" type="text"/><form:errors path="manufacturer"/><br/>
+        Toimittaja: <form:input path="supplier" type="text"/><form:errors path="supplier"/><br/>
+        Säilytettävä kylmässä: <form:select path="needsColdStorage">
+            <form:option value="1">Kyllä</form:option>
+            <form:option value="0">Ei</form:option>
         </form:select><br/>
-        Eränumero: <form:input path="batchNumber" type="text"/><form:errors path="batchNumber"/><br/>
-        Määrä: <form:input path="amount" type="number"/><form:errors path="amount"/><br/>
-        Saapumispäivä: <form:input path="arrivalDate" type="date"/><form:errors path="arrivalDate"/><br/>
-        Vanhenemispäivä: <form:input path="expDate" type="date"/><form:errors path="expDate"/><br/>
-        Huomioita: <form:textarea path="note" type="text"/><form:errors path="note"/><br/>
+        Hälytysraja 1: <form:input path="alertLimit1" type="number"/><form:errors path="alertLimit1"/><br/>
+        Hälytysraja 2: <form:input path="alertLimit2" type="number"/><form:errors path="alertLimit2"/><br/>
         <input type="submit">
-    </form:form>
+    </form:form>  
+
 </div>
 
 <%@include file="footer.jsp" %>

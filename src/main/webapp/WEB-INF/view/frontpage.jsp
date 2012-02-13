@@ -15,7 +15,7 @@
 
         <c:forEach var="substance" items="${substances}">
             <tr>
-                <td><a href="substance/"${substance.id}>${substance.name}</a></td>
+                <td><a href="substance/${substance.id}">${substance.name}</a></td>
                 <td class="maara">${substance.totalAmount}</td>
                 <td>${substance.oldestDate}</td>
                 <td></td>

@@ -1,30 +1,39 @@
- package ohtu.radioaine.domain;
+package ohtu.radioaine.domain;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
 import javax.persistence.*;
 
- /**
-  * Entity for different substances in storage. Used to create table Substance
-  * in DB.
-  * @author rmjheino
-  */
+/**
+ * Entity for different substances in storage. Used to create table Substance in
+ * DB.
+ *
+ * @author rmjheino
+ */
 @Entity
 public class Substance implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.TABLE)
-    @Column(nullable=false)
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(nullable = false)
     private int id;
-    @Column(nullable=false)
+    @Column(nullable = false)
     private String name;
+    @Column
     private int alertLimit1;
+    @Column
     private int alertLimit2;
+    @Column
     private boolean ordered;
+    @Column
     private boolean needsColdStorage;
+    @Column
     private String manufacturer;
+    @Column
     private String supplier;
+    @Column
     private int totalAmount;
+    @Column
     private Timestamp oldestDate;
 
     public Timestamp getOldestDate() {
@@ -65,13 +74,6 @@ public class Substance implements Serializable {
 
     public void setOrdered(boolean ordered) {
         this.ordered = ordered;
-    }
-
-    public Substance() {
-    }
-    
-    public Substance(String name) {
-        this.name = name;
     }
 
     public int getId() {
@@ -117,7 +119,7 @@ public class Substance implements Serializable {
     public void setNeedsColdStorage(boolean needsColdStorage) {
         this.needsColdStorage = needsColdStorage;
     }
-    
+
     @Override
     public String toString() {
         return name;

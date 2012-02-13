@@ -16,10 +16,10 @@ public class Batch implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(nullable = false)
-    private long id;
+    private int id;
     @Column(nullable = false)
-
     private String batchNumber;
+    @Column
     private int amount;
     
     //Products of this batch are made of this substance
@@ -70,9 +70,14 @@ public class Batch implements Serializable {
         return batchNumber;
     }
     
-    public long getId() {
+    public int getId() {
         return id;
     }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+    
 
     public void setBatchNumber(String batchNumber) {
         this.batchNumber = batchNumber;

@@ -40,7 +40,7 @@ public class SimpleSubstanceService implements SubstanceService<Substance> {
     
     @Override
     @Transactional(readOnly = true)
-    public Substance get(Long id) {
+    public Substance read(int id) {
         return storageDao.read(id);
     }
 }

@@ -15,7 +15,7 @@ public class BatchFormObject {
     @NotNull(message = "Eränumero ei saa olla tyhjä")
     private String batchNumber;
     @NotNull(message = "Aine ei saa olla tyhjä")
-    private long substance;
+    private int substance;
     @NotNull(message = "Määrä ei saa olla tyhjä")
     private int amount;
     @NotNull(message = "Saapumispäivä ei saa olla tyhjä")
@@ -65,11 +65,11 @@ public class BatchFormObject {
     }
 
 
-    public long getSubstance() {
+    public int getSubstance() {
         return substance;
     }
 
-    public void setSubstance(long substance) {
+    public void setSubstance(int substance) {
         this.substance = substance;
     }
 }

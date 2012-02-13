@@ -10,9 +10,9 @@
 
     <form:form commandName="batch" action="batch" method="POST">
         Aine: <form:select path="substance">
-            <form:option value="1">Bridatec</form:option>
-            <form:option value="2">Stamicis</form:option>
-            <form:option value="3">Nanocolli</form:option>
+            <c:forEach var="substance" items="${substances}">
+                <form:option value="${substance.id}">${substance.name}</form:option>
+            </c:forEach>
         </form:select><br/>
         Eränumero: <form:input path="batchNumber" type="text"/><form:errors path="batchNumber"/><br/>
         Määrä: <form:input path="amount" type="number"/><form:errors path="amount"/><br/>

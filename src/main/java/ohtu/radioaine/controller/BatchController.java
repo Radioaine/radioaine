@@ -53,8 +53,7 @@ public class BatchController {
 
     @RequestMapping(value = "addBatch", method = RequestMethod.GET)
     public String addbatchView(Model model) {
-        BatchFormObject bfm = new BatchFormObject();
-        model.addAttribute("batch", bfm);
+        model.addAttribute("batch", new BatchFormObject());
         model.addAttribute("substances", substanceService.list());
         return "addBatchView";
     }
@@ -70,34 +69,36 @@ public class BatchController {
 
     /**
      * 
-     * @param bfm 
+     * @param bfo 
      * @return 
      */
-    private Batch createBatch(BatchFormObject bfm) {
+    private Batch createBatch(BatchFormObject bfo) {
         Batch batch = new Batch();
-        batch.setBatchNumber(bfm.getBatchNumber());
-        batch.setNote(bfm.getNote());
+        batch.setBatchNumber(bfo.getBatchNumber());
+        batch.setNote(bfo.getNote());
         batch.setArrivalDate(Time.getTimestamp());
         batch.setExpDate((Time.getTimestamp()));
-        batch.setAmount(bfm.getAmount());
+        batch.setAmount(bfo.getAmount());
 
-        //  Substance substance = substanceService.get(bfm.getSubstance());
-        Substance substance = createTestSubstance(bfm); //luodaan testiaine testausta varten
+        Substance substance = (Substance) substanceService.read(bfo.getSubstance());
+        //Substance substance = createTestSubstance(bfo); //luodaan testiaine testausta varten
+        substance.setTotalAmount(substance.getTotalAmount()+bfo.getAmount());
+        substanceService.lisaa(substance);
         batch.setSubstance(substance);
         batch.setManufacturer(substance.getManufacturer());
         batch.setSupplier(substance.getSupplier());
         return batch;
     }
 
-    private Substance createTestSubstance(BatchFormObject bfm) {
-        Substance substance = new Substance("" + bfm.getSubstance());
-        substance.setName("LääkeaineX");
-        substance.setNeedsColdStorage(true);
-        substance.setAlertLimit1(5);
-        substance.setAlertLimit2(8);
-        substance.setHasBeenOrdered(false);
-        substance.setManufacturer("Pekan lääkefirma");
-        substance.setSupplier("Taavon tukkuliike");
-        return substance;
-    }
+//    private Substance createTestSubstance(BatchFormObject bfm) {
+//        Substance substance = new Substance("" + bfm.getSubstance());
+//        substance.setName("LääkeaineX");
+//        substance.setNeedsColdStorage(true);
+//        substance.setAlertLimit1(5);
+//        substance.setAlertLimit2(8);
+//        substance.setHasBeenOrdered(false);
+//        substance.setManufacturer("Pekan lääkefirma");
+//        substance.setSupplier("Taavon tukkuliike");
+//        return substance;
+//    }
 }

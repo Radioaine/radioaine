@@ -7,6 +7,10 @@ import org.springframework.transaction.annotation.Transactional;
 import ohtu.radioaine.database.SubstanceDBDao;
 import ohtu.radioaine.domain.Substance;
 
+/**
+ * Implementation for Substance service methods.
+ * @author rmjheino
+ */
 @Service
 public class SimpleSubstanceService implements SubstanceService<Substance> {
 

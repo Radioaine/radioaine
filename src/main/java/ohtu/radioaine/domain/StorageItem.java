@@ -4,6 +4,10 @@ import java.util.Date;
 import java.util.List;
 import javax.persistence.*;
 
+/**
+ * Entity for a single storage item. Used to create table StorageItem in DB.
+ * @author rmjheino
+ */
 @Entity
 public class StorageItem {
     @Id

@@ -3,6 +3,11 @@
 import java.io.Serializable;
 import javax.persistence.*;
 
+ /**
+  * Entity for different substances in storage. Used to create table Substance
+  * in DB.
+  * @author rmjheino
+  */
 @Entity
 public class Substance implements Serializable {
 

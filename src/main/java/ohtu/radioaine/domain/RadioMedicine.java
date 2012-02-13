@@ -7,6 +7,11 @@ package ohtu.radioaine.domain;
 import java.util.List;
 import javax.persistence.*;
 
+/**
+ * Entity for radiomedicine. Extends Product. Used to create table RadioMedicine
+ * to DB
+ * @author rmjheino
+ */
 @Entity
 public class RadioMedicine extends Product {
 

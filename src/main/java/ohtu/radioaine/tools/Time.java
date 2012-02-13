@@ -1,6 +1,5 @@
 /*
- * To change this template, choose Time | Templates
- * and open the template in the editor.
+ * Tool used for testing
  */
 package ohtu.radioaine.tools;
 

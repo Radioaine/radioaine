@@ -7,6 +7,10 @@ import javax.persistence.Query;
 import org.springframework.stereotype.Repository;
 import ohtu.radioaine.domain.Batch;
 
+/**
+ * DB methods for Batch
+ * @author rmjheino
+ */
 @Repository
 public class JPABatchDBDao implements BatchDBDao {
 

@@ -7,6 +7,10 @@ import org.springframework.transaction.annotation.Transactional;
 import ohtu.radioaine.database.BatchDBDao;
 import ohtu.radioaine.domain.Batch;
 
+/**
+ * Implementation for Batch service methods.
+ * @author rmjheino
+ */
 @Service
 public class SimpleBatchService implements BatchService {
 

@@ -1,3 +1,14 @@
+/*
+ * Contains following controllers for batch page:
+ *  - batch/{id}: fetches batch by id from db, gives it in model to view 'batchView'
+ *  - batch: fetches all batches from db, gives them in model to view 'batch' 
+ *  - addBatch: 
+ */
+
+/**
+ * 
+ */
+
 package ohtu.radioaine.controller;
 
 import javax.validation.Valid;
@@ -16,6 +27,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMethod;
 import ohtu.radioaine.tools.Time;
 
+/**
+ * Controllers for batch creation and viewing
+ * @author rmjheino
+ */
 @Controller
 public class BatchController {
 
@@ -52,13 +67,17 @@ public class BatchController {
         return "redirect:/batch/" + batch.getId();
     }
 
+    /**
+     * 
+     * @param bfm 
+     * @return 
+     */
     private Batch createBatch(BatchFormObject bfm) {
         Batch batch = new Batch();
         batch.setBatchNumber(bfm.getBatchNumber());
         batch.setNote(bfm.getNote());
         batch.setArrivalDate(Time.getTimestamp());
         batch.setExpDate((Time.getTimestamp()));
-        batch.setSubstanceCount(bfm.getAmount());
         //  Substance substance = substanceService.get(bfm.getSubstance());
         Substance substance = createTestSubstance(bfm); //luodaan testiaine testausta varten
         batch.setSubstance(substance);

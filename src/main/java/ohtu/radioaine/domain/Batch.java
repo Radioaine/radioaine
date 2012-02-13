@@ -5,33 +5,35 @@ import java.sql.Timestamp;
 import java.util.Date;
 import javax.persistence.*;
 
+/**
+ * Entity for a batch of products. Used to create table BATCH to database.
+ * @author rmjheino
+ */
 @Entity
 public class Batch implements Serializable {
 
+    
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(nullable = false)
     private long id;
     @Column(nullable = false)
     private long batchNumber;
+    
+    //Number of products in this batch
     private int amount;
+    
+    //Products of this batch are made of this substance
     private Substance substance;
     private Timestamp arrivalDate;
     private Timestamp expDate;
     private boolean qualityCheck;
+    
+    //Possible radioactivity
     private double strength;
     private String manufacturer;
     private String supplier;
     private String note;
-    private int substanceCount;
-
-    public int getSubstanceCount() {
-        return substanceCount;
-    }
-
-    public void setSubstanceCount(int substanceCount) {
-        this.substanceCount = substanceCount;
-    }
     
     public Timestamp getArrivalDate() {
         return arrivalDate;
@@ -72,7 +74,11 @@ public class Batch implements Serializable {
     public String getManufacturer() {
         return manufacturer;
     }
-
+    
+    /**
+     * Sets the manufacturer
+     * @param manufacturer name of the manufacturer
+     */
     public void setManufacturer(String manufacturer) {
         this.manufacturer = manufacturer;
     }

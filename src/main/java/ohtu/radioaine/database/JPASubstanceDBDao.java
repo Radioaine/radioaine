@@ -7,6 +7,10 @@ import javax.persistence.Query;
 import org.springframework.stereotype.Repository;
 import ohtu.radioaine.domain.Substance;
 
+/**
+ * DB methods for Substance
+ * @author rmjheino
+ */
 @Repository
 public class JPASubstanceDBDao implements SubstanceDBDao {
 

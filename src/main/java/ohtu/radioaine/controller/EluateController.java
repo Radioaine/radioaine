@@ -5,6 +5,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import ohtu.radioaine.service.BatchService;
 
+/**
+ * Controllers for eluate creation ja viewing
+ * @author rmjheino
+ */
 @Controller
 public class EluateController {
 

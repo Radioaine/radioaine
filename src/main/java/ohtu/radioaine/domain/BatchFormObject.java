@@ -1,7 +1,15 @@
 package ohtu.radioaine.domain;
 
+/*
+ * Used for form validation. Has only getters and setters.
+ */
+
 import javax.validation.constraints.NotNull;
 
+/**
+ * Used for form validation
+ * @author rmjheino
+ */
 public class BatchFormObject {
 
     @NotNull(message = "Eränumero ei saa olla tyhjä")
@@ -15,7 +23,7 @@ public class BatchFormObject {
     @NotNull(message = "Vanhenemispäivä ei saa olla tyhjä")
     private String expDate;
     private String note;
-
+    
     public int getAmount() {
         return amount;
     }

@@ -7,6 +7,10 @@ import ohtu.radioaine.service.BatchService;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+/**
+ * Controllers for 
+ * @author rmjheino
+ */
 @Controller
 public class ProductController {
 

@@ -42,4 +42,10 @@ public class JPABatchDBDao implements BatchDBDao {
         Query q = entityManager.createQuery("SELECT e FROM Batch e");
         return q.getResultList();
     }
+    
+    @Override
+    public List<Batch> listBatchesWhereSubstance(int id) {
+        Query q = entityManager.createQuery("SELECT e FROM Batch e WHERE e.substance.id="+id);
+        return q.getResultList();
+    }
 }

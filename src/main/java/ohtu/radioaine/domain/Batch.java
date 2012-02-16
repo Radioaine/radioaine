@@ -23,6 +23,7 @@ public class Batch implements Serializable {
     private int amount;
     
     //Products of this batch are made of this substance
+    @ManyToOne
     private Substance substance;
     private Timestamp arrivalDate;
     private Timestamp expDate;

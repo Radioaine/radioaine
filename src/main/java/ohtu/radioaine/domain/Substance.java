@@ -17,6 +17,8 @@ public class Substance implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(nullable = false)
     private int id;
+
+    
     @Column(nullable = false)
     private String name;
     @Column
@@ -79,7 +81,11 @@ public class Substance implements Serializable {
     public int getId() {
         return id;
     }
-
+    
+    public void setId(int id) {
+        this.id = id;
+    }
+    
     public int getAlertLimit1() {
         return alertLimit1;
     }

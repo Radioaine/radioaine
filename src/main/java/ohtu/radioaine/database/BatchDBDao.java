@@ -10,4 +10,5 @@ import ohtu.radioaine.domain.Batch;
 
 public interface BatchDBDao extends DAO<Batch> {
     public List<Batch> list();
+    public List<Batch> listBatchesWhereSubstance(int id);
 }

@@ -12,4 +12,5 @@ public interface BatchService {
     public List<Batch> listaa();
     public Batch read(int id);
     public void delete(int esineId);
+    public List<Batch> listBatchesWhereSubstancee(int id);
 }

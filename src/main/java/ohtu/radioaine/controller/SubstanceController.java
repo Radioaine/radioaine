@@ -26,6 +26,7 @@ public class SubstanceController {
     @RequestMapping(value = "substance/{id}", method = RequestMethod.GET)
     public String getSubstanceById(@PathVariable Integer id, Model model) {
         model.addAttribute("substance", substanceService.read(id));
+        model.addAttribute("substanceBatches", batchService.listBatchesWhereSubstancee(id));
         return "substanceView";
     }
 

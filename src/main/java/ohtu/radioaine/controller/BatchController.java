@@ -76,9 +76,9 @@ public class BatchController {
         int total = batch.getAmount() - amount;
         if(total >= 0) {
             substance.setTotalAmount(substance.getTotalAmount() - amount);
-            substanceService.lisaa(substance);
+            substanceService.createOrUpdate(substance);
             batch.setAmount(total);
-            batchService.create(batch);
+            batchService.createOrUpdate(batch);
         }
         return "redirect:/batch/" + id;
     }

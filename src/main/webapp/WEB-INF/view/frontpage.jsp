@@ -62,7 +62,7 @@
         </tr>
     </table>
     <br/>
-    <a href="generateDB">Generoi testitietokanta</a>
+    <a href="generateTestDB">Generoi testitietokanta</a>
     
 </div>
 <%@include file="footer.jsp" %>

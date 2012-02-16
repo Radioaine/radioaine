@@ -85,6 +85,13 @@
             <td></td>
         <tr>
     </table>
+    <br />
+    <p>Poista erästä:</p>
+    <form action="${pageContext.servletContext.contextPath}/batchDelete/${batch.id}" method="POST">
+        Määrä: <input name="amount" type="number"/><br/>
+        Nimi: <input name="name" type="text"/><br/>
+        <input type="submit" value="Poista">
+    </form>
 </div>
 
 <%@include file="footer.jsp" %>

@@ -12,10 +12,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
  *
- * @author Jarno
+ * Creates a test database
+ * @author Radioaine
+ * 
  */
 @Controller
-public class DBController {
+public class TestDBController {
     
     @Autowired
     private SubstanceService substanceService;
@@ -31,7 +33,7 @@ public class DBController {
     private String[][] batches = {{"123445EE", "8", "true", "Jeejeee paljon huomautettavaa"},
                                     {"99AADD22", "3", "false","puolet rikki"}};
     
-    @RequestMapping("generateDB")
+    @RequestMapping("generateTestDB")
     public String createDB()    {
         createSubstances();
         createBatches();

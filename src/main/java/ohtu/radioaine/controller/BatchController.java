@@ -68,17 +68,20 @@ public class BatchController {
         return "redirect:/batch/" + batch.getId();
     }
     
-//    @RequestMapping(value = "batch/{id}", method = RequestMethod.DELETE)
-//    public String deleteBatch(@RequestParam String name, @RequestParam Integer amount, @PathVariable Integer id) {
-//        Batch batch = batchService.read(id);
-//        
-////        int total = batch.getAmount() - amount;
-////        if(total >= 0) {
-////            batch.setAmount(total);
-//            batchService.delete(id);
-////        }
-//        return "redirect:/batch/" + id;
-//    }
+    @RequestMapping(value = "batchDelete/{id}", method = RequestMethod.POST)
+    public String deleteBatch(@RequestParam String name, @RequestParam Integer amount, @PathVariable Integer id) {
+        Batch batch = batchService.read(id);
+        Substance substance = batch.getSubstance();
+        
+        int total = batch.getAmount() - amount;
+        if(total >= 0) {
+            substance.setTotalAmount(substance.getTotalAmount() - amount);
+            substanceService.lisaa(substance);
+            batch.setAmount(total);
+            batchService.create(batch);
+        }
+        return "redirect:/batch/" + id;
+    }
 
 
     /**

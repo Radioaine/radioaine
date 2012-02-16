@@ -43,7 +43,7 @@ public class DBController {
     private void createSubstances() {
         for(int i=0; i < substances.length; i++) {
             Substance substance = new Substance();
-            substance.setId((i+1));
+            substance.setId((i+100));
             substance.setName(substances[i][0]);
             substance.setAlertLimit1(Integer.parseInt(substances[i][1]));
             substance.setAlertLimit2(Integer.parseInt(substances[i][2]));

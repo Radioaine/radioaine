@@ -26,6 +26,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMethod;
 import ohtu.radioaine.tools.Time;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * Controllers for batch creation and viewing
@@ -66,6 +67,19 @@ public class BatchController {
         Batch batch = batchService.create(createBatch(bfm));
         return "redirect:/batch/" + batch.getId();
     }
+    
+//    @RequestMapping(value = "batch/{id}", method = RequestMethod.DELETE)
+//    public String deleteBatch(@RequestParam String name, @RequestParam Integer amount, @PathVariable Integer id) {
+//        Batch batch = batchService.read(id);
+//        
+////        int total = batch.getAmount() - amount;
+////        if(total >= 0) {
+////            batch.setAmount(total);
+//            batchService.delete(id);
+////        }
+//        return "redirect:/batch/" + id;
+//    }
+
 
     /**
      * 

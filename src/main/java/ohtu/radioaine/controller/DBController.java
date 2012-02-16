@@ -22,8 +22,6 @@ public class DBController {
     @Autowired
     private BatchService batchService;
     
-    private List<Substance> substanceList = new ArrayList<Substance>();
-    
     private String[][] substances =   {{"Angiocis 20.12mg 5 inj.plo", "10", "12", "true", "false", "Lääkefirma Jamppa", "Magnum Medical Finland Oy", "5"}, 
                                 {"Bridatec kittipakkaus 5 inj.plo", "3", "4", "false", "true", "Lääkefirma Perttilä", "Oy GE Healthcare Bio-Sciences Ab", "5"},
                                 {"Ceretec Exametazine Agent kittipakkaus 5 inj.plo", "3", "4", "false", "true", "Lääkefirma Perttilä", "Oy GE Healthcare Bio-Sciences Ab", "10"},
@@ -43,7 +41,6 @@ public class DBController {
     private void createSubstances() {
         for(int i=0; i < substances.length; i++) {
             Substance substance = new Substance();
-            substance.setId((i+100));
             substance.setName(substances[i][0]);
             substance.setAlertLimit1(Integer.parseInt(substances[i][1]));
             substance.setAlertLimit2(Integer.parseInt(substances[i][2]));
@@ -51,8 +48,6 @@ public class DBController {
             substance.setNeedsColdStorage(Boolean.parseBoolean(substances[i][4]));
             substance.setManufacturer(substances[i][5]);
             substance.setSupplier(substances[i][6]);
-            substance.setTotalAmount(Integer.parseInt(substances[i][7]));
-            substanceList.add(substance);
             substanceService.lisaa(substance);
         }
     }
@@ -60,12 +55,14 @@ public class DBController {
     private void createBatches()    {
         for(int i=0; i < batches.length; i++) {
             Batch batch = new Batch();
-            batch.setId((i+100));
             batch.setBatchNumber(batches[i][0]);
             batch.setAmount(Integer.parseInt(batches[i][1]));
             batch.setQualityCheck(Boolean.parseBoolean(batches[i][2]));
             batch.setNote(batches[i][3]);
-            batch.setSubstance(substanceList.get(0));
+            Substance substance = (Substance) substanceService.read(1);
+            substance.setTotalAmount(substance.getTotalAmount() + batch.getAmount());
+            substanceService.lisaa(substance);
+            batch.setSubstance(substance);
             batchService.create(batch);
         }
     }

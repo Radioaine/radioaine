@@ -14,7 +14,7 @@ public class Batch implements Serializable {
 
     
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.TABLE)
     @Column(nullable = false)
     private int id;
     @Column(nullable = false)

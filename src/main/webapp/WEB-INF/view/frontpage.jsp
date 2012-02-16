@@ -61,5 +61,8 @@
             <td></td>
         </tr>
     </table>
+    <br/>
+    <a href="generateDB">Generoi testitietokanta</a>
+    
 </div>
 <%@include file="footer.jsp" %>

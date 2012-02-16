@@ -14,7 +14,7 @@ import javax.persistence.*;
 public class Substance implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.TABLE)
     @Column(nullable = false)
     private int id;
 
@@ -38,6 +38,10 @@ public class Substance implements Serializable {
     @Column
     private Timestamp oldestDate;
 
+    public Substance() {
+        totalAmount = 0;
+    }
+    
     public Timestamp getOldestDate() {
         return oldestDate;
     }

@@ -4,11 +4,9 @@
  *  - batch: fetches all batches from db, gives them in model to view 'batch' 
  *  - addBatch: 
  */
-
 /**
- * 
+ *
  */
-
 package ohtu.radioaine.controller;
 
 import javax.validation.Valid;
@@ -30,6 +28,7 @@ import org.springframework.web.bind.annotation.*;
 
 /**
  * Controllers for batch creation and viewing
+ *
  * @author rmjheino
  */
 @Controller
@@ -67,14 +66,14 @@ public class BatchController {
         Batch batch = batchService.createOrUpdate(createBatch(bfm));
         return "redirect:/batch/" + batch.getId();
     }
-    
+
     @RequestMapping(value = "batchDelete/{id}", method = RequestMethod.POST)
     public String deleteBatch(@RequestParam String name, @RequestParam Integer amount, @PathVariable Integer id) {
         Batch batch = batchService.read(id);
         Substance substance = batch.getSubstance();
-        
+
         int total = batch.getAmount() - amount;
-        if(total >= 0) {
+        if (total >= 0 && name.length() >= 1) {
             substance.setTotalAmount(substance.getTotalAmount() - amount);
             substanceService.createOrUpdate(substance);
             batch.setAmount(total);
@@ -83,11 +82,10 @@ public class BatchController {
         return "redirect:/batch/" + id;
     }
 
-
     /**
-     * 
-     * @param bfo 
-     * @return 
+     *
+     * @param bfo
+     * @return
      */
     private Batch createBatch(BatchFormObject bfo) {
         Batch batch = new Batch();
@@ -99,14 +97,13 @@ public class BatchController {
 
         Substance substance = (Substance) substanceService.read(bfo.getSubstance());
         //Substance substance = createTestSubstance(bfo); //luodaan testiaine testausta varten
-        substance.setTotalAmount(substance.getTotalAmount()+bfo.getAmount());
+        substance.setTotalAmount(substance.getTotalAmount() + bfo.getAmount());
         substanceService.createOrUpdate(substance);
         batch.setSubstance(substance);
         batch.setManufacturer(substance.getManufacturer());
         batch.setSupplier(substance.getSupplier());
         return batch;
     }
-
 //    private Substance createTestSubstance(BatchFormObject bfm) {
 //        Substance substance = new Substance("" + bfm.getSubstance());
 //        substance.setName("LääkeaineX");

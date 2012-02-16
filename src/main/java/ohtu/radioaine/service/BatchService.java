@@ -8,9 +8,9 @@ import ohtu.radioaine.domain.Batch;
  * @author rmjheino
  */
 public interface BatchService {
-    public Batch create(Batch esine);
-    public List<Batch> listaa();
+    public Batch createOrUpdate(Batch esine);
+    public List<Batch> list();
     public Batch read(int id);
     public void delete(int esineId);
-    public List<Batch> listBatchesWhereSubstancee(int id);
+    public List<Batch> listSubstanceBatches(int id);
 }

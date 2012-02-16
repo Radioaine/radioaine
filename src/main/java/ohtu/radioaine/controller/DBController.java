@@ -48,7 +48,7 @@ public class DBController {
             substance.setNeedsColdStorage(Boolean.parseBoolean(substances[i][4]));
             substance.setManufacturer(substances[i][5]);
             substance.setSupplier(substances[i][6]);
-            substanceService.lisaa(substance);
+            substanceService.createOrUpdate(substance);
         }
     }
     
@@ -61,9 +61,9 @@ public class DBController {
             batch.setNote(batches[i][3]);
             Substance substance = (Substance) substanceService.read(1);
             substance.setTotalAmount(substance.getTotalAmount() + batch.getAmount());
-            substanceService.lisaa(substance);
+            substanceService.createOrUpdate(substance);
             batch.setSubstance(substance);
-            batchService.create(batch);
+            batchService.createOrUpdate(batch);
         }
     }
 }

@@ -48,7 +48,7 @@ public class BatchController {
 
     @RequestMapping(value = "batch", method = RequestMethod.GET)
     public String batchList(Model model) {
-        model.addAttribute("batches", batchService.listaa());
+        model.addAttribute("batches", batchService.list());
         return "batchView";
     }
 
@@ -64,7 +64,7 @@ public class BatchController {
         if (result.hasErrors()) {
             return "addBatchView";
         }
-        Batch batch = batchService.create(createBatch(bfm));
+        Batch batch = batchService.createOrUpdate(createBatch(bfm));
         return "redirect:/batch/" + batch.getId();
     }
     
@@ -97,7 +97,7 @@ public class BatchController {
         Substance substance = (Substance) substanceService.read(bfo.getSubstance());
         //Substance substance = createTestSubstance(bfo); //luodaan testiaine testausta varten
         substance.setTotalAmount(substance.getTotalAmount()+bfo.getAmount());
-        substanceService.lisaa(substance);
+        substanceService.createOrUpdate(substance);
         batch.setSubstance(substance);
         batch.setManufacturer(substance.getManufacturer());
         batch.setSupplier(substance.getSupplier());

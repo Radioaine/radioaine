@@ -19,8 +19,8 @@ public class SimpleSubstanceService implements SubstanceService<Substance> {
 
     @Override
     @Transactional
-    public Substance lisaa(Substance esine) {
-        return storageDao.create(esine);
+    public Substance createOrUpdate(Substance esine) {
+        return storageDao.createOrUpdate(esine);
     }
 
     @Override
@@ -31,7 +31,7 @@ public class SimpleSubstanceService implements SubstanceService<Substance> {
 
     @Override
     @Transactional
-    public void poista(int esineId) {
+    public void delete(int esineId) {
         Substance e = storageDao.read(esineId);
         if (e != null) {
             storageDao.delete(e);

@@ -20,13 +20,13 @@ public class SimpleBatchService implements BatchService {
 
     @Override
     @Transactional
-    public Batch create(Batch esine) {
-        return varastoDao.create(esine);
+    public Batch createOrUpdate(Batch esine) {
+        return varastoDao.createOrUpdate(esine);
     }
 
     @Override
     @Transactional(readOnly = true)
-    public List<Batch> listaa() {
+    public List<Batch> list() {
         return varastoDao.list();
     }
     
@@ -47,7 +47,7 @@ public class SimpleBatchService implements BatchService {
     
     @Override
     @Transactional(readOnly = true)
-    public List<Batch> listBatchesWhereSubstancee(int id) {
-        return varastoDao.listBatchesWhereSubstance(id);
+    public List<Batch> listSubstanceBatches(int id) {
+        return varastoDao.listSubstanceBatches(id);
     }
 }

@@ -6,5 +6,5 @@ import ohtu.radioaine.domain.Substance;
 public interface SubstanceDBDao extends DAO<Substance> {
     public List<Substance> list();
     @Override
-    public Substance create(Substance instance);
+    public Substance createOrUpdate(Substance instance);
 }

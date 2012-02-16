@@ -26,7 +26,7 @@ public class SubstanceController {
     @RequestMapping(value = "substance/{id}", method = RequestMethod.GET)
     public String getSubstanceById(@PathVariable Integer id, Model model) {
         model.addAttribute("substance", substanceService.read(id));
-        model.addAttribute("substanceBatches", batchService.listBatchesWhereSubstancee(id));
+        model.addAttribute("substanceBatches", batchService.listSubstanceBatches(id));
         return "substanceView";
     }
 
@@ -35,7 +35,7 @@ public class SubstanceController {
         if(result.hasErrors()) {
             return "addSubstanceView";
         }
-        substanceService.lisaa(createSubstance(sfo));
+        substanceService.createOrUpdate(createSubstance(sfo));
         return "redirect:/substanceList";
     }
     

@@ -19,7 +19,7 @@ public class JPASubstanceDBDao implements SubstanceDBDao {
     EntityManager entityManager;
 
     @Override
-    public Substance create(Substance instance) {
+    public Substance createOrUpdate(Substance instance) {
         return entityManager.merge(instance);
     }
 

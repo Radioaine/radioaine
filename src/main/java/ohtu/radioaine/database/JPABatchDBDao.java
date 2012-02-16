@@ -18,7 +18,7 @@ public class JPABatchDBDao implements BatchDBDao {
     EntityManager entityManager;
     
     @Override
-    public Batch create(Batch instance) {
+    public Batch createOrUpdate(Batch instance) {
        return entityManager.merge(instance);
     }
 
@@ -44,7 +44,7 @@ public class JPABatchDBDao implements BatchDBDao {
     }
     
     @Override
-    public List<Batch> listBatchesWhereSubstance(int id) {
+    public List<Batch> listSubstanceBatches(int id) {
         Query q = entityManager.createQuery("SELECT e FROM Batch e WHERE e.substance.id="+id);
         return q.getResultList();
     }

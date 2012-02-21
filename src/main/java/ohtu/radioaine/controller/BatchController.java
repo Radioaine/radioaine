@@ -66,7 +66,30 @@ public class BatchController {
         Batch batch = batchService.createOrUpdate(createBatch(bfm));
         return "redirect:/batch/" + batch.getId();
     }
-
+    
+    
+    //Batchin päivittämiseen kesken
+    @RequestMapping(value = "updateBatch/{id}")
+    public String batchUpdateRequest(Model model, @PathVariable Integer id) {
+        model.addAttribute("substances", substanceService.list());
+        model.addAttribute("batch", batchService.read(id));
+        return "batchUpdateView";
+    }
+    //Batchin päivittämiseen keskenlog
+    @RequestMapping(value = "updateBatch/{id}", method = RequestMethod.POST)
+    public String batchUpdate(@Valid @ModelAttribute("batch") BatchFormObject bfm, 
+    BindingResult result, 
+    Model model, 
+    @PathVariable Integer id) {
+        if (result.hasErrors()) {
+            return "redirect:/updateBatch/" + id;
+        }
+        Batch temp = createBatch(bfm);
+        Batch batch = batchService.read(id);
+        
+        return "redirect:/batch/" + id;
+    }
+    
     @RequestMapping(value = "batchDelete/{id}", method = RequestMethod.POST)
     public String deleteBatch(@RequestParam String name, @RequestParam Integer amount, @PathVariable Integer id) {
         Batch batch = batchService.read(id);

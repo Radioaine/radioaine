@@ -122,6 +122,11 @@ public class Batch implements Serializable {
         this.strength = strength;
     }
 
+    @Override
+    public String toString() {
+        return "Batch{" + "id=" + id + ", batchNumber=" + batchNumber + ", amount=" + amount + ", substanceVolume=" + substanceVolume + ", substance=" + substance + ", arrivalDate=" + arrivalDate + ", expDate=" + expDate + ", qualityCheck=" + qualityCheck + ", strength=" + strength + ", manufacturer=" + manufacturer + ", supplier=" + supplier + ", note=" + note + '}';
+    }
+
     public Substance getSubstance() {
         return substance;
     }

@@ -20,8 +20,8 @@ public class SimpleBatchService implements BatchService {
 
     @Override
     @Transactional
-    public Batch createOrUpdate(Batch esine) {
-        return varastoDao.createOrUpdate(esine);
+    public Batch createOrUpdate(Batch batch) {
+        return varastoDao.createOrUpdate(batch);
     }
 
     @Override
@@ -38,8 +38,8 @@ public class SimpleBatchService implements BatchService {
 
     @Override
     @Transactional
-    public void delete(int esineId) {
-        Batch e = varastoDao.read(esineId);
+    public void delete(int batchId) {
+        Batch e = varastoDao.read(batchId);
         if (e != null) {
             varastoDao.delete(e);
         }

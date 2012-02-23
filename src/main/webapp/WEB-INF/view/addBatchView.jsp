@@ -15,6 +15,7 @@
         </form:select><br/>
         Eränumero: <form:input path="batchNumber" type="text"/><form:errors path="batchNumber"/><br/>
         Määrä: <form:input path="amount" type="number"/><form:errors path="amount"/><br/>
+        Yksikön tilavuus: <form:input path="substanceVolume" type="number" /><form:errors path="substanceVolume" /><br />
         Saapumispäivä: <form:input path="arrivalDate" type="date"/><form:errors path="arrivalDate"/><br/>
         Vanhenemispäivä: <form:input path="expDate" type="date"/><form:errors path="expDate"/><br/>
         Huomioita: <form:textarea path="note" type="text"/><form:errors path="note"/><br/>

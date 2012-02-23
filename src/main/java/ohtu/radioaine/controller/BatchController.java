@@ -86,7 +86,6 @@ public class BatchController {
         }
         int tempAmount;
         Batch batch = batchService.read(id);
-        System.out.println("batch amount: " + batch.getAmount() + " bfm amount: " + bfm.getAmount());
         if(batch.getAmount() > bfm.getAmount())
             tempAmount = -(batch.getAmount() - bfm.getAmount());
         else if(batch.getAmount() < bfm.getAmount())
@@ -97,14 +96,11 @@ public class BatchController {
         substance.setTotalAmount(substance.getTotalAmount() + tempAmount);
         substanceService.createOrUpdate(substance);
         batch.setAmount(bfm.getAmount());
+        batch.setSubstanceVolume(bfm.getSubstanceVolume());
+        batch.setBatchNumber(bfm.getBatchNumber());
+        batch.setNote(bfm.getNote());
         batchService.createOrUpdate(batch);
-        
-        //Batch temp = createBatch(bfm);
-//        Batch batch = batchService.read(id);
-//        temp.setId(id);
-        
-        
-        
+  
         return "redirect:/batch/" + id;
     }
     
@@ -135,6 +131,7 @@ public class BatchController {
         batch.setArrivalDate(Time.getTimestamp());
         batch.setExpDate((Time.getTimestamp()));
         batch.setAmount(bfo.getAmount());
+        batch.setSubstanceVolume(bfo.getSubstanceVolume());
 
         Substance substance = (Substance) substanceService.read(bfo.getSubstance());
         //Substance substance = createTestSubstance(bfo); //luodaan testiaine testausta varten

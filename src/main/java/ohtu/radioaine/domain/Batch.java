@@ -21,7 +21,9 @@ public class Batch implements Serializable {
     private String batchNumber;
     @Column
     private int amount;
-    
+    @Column
+    private int substanceVolume;
+
     //Products of this batch are made of this substance
     @ManyToOne
     private Substance substance;
@@ -35,6 +37,14 @@ public class Batch implements Serializable {
     private String supplier;
     private String note;
 
+    public int getSubstanceVolume() {
+        return substanceVolume;
+    }
+
+    public void setSubstanceVolume(int substanceVolume) {
+        this.substanceVolume = substanceVolume;
+    }
+    
     public int getAmount() {
         return amount;
     }

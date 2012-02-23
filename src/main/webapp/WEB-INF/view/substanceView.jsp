@@ -23,7 +23,7 @@
             <tr>
                 <td><a href="<c:out value="${pageContext.servletContext.contextPath}" />/batch/${batch.id}">${batch.batchNumber}</a></td>
                 <td>${batch.amount}</td>
-                <td>20</td>
+                <td>${batch.substanceVolume}</td>
                 <td>${batch.strength}</td>
                 <td>${batch.expDate}</td>
                 <td>${substance.manufacturer}</td>

@@ -18,7 +18,7 @@
         </form:select><br/>
         Hälytysraja 1: <form:input path="alertLimit1" type="number"/><form:errors path="alertLimit1"/><br/>
         Hälytysraja 2: <form:input path="alertLimit2" type="number"/><form:errors path="alertLimit2"/><br/>
-        <input type="submit">
+        <input type="submit" value="Lisää">
     </form:form>  
 
 </div>

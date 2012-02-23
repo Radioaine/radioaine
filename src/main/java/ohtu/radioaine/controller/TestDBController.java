@@ -1,7 +1,5 @@
 package ohtu.radioaine.controller;
 
-import java.util.ArrayList;
-import java.util.List;
 import ohtu.radioaine.domain.Batch;
 import ohtu.radioaine.domain.Substance;
 import ohtu.radioaine.service.BatchService;
@@ -30,8 +28,8 @@ public class TestDBController {
                                 {"Ceretec Stabilised kittipakkaus 5 inj.plo", "3", "4", "true", "false", "Lääkefirma Perttilä", "Oy GE Healthcare Bio-Sciences Ab", "18"},
                                 {"Myoview kittipakkaus 5 inj.plo", "3", "4",  "true", "true", "Lääkefirma Perttilä", "Oy GE Healthcare Bio-Sciences Ab", "1"}};
     
-    private String[][] batches = {{"123445EE", "8", "true", "Jeejeee paljon huomautettavaa"},
-                                    {"99AADD22", "3", "false","puolet rikki"}};
+    private String[][] batches = {{"123445EE", "8", "30", "true", "Jeejeee paljon huomautettavaa"},
+                                    {"99AADD22", "3", "10", "false","puolet rikki"}};
     
     @RequestMapping("generateTestDB")
     public String createDB()    {
@@ -59,8 +57,9 @@ public class TestDBController {
             Batch batch = new Batch();
             batch.setBatchNumber(batches[i][0]);
             batch.setAmount(Integer.parseInt(batches[i][1]));
-            batch.setQualityCheck(Boolean.parseBoolean(batches[i][2]));
-            batch.setNote(batches[i][3]);
+            batch.setSubstanceVolume(Integer.parseInt(batches[i][2]));
+            batch.setQualityCheck(Boolean.parseBoolean(batches[i][3]));
+            batch.setNote(batches[i][4]);
             Substance substance = (Substance) substanceService.read(1);
             substance.setTotalAmount(substance.getTotalAmount() + batch.getAmount());
             substanceService.createOrUpdate(substance);

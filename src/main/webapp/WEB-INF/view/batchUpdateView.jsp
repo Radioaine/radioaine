@@ -6,7 +6,7 @@
 
 <div id="sisalto">
     <h1>Erä ${batch.batchNumber}</h1>
-
+    <p><b>Vanhat tiedot</b></p>
     <table id="reunaton">
 
         <tr>
@@ -19,7 +19,7 @@
         </tr>
         <tr>
             <td>Pakkauskoko</td>
-            <td>30ml</td>
+            <td>${batch.substanceVolume}ml</td>
         </tr>
         <tr>
             <td>Vahvuus</td>
@@ -61,18 +61,13 @@
         </form:select><br/>
         Eränumero: <form:input path="batchNumber" type="text"/><form:errors path="batchNumber"/><br/>
         Määrä: <form:input path="amount" type="number"/><form:errors path="amount"/><br/>
+        Pakkauskoko: <form:input path="substanceVolume" type="number"/><form:errors path="substanceVolume"/><br/>
         Saapumispäivä: <form:input path="arrivalDate" type="date"/><form:errors path="arrivalDate"/><br/>
         Vanhenemispäivä: <form:input path="expDate" type="date"/><form:errors path="expDate"/><br/>
-        Huomioita: <form:textarea path="note" type="text"/><form:errors path="note"/><br/>
-        <input type="submit">
+        Huomioita: <br /><form:textarea path="note" type="text"/><form:errors path="note"/><br/>
+        <input type="submit" value="Tallenna muutokset">
+        <input type="button" value="Peruuta" onClick="parent.location = '${pageContext.servletContext.contextPath}/batch/${batch.id}'" />
     </form:form>
-    <br />
-    <p>Poista erästä:</p>
-    <form action="${pageContext.servletContext.contextPath}/batchDelete/${batch.id}" method="POST">
-        Määrä: <input name="amount" type="number"/><br/>
-        Nimi: <input name="name" type="text"/><br/>
-        <input type="submit" value="Poista">
-    </form>
 </div>
 
 <%@include file="footer.jsp" %>

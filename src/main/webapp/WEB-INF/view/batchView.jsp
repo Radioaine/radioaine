@@ -19,7 +19,7 @@
         </tr>
         <tr>
             <td>Pakkauskoko</td>
-            <td>30ml</td>
+            <td>${batch.substanceVolume}ml</td>
         </tr>
         <tr>
             <td>Vahvuus</td>

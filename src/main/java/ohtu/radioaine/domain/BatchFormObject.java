@@ -18,11 +18,21 @@ public class BatchFormObject {
     private int substance;
     @NotNull(message = "Määrä ei saa olla tyhjä")
     private int amount;
+    @NotNull(message = "Tilavuus ei saa olla tyhjä")
+    private int substanceVolume;
     @NotNull(message = "Saapumispäivä ei saa olla tyhjä")
     private String arrivalDate;
     @NotNull(message = "Vanhenemispäivä ei saa olla tyhjä")
     private String expDate;
     private String note;
+    
+    public int getSubstanceVolume() {
+        return substanceVolume;
+    }
+
+    public void setSubstanceVolume(int substanceVolume) {
+        this.substanceVolume = substanceVolume;
+    }
     
     public int getAmount() {
         return amount;

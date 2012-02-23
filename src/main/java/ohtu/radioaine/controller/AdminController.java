@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import ohtu.radioaine.service.BatchService;
+import ohtu.radioaine.service.SubstanceService;
+import org.springframework.ui.Model;
 
 /**
  * Controllers for admin page.
@@ -19,10 +21,17 @@ import ohtu.radioaine.service.BatchService;
 public class AdminController {
 
     @Autowired
-    private BatchService esinePalvelu;
+    private SubstanceService substanceService;
   
     @RequestMapping("admin")
     public String adminView() {
         return "admin";
     }
+    
+    @RequestMapping("substanceView")
+    public String substancesUpdate(Model model) {
+        model.addAttribute("substances", substanceService.list());
+        return "substanceView";
+    }
+    
 }

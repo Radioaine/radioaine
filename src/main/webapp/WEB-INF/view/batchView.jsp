@@ -92,6 +92,9 @@
         Nimi: <input name="name" type="text"/><br/>
         <input type="submit" value="Poista">
     </form>
+    <form action="${pageContext.servletContext.contextPath}/updateBatch/${batch.id}" method="POST">  
+        <input type="submit" value="Muokkaa erän tietoja">
+    </form>    
 </div>
 
 <%@include file="footer.jsp" %>

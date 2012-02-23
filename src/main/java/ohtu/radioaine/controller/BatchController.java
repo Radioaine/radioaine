@@ -84,8 +84,26 @@ public class BatchController {
         if (result.hasErrors()) {
             return "redirect:/updateBatch/" + id;
         }
-        Batch temp = createBatch(bfm);
+        int tempAmount;
         Batch batch = batchService.read(id);
+        System.out.println("batch amount: " + batch.getAmount() + " bfm amount: " + bfm.getAmount());
+        if(batch.getAmount() > bfm.getAmount())
+            tempAmount = -(batch.getAmount() - bfm.getAmount());
+        else if(batch.getAmount() < bfm.getAmount())
+            tempAmount = (batch.getAmount() - bfm.getAmount());
+        else
+            tempAmount = 0;
+        Substance substance =  batch.getSubstance();
+        substance.setTotalAmount(substance.getTotalAmount() + tempAmount);
+        substanceService.createOrUpdate(substance);
+        batch.setAmount(bfm.getAmount());
+        batchService.createOrUpdate(batch);
+        
+        //Batch temp = createBatch(bfm);
+//        Batch batch = batchService.read(id);
+//        temp.setId(id);
+        
+        
         
         return "redirect:/batch/" + id;
     }
@@ -127,6 +145,7 @@ public class BatchController {
         batch.setSupplier(substance.getSupplier());
         return batch;
     }
+    
 //    private Substance createTestSubstance(BatchFormObject bfm) {
 //        Substance substance = new Substance("" + bfm.getSubstance());
 //        substance.setName("LääkeaineX");
@@ -138,4 +157,6 @@ public class BatchController {
 //        substance.setSupplier("Taavon tukkuliike");
 //        return substance;
 //    }
+
+    
 }

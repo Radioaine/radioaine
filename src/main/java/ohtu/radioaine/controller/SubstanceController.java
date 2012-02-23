@@ -47,12 +47,7 @@ public class SubstanceController {
         substance.setAlertLimit1(sfo.getAlertLimit1());
         substance.setAlertLimit2(sfo.getAlertLimit2());
         substance.setTotalAmount(0);
-        if(sfo.getNeedsColdStorage().equals("1")) {
-            substance.setNeedsColdStorage(true);
-        }
-        else {
-            substance.setNeedsColdStorage(false);
-        }
+        
         return substance;
     }
 
@@ -60,6 +55,31 @@ public class SubstanceController {
     public String listaa(Model model) {
         model.addAttribute("substances", substanceService.list());
         return "substanceViewTest";
+    }
+    
+    @RequestMapping(value = "updateSubstance/{id}", method = RequestMethod.POST)
+    public String substanceUpdate(@Valid @ModelAttribute("substance") SubstanceFormObject sfm, 
+    BindingResult result, 
+    Model model, 
+    @PathVariable Integer id){
+        Substance temp = (Substance)substanceService.read(id);
+        Substance substance = new Substance();
+        substance.setId(temp.getId());
+        substance.setName(sfm.getName());
+        substance.setAlertLimit1(sfm.getAlertLimit1());
+        substance.setAlertLimit2(sfm.getAlertLimit2());
+        substance.setNeedsColdStorage(sfm.getNeedsColdStorage());
+        substance.setManufacturer(sfm.getManufacturer());
+        substance.setSupplier(sfm.getSupplier());
+        substanceService.createOrUpdate(substance);
+        
+        return "redirect:/updateSubstance/"+id;
+    }
+    
+    @RequestMapping(value = "updateSubstance/{id}", method = RequestMethod.GET)
+    public String update(Model model, @PathVariable Integer id) {
+        model.addAttribute("substance", substanceService.read(id));
+        return "substanceUpdateView";
     }
 
     @RequestMapping(value = "addSubstance", method = RequestMethod.GET)

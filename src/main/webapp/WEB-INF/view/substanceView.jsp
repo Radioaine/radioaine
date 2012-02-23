@@ -11,7 +11,7 @@
         <c:forEach var="substance" items="${substances}">
             <tr>
                 <td>
-                    <a href="<c:out value="${pageContext.servletContext.contextPath}" />/substance/${substance.id}">${substance.name}</a>
+                    <a href="<c:out value="${pageContext.servletContext.contextPath}" />/updateSubstance/${substance.id}">${substance.name}</a>
                 </td>
             </tr>
         </c:forEach>

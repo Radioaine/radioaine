@@ -13,7 +13,7 @@ public class SubstanceFormObject {
     private String name;
     private int alertLimit1;
     private int alertLimit2;
-    private String needsColdStorage;
+    private boolean needsColdStorage;
     private String manufacturer;
     private String supplier;
 
@@ -49,11 +49,11 @@ public class SubstanceFormObject {
         this.name = name;
     }
 
-    public String getNeedsColdStorage() {
+    public boolean getNeedsColdStorage() {
         return needsColdStorage;
     }
 
-    public void setNeedsColdStorage(String needsColdStorage) {
+    public void setNeedsColdStorage(boolean needsColdStorage) {
         this.needsColdStorage = needsColdStorage;
     }
 

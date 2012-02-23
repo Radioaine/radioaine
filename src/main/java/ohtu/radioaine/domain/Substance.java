@@ -122,7 +122,7 @@ public class Substance implements Serializable {
         this.name = name;
     }
 
-    public boolean needsColdStorage() {
+    public boolean getNeedsColdStorage() {
         return needsColdStorage;
     }
 

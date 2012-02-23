@@ -86,10 +86,12 @@ public class BatchController {
         }
         int tempAmount;
         Batch batch = batchService.read(id);
+        System.out.println(batch.getAmount());
+        System.out.println(bfm.getAmount());
         if(batch.getAmount() > bfm.getAmount())
             tempAmount = -(batch.getAmount() - bfm.getAmount());
         else if(batch.getAmount() < bfm.getAmount())
-            tempAmount = (batch.getAmount() - bfm.getAmount());
+            tempAmount = (bfm.getAmount() - batch.getAmount());
         else
             tempAmount = 0;
         Substance substance =  batch.getSubstance();

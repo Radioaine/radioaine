@@ -26,6 +26,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMethod;
 import ohtu.radioaine.tools.Time;
+import ohtu.radioaine.tools.EventHandler;
 import org.springframework.web.bind.annotation.*;
 
 /**
@@ -68,8 +69,7 @@ public class BatchController {
             return "addBatchView";
         }
         Batch batch = batchService.createOrUpdate(createBatch(bfm));
-        Event event = new Event();
-        event.setHappening("New batch was created! "+batch.toString());
+        Event event = EventHandler.createEvent("New batch was created! " + batch.toString(), batch);
         eventService.createOrUpdate(event);
         return "redirect:/batch/" + batch.getId();
     }
@@ -96,17 +96,17 @@ public class BatchController {
         return "redirect:/batch/" + id;
     }
 
-    private void updateBatch(Integer id, BatchFormObject bfm) {
+    private void updateBatch(Integer id, BatchFormObject bfo) {
         Batch batch = batchService.read(id);
-        int amountChange = amountChange(batch, bfm);
-        
+        int amountChange = amountChange(batch, bfo);
+
         Substance substance = batch.getSubstance();
         substance.setTotalAmount(substance.getTotalAmount() + amountChange);
         substanceService.createOrUpdate(substance);
-        batch.setAmount(bfm.getAmount());
-        batch.setSubstanceVolume(bfm.getSubstanceVolume());
-        batch.setBatchNumber(bfm.getBatchNumber());
-        batch.setNote(bfm.getNote());
+        batch.setAmount(bfo.getAmount());
+        batch.setSubstanceVolume(bfo.getSubstanceVolume());
+        batch.setBatchNumber(bfo.getBatchNumber());
+        batch.setNote(bfo.getNote());
         batchService.createOrUpdate(batch);
     }
 
@@ -152,7 +152,6 @@ public class BatchController {
         batch.setSubstanceVolume(bfo.getSubstanceVolume());
 
         Substance substance = (Substance) substanceService.read(bfo.getSubstance());
-        //Substance substance = createTestSubstance(bfo); //luodaan testiaine testausta varten
         substance.setTotalAmount(substance.getTotalAmount() + bfo.getAmount());
         substanceService.createOrUpdate(substance);
         batch.setSubstance(substance);
@@ -160,15 +159,4 @@ public class BatchController {
         batch.setSupplier(substance.getSupplier());
         return batch;
     }
-//    private Substance createTestSubstance(BatchFormObject bfm) {
-//        Substance substance = new Substance("" + bfm.getSubstance());
-//        substance.setName("LääkeaineX");
-//        substance.setNeedsColdStorage(true);
-//        substance.setAlertLimit1(5);
-//        substance.setAlertLimit2(8);
-//        substance.setHasBeenOrdered(false);
-//        substance.setManufacturer("Pekan lääkefirma");
-//        substance.setSupplier("Taavon tukkuliike");
-//        return substance;
-//    }
 }

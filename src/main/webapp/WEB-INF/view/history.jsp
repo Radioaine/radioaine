@@ -1,10 +1,11 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
 <h1>Tapahtumat</h1>
 <table id="listaus">
     <c:forEach var="event" items="${events}">
         <tr>
+            <td><fmt:formatDate value="${event.timestamp}" pattern="dd.MM.yyyy HH:ss"/></td>
             <td>${event.happening}</td>
         </tr>
     </c:forEach>

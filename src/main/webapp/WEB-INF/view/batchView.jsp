@@ -1,5 +1,6 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <%@include file="header.jsp" %>
@@ -27,11 +28,11 @@
         </tr>
         <tr>
             <td>Saapunut</td>
-            <td>${batch.arrivalDate}</td>
+            <td><fmt:formatDate value="${batch.arrivalDate}" pattern="dd.MM.yyyy"/></td>
         </tr>
         <tr>
             <td>Vanhenee</td>
-            <td>${batch.expDate}</td>
+            <td><fmt:formatDate value="${batch.expDate}" pattern="dd.MM.yyyy"/></td>
         </tr>
         <tr>
             <td>Valmistaja</td>

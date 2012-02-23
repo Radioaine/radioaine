@@ -66,8 +66,7 @@ public class BatchController {
         Batch batch = batchService.createOrUpdate(createBatch(bfm));
         return "redirect:/batch/" + batch.getId();
     }
-    
-    
+
     //Batchin päivittämiseen kesken
     @RequestMapping(value = "updateBatch/{id}")
     public String batchUpdateRequest(Model model, @PathVariable Integer id) {
@@ -76,36 +75,46 @@ public class BatchController {
         return "batchUpdateView";
     }
     //Batchin päivittämiseen keskenlog
+
     @RequestMapping(value = "updateBatch/{id}", method = RequestMethod.POST)
-    public String batchUpdate(@Valid @ModelAttribute("batch") BatchFormObject bfm, 
-    BindingResult result, 
-    Model model, 
-    @PathVariable Integer id) {
+    public String batchUpdate(@Valid @ModelAttribute("batch") BatchFormObject bfm,
+            BindingResult result,
+            Model model,
+            @PathVariable Integer id) {
         if (result.hasErrors()) {
             return "redirect:/updateBatch/" + id;
         }
-        int tempAmount;
+        updateBatch(id, bfm);
+
+        return "redirect:/batch/" + id;
+    }
+
+    private void updateBatch(Integer id, BatchFormObject bfm) {
         Batch batch = batchService.read(id);
-        System.out.println(batch.getAmount());
-        System.out.println(bfm.getAmount());
-        if(batch.getAmount() > bfm.getAmount())
-            tempAmount = -(batch.getAmount() - bfm.getAmount());
-        else if(batch.getAmount() < bfm.getAmount())
-            tempAmount = (bfm.getAmount() - batch.getAmount());
-        else
-            tempAmount = 0;
-        Substance substance =  batch.getSubstance();
-        substance.setTotalAmount(substance.getTotalAmount() + tempAmount);
+        int amountChange = amountChange(batch, bfm);
+        
+        Substance substance = batch.getSubstance();
+        substance.setTotalAmount(substance.getTotalAmount() + amountChange);
         substanceService.createOrUpdate(substance);
         batch.setAmount(bfm.getAmount());
         batch.setSubstanceVolume(bfm.getSubstanceVolume());
         batch.setBatchNumber(bfm.getBatchNumber());
         batch.setNote(bfm.getNote());
         batchService.createOrUpdate(batch);
-  
-        return "redirect:/batch/" + id;
     }
-    
+
+    private int amountChange(Batch batch, BatchFormObject bfm) {
+        int tempAmount;
+        if (batch.getAmount() > bfm.getAmount()) {
+            tempAmount = -(batch.getAmount() - bfm.getAmount());
+        } else if (batch.getAmount() < bfm.getAmount()) {
+            tempAmount = (bfm.getAmount() - batch.getAmount());
+        } else {
+            tempAmount = 0;
+        }
+        return tempAmount;
+    }
+
     @RequestMapping(value = "batchDelete/{id}", method = RequestMethod.POST)
     public String deleteBatch(@RequestParam String name, @RequestParam Integer amount, @PathVariable Integer id) {
         Batch batch = batchService.read(id);
@@ -144,7 +153,6 @@ public class BatchController {
         batch.setSupplier(substance.getSupplier());
         return batch;
     }
-    
 //    private Substance createTestSubstance(BatchFormObject bfm) {
 //        Substance substance = new Substance("" + bfm.getSubstance());
 //        substance.setName("LääkeaineX");
@@ -156,6 +164,4 @@ public class BatchController {
 //        substance.setSupplier("Taavon tukkuliike");
 //        return substance;
 //    }
-
-    
 }

@@ -1,6 +1,3 @@
-/*
- * Tool used for testing
- */
 package ohtu.radioaine.tools;
 
 import java.sql.Timestamp;
@@ -9,9 +6,10 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
+
 /**
- *
- * @author jahyvone
+ * Tools for managing time
+ * @author Radioaine
  */
 public class Time {
 
@@ -35,12 +33,8 @@ public class Time {
         return timestamp;
     }
 
-//    public static Timestamp parseDate(String time) {
-//        return parseTime(time, "dd.MM.yyyy HH:mm");
-//    }
-
     public static Timestamp parseDate(String time) {
         return parseTime(time, "dd.MM.yyyy");
-    
+
     }
 }

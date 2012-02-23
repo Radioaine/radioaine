@@ -1,8 +1,22 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <script type="text/javascript" src="<c:url value="/css/script.js" />"></script>
 <%@include file="header.jsp" %>
+
+<script>
+    $(function() {
+        $( "#arrivalDate" ).datepicker();
+    });
+    
+    $(function() {
+        $( "#expDate" ).datepicker();
+    });
+    
+    
+</script>
+<script type="text/javascript" src="script/ui.datepicker-fi.js"></script>
 
 <div id="sisalto">
     <h1>Erä ${batch.batchNumber}</h1>
@@ -27,11 +41,11 @@
         </tr>
         <tr>
             <td>Saapunut</td>
-            <td>${batch.arrivalDate}</td>
+            <td><fmt:formatDate value="${batch.arrivalDate}" pattern="dd.MM.yyyy"/></td>
         </tr>
         <tr>
             <td>Vanhenee</td>
-            <td>${batch.expDate}</td>
+            <td><fmt:formatDate value="${batch.expDate}" pattern="dd.MM.yyyy"/></td>
         </tr>
         <tr>
             <td>Valmistaja</td>
@@ -52,7 +66,7 @@
 
     </table>
     <br>
-    
+
     <form:form commandName="batch" action="${pageContext.servletContext.contextPath}/updateBatch/${batch.id}" method="POST">
         Aine: <form:select path="substance">
             <c:forEach var="substance" items="${substances}">
@@ -62,8 +76,8 @@
         Eränumero: <form:input path="batchNumber" type="text"/><form:errors path="batchNumber"/><br/>
         Määrä: <form:input path="amount" type="number"/><form:errors path="amount"/><br/>
         Pakkauskoko: <form:input path="substanceVolume" type="number"/><form:errors path="substanceVolume"/><br/>
-        Saapumispäivä: <form:input path="arrivalDate" type="date"/><form:errors path="arrivalDate"/><br/>
-        Vanhenemispäivä: <form:input path="expDate" type="date"/><form:errors path="expDate"/><br/>
+        Saapumispäivä: <form:input path="arrivalDate" type="text" id="arrivalDate"/><form:errors path="arrivalDate"/><br/>
+        Vanhenemispäivä: <form:input path="expDate" type="text" id="expDate"/><form:errors path="expDate"/><br/>
         Huomioita: <br /><form:textarea path="note" type="text"/><form:errors path="note"/><br/>
         <input type="submit" value="Tallenna muutokset">
         <input type="button" value="Peruuta" onClick="parent.location = '${pageContext.servletContext.contextPath}/batch/${batch.id}'" />

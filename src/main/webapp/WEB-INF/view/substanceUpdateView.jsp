@@ -8,14 +8,18 @@
     <h1>${substance.name}</h1>
     <p><b>Vanhat tiedot</b></p>
     <table id="reunaton">
-
+        
+        <tr>
+            <td>Aine</td>
+            <td>${substance.name}</td>
+        </tr>
         <tr>
             <td>Valmistaja</td>
-            <td>${substance.manufacturer}kpl</td>
+            <td>${substance.manufacturer}</td>
         </tr>
         <tr>
             <td>Toimittaja</td>
-            <td>${substance.supplier}ml</td>
+            <td>${substance.supplier}</td>
         </tr>
         <tr>
             <td>Säilytettävä kylmässä</td>
@@ -29,10 +33,7 @@
             <td>Hälytysraja 2</td>
             <td>${substance.alertLimit2}</td>
         </tr>
-        <tr>
-            <td>Valmistaja</td>
-            <td>${substance.manufacturer}</td>
-        </tr>
+        
     </table>
     <br>
     

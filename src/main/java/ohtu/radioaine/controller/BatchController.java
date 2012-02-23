@@ -12,11 +12,13 @@ package ohtu.radioaine.controller;
 import javax.validation.Valid;
 import ohtu.radioaine.domain.Batch;
 import ohtu.radioaine.domain.BatchFormObject;
+import ohtu.radioaine.domain.Event;
 import ohtu.radioaine.domain.Substance;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import ohtu.radioaine.service.BatchService;
+import ohtu.radioaine.service.EventService;
 import ohtu.radioaine.service.SubstanceService;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -38,6 +40,8 @@ public class BatchController {
     private BatchService batchService;
     @Autowired
     private SubstanceService substanceService;
+    @Autowired
+    private EventService eventService;
 
     @RequestMapping(value = "batch/{id}", method = RequestMethod.GET)
     public String getBatchById(@PathVariable Integer id, Model model) {
@@ -64,6 +68,9 @@ public class BatchController {
             return "addBatchView";
         }
         Batch batch = batchService.createOrUpdate(createBatch(bfm));
+        Event event = new Event();
+        event.setHappening("New batch was created! "+batch.toString());
+        eventService.createOrUpdate(event);
         return "redirect:/batch/" + batch.getId();
     }
 

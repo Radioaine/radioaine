@@ -3,6 +3,11 @@
 
 <h1>Tapahtumat</h1>
 <table id="listaus">
+    <c:forEach var="event" items="${events}">
+        <tr>
+            <td>${event.happening}</td>
+        </tr>
+    </c:forEach>
     <tr>
         <th>Eluaatti</th>
         <th>Tehty</th>

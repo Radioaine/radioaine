@@ -26,6 +26,7 @@
     <mvc:annotation-driven /> 
     
     <mvc:resources mapping="/css/**" location="WEB-INF/css/*" />
+    <mvc:resources mapping="/script/**" location="WEB-INF/script/*" />
     
     <!-- Mahdollistetaan konfigurointi annotaatioilla -->
     <context:annotation-config />

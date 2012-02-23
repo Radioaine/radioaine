@@ -4,6 +4,19 @@
 
 <%@include file="header.jsp" %>
 
+<script>
+    $(function() {
+        $( "#arrivalDate" ).datepicker();
+    });
+    
+    $(function() {
+        $( "#expDate" ).datepicker();
+    });
+    
+    
+</script>
+<script type="text/javascript" src="script/ui.datepicker-fi.js"></script>
+
 <div id="sisalto">
     <h1>Lisää lähetys</h1>
 
@@ -15,12 +28,12 @@
         </form:select><br/>
         Eränumero: <form:input path="batchNumber" type="text"/><form:errors path="batchNumber"/><br/>
         Määrä: <form:input path="amount" type="number"/><form:errors path="amount"/><br/>
-        Yksikön tilavuus: <form:input path="substanceVolume" type="number" /><form:errors path="substanceVolume" /><br />
-        Saapumispäivä: <form:input path="arrivalDate" type="date"/><form:errors path="arrivalDate"/><br/>
-        Vanhenemispäivä: <form:input path="expDate" type="date"/><form:errors path="expDate"/><br/>
+        Saapumispäivä: <form:input path="arrivalDate" type="text" id="arrivalDate"/><form:errors path="arrivalDate"/><br/>
+        Vanhenemispäivä: <form:input path="expDate" type="text" id="expDate"/><form:errors path="expDate"/><br/>
         Huomioita: <form:textarea path="note" type="text"/><form:errors path="note"/><br/>
         <input type="submit">
     </form:form>
+
 </div>
 
 <%@include file="footer.jsp" %>

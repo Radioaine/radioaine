@@ -128,8 +128,8 @@ public class BatchController {
         Batch batch = new Batch();
         batch.setBatchNumber(bfo.getBatchNumber());
         batch.setNote(bfo.getNote());
-        batch.setArrivalDate(Time.getTimestamp());
-        batch.setExpDate((Time.getTimestamp()));
+        batch.setArrivalDate(Time.parseDate(bfo.getArrivalDate()));
+        batch.setExpDate((Time.parseDate(bfo.getExpDate())));
         batch.setAmount(bfo.getAmount());
         batch.setSubstanceVolume(bfo.getSubstanceVolume());
 

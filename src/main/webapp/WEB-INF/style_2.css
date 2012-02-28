@@ -1,0 +1,19 @@
+/* 
+    Document   : style_2
+    Created on : 28.2.2012, 21:43:24
+    Author     : Suvi Jentze-Korpi
+    Description:
+        Style for GUI version 2.
+*/
+
+th {
+	border-style:solid;
+	/*border-bottom:thick solid;*/
+	border-width:5px;
+	text-align: left;
+}
+
+root { 
+    display: block;
+}
+

@@ -36,13 +36,13 @@ public class Batch implements Serializable {
     private String manufacturer;
     private String supplier;
     private String note;
-    private int[] storageLocations = new int[10];
+    private int[][] storageLocations = new int[10][2];
 
-    public int[] getStorageLocations() {
+    public int[][] getStorageLocations() {
         return storageLocations;
     }
 
-    public void setStorageLocations(int[] storageLocations) {
+    public void setStorageLocations(int[][] storageLocations) {
         this.storageLocations = storageLocations;
     }
     

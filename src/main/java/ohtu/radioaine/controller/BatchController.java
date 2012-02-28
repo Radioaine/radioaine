@@ -68,6 +68,7 @@ public class BatchController {
         if (result.hasErrors()) {
             return "addBatchView";
         }
+        System.out.println("Taaaallaal:"+bfm.getStorageLocations()[1][1]);
         Batch batch = batchService.createOrUpdate(createBatch(bfm));
         Event event = EventHandler.createEvent("New batch was created! " + batch.toString(), batch);
         eventService.createOrUpdate(event);
@@ -150,7 +151,7 @@ public class BatchController {
         batch.setExpDate((Time.parseDate(bfo.getExpDate())));
         batch.setAmount(bfo.getAmount());
         batch.setSubstanceVolume(bfo.getSubstanceVolume());
-
+        batch.setStorageLocations(bfo.getStorageLocations());
         Substance substance = (Substance) substanceService.read(bfo.getSubstance());
         substance.setTotalAmount(substance.getTotalAmount() + bfo.getAmount());
         substanceService.createOrUpdate(substance);

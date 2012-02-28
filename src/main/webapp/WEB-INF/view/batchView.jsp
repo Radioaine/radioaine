@@ -46,6 +46,11 @@
             <td>Laadunvarmistus</td>
             <td>Suoritettu (MK) ${batch.qualityCheck}</td>
         </tr>
+        <c:forEach var="location" varStatus="i" items="${batch.storageLocations}">
+            <tr>
+                <td>Varastopaikassa ${location[0]} on ${location[1]} kappaletta </td>     
+            </tr>  
+        </c:forEach>
         <tr>
             <td>Kommentit</td>
             <td>${batch.note}</td>

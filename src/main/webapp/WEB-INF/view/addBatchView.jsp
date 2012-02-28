@@ -2,7 +2,8 @@
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@include file="header.jsp" %>
-<%@include file='script/addStorage.js'%>
+<script type="text/javascript" src="script/ui.datepicker-fi.js"></script>
+<script type="text/javascript" src="script/batchStorageFuncs.js"></script>
 <script>
     $(function() {
         $( "#arrivalDate" ).datepicker();
@@ -30,13 +31,11 @@
         Vanhenemispäivä: <form:input path="expDate" type="text" id="expDate"/><form:errors path="expDate"/><br/>
         
         <div id="varastot">
-            <div id="varasto">
                 Varastopaikkassa 1 <form:select path=""> 
                     <form:option value="Jääkaappi 1"></form:option>
                     <form:option value="Jääkaappi 2"></form:option>
                     <form:option value="Jääkaappi 3"></form:option>
-                </form:select> <form:input path="storageLocations[0]" type="number"/> kappaletta<br/>    
-            </div>
+                </form:select> <form:input path="storageLocations[0]" type="number"/> kappaletta<br/> 
         </div>
         <button type="button" onClick="addStorage()">Lisää varastopaikka</button><br />
         Huomioita: <form:textarea path="note" type="text"/><form:errors path="note"/><br/>

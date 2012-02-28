@@ -1,48 +1,15 @@
 <!DOCTYPE html>
-<html>
-    <style>
-        * { margin: 0; padding: 0; }
-        #page-wrap { width: 960px; margin: 100px auto; }
-        h1 { font: 36px Georgia, Serif; margin: 20px 0; }
-        .group:after { visibility: hidden; display: block; font-size: 0; content: " "; clear: both; height: 0; }
-        p { margin: 0 0 10px 0; }
-        
-        .tabs { list-style: none; }
-        .tabs li { display: inline; }
-        .tabs li a { color: black; float: left; display: block; padding: 4px 10px; margin-left: -1px; position: relative; left: 1px; background: white; text-decoration: none; }
-        .tabs li a:hover { background: #ccc; }
-        
-        .w3c { min-height: 250px; position: relative; width: 100%; }
-        .w3c > div { display: inline; }
-        .w3c > div > a { margin-left: -1px; position: relative; left: 1px; text-decoration: none; color: black; background: white; display: block; float: left; padding: 5px 10px; border: 1px solid #ccc; border-bottom: 1px solid white; }
-        .w3c > div:not(:target) > a { border-bottom: 0; background: -moz-linear-gradient(top, white, #eee); }	
-        .w3c > div:target > a { background: white; }	
-        .w3c > div > div { background: white; z-index: -2; left: 0; top: 30px; bottom: 0; right: 0; padding: 20px; border: 1px solid #ccc; }	
-        .w3c > div:not(:target) > div { position: absolute }
-        .w3c > div:target > div { position: absolute; z-index: -1; }
-    </style>
-    
+<html>    
     
     <head>
         <link rel="stylesheet" type="text/css" href="style_2.css" />
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     </head>
     <body>
-                    
-            <div class="w3c">
-                <div id="VALMISTUS">
-                    <a href="VALMISTUS">VALMISTUS</a>
-                    <div>One might well argue, that...</div>
-                </div>
-                <div id="VARASTO">
-                    <a href="VARASTO">VARASTO</a>
-
-                    <div>... 30 lines of CSS is rather a lot, and...</div>
-                </div>
-                <div id="HALLINTA">
-                    <a href="HALLINTA">HALLINTA</a>
-                    <div>... that 2 should have been enough, but...</div>
-                </div>
-            </div>
+        <ul class="tabrow">
+            <li class="selected">VALMISTUS</li>
+            <li>VARASTO</li>
+            <li>HALLINTA</li>
+        </ul>
     </body>
 </html>

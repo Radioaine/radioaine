@@ -1,0 +1,78 @@
+/* 
+    Document   : style_2
+    Created on : 28.2.2012, 21:43:24
+    Author     : Suvi Jentze-Korpi
+    Description:
+        Style for GUI version 2.
+*/
+
+.tabrow {
+    text-align: center;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    line-height: 24px;
+    position: relative;
+}
+.tabrow li {
+    background:      -o-linear-gradient(top, #ECECEC 50%, #D1D1D1 100%);
+    background:     -ms-linear-gradient(top, #ECECEC 50%, #D1D1D1 100%);
+    background:    -moz-linear-gradient(top, #ECECEC 50%, #D1D1D1 100%);
+    background: -webkit-linear-gradient(top, #ECECEC 50%, #D1D1D1 100%);
+    background: linear-gradient(top, #ECECEC 50%, #D1D1D1 100%);
+    box-shadow: 0 3px 3px rgba(0, 0, 0, 0.4), inset 0 1px 0 #FFF;
+    text-shadow: 0 1px #FFF;
+    margin: 0 -5px;
+    padding: 0 20px;
+    border: 1px solid #AAA;
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+    background: #ECECEC;
+    display: inline-block;
+    position: relative;
+    z-index: 0;
+}
+.tabrow li.selected {
+    background: #FFF;
+    color: #000;
+    z-index: 2;
+    border-bottom-color: #FFF;
+}
+.tabrow li.selected:before {
+    box-shadow: 2px 2px 0 #FFF;
+}
+.tabrow li.selected:after {
+    box-shadow: -2px 2px 0 #FFF;
+}
+.tabrow li:before {
+    left: -6px;
+    border-bottom-right-radius: 6px;
+    border-width: 0 1px 1px 0;
+    box-shadow: 2px 2px 0 #ECECEC;
+}
+.tabrow li:after {
+    right: -6px;
+    border-bottom-left-radius: 6px;
+    border-width: 0 0 1px 1px;
+    box-shadow: -2px 2px 0 #ECECEC;
+}
+.tabrow li:before,
+.tabrow li:after {
+    position: absolute;
+    bottom: -1px;
+    width: 6px;
+    height: 6px;
+    border: 1px solid #AAA;
+}
+.tabrow:before {
+    z-index: 1;
+}
+.tabrow:after {
+    position: absolute;
+    content: "";
+    width: 100%;
+    bottom: 0;
+    left: 0;
+    border-bottom: 1px solid #AAA;
+    z-index: 1;
+}

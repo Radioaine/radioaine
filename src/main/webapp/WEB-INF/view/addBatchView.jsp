@@ -1,11 +1,8 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<script type="text/javascript" src="script/ui.datepicker-fi.js"></script>
-<script type="text/javascript" src="addStorage.js"></script>
-
 <%@include file="header.jsp" %>
-
+<%@include file='script/addStorage.js'%>
 <script>
     $(function() {
         $( "#arrivalDate" ).datepicker();
@@ -41,7 +38,7 @@
                 </form:select> <form:input path="storageLocations[0]" type="number"/> kappaletta<br/>    
             </div>
         </div>
-        <button type="button">Lisää varastopaikka</button><br />
+        <button type="button" onClick="addStorage()">Lisää varastopaikka</button><br />
         Huomioita: <form:textarea path="note" type="text"/><form:errors path="note"/><br/>
         <input type="submit">
     </form:form>

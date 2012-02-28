@@ -4,6 +4,7 @@ package ohtu.radioaine.domain;
  * Used for form validation. Has only getters and setters.
  */
 
+import java.util.ArrayList;
 import javax.validation.constraints.NotNull;
 
 /**
@@ -25,6 +26,17 @@ public class BatchFormObject {
     @NotNull(message = "Vanhenemispäivä ei saa olla tyhjä")
     private String expDate;
     private String note;
+    private int[] storageLocations = new int[10];
+
+    public int[] getStorageLocations() {
+        return storageLocations;
+    }
+
+    public void setStorageLocations(int[] storageLocations) {
+        this.storageLocations = storageLocations;
+    }
+
+    
     
     public int getSubstanceVolume() {
         return substanceVolume;

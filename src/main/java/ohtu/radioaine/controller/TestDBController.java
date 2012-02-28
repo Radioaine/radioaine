@@ -1,9 +1,12 @@
 package ohtu.radioaine.controller;
 
 import ohtu.radioaine.domain.Batch;
+import ohtu.radioaine.domain.Event;
 import ohtu.radioaine.domain.Substance;
 import ohtu.radioaine.service.BatchService;
+import ohtu.radioaine.service.EventService;
 import ohtu.radioaine.service.SubstanceService;
+import ohtu.radioaine.tools.EventHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,6 +24,8 @@ public class TestDBController {
     private SubstanceService substanceService;
     @Autowired
     private BatchService batchService;
+    @Autowired
+    private EventService eventService;
     
     private String[][] substances =   {{"Angiocis 20.12mg 5 inj.plo", "10", "12", "true", "false", "Lääkefirma Jamppa", "Magnum Medical Finland Oy", "5"}, 
                                 {"Bridatec kittipakkaus 5 inj.plo", "3", "4", "false", "true", "Lääkefirma Perttilä", "Oy GE Healthcare Bio-Sciences Ab", "5"},
@@ -30,6 +35,7 @@ public class TestDBController {
     
     private String[][] batches = {{"123445EE", "8", "30", "true", "Jeejeee paljon huomautettavaa"},
                                     {"99AADD22", "3", "10", "false","puolet rikki"}};
+    
     
     @RequestMapping("generateTestDB")
     public String createDB()    {
@@ -65,6 +71,8 @@ public class TestDBController {
             substanceService.createOrUpdate(substance);
             batch.setSubstance(substance);
             batchService.createOrUpdate(batch);
+            Event event = EventHandler.createEvent("New batch was created! " + batch.toString(), batch);
+            eventService.createOrUpdate(event);
         }
     }
 }

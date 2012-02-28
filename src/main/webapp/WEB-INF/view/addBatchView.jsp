@@ -1,6 +1,8 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<script type="text/javascript" src="script/ui.datepicker-fi.js"></script>
+<script type="text/javascript" src="addStorage.js"></script>
 
 <%@include file="header.jsp" %>
 
@@ -15,7 +17,6 @@
     
     
 </script>
-<script type="text/javascript" src="script/ui.datepicker-fi.js"></script>
 
 <div id="sisalto">
     <h1>Lisää lähetys</h1>
@@ -25,11 +26,22 @@
             <c:forEach var="substance" items="${substances}">
                 <form:option value="${substance.id}">${substance.name}</form:option>
             </c:forEach>
-        </form:select><br/>
+               </form:select><br/>
         Eränumero: <form:input path="batchNumber" type="text"/><form:errors path="batchNumber"/><br/>
         Määrä: <form:input path="amount" type="number"/><form:errors path="amount"/><br/>
         Saapumispäivä: <form:input path="arrivalDate" type="text" id="arrivalDate"/><form:errors path="arrivalDate"/><br/>
         Vanhenemispäivä: <form:input path="expDate" type="text" id="expDate"/><form:errors path="expDate"/><br/>
+        
+        <div id="varastot">
+            <div id="varasto">
+                Varastopaikkassa 1 <form:select path=""> 
+                    <form:option value="Jääkaappi 1"></form:option>
+                    <form:option value="Jääkaappi 2"></form:option>
+                    <form:option value="Jääkaappi 3"></form:option>
+                </form:select> <form:input path="storageLocations[0]" type="number"/> kappaletta<br/>    
+            </div>
+        </div>
+        <button type="button">Lisää varastopaikka</button><br />
         Huomioita: <form:textarea path="note" type="text"/><form:errors path="note"/><br/>
         <input type="submit">
     </form:form>

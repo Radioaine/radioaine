@@ -66,6 +66,7 @@ public class SubstanceController {
         Substance substance = new Substance();
         substance.setId(temp.getId());
         substance.setName(sfm.getName());
+        substance.setType(sfm.getType());
         substance.setAlertLimit1(sfm.getAlertLimit1());
         substance.setAlertLimit2(sfm.getAlertLimit2());
         substance.setNeedsColdStorage(sfm.getNeedsColdStorage());

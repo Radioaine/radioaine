@@ -2,6 +2,7 @@ package ohtu.radioaine.service;
 
 import java.util.List;
 import ohtu.radioaine.domain.Batch;
+import ohtu.radioaine.domain.Substance;
 
 /**
  * Interface for DAO methods
@@ -13,4 +14,5 @@ public interface BatchService {
     public Batch read(int id);
     public void delete(int esineId);
     public List<Batch> listSubstanceBatches(int id);
+    public Batch read(String batchNumber, int substance);
 }

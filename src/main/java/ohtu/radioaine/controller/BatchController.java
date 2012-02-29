@@ -68,8 +68,14 @@ public class BatchController {
         if (result.hasErrors()) {
             return "addBatchView";
         }
-        System.out.println("Taaaallaal:"+bfm.getStorageLocations()[1][1]);
-        Batch batch = batchService.createOrUpdate(createBatch(bfm));
+        Batch batch = createBatch(bfm);
+        Batch temp = batchService.read(batch.getBatchNumber(), bfm.getSubstance());
+        if(temp == null){ 
+            System.out.println("Mentii tanne!");
+            batchService.createOrUpdate(batch); }
+        else{ 
+            System.out.println("Mentii elsee!");
+            updateBatch(temp.getId(),bfm); }
         Event event = EventHandler.createEvent("New batch was created! " + batch.toString(), batch);
         eventService.createOrUpdate(event);
         return "redirect:/batch/" + batch.getId();
@@ -100,7 +106,6 @@ public class BatchController {
     private void updateBatch(Integer id, BatchFormObject bfo) {
         Batch batch = batchService.read(id);
         int amountChange = amountChange(batch, bfo);
-
         Substance substance = batch.getSubstance();
         substance.setTotalAmount(substance.getTotalAmount() + amountChange);
         substanceService.createOrUpdate(substance);

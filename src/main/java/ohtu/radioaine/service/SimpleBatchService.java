@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ohtu.radioaine.database.BatchDBDao;
 import ohtu.radioaine.domain.Batch;
+import ohtu.radioaine.domain.Substance;
 
 /**
  * Implementation for Batch service methods.
@@ -49,5 +50,11 @@ public class SimpleBatchService implements BatchService {
     @Transactional(readOnly = true)
     public List<Batch> listSubstanceBatches(int id) {
         return varastoDao.listSubstanceBatches(id);
+    }
+
+    @Override
+    @Transactional
+    public Batch read(String batchNumber, int substance) {
+        return varastoDao.read(batchNumber, substance);
     }
 }

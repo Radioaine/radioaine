@@ -17,10 +17,10 @@ public class Substance implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(nullable = false)
     private int id;
-
-    
     @Column(nullable = false)
     private String name;
+    @Column(nullable = false)
+    private String type;
     @Column
     private int alertLimit1;
     @Column
@@ -40,6 +40,14 @@ public class Substance implements Serializable {
 
     public Substance() {
         totalAmount = 0;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
     
     public Timestamp getOldestDate() {

@@ -27,11 +27,11 @@ public class TestDBController {
     @Autowired
     private EventService eventService;
     
-    private String[][] substances =   {{"Angiocis 20.12mg 5 inj.plo", "10", "12", "true", "false", "Lääkefirma Jamppa", "Magnum Medical Finland Oy", "5"}, 
-                                {"Bridatec kittipakkaus 5 inj.plo", "3", "4", "false", "true", "Lääkefirma Perttilä", "Oy GE Healthcare Bio-Sciences Ab", "5"},
-                                {"Ceretec Exametazine Agent kittipakkaus 5 inj.plo", "3", "4", "false", "true", "Lääkefirma Perttilä", "Oy GE Healthcare Bio-Sciences Ab", "10"},
-                                {"Ceretec Stabilised kittipakkaus 5 inj.plo", "3", "4", "true", "false", "Lääkefirma Perttilä", "Oy GE Healthcare Bio-Sciences Ab", "18"},
-                                {"Myoview kittipakkaus 5 inj.plo", "3", "4",  "true", "true", "Lääkefirma Perttilä", "Oy GE Healthcare Bio-Sciences Ab", "1"}};
+    private String[][] substances =   {{"Angiocis 20.12mg 5 inj.plo", "10", "12", "true", "false", "Lääkefirma Jamppa", "Magnum Medical Finland Oy", "5","Kit"}, 
+                                {"Bridatec kittipakkaus 5 inj.plo", "3", "4", "false", "true", "Lääkefirma Perttilä", "Oy GE Healthcare Bio-Sciences Ab", "5","Kit"},
+                                {"Ceretec Exametazine Agent kittipakkaus 5 inj.plo", "3", "4", "false", "true", "Lääkefirma Perttilä", "Oy GE Healthcare Bio-Sciences Ab", "10","Kit"},
+                                {"Ceretec Stabilised kittipakkaus 5 inj.plo", "3", "4", "true", "false", "Lääkefirma Perttilä", "Oy GE Healthcare Bio-Sciences Ab", "18","Kit"},
+                                {"Myoview kittipakkaus 5 inj.plo", "3", "4",  "true", "true", "Lääkefirma Perttilä", "Oy GE Healthcare Bio-Sciences Ab", "1","Kit"}};
     
     private String[][] batches = {{"123445EE", "8", "30", "true", "Jeejeee paljon huomautettavaa"},
                                     {"99AADD22", "3", "10", "false","puolet rikki"}};
@@ -48,6 +48,7 @@ public class TestDBController {
         for(int i=0; i < substances.length; i++) {
             Substance substance = new Substance();
             substance.setName(substances[i][0]);
+            substance.setType(substances[i][8]);
             substance.setAlertLimit1(Integer.parseInt(substances[i][1]));
             substance.setAlertLimit2(Integer.parseInt(substances[i][2]));
             substance.setHasBeenOrdered(Boolean.parseBoolean(substances[i][3]));

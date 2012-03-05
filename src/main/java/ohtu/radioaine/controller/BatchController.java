@@ -20,13 +20,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import ohtu.radioaine.service.BatchService;
 import ohtu.radioaine.service.EventService;
 import ohtu.radioaine.service.SubstanceService;
+import ohtu.radioaine.tools.EventHandler;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMethod;
 import ohtu.radioaine.tools.Time;
-import ohtu.radioaine.tools.EventHandler;
 import org.springframework.web.bind.annotation.*;
 
 /**
@@ -70,16 +70,19 @@ public class BatchController {
         }
         Batch batch = createBatch(bfm);
         Batch temp = batchService.read(batch.getBatchNumber(), bfm.getSubstance());
-        if(temp == null){ 
+        if (temp == null) {
             System.out.println("Mentii tanne!");
-            batchService.createOrUpdate(batch); }
-        else{ 
+            batchService.createOrUpdate(batch);
+        } else {
             System.out.println("Mentii elsee!");
-            updateBatch(temp.getId(),bfm); }
-        Event event = EventHandler.createEvent("New batch was created! " + batch.toString(), batch);
+            updateBatch(temp.getId(), bfm);
+        }
+        Event event = EventHandler.createEvent(batch);
         eventService.createOrUpdate(event);
         return "redirect:/batch/" + batch.getId();
     }
+
+    
 
     //Batchin päivittämiseen kesken
     @RequestMapping(value = "updateBatch/{id}")

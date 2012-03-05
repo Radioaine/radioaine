@@ -1,5 +1,7 @@
 package ohtu.radioaine.controller;
 
+import java.util.ArrayList;
+import java.util.List;
 import ohtu.radioaine.domain.Batch;
 import ohtu.radioaine.domain.Event;
 import ohtu.radioaine.domain.Substance;
@@ -14,38 +16,36 @@ import org.springframework.web.bind.annotation.RequestMapping;
 /**
  *
  * Creates a test database
+ *
  * @author Radioaine
- * 
+ *
  */
 @Controller
 public class TestDBController {
-    
+
     @Autowired
     private SubstanceService substanceService;
     @Autowired
     private BatchService batchService;
     @Autowired
     private EventService eventService;
-    
-    private String[][] substances =   {{"Angiocis 20.12mg 5 inj.plo", "10", "12", "true", "false", "Lääkefirma Jamppa", "Magnum Medical Finland Oy", "5","Kit"}, 
-                                {"Bridatec kittipakkaus 5 inj.plo", "3", "4", "false", "true", "Lääkefirma Perttilä", "Oy GE Healthcare Bio-Sciences Ab", "5","Kit"},
-                                {"Ceretec Exametazine Agent kittipakkaus 5 inj.plo", "3", "4", "false", "true", "Lääkefirma Perttilä", "Oy GE Healthcare Bio-Sciences Ab", "10","Kit"},
-                                {"Ceretec Stabilised kittipakkaus 5 inj.plo", "3", "4", "true", "false", "Lääkefirma Perttilä", "Oy GE Healthcare Bio-Sciences Ab", "18","Kit"},
-                                {"Myoview kittipakkaus 5 inj.plo", "3", "4",  "true", "true", "Lääkefirma Perttilä", "Oy GE Healthcare Bio-Sciences Ab", "1","Kit"}};
-    
+    private String[][] substances = {{"Angiocis 20.12mg 5 inj.plo", "10", "12", "true", "false", "Lääkefirma Jamppa", "Magnum Medical Finland Oy", "5", "Kit"},
+        {"Bridatec kittipakkaus 5 inj.plo", "3", "4", "false", "true", "Lääkefirma Perttilä", "Oy GE Healthcare Bio-Sciences Ab", "5", "Kit"},
+        {"Ceretec Exametazine Agent kittipakkaus 5 inj.plo", "3", "4", "false", "true", "Lääkefirma Perttilä", "Oy GE Healthcare Bio-Sciences Ab", "10", "Kit"},
+        {"Ceretec Stabilised kittipakkaus 5 inj.plo", "3", "4", "true", "false", "Lääkefirma Perttilä", "Oy GE Healthcare Bio-Sciences Ab", "18", "Kit"},
+        {"Myoview kittipakkaus 5 inj.plo", "3", "4", "true", "true", "Lääkefirma Perttilä", "Oy GE Healthcare Bio-Sciences Ab", "1", "Kit"}};
     private String[][] batches = {{"123445EE", "8", "30", "true", "Jeejeee paljon huomautettavaa"},
-                                    {"99AADD22", "3", "10", "false","puolet rikki"}};
-    
-    
+        {"99AADD22", "3", "10", "false", "puolet rikki"}};
+
     @RequestMapping("generateTestDB")
-    public String createDB()    {
+    public String createDB() {
         createSubstances();
         createBatches();
         return "redirect:/frontpage";
     }
-    
+
     private void createSubstances() {
-        for(int i=0; i < substances.length; i++) {
+        for (int i = 0; i < substances.length; i++) {
             Substance substance = new Substance();
             substance.setName(substances[i][0]);
             substance.setType(substances[i][8]);
@@ -58,9 +58,9 @@ public class TestDBController {
             substanceService.createOrUpdate(substance);
         }
     }
-    
-    private void createBatches()    {
-        for(int i=0; i < batches.length; i++) {
+
+    private void createBatches() {
+        for (int i = 0; i < batches.length; i++) {
             Batch batch = new Batch();
             batch.setBatchNumber(batches[i][0]);
             batch.setAmount(Integer.parseInt(batches[i][1]));
@@ -71,8 +71,13 @@ public class TestDBController {
             substance.setTotalAmount(substance.getTotalAmount() + batch.getAmount());
             substanceService.createOrUpdate(substance);
             batch.setSubstance(substance);
-            batchService.createOrUpdate(batch);
-            Event event = EventHandler.createEvent("New batch was created! " + batch.toString(), batch);
+            batchService.createOrUpdate(batch)
+                    ;
+            List<String> objects = new ArrayList<String>();
+            objects.add(batch.getClass().getName());
+            List<Integer> objectIds = new ArrayList<Integer>();
+            objectIds.add(batch.getId());
+            Event event = EventHandler.createEvent(batch);
             eventService.createOrUpdate(event);
         }
     }

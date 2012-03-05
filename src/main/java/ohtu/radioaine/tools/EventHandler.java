@@ -8,8 +8,8 @@ import java.util.ArrayList;
 import java.util.List;
 import ohtu.radioaine.domain.Batch;
 import ohtu.radioaine.domain.Event;
-import ohtu.radioaine.service.EventService;
-import org.springframework.beans.factory.annotation.Autowired;
+
+
 
 /**
  *
@@ -17,15 +17,15 @@ import org.springframework.beans.factory.annotation.Autowired;
  */
 public class EventHandler {
 
-    public static Event createEvent(String message, List<Object> objects) {
-        Event event = new Event(objects);
-        event.setHappening(message);
-        return event;
-    }
+    private static final String NEWBATCH = "NEWBATCH";
 
-    public static Event createEvent(String message, Batch batch) {
-        List<Object> list = new ArrayList<Object>();
-        list.add(batch);
-        return createEvent(message, list);
+    public static Event createEvent(Batch batch) {
+        Event event = new Event();
+        List<Batch> batchList = new ArrayList<Batch>();
+        batchList.add(batch);
+        event.setBatches(batchList);
+        event.setMessage("Uusi erä");
+        event.setType(NEWBATCH);
+        return event;
     }
 }

@@ -5,8 +5,8 @@
 package ohtu.radioaine.domain;
 
 import java.io.Serializable;
-import java.util.Date;
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -15,6 +15,7 @@ import javax.persistence.Id;
  * Superclass for Radiomedicine & Eluate. Used to create table Product in DB
  * @author rmjheino
  */
+@Entity
 public class Product implements Serializable{
     
     @Id

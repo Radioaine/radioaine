@@ -1,9 +1,10 @@
 package ohtu.radioaine.controller;
 
+import java.util.List;
+import ohtu.radioaine.domain.Event;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import ohtu.radioaine.service.BatchService;
 import ohtu.radioaine.service.EventService;
 import org.springframework.ui.Model;
 

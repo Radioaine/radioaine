@@ -7,11 +7,7 @@ package ohtu.radioaine.domain;
 import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.List;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import ohtu.radioaine.tools.Time;
 
 /**
@@ -25,18 +21,92 @@ public class Event implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     @Column
-    private String happening;
+    private String message;
     @Column
     private Timestamp timestamp;
     @Column
-    private List<Object> objects;
+    private String type;
+    @OneToMany(cascade = CascadeType.MERGE)
+    @JoinTable(joinColumns = {
+        @JoinColumn(name = "event_id")},
+    inverseJoinColumns = {
+        @JoinColumn(name = "batch_id")})
+    private List<Batch> batches;
+    @OneToMany(cascade = CascadeType.MERGE)
+    @JoinTable(joinColumns = {
+        @JoinColumn(name = "event_id")},
+    inverseJoinColumns = {
+        @JoinColumn(name = "eluate_id")})
+    private List<Eluate> eluates;
+    @OneToMany(cascade = CascadeType.MERGE)
+    @JoinTable(joinColumns = {
+        @JoinColumn(name = "event_id")},
+    inverseJoinColumns = {
+        @JoinColumn(name = "substance_id")})
+    private List<Substance> substances;
+    @OneToMany(cascade = CascadeType.MERGE)
+    @JoinTable(joinColumns = {
+        @JoinColumn(name = "event_id")},
+    inverseJoinColumns = {
+        @JoinColumn(name = "product_id")})
+    private List<Product> products;
+    @OneToMany(cascade = CascadeType.MERGE)
+    @JoinTable(joinColumns = {
+        @JoinColumn(name = "event_id")},
+    inverseJoinColumns = {
+        @JoinColumn(name = "radiomedicine_id")})
+    private List<RadioMedicine> radioMedicines;
 
-    public List<Object> getObjects() {
-        return objects;
+    public Event() {
+        timestamp = Time.getTimestamp();
     }
 
-    public void setObjects(List<Object> objects) {
-        this.objects = objects;
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public List<Batch> getBatches() {
+        return batches;
+    }
+
+    public void setBatches(List<Batch> batches) {
+        this.batches = batches;
+    }
+
+    public List<Eluate> getEluates() {
+        return eluates;
+    }
+
+    public void setEluates(List<Eluate> eluates) {
+        this.eluates = eluates;
+    }
+
+    public List<Product> getProducts() {
+        return products;
+    }
+
+    public void setProducts(List<Product> products) {
+        this.products = products;
+    }
+
+    public List<RadioMedicine> getRadioMedicines() {
+        return radioMedicines;
+    }
+
+    public void setRadioMedicines(List<RadioMedicine> radioMedicines) {
+        this.radioMedicines = radioMedicines;
+    }
+
+    public List<Substance> getSubstances() {
+        return substances;
+    }
+
+    public void setSubstances(List<Substance> substances) {
+        this.substances = substances;
     }
 
     public Timestamp getTimestamp() {
@@ -47,21 +117,12 @@ public class Event implements Serializable {
         this.timestamp = timestamp;
     }
 
-    public Event() {
-        timestamp = Time.getTimestamp();
+    public String getMessage() {
+        return message;
     }
 
-    public Event(List<Object> objects) {
-        this.objects = objects;
-        timestamp = Time.getTimestamp();
-    }
-
-    public String getHappening() {
-        return happening;
-    }
-
-    public void setHappening(String happening) {
-        this.happening = happening;
+    public void setMessage(String happening) {
+        this.message = happening;
     }
 
     public int getId() {

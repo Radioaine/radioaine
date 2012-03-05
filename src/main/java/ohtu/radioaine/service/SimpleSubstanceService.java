@@ -19,8 +19,8 @@ public class SimpleSubstanceService implements SubstanceService<Substance> {
 
     @Override
     @Transactional
-    public Substance createOrUpdate(Substance esine) {
-        return storageDao.createOrUpdate(esine);
+    public Substance createOrUpdate(Substance substance) {
+        return storageDao.createOrUpdate(substance  );
     }
 
     @Override

@@ -72,10 +72,10 @@ public class BatchController {
         Batch temp = batchService.read(batch.getBatchNumber(), bfm.getSubstance());
         if (temp == null) {
             System.out.println("Mentii tanne!");
-            batchService.createOrUpdate(batch);
+            batch = batchService.createOrUpdate(batch);
         } else {
             System.out.println("Mentii elsee!");
-            updateBatchSaato(temp.getId(), bfm);
+            batch = updateBatchSaato(temp.getId(), bfm);
         }
         Event event = EventHandler.newBatchEvent(batch);
         eventService.createOrUpdate(event);
@@ -106,7 +106,7 @@ public class BatchController {
         return "redirect:/batch/" + id;
     }
 
-    private void updateBatch(Integer id, BatchFormObject bfo) {
+    private Batch updateBatch(Integer id, BatchFormObject bfo) {
         Batch batch = batchService.read(id);
         int amountChange = amountChange(batch, bfo);
         Substance substance = batch.getSubstance();
@@ -119,6 +119,7 @@ public class BatchController {
         batch = batchService.createOrUpdate(batch);
         Event event = EventHandler.updateBatchEvent(batch, bfo.getUserName());
         eventService.createOrUpdate(event);
+        return batch;
     }
 
     private int amountChange(Batch batch, BatchFormObject bfm) {
@@ -171,11 +172,11 @@ public class BatchController {
         return batch;
     }
 
-    private void updateBatchSaato(int id, BatchFormObject bfm) {
+    private Batch updateBatchSaato(int id, BatchFormObject bfm) {
         Batch batch = batchService.read(id);
         batch.setAmount(batch.getAmount()+bfm.getAmount());
         batch.setNote(batch.getNote()+"\n\n"+bfm.getNote());
-        batchService.createOrUpdate(batch);
+        return batchService.createOrUpdate(batch);
         
     }
 }

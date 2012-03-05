@@ -2,7 +2,6 @@ package ohtu.radioaine.service;
 
 import java.util.List;
 import ohtu.radioaine.domain.Batch;
-import ohtu.radioaine.domain.Substance;
 
 /**
  * Interface for DAO methods

@@ -116,7 +116,9 @@ public class BatchController {
         batch.setSubstanceVolume(bfo.getSubstanceVolume());
         batch.setBatchNumber(bfo.getBatchNumber());
         batch.setNote(bfo.getNote());
-        batchService.createOrUpdate(batch);
+        batch = batchService.createOrUpdate(batch);
+        Event event = EventHandler.updateBatchEvent(batch, bfo.getUserName());
+        eventService.createOrUpdate(event);
     }
 
     private int amountChange(Batch batch, BatchFormObject bfm) {

@@ -3,12 +3,12 @@ package ohtu.radioaine.domain;
 /*
  * Used for form validation. Has only getters and setters.
  */
-
 import java.util.ArrayList;
 import javax.validation.constraints.NotNull;
 
 /**
  * Used for form validation
+ *
  * @author rmjheino
  */
 public class BatchFormObject {
@@ -27,6 +27,7 @@ public class BatchFormObject {
     private String expDate;
     private String note;
     private int[][] storageLocations = new int[10][2];
+    private String userName;
 
     public int[][] getStorageLocations() {
         return storageLocations;
@@ -36,8 +37,14 @@ public class BatchFormObject {
         this.storageLocations = storageLocations;
     }
 
-    
-    
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
     public int getSubstanceVolume() {
         return substanceVolume;
     }
@@ -45,7 +52,7 @@ public class BatchFormObject {
     public void setSubstanceVolume(int substanceVolume) {
         this.substanceVolume = substanceVolume;
     }
-    
+
     public int getAmount() {
         return amount;
     }
@@ -53,7 +60,7 @@ public class BatchFormObject {
     public void setAmount(int amount) {
         this.amount = amount;
     }
-    
+
     public String getArrivalDate() {
         return arrivalDate;
     }
@@ -85,7 +92,6 @@ public class BatchFormObject {
     public void setNote(String note) {
         this.note = note;
     }
-
 
     public int getSubstance() {
         return substance;

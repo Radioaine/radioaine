@@ -75,7 +75,7 @@ public class BatchController {
             batchService.createOrUpdate(batch);
         } else {
             System.out.println("Mentii elsee!");
-            updateBatch(temp.getId(), bfm);
+            updateBatchSaato(temp.getId(), bfm);
         }
         Event event = EventHandler.newBatchEvent(batch);
         eventService.createOrUpdate(event);
@@ -169,5 +169,13 @@ public class BatchController {
         batch.setManufacturer(substance.getManufacturer());
         batch.setSupplier(substance.getSupplier());
         return batch;
+    }
+
+    private void updateBatchSaato(int id, BatchFormObject bfm) {
+        Batch batch = batchService.read(id);
+        batch.setAmount(batch.getAmount()+bfm.getAmount());
+        batch.setNote(batch.getNote()+"\n\n"+bfm.getNote());
+        batchService.createOrUpdate(batch);
+        
     }
 }

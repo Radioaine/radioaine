@@ -53,12 +53,11 @@ public class JPABatchDBDao implements BatchDBDao {
     @Override
     public Batch read(String batchNumber, int substance) {
         try{
-            Query q = entityManager.createQuery("SELECT e FROM Batch e WHERE e.batchNumber="+batchNumber+" AND e.substance.id="+substance);
+            Query q = entityManager.createQuery("SELECT e FROM Batch e WHERE e.batchNumber='"+batchNumber+"' AND e.substance.id="+substance);
             return (Batch)q.getSingleResult();
         }catch(NoResultException e){
             return null;
         }  
-        
     }
     
     

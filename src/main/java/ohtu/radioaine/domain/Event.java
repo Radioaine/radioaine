@@ -27,10 +27,6 @@ public class Event implements Serializable {
     @Column
     private String type;
     @OneToMany(cascade = CascadeType.MERGE)
-    @JoinTable(joinColumns = {
-        @JoinColumn(name = "event_id")},
-    inverseJoinColumns = {
-        @JoinColumn(name = "batch_id")})
     private List<Batch> batches;
     @OneToMany(cascade = CascadeType.MERGE)
     @JoinTable(joinColumns = {

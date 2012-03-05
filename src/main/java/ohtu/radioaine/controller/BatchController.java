@@ -77,7 +77,7 @@ public class BatchController {
             System.out.println("Mentii elsee!");
             updateBatch(temp.getId(), bfm);
         }
-        Event event = EventHandler.createEvent(batch);
+        Event event = EventHandler.newBatchEvent(batch);
         eventService.createOrUpdate(event);
         return "redirect:/batch/" + batch.getId();
     }

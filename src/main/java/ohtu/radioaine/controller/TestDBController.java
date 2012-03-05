@@ -71,13 +71,8 @@ public class TestDBController {
             substance.setTotalAmount(substance.getTotalAmount() + batch.getAmount());
             substanceService.createOrUpdate(substance);
             batch.setSubstance(substance);
-            batchService.createOrUpdate(batch)
-                    ;
-            List<String> objects = new ArrayList<String>();
-            objects.add(batch.getClass().getName());
-            List<Integer> objectIds = new ArrayList<Integer>();
-            objectIds.add(batch.getId());
-            Event event = EventHandler.createEvent(batch);
+            batch = batchService.createOrUpdate(batch);
+            Event event = EventHandler.newBatchEvent(batch);
             eventService.createOrUpdate(event);
         }
     }

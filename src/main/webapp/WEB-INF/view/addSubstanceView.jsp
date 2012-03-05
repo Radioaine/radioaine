@@ -5,7 +5,7 @@
 <%@include file="header.jsp" %>
 
 <div id="sisalto">
-    <h1>Lisää lähetys</h1>
+    <h1>Lisää lääkeaine</h1>
 
 
     <form:form commandName="substance" action="substance" method="POST">

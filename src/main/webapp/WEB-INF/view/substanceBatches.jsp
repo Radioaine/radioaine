@@ -28,7 +28,16 @@
                 <td>${batch.expDate}</td>
                 <td>${substance.manufacturer}</td>
                 <td>${substance.supplier}</td>
-                <td>${batch.qualityCheck}</td>
+                <td>
+                    <c:choose>
+                    <c:when test="${batch.qualityCheck==true}">
+                        Suoritettu
+                    </c:when>
+                    <c:otherwise>
+                        Ei suoritettu
+                    </c:otherwise>
+                </c:choose>
+                </td>
                 <td>${batch.note}</td>
             </tr>
         </c:forEach>

@@ -44,8 +44,18 @@
         </tr>
         <tr>
             <td>Laadunvarmistus</td>
-            <td>Suoritettu (MK) ${batch.qualityCheck}</td>
+            <td>
+                <c:choose>
+                    <c:when test="${batch.qualityCheck==true}">
+                        Suoritettu
+                    </c:when>
+                    <c:otherwise>
+                        Ei suoritettu
+                    </c:otherwise>
+                </c:choose>
+            </td>
         </tr>
+        
         <c:forEach var="location" varStatus="i" items="${batch.storageLocations}">
             <tr>
                 <td>Varastopaikassa ${location[0]} on ${location[1]} kappaletta </td>     

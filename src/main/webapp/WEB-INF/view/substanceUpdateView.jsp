@@ -27,7 +27,16 @@
         </tr>
         <tr>
             <td>Säilytettävä kylmässä</td>
-            <td>${substance.needsColdStorage}</td>
+            <td>
+                <c:choose>
+                    <c:when test="${substance.needsColdStorage==true}">
+                        Kyllä
+                    </c:when>
+                    <c:otherwise>
+                        Ei 
+                    </c:otherwise>
+                </c:choose>
+            </td>
         </tr>
         <tr>
             <td>Hälytysraja 1</td>

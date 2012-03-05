@@ -19,10 +19,64 @@ public class Eluate extends Product {
     @Column(nullable = false)
     private Long id;
     // Descripes radioactive strength
-    @Column
     private double strength;
-//    @Column
-//    private List<StorageItem> itemUsed;
+    private double activity;
+    private String creator;
+    private String note;
+    private int[][] storageLocations = new int[10][2];
+    
+    @OneToOne
+    private Substance generator;
+    @OneToOne
+    private Substance solvent;
+
+    public Substance getGenerator() {
+        return generator;
+    }
+
+    public void setGenerator(Substance generator) {
+        this.generator = generator;
+    }
+
+    public Substance getSolvent() {
+        return solvent;
+    }
+
+    public void setSolvent(Substance solvent) {
+        this.solvent = solvent;
+    }
+    
+    public double getActivity() {
+        return activity;
+    }
+
+    public void setActivity(double activity) {
+        this.activity = activity;
+    }
+
+    public String getCreator() {
+        return creator;
+    }
+
+    public void setCreator(String creator) {
+        this.creator = creator;
+    }
+
+    public String getNote() {
+        return note;
+    }
+
+    public void setNote(String note) {
+        this.note = note;
+    }
+
+    public int[][] getStorageLocations() {
+        return storageLocations;
+    }
+
+    public void setStorageLocations(int[][] storageLocations) {
+        this.storageLocations = storageLocations;
+    }
 
     public long getId() {
         return id;
@@ -40,11 +94,4 @@ public class Eluate extends Product {
         this.strength = strength;
     }
 
-//    public List<StorageItem> getItemUsed() {
-//        return itemUsed;
-//    }
-//
-//    public void setItemUsed(StorageItem itemUsed) {
-//        this.itemUsed.add(itemUsed);
-//    }
 }

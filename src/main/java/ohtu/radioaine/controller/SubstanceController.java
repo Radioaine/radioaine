@@ -41,6 +41,7 @@ public class SubstanceController {
     
     private Substance createSubstance(SubstanceFormObject sfo) {
         Substance substance = new Substance();
+        substance.setType(sfo.getType());
         substance.setName(sfo.getName());
         substance.setManufacturer(sfo.getManufacturer());
         substance.setSupplier(sfo.getSupplier());

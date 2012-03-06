@@ -11,18 +11,18 @@ package ohtu.radioaine.domain;
 public class SubstanceFormObject {
 
     private String name;
-    private String type;
+    private int type;
     private int alertLimit1;
     private int alertLimit2;
     private boolean needsColdStorage;
     private String manufacturer;
     private String supplier;
 
-    public String getType() {
+    public int getType() {
         return type;
     }
 
-    public void setType(String type) {
+    public void setType(int type) {
         this.type = type;
     }
     

@@ -20,7 +20,7 @@ public class Substance implements Serializable {
     @Column(nullable = false)
     private String name;
     @Column(nullable = false)
-    private String type;
+    private int type;
     @Column
     private int alertLimit1;
     @Column
@@ -42,11 +42,11 @@ public class Substance implements Serializable {
         totalAmount = 0;
     }
 
-    public String getType() {
+    public int getType() {
         return type;
     }
 
-    public void setType(String type) {
+    public void setType(int type) {
         this.type = type;
     }
     

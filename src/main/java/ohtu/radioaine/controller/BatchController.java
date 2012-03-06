@@ -87,8 +87,8 @@ public class BatchController {
             System.out.println("Mentii elsee!");
             batch = updateBatchSaato(temp.getId(), bfm);
         }
-        Event event = EventHandler.newBatchEvent(batch);
-        eventService.createOrUpdate(event);
+//        Event event = EventHandler.newBatchEvent(batch);
+//        eventService.createOrUpdate(event);
         return "redirect:/batch/" + batch.getId();
     }
 
@@ -127,8 +127,8 @@ public class BatchController {
         batch.setBatchNumber(bfo.getBatchNumber());
         batch.setNote(bfo.getNote());
         batch = batchService.createOrUpdate(batch);
-        Event event = EventHandler.updateBatchEvent(batch, bfo.getUserName());
-        eventService.createOrUpdate(event);
+//        Event event = EventHandler.updateBatchEvent(batch, bfo.getUserName());
+//        eventService.createOrUpdate(event);
         return batch;
     }
 

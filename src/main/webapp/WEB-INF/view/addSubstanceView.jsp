@@ -11,9 +11,9 @@
     <form:form commandName="substance" action="substance" method="POST">
         Aine: <form:input path="name" type="text"/><form:errors path="name"/><br/>
         Tyyppi: <form:select path="type">
-            <form:option value="Kit">Kitti</form:option>
-            <form:option value="Generator">Generaattori</form:option>
-            <form:option value="Other">Muu</form:option>
+            <form:option value="0">Kitti</form:option>
+            <form:option value="1">Generaattori</form:option>
+            <form:option value="2">Muu</form:option>
         </form:select><br/>
         Valmistaja: <form:input path="manufacturer" type="text"/><form:errors path="manufacturer"/><br/>
         Toimittaja: <form:input path="supplier" type="text"/><form:errors path="supplier"/><br/>

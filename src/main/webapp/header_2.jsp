@@ -13,6 +13,6 @@
     </head>
     <body>
         <%java.util.Date date = new java.util.Date();%>
-        <h3>RADIOAINE 1.0      <%out.print(String.valueOf(date));%></h3>
+        <h3>RADIOAINE 1.0                                 <%out.print(String.valueOf(date));%></h3>
     </body>
 </html>

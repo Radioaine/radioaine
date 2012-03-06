@@ -46,11 +46,20 @@
             <td>Laadunvarmistus</td>
             <td>
                 <c:choose>
-                    <c:when test="${batch.qualityCheck==true}">
-                        Suoritettu
+                    <c:when test="${batch.qualityCheck==1}">
+                        Ok
+                    </c:when>
+                    <c:when test="${batch.qualityCheck==2}">
+                        Hylätty
                     </c:when>
                     <c:otherwise>
-                        Ei suoritettu
+                        <form style="background-color: yellow" action="${pageContext.servletContext.contextPath}/doCheck/${batch.id}+${batch.substance.id}" method="POST">
+                            <select name="qualityCheck">
+                                <option value="1">Hyväksytty</option>
+                                <option value="2">Hylätty</option>
+                            </select>
+                            <input type="submit" value="Kirjaa tulos">
+                        </form>
                     </c:otherwise>
                 </c:choose>
             </td>

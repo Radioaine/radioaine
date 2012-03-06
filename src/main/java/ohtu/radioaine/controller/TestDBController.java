@@ -34,8 +34,8 @@ public class TestDBController {
         {"Ceretec Exametazine Agent kittipakkaus 5 inj.plo", "3", "4", "false", "true", "Lääkefirma Perttilä", "Oy GE Healthcare Bio-Sciences Ab", "10", "Kit"},
         {"Ceretec Stabilised kittipakkaus 5 inj.plo", "3", "4", "true", "false", "Lääkefirma Perttilä", "Oy GE Healthcare Bio-Sciences Ab", "18", "Kit"},
         {"Myoview kittipakkaus 5 inj.plo", "3", "4", "true", "true", "Lääkefirma Perttilä", "Oy GE Healthcare Bio-Sciences Ab", "1", "Kit"}};
-    private String[][] batches = {{"123445EE", "8", "30", "true", "Jeejeee paljon huomautettavaa"},
-        {"99AADD22", "3", "10", "false", "puolet rikki"}};
+    private String[][] batches = {{"123445EE", "8", "30", "0", "Jeejeee paljon huomautettavaa"},
+        {"99AADD22", "3", "10", "1", "puolet rikki"},{"AAD175", "3", "10", "2", "1 lainassa"}};
 
     @RequestMapping("generateTestDB")
     public String createDB() {
@@ -65,7 +65,7 @@ public class TestDBController {
             batch.setBatchNumber(batches[i][0]);
             batch.setAmount(Integer.parseInt(batches[i][1]));
             batch.setSubstanceVolume(Integer.parseInt(batches[i][2]));
-            batch.setQualityCheck(Boolean.parseBoolean(batches[i][3]));
+            batch.setQualityCheck(Integer.parseInt(batches[i][3]));
             batch.setNote(batches[i][4]);
             Substance substance = (Substance) substanceService.read(1);
             substance.setTotalAmount(substance.getTotalAmount() + batch.getAmount());

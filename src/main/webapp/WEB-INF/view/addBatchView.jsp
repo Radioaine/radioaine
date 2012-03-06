@@ -2,8 +2,7 @@
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@include file="header.jsp" %>
-<script type="text/javascript" src="script/ui.datepicker-fi.js"></script>
-<script type="text/javascript" src="script/batchStorageFuncs.js"></script>
+<script type="text/javascript" src="<c:url value="/script/ui.datepicker-fi.js" />"</script>
 <script>
     $(function() {
         $( "#arrivalDate" ).datepicker();

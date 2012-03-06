@@ -1,7 +1,9 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-
 <%@include file="header.jsp" %>
+
+
 
 <div id="sisalto">
     
@@ -20,7 +22,7 @@
             <th>Huom</th>
         </tr>
         <c:forEach var="batch" items="${substanceBatches}">
-            <tr>
+            <tr id="${batch.id}">
                 <td><a href="<c:out value="${pageContext.servletContext.contextPath}" />/batch/${batch.id}">${batch.batchNumber}</a></td>
                 <td>${batch.amount}</td>
                 <td>20</td>
@@ -28,13 +30,22 @@
                 <td>${batch.expDate}</td>
                 <td>${substance.manufacturer}</td>
                 <td>${substance.supplier}</td>
-                <td>
+                <td id="qualityCheck">
                     <c:choose>
-                    <c:when test="${batch.qualityCheck==true}">
-                        Suoritettu
+                    <c:when test="${batch.qualityCheck==1}">
+                        Hyväksytty
+                    </c:when>
+                    <c:when test="${batch.qualityCheck==2}">
+                        <p style="background-color: red">Hylätty</p>
                     </c:when>
                     <c:otherwise>
-                        Ei suoritettu
+                        <form style="background-color: yellow" action="${pageContext.servletContext.contextPath}/doCheck/${batch.id}+${substance.id}" method="POST">
+                            <select name="qualityCheck">
+                                <option value="1">Hyväksytty</option>
+                                <option value="2">Hylätty</option>
+                            </select>
+                            <input type="submit" value="Kirjaa tulos">
+                        </form>
                     </c:otherwise>
                 </c:choose>
                 </td>

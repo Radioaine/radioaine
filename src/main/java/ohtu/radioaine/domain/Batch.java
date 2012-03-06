@@ -29,7 +29,7 @@ public class Batch implements Serializable {
     private Substance substance;
     private Timestamp arrivalDate;
     private Timestamp expDate;
-    private boolean qualityCheck;
+    private int qualityCheck;
     
     //Possible radioactivity
     private double strength;
@@ -115,11 +115,11 @@ public class Batch implements Serializable {
         this.manufacturer = manufacturer;
     }
 
-    public boolean getQualityCheck() {
+    public int getQualityCheck() {
         return qualityCheck;
     }
 
-    public void setQualityCheck(boolean qualityCheck) {
+    public void setQualityCheck(int qualityCheck) {
         this.qualityCheck = qualityCheck;
     }
 

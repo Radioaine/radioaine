@@ -49,6 +49,16 @@ public class BatchController {
         model.addAttribute("batch", batchService.read(id));
         return "batchView";
     }
+    
+    @RequestMapping(value = "doCheck/{id}+{sid}", method = RequestMethod.POST)
+    public String qualityCheck(@PathVariable Integer id, 
+    @PathVariable Integer sid, 
+    @RequestParam Integer qualityCheck) {
+        Batch temp = batchService.read(id);
+        temp.setQualityCheck(qualityCheck);
+        batchService.createOrUpdate(temp);
+        return "redirect:/substance/"+sid;
+    }
 
     @RequestMapping(value = "batch", method = RequestMethod.GET)
     public String batchList(Model model) {
@@ -175,7 +185,7 @@ public class BatchController {
     private Batch updateBatchSaato(int id, BatchFormObject bfm) {
         Batch batch = batchService.read(id);
         batch.setAmount(batch.getAmount()+bfm.getAmount());
-        batch.setNote(batch.getNote()+"\n\n"+bfm.getNote());
+        batch.setNote(batch.getNote()+"\n"+bfm.getNote());
         return batchService.createOrUpdate(batch);
         
     }

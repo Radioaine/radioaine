@@ -4,6 +4,7 @@
     Author     : Suvi Jentze-Korpi
 --%>
 
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -25,7 +26,7 @@
             </ul>
         </div>
     
-        <div ib="buttons">
+        <div id="buttons">
            <br>
             <button><strong>LUO ELUAATTI</strong></button>
             <br>     

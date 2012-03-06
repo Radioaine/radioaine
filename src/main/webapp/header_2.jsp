@@ -15,6 +15,8 @@
         <%java.util.Date date = new java.util.Date();%>
         <%String dayAndTime = date.toLocaleString();%>        
         
-        <h3>RADIOAINE 1.0  <%out.print(String.valueOf(dayAndTime));%></h3>
+        <h3>
+            RADIOAINE 1.0<div align="center"><%out.print(String.valueOf(dayAndTime));%></div>
+        </h3>
     </body>
 </html>

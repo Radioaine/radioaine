@@ -8,8 +8,8 @@
 
 body { 
     font-family: "Arial", sans-serif; 
-    margin-left: 3em; 
-    margin-right: 7%; 
+    margin-left: 10em; 
+    /*margin-right: 7%;*/ 
     background-color: #FDFDF0; 
     padding: 4em; 
     text-align: justify; 

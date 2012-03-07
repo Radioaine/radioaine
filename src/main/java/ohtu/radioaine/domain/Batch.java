@@ -151,4 +151,13 @@ public class Batch implements Serializable {
     public void setSupplier(String supplier) {
         this.supplier = supplier;
     }
+    
+    public int getCurrentStorageLocationsCount()   {
+        int temp = 0;
+        for(int i=0; i < storageLocations.length; i++)  {
+            if(storageLocations[i][1] > 0)
+                temp++;
+        }
+        return temp;
+    }
 }

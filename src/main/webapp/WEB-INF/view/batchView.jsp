@@ -66,9 +66,13 @@
         </tr>
         
         <c:forEach var="location" varStatus="i" items="${batch.storageLocations}">
-            <tr>
-                <td>Varastopaikassa ${location[0]} on ${location[1]} kappaletta </td>     
-            </tr>  
+            <c:choose>
+                <c:when test="${batch.storageLocations[i.index][1] > 0}">
+                    <tr>
+                        <td>Varastopaikassa ${i.index+1} on ${location[1]} kappaletta </td>     
+                    </tr>  
+                </c:when>
+            </c:choose>
         </c:forEach>
         <tr>
             <td>Kommentit</td>

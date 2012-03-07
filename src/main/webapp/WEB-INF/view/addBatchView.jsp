@@ -25,12 +25,12 @@
             </c:forEach>
                </form:select><br/>
         Eränumero: <form:input path="batchNumber" type="text"/><form:errors path="batchNumber"/><br/>
-        Määrä: <form:input path="amount" type="number"/><form:errors path="amount"/><br/>
+        <!-- Määrä: <form:input path="amount" type="number"/><form:errors path="amount"/><br/>-->
         Saapumispäivä: <form:input path="arrivalDate" type="text" id="arrivalDate"/><form:errors path="arrivalDate"/><br/>
         Vanhenemispäivä: <form:input path="expDate" type="text" id="expDate"/><form:errors path="expDate"/><br/>
         
         <div id="varastot">
-                Varastopaikkassa 1 <form:select path="storageLocations[0][0]"> 
+                <form:select path="storageLocations[0][0]"> 
                     <form:option value="1">Jääkaappi 1</form:option>
                     <form:option value="2">Jääkaappi 2</form:option>
                     <form:option value="3">Jääkaappi 3</form:option>

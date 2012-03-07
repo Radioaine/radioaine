@@ -57,8 +57,35 @@
         </tr>
         <tr>
             <td>Laadunvarmistus</td>
-            <td>Suoritettu (MK) ${batch.qualityCheck}</td>
+            <td>
+                <c:choose>
+                    <c:when test="${batch.qualityCheck==1}">
+                        Ok
+                    </c:when>
+                    <c:when test="${batch.qualityCheck==2}">
+                        Hylätty
+                    </c:when>
+                    <c:otherwise>
+                        <form style="background-color: yellow" action="${pageContext.servletContext.contextPath}/doCheck/${batch.id}+${batch.substance.id}" method="POST">
+                            <select name="qualityCheck">
+                                <option value="1">Hyväksytty</option>
+                                <option value="2">Hylätty</option>
+                            </select>
+                            <input type="submit" value="Kirjaa tulos">
+                        </form>
+                    </c:otherwise>
+                </c:choose>
+            </td>
         </tr>
+        <c:forEach var="location" varStatus="i" items="${batch.storageLocations}">
+            <c:choose>
+                <c:when test="${batch.storageLocations[i.index][1] > 0}">
+                    <tr>
+                        <td>Varastopaikassa ${i.index+1} on ${location[1]} kappaletta </td>     
+                    </tr>  
+                </c:when>
+            </c:choose>
+        </c:forEach>
         <tr>
             <td>Kommentit</td>
             <td>${batch.note}</td>
@@ -74,10 +101,24 @@
             </c:forEach>
         </form:select><br/>
         Eränumero: <form:input path="batchNumber" type="text"/><form:errors path="batchNumber"/><br/>
-        Määrä: <form:input path="amount" type="number"/><form:errors path="amount"/><br/>
+        <!--Määrä: <form:input path="amount" type="number"/><form:errors path="amount"/><br/>-->
         Pakkauskoko: <form:input path="substanceVolume" type="number"/><form:errors path="substanceVolume"/><br/>
         Saapumispäivä: <form:input path="arrivalDate" type="text" id="arrivalDate"/><form:errors path="arrivalDate"/><br/>
         Vanhenemispäivä: <form:input path="expDate" type="text" id="expDate"/><form:errors path="expDate"/><br/>
+        <div id="varastot">
+            <c:forEach var="location" items="${batch.storageLocations}" varStatus="status">
+                <c:choose>
+                    <c:when test="${batch.storageLocations[status.index][1] > 0}">
+                        Varastopaikkassa ${status.index+1} <form:select path="storageLocations[${status.index}][0]"> 
+                            <form:option value="1">Jääkaappi 1</form:option>
+                            <form:option value="2">Jääkaappi 2</form:option>
+                            <form:option value="3">Jääkaappi 3</form:option>
+                        </form:select> on <form:input path="storageLocations[${status.index}][1]" type="number"/> kappaletta<br/>
+                    </c:when>
+                </c:choose>
+            </c:forEach>
+        </div>
+        <button type="button" onClick="addStorage(${batch.currentStorageLocationsCount})">Lisää varastopaikka</button><br />
         Huomioita: <br /><form:textarea path="note" type="text"/><form:errors path="note"/><br/>
         <input type="submit" value="Tallenna muutokset">
         <input type="button" value="Peruuta" onClick="parent.location = '${pageContext.servletContext.contextPath}/batch/${batch.id}'" />

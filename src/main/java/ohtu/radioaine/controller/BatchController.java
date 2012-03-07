@@ -118,6 +118,13 @@ public class BatchController {
 
     private Batch updateBatch(Integer id, BatchFormObject bfo) {
         Batch batch = batchService.read(id);
+        int temp = 0;
+        for(int i=0; i < bfo.getStorageLocations().length; i++) {
+            temp += bfo.getStorageLocations()[i][1];
+            
+        }
+        batch.setStorageLocations(bfo.getStorageLocations());
+        bfo.setAmount(temp);
         int amountChange = amountChange(batch, bfo);
         Substance substance = batch.getSubstance();
         substance.setTotalAmount(substance.getTotalAmount() + amountChange);
@@ -170,6 +177,14 @@ public class BatchController {
         batch.setNote(bfo.getNote());
         batch.setArrivalDate(Time.parseDate(bfo.getArrivalDate()));
         batch.setExpDate((Time.parseDate(bfo.getExpDate())));
+        
+        //Counts and sets the correct amount of the batch from storageLocations
+        int temp = 0;
+        for(int i=0; i < bfo.getStorageLocations().length; i++)
+            temp += bfo.getStorageLocations()[i][1];
+        
+        bfo.setAmount(temp);
+        
         batch.setAmount(bfo.getAmount());
         batch.setSubstanceVolume(bfo.getSubstanceVolume());
         batch.setStorageLocations(bfo.getStorageLocations());

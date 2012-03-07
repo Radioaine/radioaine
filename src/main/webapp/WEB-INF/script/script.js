@@ -5,11 +5,13 @@
 
 var counter = 2;
 
-function addStorage(){
+function addStorage(storageLocationsCount){
+    if(storageLocationsCount > 0 && storageLocationsCount > counter)
+        counter = storageLocationsCount + 1;
     var storage = document.querySelector("#varastot");
     var newdiv = document.createElement("div");
     newdiv.id = "varasto"+counter;
-    newdiv.innerHTML = "Varastopaikkassa "+counter+" <select name=\"storageLocations["+(counter-1)+"][0]\"><option value=\"1\">Jääkaappi 1</option><option value=\"2\">Jääkaappi 2</option><option value=\"3\">Jääkaappi 3</option></select><input type=\"number\" name=\"storageLocations["+(counter-1)+"][1]\"> kappaletta <button type=\"button\" onClick=\"removeStorage("+counter+")\">Poista varasto</button>";
+    newdiv.innerHTML = "<select name=\"storageLocations["+(counter-1)+"][0]\"><option value=\"1\">Jääkaappi 1</option><option value=\"2\">Jääkaappi 2</option><option value=\"3\">Jääkaappi 3</option></select><input type=\"number\" name=\"storageLocations["+(counter-1)+"][1]\"> kappaletta <button type=\"button\" onClick=\"removeStorage("+counter+")\">Poista varasto</button>";
     counter++;
     storage.appendChild(newdiv);
 }

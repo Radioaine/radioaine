@@ -1,0 +1,153 @@
+/* 
+    Document   : tabs
+    Created on : 7.3.2012, 21:30:55
+    Author     : Maria von Kügelgen
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+#main {
+    border: 1px solid #666;
+    clear: both;
+    background: #FDFDF0;
+    padding-top: 2em;
+}
+
+#contents {
+    padding: 1.5em;
+    background: #FDFDF0;
+    min-height: 300px;
+}
+
+#header {
+    position: relative;
+    width: 100%;
+    height: 3em;
+    width: 45em;
+}
+
+#header ul#primary {
+    margin: 0;
+    padding: 0;
+    position: absolute;
+    bottom: -1px;
+    width: 45em;
+}
+
+#header ul#primary li  {
+    display: inline;
+    list-style: none;
+}
+
+#header ul#primary a,#header ul#primary span,#header ul#primary a.current {
+    width: 8em;
+    display: block;
+    float: left;
+    padding: 4px 0;
+    margin: 1px 2px 0 0;
+    text-align: center;
+    font-size: 85%;
+    text-decoration: none;
+    color: #586B59;
+}
+
+/*testi
+#header ul#primary span {
+    width: 8em;
+    display: block;
+    float: left;
+    padding: 4px 0;
+    margin: 1px 2px 0 0;
+    text-align: center;
+    font-family: tahoma, verdana, sans-serif;
+    font-size: 85%;
+    text-decoration: none;
+    color: #333;
+}*/
+
+/*testi
+#header ul#primary span a {
+    width: 8em;
+    display: block;
+    float: left;
+    padding: 4px 0;
+    margin: 1px 2px 0 0;
+    text-align: center;
+    font-family: tahoma, verdana, sans-serif;
+    font-size: 85%;
+    text-decoration: none;
+    color: #333;
+}*/
+
+#header ul#primary span,#header ul#primary a.current,#header ul#primary a.current:hover {
+    border: 1px solid #666;
+    border-bottom: none;
+    background: #FDFDF0;
+    padding-bottom: 6px;
+    margin-top: 0;
+}
+
+/*testi*/
+#header ul#primary a {
+    background: #586B59;
+    color: #FDFDF0;
+    border: 1px solid #666;
+    border-bottom: none;
+}
+
+#header ul#primary a:hover {
+    text-decoration:underline;
+    margin-top: 0;
+    border-color: #666;
+    /*background: #FFF7CD;*/
+    padding-bottom: 5px;
+}
+
+#header ul#primary a.selected {
+    color: #2D562F;
+    background: #FDFDF0;
+    border-bottom: none;
+}
+/*
+#header ul#secondary {
+    position: absolute;
+    margin: 0;
+    padding: 0;
+    bottom: -1.4em;
+    left: 1px;
+    width: 50em;
+}
+
+#header ul#secondary li a,#header ul#secondary li span {
+    width: auto;
+    display: block;
+    float: left;
+    padding: 0 10px;
+    margin: 0;
+    text-align: auto;
+    border: none;
+    border-right: 1px dotted #AAA;
+    background: none;
+
+}
+
+#header ul#secondary li a {
+    color: #06C;
+    text-decoration: underline;
+}
+
+#header ul#secondary li a:hover {
+    color: #333;
+    background: transparent;
+    padding: 0 10px;
+    border: none;
+    border-right: 1px dotted #AAA;
+}
+
+#header ul#secondary li a:active {
+    color: #000;
+    background: transparent;
+}
+
+#header ul#secondary li:last-child a { border: none; }*/
+

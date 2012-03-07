@@ -149,11 +149,11 @@ public class Batch implements Serializable {
     }
 
     public String toStringDB() {
-        return "Batch{" + "id=" + id + ", batchNumber=" + batchNumber + ", amount=" + amount + ", substanceVolume=" + substanceVolume + ", substance=" + substance + ", arrivalDate=" + arrivalDate + ", expDate=" + expDate + ", qualityCheck=" + qualityCheck + ", strength=" + strength + ", manufacturer=" + manufacturer + ", supplier=" + supplier + ", note=" + note + '}';
+        return "Batch" + "id=" + id + " batchNumber=" + batchNumber + " amount=" + amount + " substanceVolume=" + substanceVolume + " substance=" + substance + " arrivalDate=" + arrivalDate + " expDate=" + expDate + " qualityCheck=" + qualityCheck + " strength=" + strength + " manufacturer=" + manufacturer + " supplier=" + supplier + " note=" + note;
     }
     
     public String toStringShow() {
-        return "eränumero = " + batchNumber + ", määrä = " + amount + ", aine = " + substance + ", saapumispvm = " + arrivalDate + ", vanhenemispvm = " + expDate + ", radioaktiivisuus = " + strength + ", valmistaja = " + manufacturer + ", toimittaja = " + supplier + ", kommentit = " + note;
+        return "eränumero = " + batchNumber + " määrä = " + amount + " aine = " + substance + " saapumispvm = " + arrivalDate + " vanhenemispvm = " + expDate + " radioaktiivisuus = " + strength + " valmistaja = " + manufacturer + " toimittaja = " + supplier + " kommentit = " + note;
     }
 
     public Substance getSubstance() {

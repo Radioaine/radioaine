@@ -14,4 +14,5 @@ import ohtu.radioaine.domain.Event3;
  */
 public interface EventDBDao extends DAO<Event> {
     public List<Event> list();
+    public List<Event> list(String arg);
 }

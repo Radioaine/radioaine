@@ -15,6 +15,7 @@ import ohtu.radioaine.domain.Event3;
 public interface EventService {
     public Event createOrUpdate(Event event);
     public List<Event> list();
+    public List<Event> list(String arg);
     public Event read(int id);
     public void delete(int eventId);
 }

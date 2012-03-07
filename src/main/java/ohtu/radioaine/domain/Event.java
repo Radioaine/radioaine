@@ -22,7 +22,7 @@ public class Event implements Serializable {
     @Column
     String happening;
     @Column
-    String show;
+    String info;
     @Column
     private Timestamp timestamp;
     
@@ -34,12 +34,12 @@ public class Event implements Serializable {
         return happening;
     }
 
-    public String getShow() {
-        return show;
+    public String getInfo() {
+        return info;
     }
 
-    public void setShow(String show) {
-        this.show = show;
+    public void setInfo(String info) {
+        this.info = info;
     }
 
     public void setHappening(String happening) {

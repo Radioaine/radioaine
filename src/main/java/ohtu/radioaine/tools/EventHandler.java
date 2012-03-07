@@ -20,21 +20,21 @@ public class EventHandler {
     public static Event newBatchEvent(Batch batch) {
         Event event = new Event();
         event.setHappening("type=new "+batch.toStringDB());
-        event.setShow("Luotiin "+batch.toStringShow());
+        event.setInfo("Luotiin "+batch.toStringShow());
         return event;
     }
 
     public static Event updateBatchEvent(Batch batch) {
         Event event = new Event();
         event.setHappening("type=modify "+batch.toStringDB());
-        event.setShow("Muokattiin "+batch.toStringShow());
+        event.setInfo("Muokattiin "+batch.toStringShow());
         return event;
     }
 
     public static Event addToBatchEvent(Batch batch) {
         Event event = new Event();
         event.setHappening("type=addTo "+batch.toStringDB());
-        event.setShow("Lisättiin erään "+batch.toStringShow());
+        event.setInfo("Lisättiin erään "+batch.toStringShow());
         return event;
     }
     

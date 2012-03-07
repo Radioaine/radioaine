@@ -47,6 +47,12 @@ public class JPAEventDBDAO implements EventDBDao {
     public Event update(Event instance) {
         return entityManager.merge(instance);
     }
+
+    @Override
+    public List<Event> list(String arg) {
+        Query q = entityManager.createQuery("SELECT e FROM Event e WHERE e.happening LIKE '%type=modify%'");
+        return q.getResultList();
+    }
     
     
     

@@ -23,5 +23,11 @@ public class HistoryController {
         model.addAttribute("events", eventService.list());
         return "historyView";
     }
+    
+    @RequestMapping("seekModify")
+    public String modified(Model model) {
+        model.addAttribute("modified", eventService.list("type=modify"));
+        return "historyView";
+    }
 
 }

@@ -47,5 +47,10 @@ public class SimpleEventService implements EventService {
         if (e != null) {
             varastoDao.delete(e);
         }
-    }   
+    }
+
+    @Override
+    public List<Event> list(String arg) {
+        return varastoDao.list(arg);
+    }
 }

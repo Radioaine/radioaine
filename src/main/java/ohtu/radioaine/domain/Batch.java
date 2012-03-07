@@ -30,7 +30,7 @@ public class Batch implements Serializable {
     private Timestamp arrivalDate;
     private Timestamp expDate;
     private int qualityCheck;
-    
+    private String signature;
     //Possible radioactivity
     private double strength;
     private String manufacturer;
@@ -38,6 +38,14 @@ public class Batch implements Serializable {
     private String note;
     private int storageLocationsCount = 10;
     private int[][] storageLocations = new int[storageLocationsCount][2];
+
+    public String getSignature() {
+        return signature;
+    }
+
+    public void setSignature(String signature) {
+        this.signature = signature;
+    }
 
     public int[][] getStorageLocations() {
         return storageLocations;
@@ -140,9 +148,12 @@ public class Batch implements Serializable {
         this.strength = strength;
     }
 
-    @Override
-    public String toString() {
+    public String toStringDB() {
         return "Batch{" + "id=" + id + ", batchNumber=" + batchNumber + ", amount=" + amount + ", substanceVolume=" + substanceVolume + ", substance=" + substance + ", arrivalDate=" + arrivalDate + ", expDate=" + expDate + ", qualityCheck=" + qualityCheck + ", strength=" + strength + ", manufacturer=" + manufacturer + ", supplier=" + supplier + ", note=" + note + '}';
+    }
+    
+    public String toStringShow() {
+        return "eränumero = " + batchNumber + ", määrä = " + amount + ", aine = " + substance + ", saapumispvm = " + arrivalDate + ", vanhenemispvm = " + expDate + ", radioaktiivisuus = " + strength + ", valmistaja = " + manufacturer + ", toimittaja = " + supplier + ", kommentit = " + note;
     }
 
     public Substance getSubstance() {

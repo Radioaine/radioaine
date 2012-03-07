@@ -7,6 +7,7 @@ package ohtu.radioaine.service;
 import java.util.List;
 import ohtu.radioaine.database.EventDBDao;
 import ohtu.radioaine.domain.Event;
+import ohtu.radioaine.domain.Event3;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

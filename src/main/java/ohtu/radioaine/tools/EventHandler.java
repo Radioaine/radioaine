@@ -1,44 +1,41 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package ohtu.radioaine.tools;
 
-import java.util.ArrayList;
-import java.util.List;
 import ohtu.radioaine.domain.Batch;
 import ohtu.radioaine.domain.Event;
-import ohtu.radioaine.domain.Substance;
+import ohtu.radioaine.service.EventService;
+import org.springframework.beans.factory.annotation.Autowired;
 
+
+
+/**
+ *
+ * @author Richard Moneybags
+ */
 public class EventHandler {
-
-    private static final String NEWBATCH = "NEWBATCH";
-    private static final String UPDATEBATCH = "MODIFYBATCH";
-    private static final String NEWSUBSTANCE = "NEWSUBSTANCE";
-
+    
     public static Event newBatchEvent(Batch batch) {
         Event event = new Event();
-        List<Batch> batchList = new ArrayList<Batch>();
-        batchList.add(batch);
-        event.setBatches(batchList);
-        event.setMessage("Uusi erä");
-        event.setType(NEWBATCH);
+        event.setHappening("type=new "+batch.toStringDB());
+        event.setShow("Luotiin "+batch.toStringShow());
         return event;
     }
 
-    public static Event updateBatchEvent(Batch batch, String name) {
+    public static Event updateBatchEvent(Batch batch) {
         Event event = new Event();
-        List<Batch> batchList = new ArrayList<Batch>();
-        batchList.add(batch);
-        event.setBatches(batchList);
-        event.setMessage(name + " muutti erän tietoja");
-        event.setType(UPDATEBATCH);
+        event.setHappening("type=modify "+batch.toStringDB());
+        event.setShow("Muokattiin "+batch.toStringShow());
         return event;
     }
 
-    public static Event newSubstanceEvent(Substance substance) {
+    public static Event addToBatchEvent(Batch batch) {
         Event event = new Event();
-        List<Substance> substanceList = new ArrayList<Substance>();
-        substanceList.add(substance);
-        event.setSubstances(substanceList);
-        event.setMessage("Uusi lääkeaine");
-        event.setType(NEWSUBSTANCE);
+        event.setHappening("type=addTo "+batch.toStringDB());
+        event.setShow("Lisättiin erään "+batch.toStringShow());
         return event;
     }
+    
 }

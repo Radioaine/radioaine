@@ -9,6 +9,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import ohtu.radioaine.domain.Event;
+import ohtu.radioaine.domain.Event3;
 import org.springframework.stereotype.Repository;
 
 /**

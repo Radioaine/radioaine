@@ -6,6 +6,7 @@ package ohtu.radioaine.database;
 
 import java.util.List;
 import ohtu.radioaine.domain.Event;
+import ohtu.radioaine.domain.Event3;
 
 /**
  *

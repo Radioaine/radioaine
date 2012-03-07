@@ -57,7 +57,7 @@
             </tr>
             
             <c:forEach var="product" items="${products}">
-                <c:if test="${product.type == '1'}AND${product.timeCreated==tänään!}">
+                <c:if test="${product.type == '1'}AND${product.timeCreated==tänään}">
                     <tr>
                         <td>$(product.timeCreated)</td> <!--sarake eluaatin kellonajalle-->
                         <td>""</td><!--sarake ko. eluaatista tehdyn lääkkeen kellonajalle-->

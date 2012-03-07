@@ -3,14 +3,12 @@
 
 <div id="sisalto">
     <h1>Tapahtumat</h1>
-
+    
     <c:forEach var="event" items="${events}">
         <p><fmt:formatDate value="${event.timestamp}" pattern="dd.MM.yyyy HH:mm:ss"/>
-            ${event.message}   
+            ${event.show}   
 
-            <c:forEach var="batch" items="${event.batches}">
-                ${batch.batchNumber}</p>
-            </c:forEach>
+            
 
     </c:forEach>
 </div>

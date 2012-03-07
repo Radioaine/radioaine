@@ -26,7 +26,8 @@ public class BatchFormObject {
     @NotNull(message = "Vanhenemispäivä ei saa olla tyhjä")
     private String expDate;
     private String note;
-    private int[][] storageLocations = new int[10][2];
+    private int storageLocationsCount = 10;
+    private int[][] storageLocations = new int[storageLocationsCount][2];
     private String userName;
 
     public int[][] getStorageLocations() {
@@ -36,7 +37,15 @@ public class BatchFormObject {
     public void setStorageLocations(int[][] storageLocations) {
         this.storageLocations = storageLocations;
     }
+    
+    public int getStorageLocationsCount() {
+        return storageLocationsCount;
+    }
 
+    public void setStorageLocationsCount(int storageLocationsCount) {
+        this.storageLocationsCount = storageLocationsCount;
+    }
+    
     public String getUserName() {
         return userName;
     }

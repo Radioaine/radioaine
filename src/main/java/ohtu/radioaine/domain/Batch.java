@@ -36,7 +36,8 @@ public class Batch implements Serializable {
     private String manufacturer;
     private String supplier;
     private String note;
-    private int[][] storageLocations = new int[10][2];
+    private int storageLocationsCount = 10;
+    private int[][] storageLocations = new int[storageLocationsCount][2];
 
     public int[][] getStorageLocations() {
         return storageLocations;
@@ -44,6 +45,14 @@ public class Batch implements Serializable {
 
     public void setStorageLocations(int[][] storageLocations) {
         this.storageLocations = storageLocations;
+    }
+    
+    public int getStorageLocationsCount() {
+        return storageLocationsCount;
+    }
+
+    public void setStorageLocationsCount(int storageLocationsCount) {
+        this.storageLocationsCount = storageLocationsCount;
     }
     
     public int getSubstanceVolume() {

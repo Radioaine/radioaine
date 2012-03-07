@@ -81,7 +81,7 @@
             <c:choose>
                 <c:when test="${batch.storageLocations[i.index][1] > 0}">
                     <tr>
-                        <td>Varastopaikassa ${i.index+1} on ${location[1]} kappaletta </td>     
+                        <td>Jääkaapissa ${batch.storageLocations[i.index][0]} on ${location[1]} kappaletta</td>     
                     </tr>  
                 </c:when>
             </c:choose>
@@ -109,16 +109,18 @@
             <c:forEach var="location" items="${batch.storageLocations}" varStatus="status">
                 <c:choose>
                     <c:when test="${batch.storageLocations[status.index][1] > 0}">
-                        Varastopaikkassa ${status.index+1} <form:select path="storageLocations[${status.index}][0]"> 
-                            <form:option value="1">Jääkaappi 1</form:option>
-                            <form:option value="2">Jääkaappi 2</form:option>
-                            <form:option value="3">Jääkaappi 3</form:option>
-                        </form:select> on <form:input path="storageLocations[${status.index}][1]" type="number"/> kappaletta<br/>
+                        <form:select path="storageLocations[${status.index}][0]"> 
+                            <c:forEach var="locations" items="${batch.storageLocations}" varStatus="i">
+                                <form:option value="${i.index+1}">Jääkaappi ${i.index+1}</form:option>
+                                <form:options items="${storageLocations[status.index][0]}" />
+
+                            </c:forEach>
+                        </form:select> <form:input path="storageLocations[${status.index}][1]" type="number"/> kappaletta<br/>
                     </c:when>
                 </c:choose>
             </c:forEach>
         </div>
-        <button type="button" onClick="addStorage(${batch.currentStorageLocationsCount})">Lisää varastopaikka</button><br />
+        <button type="button" onClick="addStorage(${batch.currentStorageLocationsCount},${batch.storageLocationsCount})">Lisää varastopaikka</button><br />
         Huomioita: <br /><form:textarea path="note" type="text"/><form:errors path="note"/><br/>
         <input type="submit" value="Tallenna muutokset">
         <input type="button" value="Peruuta" onClick="parent.location = '${pageContext.servletContext.contextPath}/batch/${batch.id}'" />

@@ -30,13 +30,13 @@
         Vanhenemispäivä: <form:input path="expDate" type="text" id="expDate"/><form:errors path="expDate"/><br/>
         
         <div id="varastot">
-                <form:select path="storageLocations[0][0]"> 
-                    <form:option value="1">Jääkaappi 1</form:option>
-                    <form:option value="2">Jääkaappi 2</form:option>
-                    <form:option value="3">Jääkaappi 3</form:option>
+                <form:select path="storageLocations[0][0]">
+                    <c:forEach var="locations" items="${batch.storageLocations}" varStatus="i">
+                        <form:option value="${i.index+1}">Jääkaappi ${i.index+1}</form:option>
+                    </c:forEach>
                 </form:select> <form:input path="storageLocations[0][1]" type="number"/> kappaletta<br/> 
         </div>
-        <button type="button" onClick="addStorage()">Lisää varastopaikka</button><br />
+        <button type="button" onClick="addStorage(1, ${batch.storageLocationsCount})">Lisää varastopaikka</button><br />
         Huomioita: <form:textarea path="note" type="text"/><form:errors path="note"/><br/>
         <input type="submit">
     </form:form>

@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html>
+   
+    <head>
+       <link rel="stylesheet" type="text/css" href="style_2.css" />
+       <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+    <body>
+       <ul class="tabrow">
+           <li class="selected"><a href="frontpage.html" class="selected">VALMISTUS</a></li>
+           <li>VARASTO</li>
+           <li>HALLINTA</li>
+       </ul>
+       
+      
+    <h2>Uusi eluaatti</h2>
+       
+<p>
+
+<table class="noborder">
+
+<tr>
+   <td>
+       Valitse aine
+   </td>
+</tr>
+
+<tr>
+   <td>    
+       <select>
+           <option selected="selected">Generaattori</option>
+           <option>Kitti</option>
+           <option>Muu</option>
+       </select>
+   </td>
+   <td>
+       <select class="substance">
+           <option>Teknetiumgeneraattori 21,5 GBq</option>
+           <option>Teknetiumgeneraattori 24 GBq</option>
+           <option>Teknetiumgeneraattori 30 GBq</option>
+       </select>
+    </td>
+   <td>
+       <select class="batch">
+           <option>Erä 1234567, 1.krs, Laatu OK, 27.5.2012</option>
+           <option>Erä 1234568</option>
+           <option>Erä 1234569</option>
+       </select>
+   </td>       
+</tr>
+
+<tr>
+   <td>    
+       <select>
+           <option>Generaattori</option>
+           <option>Kitti</option>
+           <option selected="selected">Muu</option>
+       </select>
+   </td>
+   <td>
+       <select class="substance">
+           <option>Keittosuolaliuos 1000 ml</option>
+           <option>Keittosuolaliuos 100 ml</option>
+           <option>Keittosuolaliuos 10 ml</option>
+       </select>
+    </td>
+   <td>
+       <select class="batch">
+           <option>Erä 1234567, 2.krs jääkaappi, Laatu OK, 27.5.2012</option>
+           <option>Erä 1234568</option>
+           <option>Erä 1234569</option>
+       </select><br/>
+   </td>
+   <td>
+   <button type="button">Lisää</button>
+   </td>       
+</tr>
+
+</table>
+</p>
+
+<p>
+
+<form action="frontpage.html" method="post">
+
+<table class="noborder">
+
+<tr>
+   <td class="name">
+       
+   </td>
+   <td>
+       Klo
+   </td>
+   <td>
+       Pvm
+   </td>
+</tr>
+
+<tr>
+   <td class="name">
+       Eluointiaika
+   </td>
+   <td>
+       <input required type="text" name="hour" size="2" />:<input required type="text" name="minute" size="2" />
+   </td>
+   <td>
+       <input required type="text" name="date" size="8" value="3.3.2012" />
+   </td>
+</tr>
+
+<tr>
+   <td>
+       Aktiivisuus
+   </td>
+   <td>
+       <input type="text" name="activity" size="5" />
+       <select>
+           <option>GBq</option>
+           <option>MBq</option>
+       </select>
+       &nbsp;
+   </td>
+</tr>
+
+<tr>
+   <td>
+       Tilavuus
+   </td>
+   <td>
+       <input type="text" name="volume" size="5" />
+       <input type="text" name="volumeUnit" size="4"  value="ml"/>
+   </td>
+</tr>
+
+</table>
+
+<table class="noborder">
+
+   <tr>
+       <td class="name">
+           Sijainti
+       </td>
+       <td>
+           <select>
+               <option>Valitse</option>
+               <option>1. krs jääkaappi</option>
+               <option>2. krs jääkaappi</option>
+           </select>
+       </td>
+   </tr>
+   
+   <tr>
+       <td>
+           Huomautuksia
+       </td>
+       <td>
+           <input type="text" name="comments" size="70" />
+       </td>
+   </tr>
+   
+</table>
+
+<br/>
+
+<table class="noborder">
+   <tr>
+       <td class="name">
+           Nimikirjaimet
+       </td>
+
+       <td>
+           <input required type="text" name="initials" size="6" />
+       </td>
+   </tr>
+   <tr>
+       <td>
+           <input type="submit" value="Tallenna" />
+       </td>
+   </tr>
+<!--    <tr>
+       <td>
+           <input type="submit" value="Muokkaa" disabled="disabled" />
+       </td>
+   </tr>-->
+</table>
+        
+</form>
+
+</p>
+
+</body>
+</html>

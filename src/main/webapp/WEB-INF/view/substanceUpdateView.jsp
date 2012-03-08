@@ -4,7 +4,7 @@
 <script type="text/javascript" src="<c:url value="/css/script.js" />"></script>
 <%@include file="header.jsp" %>
 
-<div id="sisalto">
+<div id="contents">
     <h1>${substance.name}</h1>
     <p><b>Vanhat tiedot</b></p>
     <table id="reunaton">

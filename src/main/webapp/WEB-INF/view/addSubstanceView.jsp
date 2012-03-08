@@ -4,7 +4,7 @@
 
 <%@include file="header.jsp" %>
 
-<div id="sisalto">
+<div id="contents">
     <h1>Lisää lääkeaine</h1>
 
 

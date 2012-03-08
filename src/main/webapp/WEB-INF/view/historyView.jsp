@@ -2,7 +2,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <%@include file="header.jsp" %>
-<div id="sisalto">
+<div id="contents">
     <%@include file="history.jsp" %>
 </div>
 <%@include file="footer.jsp" %>

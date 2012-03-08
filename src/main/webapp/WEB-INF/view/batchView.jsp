@@ -5,7 +5,7 @@
 
 <%@include file="header.jsp" %>
 
-<div id="sisalto">
+<div id="contents">
     <h1>Erä ${batch.batchNumber}</h1>
 
     <table id="reunaton">

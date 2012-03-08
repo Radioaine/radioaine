@@ -5,7 +5,7 @@
 
 
 
-<div id="sisalto">
+<div id="contents">
     
     <h1>${substance.name}</h1>
     
@@ -53,7 +53,5 @@
             </tr>
         </c:forEach>
     </table>
-    <br>
-    <button type="button">Käytä valmistukseen</button>
 </div>
 <%@include file="footer.jsp" %>

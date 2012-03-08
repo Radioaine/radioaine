@@ -8,7 +8,7 @@
     <h2>Valmisteet TIMESTAMP</h2>
 </p>
 <p>
-<form method="link" action="createEluate.html">
+<form method="link" action="createEluate">
     <input type="submit" value="LUO ELUAATTI">
 </form>
 </p>

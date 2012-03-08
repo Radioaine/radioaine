@@ -12,7 +12,7 @@ import javax.persistence.*;
  * Entity for eluate. Used to create table Eluate to DB. Extends Product
  * @author rmjheino
  */
-@Entity
+
 public class Eluate extends Product {
 
     @Id

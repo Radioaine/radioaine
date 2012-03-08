@@ -8,28 +8,20 @@ import ohtu.radioaine.service.SubstanceService;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-/**
- * Controllers for frontpage
- * @author rmjheino
- */
+
 @Controller
-public class FrontPageController {
+public class StorageController {
     
     @Autowired
     private SubstanceService substanceService;
 
     @Autowired
     private BatchService esinePalvelu;
-
-    @RequestMapping("*")
-    public String list() {
-        return "redirect:/frontpage";
-    }
     
-    @RequestMapping(value = "frontpage", method = RequestMethod.GET)
-    public String frontPage(Model model) {
+    @RequestMapping(value = "storage", method = RequestMethod.GET)
+    public String storageView(Model model) {
         model.addAttribute("substances", substanceService.list());
-        return "frontpage";
+        return "storageView";
     }
 
 }

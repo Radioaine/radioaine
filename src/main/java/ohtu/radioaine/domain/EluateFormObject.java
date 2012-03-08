@@ -4,8 +4,6 @@
  */
 package ohtu.radioaine.domain;
 
-import java.sql.Timestamp;
-
 /**
  *
  * @author jahyvone

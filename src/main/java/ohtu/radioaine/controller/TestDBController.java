@@ -43,7 +43,7 @@ public class TestDBController {
     public String createDB() {
         createSubstances();
         createBatches();
-        return "redirect:/frontpage";
+        return "redirect:/storage";
     }
 
     private void createSubstances() {

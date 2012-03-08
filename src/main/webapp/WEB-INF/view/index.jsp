@@ -3,12 +3,12 @@
     "http://www.w3.org/TR/html4/loose.dtd">
 <html>
     <head>
-        <meta http-equiv="refresh" content="0;url=${pageContext.request.contextPath}/listaa">
+        <meta http-equiv="refresh" content="0;url=${pageContext.request.contextPath}/frontpage">
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Page moved.</title>
     </head>
     <body>
         <h1>Page moved.</h1>
-        <p>Browse to <a href="${pageContext.request.contextPath}/listaa">${pageContext.request.contextPath}/listaa</a>.</p>
+        <p>Browse to <a href="${pageContext.request.contextPath}/frontpage">${pageContext.request.contextPath}/frontpage</a>.</p>
     </body>
 </html>

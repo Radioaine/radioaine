@@ -97,3 +97,11 @@ p.note {
     line-height: 130%;
     margin-top: 0;
 }
+
+#storageTable {
+	padding-left: 20px;
+	width: 500px;
+	margin-left: auto;
+	margin-right: auto;
+	text-align: left;
+}

@@ -4,7 +4,10 @@
 <%@include file="header.jsp" %>
 
 <div id="contents">
-    
+    <form method="link" action="addBatch">
+        <input type="submit" value="Lisää lähetys">
+    </form><br>
+
     <h1>Kitit</h1>
     <table class="storageTable">
         <tr>

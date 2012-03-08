@@ -47,15 +47,15 @@ public class BatchController {
         model.addAttribute("batch", batchService.read(id));
         return "batchView";
     }
-    
+
     @RequestMapping(value = "doCheck/{id}+{sid}", method = RequestMethod.POST)
-    public String qualityCheck(@PathVariable Integer id, 
-    @PathVariable Integer sid, 
-    @RequestParam Integer qualityCheck) {
+    public String qualityCheck(@PathVariable Integer id,
+            @PathVariable Integer sid,
+            @RequestParam Integer qualityCheck) {
         Batch temp = batchService.read(id);
         temp.setQualityCheck(qualityCheck);
         batchService.createOrUpdate(temp);
-        return "redirect:/substance/"+sid;
+        return "redirect:/substance/" + sid;
     }
 
     @RequestMapping(value = "batch", method = RequestMethod.GET)
@@ -88,8 +88,6 @@ public class BatchController {
         return "redirect:/batch/" + batch.getId();
     }
 
-    
-
     //Batchin päivittämiseen kesken
     @RequestMapping(value = "updateBatch/{id}")
     public String batchUpdateRequest(Model model, @PathVariable Integer id) {
@@ -108,15 +106,15 @@ public class BatchController {
             return "redirect:/updateBatch/" + id;
         }
         updateBatch(id, bfm);
-        
+
         return "redirect:/batch/" + id;
     }
 
     private Batch updateBatch(Integer id, BatchFormObject bfo) {
         int temp = 0;
-        for(int i=0; i < bfo.getStorageLocations().length; i++) {
+        for (int i = 0; i < bfo.getStorageLocations().length; i++) {
             temp += bfo.getStorageLocations()[i][1];
-            
+
         }
         bfo.setAmount(temp);
         Batch batch = batchService.read(id);
@@ -126,18 +124,17 @@ public class BatchController {
         batch.setSubstanceVolume(bfo.getSubstanceVolume());
         batch.setBatchNumber(bfo.getBatchNumber());
         batch.setNote(bfo.getNote());
-        
-        
+
+
         Substance substance = batch.getSubstance();
-        
-        if(batch.getSubstance().getId() != bfo.getSubstance()){
+
+        if (batch.getSubstance().getId() != bfo.getSubstance()) {
             Substance newSubstance = (Substance) substanceService.read(bfo.getSubstance());
             substance.setTotalAmount(substance.getTotalAmount() - oldAmount);
             newSubstance.setTotalAmount(newSubstance.getTotalAmount() + batch.getAmount());
             batch.setSubstance(newSubstance);
-            substanceService.createOrUpdate(newSubstance);  
-        }
-        else{
+            substanceService.createOrUpdate(newSubstance);
+        } else {
             int amountChange = amountChange(batch, bfo);
             substance.setTotalAmount(substance.getTotalAmount() + amountChange);
         }
@@ -188,14 +185,15 @@ public class BatchController {
         batch.setNote(bfo.getNote());
         batch.setArrivalDate(Time.parseDate(bfo.getArrivalDate()));
         batch.setExpDate((Time.parseDate(bfo.getExpDate())));
-        
+
         //Counts and sets the correct amount of the batch from storageLocations
         int temp = 0;
-        for(int i=0; i < bfo.getStorageLocations().length; i++)
+        for (int i = 0; i < bfo.getStorageLocations().length; i++) {
             temp += bfo.getStorageLocations()[i][1];
-        
+        }
+
         bfo.setAmount(temp);
-        
+
         batch.setAmount(bfo.getAmount());
         batch.setSubstanceVolume(bfo.getSubstanceVolume());
         batch.setStorageLocations(bfo.getStorageLocations());
@@ -210,11 +208,11 @@ public class BatchController {
 
     private Batch updateBatchSaato(int id, BatchFormObject bfm) {
         Batch batch = batchService.read(id);
-        batch.setAmount(batch.getAmount()+bfm.getAmount());
-        batch.setNote(batch.getNote()+"\n"+bfm.getNote());
+        batch.setAmount(batch.getAmount() + bfm.getAmount());
+        batch.setNote(batch.getNote() + "\n" + bfm.getNote());
         Event event = EventHandler.addToBatchEvent(batch);
         eventService.createOrUpdate(event);
         return batchService.createOrUpdate(batch);
-        
+
     }
 }

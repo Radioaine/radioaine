@@ -113,23 +113,35 @@ public class BatchController {
     }
 
     private Batch updateBatch(Integer id, BatchFormObject bfo) {
-        Batch batch = batchService.read(id);
         int temp = 0;
         for(int i=0; i < bfo.getStorageLocations().length; i++) {
             temp += bfo.getStorageLocations()[i][1];
             
         }
-        batch.setStorageLocations(bfo.getStorageLocations());
         bfo.setAmount(temp);
-        int amountChange = amountChange(batch, bfo);
-        Substance substance = batch.getSubstance();
-        substance.setTotalAmount(substance.getTotalAmount() + amountChange);
-        substanceService.createOrUpdate(substance);
+        Batch batch = batchService.read(id);
+        batch.setStorageLocations(bfo.getStorageLocations());
         batch.setAmount(bfo.getAmount());
         batch.setSubstanceVolume(bfo.getSubstanceVolume());
         batch.setBatchNumber(bfo.getBatchNumber());
         batch.setNote(bfo.getNote());
+        
+        
+        Substance substance = batch.getSubstance();
+        
+        if(batch.getSubstance().getId() != bfo.getSubstance()){
+            Substance newSubstance = (Substance) substanceService.read(bfo.getSubstance());
+            substance.setTotalAmount(substance.getTotalAmount() - batch.getAmount());
+            newSubstance.setTotalAmount(newSubstance.getTotalAmount() + batch.getAmount());
+            batch.setSubstance(newSubstance);
+            substanceService.createOrUpdate(newSubstance);  
+        }
+        else{
+            int amountChange = amountChange(batch, bfo);
+            substance.setTotalAmount(substance.getTotalAmount() + amountChange);
+        }
         batch = batchService.createOrUpdate(batch);
+        substanceService.createOrUpdate(substance);
 //        Event3 event = EventHandler3.updateBatchEvent(batch, bfo.getUserName());
 //        eventService.createOrUpdate(event);
         Event event = EventHandler.updateBatchEvent(batch);

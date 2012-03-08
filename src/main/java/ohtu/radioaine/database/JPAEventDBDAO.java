@@ -9,6 +9,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import ohtu.radioaine.domain.Event;
+import ohtu.radioaine.domain.Event3;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -45,6 +46,12 @@ public class JPAEventDBDAO implements EventDBDao {
     @Override
     public Event update(Event instance) {
         return entityManager.merge(instance);
+    }
+
+    @Override
+    public List<Event> list(String arg) {
+        Query q = entityManager.createQuery("SELECT e FROM Event e WHERE e.happening LIKE '%type=modify%'");
+        return q.getResultList();
     }
     
     

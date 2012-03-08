@@ -6,6 +6,7 @@ package ohtu.radioaine.database;
 
 import java.util.List;
 import ohtu.radioaine.domain.Event;
+import ohtu.radioaine.domain.Event3;
 
 /**
  *
@@ -13,4 +14,5 @@ import ohtu.radioaine.domain.Event;
  */
 public interface EventDBDao extends DAO<Event> {
     public List<Event> list();
+    public List<Event> list(String arg);
 }

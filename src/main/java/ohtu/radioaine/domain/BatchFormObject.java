@@ -28,7 +28,7 @@ public class BatchFormObject {
     private String note;
     private int storageLocationsCount = 10;
     private int[][] storageLocations = new int[storageLocationsCount][2];
-    private String userName;
+    private String signature;
 
     public int[][] getStorageLocations() {
         return storageLocations;
@@ -46,12 +46,12 @@ public class BatchFormObject {
         this.storageLocationsCount = storageLocationsCount;
     }
     
-    public String getUserName() {
-        return userName;
+    public String getSignature() {
+        return signature;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setSignature(String signature) {
+        this.signature = signature;
     }
 
     public int getSubstanceVolume() {

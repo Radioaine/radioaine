@@ -4,7 +4,6 @@
 
 package ohtu.radioaine.domain;
 
-import java.util.List;
 import javax.persistence.*;
 
 /**

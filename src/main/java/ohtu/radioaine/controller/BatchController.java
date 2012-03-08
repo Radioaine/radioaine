@@ -10,10 +10,7 @@
 package ohtu.radioaine.controller;
 
 import javax.validation.Valid;
-import ohtu.radioaine.domain.Batch;
-import ohtu.radioaine.domain.BatchFormObject;
-import ohtu.radioaine.domain.Event;
-import ohtu.radioaine.domain.Substance;
+import ohtu.radioaine.domain.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,6 +18,7 @@ import ohtu.radioaine.service.BatchService;
 import ohtu.radioaine.service.EventService;
 import ohtu.radioaine.service.SubstanceService;
 import ohtu.radioaine.tools.EventHandler;
+import ohtu.radioaine.tools.EventHandler3;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -81,14 +79,12 @@ public class BatchController {
         Batch batch = createBatch(bfm);
         Batch temp = batchService.read(batch.getBatchNumber(), bfm.getSubstance());
         if (temp == null) {
-            System.out.println("Mentii tanne!");
             batch = batchService.createOrUpdate(batch);
+            Event event = EventHandler.newBatchEvent(batch);
+            eventService.createOrUpdate(event);
         } else {
-            System.out.println("Mentii elsee!");
             batch = updateBatchSaato(temp.getId(), bfm);
         }
-//        Event event = EventHandler.newBatchEvent(batch);
-//        eventService.createOrUpdate(event);
         return "redirect:/batch/" + batch.getId();
     }
 
@@ -112,7 +108,7 @@ public class BatchController {
             return "redirect:/updateBatch/" + id;
         }
         updateBatch(id, bfm);
-
+        
         return "redirect:/batch/" + id;
     }
 
@@ -134,8 +130,10 @@ public class BatchController {
         batch.setBatchNumber(bfo.getBatchNumber());
         batch.setNote(bfo.getNote());
         batch = batchService.createOrUpdate(batch);
-//        Event event = EventHandler.updateBatchEvent(batch, bfo.getUserName());
+//        Event3 event = EventHandler3.updateBatchEvent(batch, bfo.getUserName());
 //        eventService.createOrUpdate(event);
+        Event event = EventHandler.updateBatchEvent(batch);
+        eventService.createOrUpdate(event);
         return batch;
     }
 
@@ -201,6 +199,8 @@ public class BatchController {
         Batch batch = batchService.read(id);
         batch.setAmount(batch.getAmount()+bfm.getAmount());
         batch.setNote(batch.getNote()+"\n"+bfm.getNote());
+        Event event = EventHandler.addToBatchEvent(batch);
+        eventService.createOrUpdate(event);
         return batchService.createOrUpdate(batch);
         
     }

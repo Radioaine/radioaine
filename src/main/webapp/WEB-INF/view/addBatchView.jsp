@@ -38,6 +38,7 @@
         </div>
         <button type="button" onClick="addStorage(1, ${batch.storageLocationsCount})">Lisää varastopaikka</button><br />
         Huomioita: <form:textarea path="note" type="text"/><form:errors path="note"/><br/>
+        Nimikirjaimet: <form:input path="signature" type="text" id="signature"/><form:errors path="signature"/><br/>
         <input type="submit">
     </form:form>
 

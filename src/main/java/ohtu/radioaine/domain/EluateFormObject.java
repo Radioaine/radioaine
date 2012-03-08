@@ -4,8 +4,6 @@
  */
 package ohtu.radioaine.domain;
 
-import java.sql.Timestamp;
-
 /**
  *
  * @author jahyvone
@@ -20,6 +18,25 @@ public class EluateFormObject {
     private String signature;
     private String note;
     private int storageLocation;
+    
+    private Batch generator;
+    private Batch solvent;
+
+    public Batch getGenerator() {
+        return generator;
+    }
+
+    public void setGenerator(Batch generator) {
+        this.generator = generator;
+    }
+
+    public Batch getSolvent() {
+        return solvent;
+    }
+
+    public void setSolvent(Batch solvent) {
+        this.solvent = solvent;
+    }
 
     public Long getId() {
         return id;

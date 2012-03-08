@@ -120,6 +120,7 @@ public class BatchController {
         }
         bfo.setAmount(temp);
         Batch batch = batchService.read(id);
+        int oldAmount = batch.getAmount();
         batch.setStorageLocations(bfo.getStorageLocations());
         batch.setAmount(bfo.getAmount());
         batch.setSubstanceVolume(bfo.getSubstanceVolume());
@@ -131,7 +132,7 @@ public class BatchController {
         
         if(batch.getSubstance().getId() != bfo.getSubstance()){
             Substance newSubstance = (Substance) substanceService.read(bfo.getSubstance());
-            substance.setTotalAmount(substance.getTotalAmount() - batch.getAmount());
+            substance.setTotalAmount(substance.getTotalAmount() - oldAmount);
             newSubstance.setTotalAmount(newSubstance.getTotalAmount() + batch.getAmount());
             batch.setSubstance(newSubstance);
             substanceService.createOrUpdate(newSubstance);  

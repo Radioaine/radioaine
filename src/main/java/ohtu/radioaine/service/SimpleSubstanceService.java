@@ -44,9 +44,9 @@ public class SimpleSubstanceService implements SubstanceService<Substance> {
         return storageDao.read(id);
     }
     
-//    @Override
-//    @Transactional(readOnly = true)
-//    public List<Substance> listSpecificType(String type) {
-//        return storageDao.listSpecificType(type);
-//    }
+    @Override
+    @Transactional(readOnly = true)
+    public List<Substance> listSpecificType(String type) {
+        return storageDao.listSpecificType(type);
+    }
 }

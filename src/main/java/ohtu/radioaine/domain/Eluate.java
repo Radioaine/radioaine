@@ -4,6 +4,7 @@
 
 package ohtu.radioaine.domain;
 
+import java.sql.Timestamp;
 import java.util.List;
 import javax.persistence.*;
 
@@ -20,46 +21,63 @@ public class Eluate extends Product {
     private Long id;
     // Descripes radioactive strength
     private double strength;
-    private double activity;
-    private String creator;
+    private int volume;
+    private Timestamp timestamp;
+    private String signature;
     private String note;
-    private int[][] storageLocations = new int[10][2];
+    private int storageLocation;
     
-    @OneToOne
-    private Substance generator;
-    @OneToOne
-    private Substance solvent;
+    @OneToMany
+    private Batch generator;
+    @OneToMany
+    private Batch solvent;
 
-    public Substance getGenerator() {
+    public String getSignature() {
+        return signature;
+    }
+
+    public void setSignature(String signature) {
+        this.signature = signature;
+    }
+
+    public int getStorageLocation() {
+        return storageLocation;
+    }
+
+    public void setStorageLocation(int storageLocation) {
+        this.storageLocation = storageLocation;
+    }
+
+    public int getVolume() {
+        return volume;
+    }
+
+    public void setVolume(int volume) {
+        this.volume = volume;
+    }
+
+    public Batch getGenerator() {
         return generator;
     }
 
-    public void setGenerator(Substance generator) {
+    public void setGenerator(Batch generator) {
         this.generator = generator;
     }
 
-    public Substance getSolvent() {
+    public Batch getSolvent() {
         return solvent;
     }
 
-    public void setSolvent(Substance solvent) {
+    public void setSolvent(Batch solvent) {
         this.solvent = solvent;
     }
-    
-    public double getActivity() {
-        return activity;
+
+    public String getsignature() {
+        return signature;
     }
 
-    public void setActivity(double activity) {
-        this.activity = activity;
-    }
-
-    public String getCreator() {
-        return creator;
-    }
-
-    public void setCreator(String creator) {
-        this.creator = creator;
+    public void setsignature(String signature) {
+        this.signature = signature;
     }
 
     public String getNote() {
@@ -68,14 +86,6 @@ public class Eluate extends Product {
 
     public void setNote(String note) {
         this.note = note;
-    }
-
-    public int[][] getStorageLocations() {
-        return storageLocations;
-    }
-
-    public void setStorageLocations(int[][] storageLocations) {
-        this.storageLocations = storageLocations;
     }
 
     public long getId() {
@@ -92,6 +102,14 @@ public class Eluate extends Product {
 
     public void setStrength(double strength) {
         this.strength = strength;
+    }
+    
+    public Timestamp getTimestamp() {
+        return timestamp;
+    }
+
+    public void setTimestamp(Timestamp timestamp) {
+        this.timestamp = timestamp;
     }
 
 }

@@ -7,5 +7,5 @@ public interface SubstanceService<Substance> {
     public Substance read(int id);
     public List<Substance> list();
     public void delete(int esineId);
-//    public List<Substance> listSpecificType(String type);
+    public List<Substance> listSpecificType(String type);
 }

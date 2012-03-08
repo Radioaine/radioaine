@@ -76,6 +76,9 @@ public class TestDBController {
             substanceService.createOrUpdate(substance);
             
             batch.setSubstance(substance);
+            batch.setManufacturer(substance.getManufacturer());
+            batch.setSupplier(substance.getSupplier());
+            batch.setSignature("testi db");
             batch = batchService.createOrUpdate(batch);
             
             Event event = EventHandler.newBatchEvent(batch);

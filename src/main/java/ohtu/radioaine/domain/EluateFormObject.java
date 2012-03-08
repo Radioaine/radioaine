@@ -4,6 +4,8 @@
  */
 package ohtu.radioaine.domain;
 
+import java.util.List;
+
 /**
  *
  * @author jahyvone
@@ -18,6 +20,27 @@ public class EluateFormObject {
     private String signature;
     private String note;
     private int storageLocation;
+    
+    private List<Batch> generators;
+    private List<Batch> solvents;
+
+    public List<Batch> getGenerators() {
+        return generators;
+    }
+
+    public void setGenerators(List<Batch> generators) {
+        this.generators = generators;
+    }
+
+    public List<Batch> getSolvents() {
+        return solvents;
+    }
+
+    public void setSolvents(List<Batch> solvents) {
+        this.solvents = solvents;
+    }
+
+    
 
     public Long getId() {
         return id;

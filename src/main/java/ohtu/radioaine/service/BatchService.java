@@ -8,10 +8,10 @@ import ohtu.radioaine.domain.Batch;
  * @author rmjheino
  */
 public interface BatchService {
-    public Batch createOrUpdate(Batch esine);
+    public Batch createOrUpdate(Batch batch);
     public List<Batch> list();
     public Batch read(int id);
-    public void delete(int esineId);
+    public void delete(int id);
     public List<Batch> listSubstanceBatches(int id);
     public Batch read(String batchNumber, int substance);
 }

@@ -2,6 +2,8 @@ package ohtu.radioaine.controller;
 
 import java.awt.Event;
 import java.beans.EventHandler;
+import java.util.ArrayList;
+import java.util.List;
 import javax.validation.Valid;
 import ohtu.radioaine.domain.Batch;
 import ohtu.radioaine.domain.Eluate;
@@ -15,6 +17,7 @@ import ohtu.radioaine.service.EventService;
 import ohtu.radioaine.tools.Time;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 /**
@@ -41,16 +44,13 @@ public class EluateController {
         if (result.hasErrors()) {
             return "createEluate";
         }
-        Eluate eluate = createEluate(efo);
-        Eluate temp = EluateService.read(Eluate.getEluateNumber(), bfm.getSubstance());
-        if (temp == null) {
-            Eluate = EluateService.createOrUpdate(Eluate);
-            Event event = EventHandler.newEluateEvent(Eluate);
-            eventService.createOrUpdate(event);
-        } else {
-            Eluate = updateEluateSaato(temp.getId(), efo);
-        }
-        return "redirect:/Eluate/" + Eluate.getId();
+        Eluate temp = eluateService.createOrUpdate(createEluate(efo));
+        return "redirect:/Eluate/" + temp.getId();
+    }
+    
+    @RequestMapping("Eluate/{id}")
+    public String eluateView(@PathVariable Integer id) {
+        return "Eluate/"+id;
     }
     
     /**
@@ -68,10 +68,18 @@ public class EluateController {
         eluate.setNote(efo.getNote());
         eluate.setStorageLocation(efo.getStorageLocation());
         
-        Batch generator = (Batch) batchService.read(efo.getGenerator().getId());
-        Batch solvent = (Batch) batchService.read(efo.getSolvent().getId());
-        eluate.setGenerator(generator);
-        eluate.setSolvent(solvent);
+        List<Batch> generators = new ArrayList<Batch>();
+        List<Batch> solvents = new ArrayList<Batch>();
+        
+        for(Batch generator : efo.getGenerators()){
+            generators.add((Batch) batchService.read(generator.getId()));
+        }
+        for(Batch solvent : efo.getSolvents()){
+            generators.add((Batch) batchService.read(solvent.getId()));
+        }
+        
+        eluate.setGenerators(generators);
+        eluate.setSolvents(solvents);
         
         eluateService.createOrUpdate(eluate);
 

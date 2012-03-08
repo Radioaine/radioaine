@@ -9,12 +9,12 @@
 html { min-width: 600px; }
 
 body, div, td, th, h2, h3, h4 { /* redundant rules for bad browsers  */  
-   font-family: "Arial", sans-serif;
+    font-family: "Arial", sans-serif;
     /*font-size:    x-small;*/
     voice-family: "\"}\"";
-    voice-family: inherit;
-    /*font-size: small;*/
-    color: #333;
+voice-family: inherit;
+/*font-size: small;*/
+color: #333;
 }  
 .clearhack { display: inline; } /*Clears Box Model Hack in IE5*/
 
@@ -23,7 +23,7 @@ th {
 }
 
 select {
-   background-color: #FFF;
+    background-color: #FFF;
 }
 
 select.substance {
@@ -35,7 +35,7 @@ select.batch {
 }
 
 table {
-   border-collapse: collapse;
+    border-collapse: collapse;
 }
 
 table.noborder td {
@@ -43,11 +43,11 @@ table.noborder td {
 }
 
 td {
-   border: 1px solid black;
+    border: 1px solid black;
 }
 
 td.noborder {
-   border: none;
+    border: none;
 }
 
 td.name {
@@ -99,9 +99,15 @@ p.note {
 }
 
 #storageTable {
-	padding-left: 20px;
-	width: 500px;
-	margin-left: auto;
-	margin-right: auto;
-	text-align: left;
+    padding-left: 20px;
+    width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: left;
+}
+
+#headertimestamp {
+    font-size: 0.8em;
+    float: right;
+    padding-right: 15px;
 }

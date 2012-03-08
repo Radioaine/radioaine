@@ -1,16 +1,12 @@
 package ohtu.radioaine.controller;
 
-import java.util.ArrayList;
-import java.util.List;
 import ohtu.radioaine.domain.Batch;
 import ohtu.radioaine.domain.Event;
-import ohtu.radioaine.domain.Event3;
 import ohtu.radioaine.domain.Substance;
 import ohtu.radioaine.service.BatchService;
 import ohtu.radioaine.service.EventService;
 import ohtu.radioaine.service.SubstanceService;
 import ohtu.radioaine.tools.EventHandler;
-import ohtu.radioaine.tools.EventHandler3;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -32,7 +28,7 @@ public class TestDBController {
     @Autowired
     private EventService eventService;
     private String[][] substances = {{"Angiocis 20.12mg 5 inj.plo", "10", "12", "true", "false", "Lääkefirma Jamppa", "Magnum Medical Finland Oy", "0"},
-        {"Bridatec kittipakkaus 5 inj.plo", "3", "4", "false", "true", "Lääkefirma Perttilä", "Oy GE Healthcare Bio-Sciences Ab", "5", "0"},
+        {"Bridatec kittipakkaus 5 inj.plo", "3", "4", "false", "true", "Lääkefirma Perttilä", "Oy GE Healthcare Bio-Sciences Ab", "0"},
         {"Ceretec Exametazine Agent kittipakkaus 5 inj.plo", "3", "4", "false", "true", "Lääkefirma Perttilä", "Oy GE Healthcare Bio-Sciences Ab", "0"},
         {"Geneerinen generaattori", "3", "4", "true", "false", "Lääkefirma Perttilä", "Oy GE Healthcare Bio-Sciences Ab", "1"},
         {"Suolaliuos plo", "3", "4", "true", "false", "Lääkefirma Perttilä", "Oy GE Healthcare Bio-Sciences Ab", "2"}};
@@ -65,15 +61,23 @@ public class TestDBController {
         for (int i = 0; i < batches.length; i++) {
             Batch batch = new Batch();
             batch.setBatchNumber(batches[i][0]);
+            
             batch.setAmount(Integer.parseInt(batches[i][1]));
+            int[][] storageLocations = new int[10][2];
+            storageLocations[0][0] = 1;
+            storageLocations[0][1] = Integer.parseInt(batches[i][1]);
+            batch.setStorageLocations(storageLocations);
+            
             batch.setSubstanceVolume(Integer.parseInt(batches[i][2]));
             batch.setQualityCheck(Integer.parseInt(batches[i][3]));
             batch.setNote(batches[i][4]);
             Substance substance = (Substance) substanceService.read(1);
             substance.setTotalAmount(substance.getTotalAmount() + batch.getAmount());
             substanceService.createOrUpdate(substance);
+            
             batch.setSubstance(substance);
             batch = batchService.createOrUpdate(batch);
+            
             Event event = EventHandler.newBatchEvent(batch);
             eventService.createOrUpdate(event);
         }

@@ -111,24 +111,25 @@ public class BatchController {
     }
 
     private Batch updateBatch(Integer id, BatchFormObject bfo) {
-        int temp = 0;
-        for (int i = 0; i < bfo.getStorageLocations().length; i++) {
-            temp += bfo.getStorageLocations()[i][1];
-
-        }
-        bfo.setAmount(temp);
         Batch batch = batchService.read(id);
-        int oldAmount = batch.getAmount();
+        Substance substance = batch.getSubstance();
         batch.setStorageLocations(bfo.getStorageLocations());
-        batch.setAmount(bfo.getAmount());
         batch.setSubstanceVolume(bfo.getSubstanceVolume());
         batch.setBatchNumber(bfo.getBatchNumber());
         batch.setNote(bfo.getNote());
-
-
-        Substance substance = batch.getSubstance();
-
+        
+        int temp = 0;
+        for (int i = 0; i < bfo.getStorageLocations().length; i++) {
+            temp += bfo.getStorageLocations()[i][1];
+        }
+        bfo.setAmount(temp);
+        
+        
+        System.out.println("bfo.getAmount() : " + bfo.getAmount());
+       
         if (batch.getSubstance().getId() != bfo.getSubstance()) {
+            int oldAmount = batch.getAmount();
+            batch.setAmount(bfo.getAmount());
             Substance newSubstance = (Substance) substanceService.read(bfo.getSubstance());
             substance.setTotalAmount(substance.getTotalAmount() - oldAmount);
             newSubstance.setTotalAmount(newSubstance.getTotalAmount() + batch.getAmount());
@@ -136,6 +137,7 @@ public class BatchController {
             substanceService.createOrUpdate(newSubstance);
         } else {
             int amountChange = amountChange(batch, bfo);
+            batch.setAmount(batch.getAmount() + amountChange);
             substance.setTotalAmount(substance.getTotalAmount() + amountChange);
         }
         batch = batchService.createOrUpdate(batch);
@@ -149,6 +151,11 @@ public class BatchController {
 
     private int amountChange(Batch batch, BatchFormObject bfm) {
         int tempAmount;
+        for(int i = 0; i < bfm.getStorageLocations().length; i++)   {
+            System.out.println("kaapissa " + i + " " + bfm.getStorageLocations()[i][1] + " kpl");
+        }
+        System.out.println("bfm.getAmount() : " + bfm.getAmount());
+        System.out.println("batch.getAmount() : " + batch.getAmount());
         if (batch.getAmount() > bfm.getAmount()) {
             tempAmount = -(batch.getAmount() - bfm.getAmount());
         } else if (batch.getAmount() < bfm.getAmount()) {
@@ -156,6 +163,7 @@ public class BatchController {
         } else {
             tempAmount = 0;
         }
+        System.out.println("Palautuva tempAmount : " + tempAmount);
         return tempAmount;
     }
 

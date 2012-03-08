@@ -96,9 +96,7 @@
 
     <form:form commandName="batch" action="${pageContext.servletContext.contextPath}/updateBatch/${batch.id}" method="POST">
         Aine: <form:select path="substance">
-                <c:forEach var="substance" items="${substances}">
-                    <form:option value="${substance.id}">${substance.name}</form:option>
-                </c:forEach>
+                    <form:options items="${substances}" itemValue="id" itemLabel="name"/>
               </form:select><br/>
         Eränumero: <form:input path="batchNumber" type="text"/><form:errors path="batchNumber"/><br/>
         <!--Määrä: <form:input path="amount" type="number"/><form:errors path="amount"/><br/>-->
@@ -112,7 +110,6 @@
                         <form:select path="storageLocations[${status.index}][0]"> 
                             <c:forEach var="locations" items="${batch.storageLocations}" varStatus="i">
                                 <form:option value="${i.index+1}">Jääkaappi ${i.index+1}</form:option>
-                                <form:options items="${storageLocations[status.index][0]}" />
                             </c:forEach>
                         </form:select> <form:input path="storageLocations[${status.index}][1]" type="number"/> kappaletta<br/>
                     </c:when>

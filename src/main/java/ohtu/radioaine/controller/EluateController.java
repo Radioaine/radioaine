@@ -28,19 +28,7 @@ public class EluateController {
     
     @RequestMapping(value = "createEluate", method = RequestMethod.POST)
     public String newEluate(@Valid @ModelAttribute("eluate") EluateFormObject efo, BindingResult result) {
-        if (result.hasErrors()) {
-            return "createEluate";
-        }
-        Eluate eluate = createEluate(efo);
-        Eluate temp = EluateService.read(Eluate.getEluateNumber(), bfm.getSubstance());
-        if (temp == null) {
-            Eluate = EluateService.createOrUpdate(Eluate);
-            Event event = EventHandler.newEluateEvent(Eluate);
-            eventService.createOrUpdate(event);
-        } else {
-            Eluate = updateEluateSaato(temp.getId(), bfm);
-        }
-        return "redirect:/Eluate/" + Eluate.getId();
+       
         return "createEluate";
     }
     

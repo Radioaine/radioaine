@@ -5,6 +5,7 @@
 package ohtu.radioaine.domain;
 
 import java.sql.Timestamp;
+import java.util.List;
 import javax.persistence.*;
 
 
@@ -28,9 +29,9 @@ public class Eluate extends Product {
     private int storageLocation;
     
     @OneToMany
-    private Batch generator;
+    private List<Batch> generators;
     @OneToMany
-    private Batch solvent;
+    private List<Batch> solvents;
 
     public String getSignature() {
         return signature;
@@ -56,21 +57,25 @@ public class Eluate extends Product {
         this.volume = volume;
     }
 
-    public Batch getGenerator() {
-        return generator;
+    public List<Batch> getGenerators() {
+        return generators;
     }
 
-    public void setGenerator(Batch generator) {
-        this.generator = generator;
+    public void setGenerators(List<Batch> generators) {
+        this.generators = generators;
     }
 
-    public Batch getSolvent() {
-        return solvent;
+    
+
+    public List<Batch> getSolvents() {
+        return solvents;
     }
 
-    public void setSolvent(Batch solvent) {
-        this.solvent = solvent;
+    public void setSolvents(List<Batch> solvents) {
+        this.solvents = solvents;
     }
+
+    
 
     public String getsignature() {
         return signature;

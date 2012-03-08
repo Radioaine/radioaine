@@ -21,12 +21,16 @@ public class Batch implements Serializable {
     private String batchNumber;
     @Column
     private int amount;
+
+    
     @Column
     private int substanceVolume;
 
     //Products of this batch are made of this substance
     @ManyToOne
     private Substance substance;
+    @ManyToOne
+    private Eluate eluate;
     private Timestamp arrivalDate;
     private Timestamp expDate;
     private int qualityCheck;
@@ -38,7 +42,16 @@ public class Batch implements Serializable {
     private String note;
     private int storageLocationsCount = 10;
     private int[][] storageLocations = new int[storageLocationsCount][2];
+    
+    public Eluate getEluate() {
+        return eluate;
+    }
 
+    public void setEluate(Eluate eluate) {
+        this.eluate = eluate;
+    }
+    
+    
     public String getSignature() {
         return signature;
     }

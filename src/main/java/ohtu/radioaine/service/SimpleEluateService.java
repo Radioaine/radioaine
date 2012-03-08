@@ -5,52 +5,47 @@
 package ohtu.radioaine.service;
 
 import java.util.List;
-import ohtu.radioaine.database.EventDBDao;
-import ohtu.radioaine.domain.Event;
-import ohtu.radioaine.domain.Event3;
+import ohtu.radioaine.database.BatchDBDao;
+import ohtu.radioaine.database.EluateDBDao;
+import ohtu.radioaine.domain.Eluate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
  *
- * @author Richard Moneybags
+ * @author rmjheino
  */
 @Service
-public class SimpleEventService implements EventService {
-    
+public class SimpleEluateService implements EluateService {
+
     @Autowired
-    private EventDBDao storageDao;
-    
+    private EluateDBDao storageDao;
+
     @Override
     @Transactional
-    public Event createOrUpdate(Event event) {
-        return storageDao.createOrUpdate(event);
+    public Eluate createOrUpdate(Eluate eluate) {
+        return storageDao.createOrUpdate(eluate);
     }
 
     @Override
     @Transactional
-    public List<Event> list() {
+    public List<Eluate> list() {
         return storageDao.list();
     }
 
     @Override
     @Transactional
-    public Event read(int id) {
+    public Eluate read(int id) {
         return storageDao.read(id);
     }
 
     @Override
     @Transactional
     public void delete(int id) {
-        Event e = storageDao.read(id);
+        Eluate e = storageDao.read(id);
         if (e != null) {
             storageDao.delete(e);
         }
-    }
-
-    @Override
-    public List<Event> list(String arg) {
-        return storageDao.list(arg);
     }
 }

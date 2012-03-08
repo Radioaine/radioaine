@@ -15,44 +15,44 @@ import ohtu.radioaine.domain.Batch;
 public class SimpleBatchService implements BatchService {
 
     @Autowired
-    private BatchDBDao varastoDao;
+    private BatchDBDao storageDao;
 
     @Override
     @Transactional
     public Batch createOrUpdate(Batch batch) {
-        return varastoDao.createOrUpdate(batch);
+        return storageDao.createOrUpdate(batch);
     }
 
     @Override
     @Transactional(readOnly = true)
     public List<Batch> list() {
-        return varastoDao.list();
+        return storageDao.list();
     }
     
     @Override
     @Transactional(readOnly = true)
     public Batch read(int id) {
-        return varastoDao.read(id);
+        return storageDao.read(id);
     }
 
     @Override
     @Transactional
     public void delete(int batchId) {
-        Batch e = varastoDao.read(batchId);
+        Batch e = storageDao.read(batchId);
         if (e != null) {
-            varastoDao.delete(e);
+            storageDao.delete(e);
         }
     }
     
     @Override
     @Transactional(readOnly = true)
     public List<Batch> listSubstanceBatches(int id) {
-        return varastoDao.listSubstanceBatches(id);
+        return storageDao.listSubstanceBatches(id);
     }
 
     @Override
     @Transactional
     public Batch read(String batchNumber, int substance) {
-        return varastoDao.read(batchNumber, substance);
+        return storageDao.read(batchNumber, substance);
     }
 }

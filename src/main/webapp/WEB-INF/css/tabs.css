@@ -95,6 +95,13 @@
     border-bottom: none;
 }
 
+#header ul#primary a#current {
+    background: #fdfdf0;
+    color: #2D562F;
+    border: 1px solid #666;
+    border-bottom: none;
+}
+
 #header ul#primary a:hover {
     text-decoration:underline;
     margin-top: 0;

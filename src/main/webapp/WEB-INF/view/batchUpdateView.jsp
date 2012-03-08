@@ -18,7 +18,7 @@
 </script>
 <script type="text/javascript" src="script/ui.datepicker-fi.js"></script>
 
-<div id="sisalto">
+<div id="contents">
     <h1>Erä ${batch.batchNumber}</h1>
     <p><b>Vanhat tiedot</b></p>
     <table id="reunaton">

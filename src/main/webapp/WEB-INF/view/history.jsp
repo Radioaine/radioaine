@@ -1,7 +1,7 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
-<div id="sisalto">
+<div id="contents">
     <h1>Tapahtumat</h1>
     <form action="${pageContext.servletContext.contextPath}/seekModify">
         <input type="submit" value="Näytä kaikki muutokset">

@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Radioaine</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" type="text/css" href="basic.css" />
+    <link rel="stylesheet" type="text/css" href="tabs.css" />
+</head>
+
+<body>
+    <h1><a href="frontpage.html">Radioaine</a></h1>
+    <div id="header">
+    <ul id="primary">
+        <li><a href="frontpage.html">VALMISTUS</a></li>
+        <li><a href="storage.html" class="selected">VARASTO</a></li>
+        <li><a href="admin.html">HALLINTA</a></li>
+    </ul>
+    </div>
+    <div id="main">
+        <div id="contents">
+                   
+            <h2>Angiocis 20.12mg</h2>
+            <br/>
+           
+            <table class="noborder">
+               
+                <tr>
+                    <td class="name">Geneerinen nimi</td>
+                    <td>Teknetium(99mTc)-pyrofosfaatti</td>
+                </tr>
+
+                <tr>
+                    <td>Valmistaja</td>
+                    <td>Orion Oyj</td>
+                </tr>
+                       
+                <tr>
+                    <td>Tukkuliike</td>
+                    <td>Magnum Medical Finland Oy</td>
+                </tr>
+               
+                <tr>
+                    <td>Tilavuus</td>
+                    <td>10 ml</td>
+                </tr>
+               
+                <tr>
+                    <td>Vahvuus</td>
+                    <td>13,2</td>
+                </tr>
+                   
+            </table>
+           
+            <br/>
+           
+            <table class="listing">
+           
+                <tr>
+                    <th class="amount">Lkm</th>
+                    <th class="batchnumber">Eränumero</th>
+                    <th class="oldest">Vanhenemispäivä</th>
+                    <th class="quality">Laadunvarmistus</th>
+                    <th class="wide">Huomautuksia</th>
+                </tr>
+               
+               
+                <tr class="blue" id="1">
+                    <td class="center">3</td>
+                    <td><a href="batch.html">99A89796</a></td>
+                    <td>5.3.2012</td>
+                    <td id="qualityCheck">Hyväksytty</td>
+                    <td>1 pullo lainattu Jorviin</td>
+                </tr>
+       
+                <tr id="2">
+                    <td class="center">3</td>
+                    <td><a href="batch.html">99AADD22</a></td>
+                    <td>5.4.2012</td>
+                    <td id="qualityCheck">Hyväksytty</td>
+                    <td></td>
+                </tr>
+       
+                <tr class="red" id="3">
+                    <td class="center">4</td>
+                    <td><a href="batch.html">AAD175</a></td>
+                    <td>16.4.2012</td>
+                    <td id="qualityCheck">Hylätty</td>
+                    <td></td>
+                </tr>
+               
+                <tr class="yellow" id="4">
+                    <td class="center">8</td>
+                    <td><a href="batch.html">123445EE</a></td>
+                    <td>3.5.2012</td>
+                    <td id="qualityCheck">
+                       <form action="/radioaine/doCheck/1+1" method="POST">
+                           <select name="qualityCheck">
+                               <option value="1">Hyväksytty</option>
+                               <option value="2">Hylätty</option>
+                           </select>
+                           <input type="submit" value="Kirjaa tulos">
+                       </form>
+                    </td>
+                    <td>1 pullo käytetty ilman laadunvarmistusta 17.2.2012</td>
+                </tr>
+       
+                <tr class="yellow" id="5">
+                    <td class="center">3</td>
+                    <td><a href="batch.html">99AAD345</a></td>
+                    <td>5.6.2012</td>
+                    <td id="qualityCheck">
+                       <form action="/radioaine/doCheck/1+1" method="POST">
+                           <select name="qualityCheck">
+                               <option value="1">Hyväksytty</option>
+                               <option value="2">Hylätty</option>
+                           </select>
+                           <input type="submit" value="Kirjaa tulos">
+                       </form>
+                    </td>
+                    <td></td>
+                </tr>
+                  
+            </table>
+
+           
+       
+   
+        </div>
+    </div>
+</body>
+</html>
+

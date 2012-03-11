@@ -1,0 +1,158 @@
+<!--<!DOCTYPE html>
+<html>
+   <head>
+       <title>Radioaine</title>
+       <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+       <link rel="stylesheet" type="text/css" href="basic.css" />
+       <link rel="stylesheet" type="text/css" href="tabs.css" />
+   </head>
+
+   <body>
+       <h1><a href="frontpage.html">Radioaine</a></h1>
+       <div id="header">
+           <ul id="primary">
+               <li><a href="frontpage.html">VALMISTUS</a></li>
+               <li><a href="storage.html" class="selected">VARASTO</a></li>
+               <li><a href="admin.html">HALLINTA</a></li>
+           </ul>
+       </div>
+       <div id="main">
+           <div id="contents">
+           
+           
+           
+           
+           
+           
+           <h2>Lisää lähetys</h2>
+           
+           <p></p>
+           
+                <form id="batch" action="batch" method="POST">
+               
+                    <table class="noborder">
+                   
+                        <tr>
+                            <td class="name">Tuote</td>
+                            <td class="substance">
+                                <select class="substance" name="substance">
+                                        <option>Valitse</option>
+                                    <optgroup label="Kitit">
+                                        <option>Angiocis 20.12mg</option>
+                                        <option>Bridatec</option>
+                                        <option>Ceretec Exametazine Agent</option>
+                                        <option>Ceretec Stabilised</option>
+                                        <option>Myoview</option>
+                                        <option>Nanocoll</option>
+                                        <option>Nephromag 0.2mg</option>
+                                        <option>Octreoscan (In-111)</option>
+                                        <option>Pentacis</option>
+                                        <option>Technescan HDP</option>
+                                        <option>Vasculocis HSA</option>
+                                        <option>Technescan DMSA</option>
+                                        <option>Technescan Sestamibi</option>
+                                        <option>Technescan LyoMAA</option>
+                                    </optgroup>
+                                    <optgroup label="Generaattorit">
+                                        <option>Teknetiumgeneraattori 21,5 GBq (581 mCi) Ultra Technekow FM</option>
+                                        <option>Teknetiumgeneraattori 24 GBq (649mCi)</option>
+                                        <option>Teknetiumgeneraattori 30 GBq (811mCi)</option>
+                                    </optgroup>
+                                    <optgroup label="Muut">
+                                        <option>NaCl 30 ml</option>
+                                        <option>NaCl 1000 ml</option>
+                                        <option>JokuValmisRadiolääke</option>
+                                    </optgroup>
+                                </select></td>
+                            <td>Pitääkö tässä pystyä lisäämään kategoriaan "Muu" tuote, jota ei ole lisätty järjestelmään aineen lisäämisen kautta?</td>
+                        </tr>
+                   
+                        <tr>
+                            <td>Eränumero</td>
+                            <td><input id="batchNumber" name="batchNumber" type="text" value=""/></td>
+                            <td></td>
+                        </tr>
+                   
+                        <tr>
+                            <td>Saapumispäivä</td>
+                            <td><input id="arrivalDate" name="arrivalDate" type="text" size="8" value="3.3.2012"/></td>
+                            <td></td>
+                        </tr>
+                     
+                        <tr>
+                            <td>Vanhenemispäivä</td>
+                            <td><input id="expDate" name="expDate" type="text" size="8" value=""/></td> <!--Jos syötetty eränumero on jo kannassa, tähän haetaan erän vanhenemispäivä ja disabloidaan kenttä-->
+                            <td></td>
+                           
+                        </tr>
+                       
+                        <tr>
+                            <td>Sijainti</td>
+                            <td>
+                                <select id="storageLocations00" name="storageLocations[0][0]">
+                                    <option value="0">Valitse</option>
+                                    <option value="1" selected="selected">Jääkaappi 1</option>
+                                    <option value="2">Jääkaappi 2</option>
+                                    <option value="3">Jääkaappi 3</option>
+                                    <option value="4">Jääkaappi 4</option>
+                                    <option value="5">Jääkaappi 5</option>
+                                    <option value="6">Jääkaappi 6</option>
+                                    <option value="7">Jääkaappi 7</option>
+                                </select> &nbsp;
+                                <input id="storageLocations01" name="storageLocations[0][1]" type="number" size="3" value="2"/> kpl
+                            </td>
+                            <td></td>
+                        </tr>
+                       
+                        <tr>
+                            <td></td>
+                            <td>
+                                <select>
+                                    <option value="0">Valitse</option>
+                                    <option value="1">Jääkaappi 1</option>
+                                    <option value="2">Jääkaappi 2</option>
+                                    <option value="3">Jääkaappi 3</option>
+                                    <option value="4">Jääkaappi 4</option>
+                                    <option value="5">Jääkaappi 5</option>
+                                    <option value="6">Jääkaappi 6</option>
+                                    <option value="7">Jääkaappi 7</option>
+                                </select> &nbsp;
+                                <input id="storageLocations01" name="storageLocations[0][1]" type="number" size="3" value="3"/> kpl
+                            </td>
+                            <td><button type="button" onClick="addStorage(1, 10)">Lisää varastopaikka</button></td>
+                        </tr>
+                       
+                        <tr>
+                            <td>Huomautuksia</td>
+                            <td colspan=2><input type="text" name="comments" size="70" /></td>
+                        </tr>
+                   
+                    </table>
+                   
+                    <br/>
+
+                    <table class="noborder">
+                        <tr>
+                            <td class="name">Nimikirjaimet</td>
+                            <td><input required type="text" name="initials" size="6" /></td>
+                        </tr>
+                    </table>
+
+                    <br/>
+               
+                    <input type="submit" value="Tallenna" /> &nbsp; &nbsp;<input type="submit" value="Peruuta"/><!-- disabled="disabled"-->
+     
+                </form>
+           
+
+   
+
+       <!-- Määrä: <input id="amount" name="amount" type="number" value="0"/><br/>-->
+
+
+
+       </div>
+       </div>
+   </body>
+</html>
+

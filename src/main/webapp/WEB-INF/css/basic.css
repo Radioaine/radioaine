@@ -11,10 +11,10 @@ html { min-width: 600px; }
 body, div, td, th, h2, h3, h4 { /* redundant rules for bad browsers  */  
     font-family: "Arial", sans-serif;
     /*font-size:    x-small;*/
-    voice-family: "\"}\"";
-voice-family: inherit;
-/*font-size: small;*/
-color: #333;
+    voice-family: "\"}\""";
+    voice-family: inherit;
+    /*font-size: small;*/
+    color: #333;
 }  
 .clearhack { display: inline; } /*Clears Box Model Hack in IE5*/
 
@@ -42,17 +42,80 @@ table.noborder td {
     border: none;
 }
 
-td {
-    border: 1px solid black;
+table.listing {
+    border: 0px;
+    margin: none;
 }
 
-td.noborder {
+table.listing td {
+    background-color: #FFF;
+    padding: 3px;
+}
+
+table.listing th {
+    padding: 3px;
+}
+
+td {
+    border: 1px solid #333;
+}
+
+table.eluate {
+    background-color: #FFF;
+}
+
+td.noborder, th.noborder {
     border: none;
 }
 
 td.name {
-    width: 120px;
+    width: 140px;
     border: none;
+}
+
+th.amount {
+    width: 45px;
+}
+
+td.center {
+    text-align: center;
+    width: 45px;
+}
+
+.oldest{
+    width: 150px;
+}
+
+.substance {
+    width: 260px;
+}
+
+.warnigs {
+    width: 200px;
+}
+
+.wide {
+    width: 500px;
+}
+
+.batchnumber {
+    width: 100px;
+}
+
+.quality {
+    width: 195px;
+}
+
+tr.blue td {
+    background-color: #BAC7FF;
+}
+
+tr.yellow td {
+    background-color: #FFF7A0;
+}
+
+tr.red td {
+    background-color: #FFA1A1;
 }
 
 body {
@@ -62,9 +125,12 @@ body {
     margin: 0;
 }
 
-a { color: #06C; }
-a:hover { color: #333; }
-a:active { color: #000; }
+a {
+    text-decoration:underline;
+    color: #333;
+}
+a:hover { color: #000000; }
+a:active { color: #000000; }
 
 p { line-height: 140%; }
 

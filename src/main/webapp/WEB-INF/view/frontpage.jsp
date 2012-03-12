@@ -17,6 +17,9 @@
 <form method="link" action="createEluate">
     <input type="submit" value="LUO ELUAATTI">
 </form>
+<form method="link" action="createRadioMedicine">
+    <input type="submit" value="LUO RADIOLÄÄKE">
+</form>
 </p>
 <p>
 <table class="listing">
@@ -44,11 +47,6 @@
         <td>11 ml</td>
         <td>1. krs</td>
         <td>MK</td>
-        <th class="noborder">
-    <form method="link" action="createRadioMedicine.html">
-        <input type="submit" value="Luo radiolääke">
-    </form>
-    </th>
     </tr>
     <tr>
         <td class="noborder"></td>
@@ -86,11 +84,6 @@
         <td>10 ml</td>
         <td>2. krs</td>
         <td>RHN</td>
-        <th class="noborder">
-    <form method="link" action="createRadioMedicine.html">
-        <input type="submit" value="Luo radiolääke">
-    </form>
-    </th>
     </tr>          
 </table>
 </p>

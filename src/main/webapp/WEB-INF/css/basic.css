@@ -164,13 +164,13 @@ p.note {
     margin-top: 0;
 }
 
-#storageTable {
+/*#storageTable {
     padding-left: 20px;
     width: 500px;
     margin-left: auto;
     margin-right: auto;
     text-align: left;
-}
+}*/
 
 #headertimestamp {
     font-size: 0.8em;

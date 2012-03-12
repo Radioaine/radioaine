@@ -19,11 +19,6 @@
        <div id="main">
            <div id="contents">
            
-           
-           
-           
-           
-           
            <h2>Lisää lähetys</h2>
            
            <p></p>
@@ -110,7 +105,7 @@
                                 <select>
                                     <option value="0">Valitse</option>
                                     <option value="1">Jääkaappi 1</option>
-                                    <option value="2">Jääkaappi 2</option>
+                                    <option value="2" selected="selected">Jääkaappi 2</option>
                                     <option value="3">Jääkaappi 3</option>
                                     <option value="4">Jääkaappi 4</option>
                                     <option value="5">Jääkaappi 5</option>
@@ -120,6 +115,11 @@
                                 <input id="storageLocations01" name="storageLocations[0][1]" type="number" size="3" value="3"/> kpl
                             </td>
                             <td><button type="button" onClick="addStorage(1, 10)">Lisää varastopaikka</button></td>
+                        </tr>
+                       
+                        <tr>
+                            <td>Määrä yhteensä</td>
+                            <td><input type="number" size="3" value="5" disabled="disabled"/> kpl</td>
                         </tr>
                        
                         <tr>
@@ -155,4 +155,3 @@
        </div>
    </body>
 </html>
-

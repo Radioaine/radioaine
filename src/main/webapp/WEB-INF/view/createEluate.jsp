@@ -36,6 +36,9 @@
 
         <tr>
             <td>Valitse aine</td>
+            <td></td>
+            <td></td>
+            <td></td>
         </tr>
 
         <tr>
@@ -59,7 +62,8 @@
                     <option>Erä 1234568</option>
                     <option>Erä 1234569</option>
                 </select>
-            </td>       
+            </td>   
+            <td></td>
         </tr>
 
         <tr>
@@ -90,9 +94,6 @@
         </tr>
 
     </table>
-</p>
-
-<p>
 
 <form action="frontpage.html" method="post">
     <table class="noborder">
@@ -119,6 +120,7 @@
                 </select>
                 &nbsp;
             </td>
+            <td></td>
         </tr>
 
         <tr>
@@ -127,6 +129,7 @@
                 <input type="text" name="volume" size="5" />
                 <input type="text" name="volumeUnit" size="4"  value="ml"/>
             </td>
+            <td></td>
         </tr>
 
     </table>
@@ -142,11 +145,13 @@
                     <option>2. krs jääkaappi</option>
                 </select>
             </td>
+            <td></td>
         </tr>
 
         <tr>
             <td>Huomautuksia</td>
             <td><input type="text" name="comments" size="70" /></td>
+            <td></td>
         </tr>
 
     </table>
@@ -166,6 +171,6 @@
 
 </form>
 
-</p>
+
 </div>
 <%@include file="footer.jsp" %>        

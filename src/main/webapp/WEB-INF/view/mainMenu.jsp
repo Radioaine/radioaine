@@ -12,5 +12,5 @@
         <li><a href="<c:out value="${pageContext.servletContext.contextPath}" />/storage">VARASTO</a></li>
         <li><a href="<c:out value="${pageContext.servletContext.contextPath}" />/admin">HALLINTA</a></li>
     </ul>
-    <span id="headertimestamp">TIMESTAMP</div>
+    <span id="headertimestamp">TIMESTAMP
 </div>

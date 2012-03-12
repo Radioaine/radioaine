@@ -4,7 +4,7 @@
 <%@include file="header.jsp" %>
 <div id="contents">
 
-    <h1>Hallitse aineita</h1>
+    <h2>Hallitse aineita</h2>
     <a href="<c:out value="${pageContext.servletContext.contextPath}" />/addSubstance">Lisää uusi lääkeaine</a><br />
     <a href="<c:out value="${pageContext.servletContext.contextPath}" />/substanceView">Muokkaa lääkeaineiden tietoja</a>
 </div>

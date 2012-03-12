@@ -6,15 +6,20 @@
 <div id="contents">
     <form method="link" action="addBatch">
         <input type="submit" value="Lisää lähetys">
-    </form><br>
-
-    <h1>Kitit</h1>
-    <table class="storageTable">
+    </form>
+    <br/>
+    <h2>Kitit</h2>
+    <br/>
+    <table class="listing">
+        <col width="200px"/>
+        <col width="100px"/>
+        <col width="100px"/>
+        <col width="100px"/>
         <tr>
-            <th>Aine</th>
-            <th class="maara">Määrä</th>
-            <th>Vanhimman päiväys</th>
-            <th>Huom</th>
+            <th class="amount">Lkm</th>
+            <th class="substance">Tuotenimi</th>
+            <th class="oldest">Vanhenemassa</th>
+            <th class="warnigs">Varoitukset</th>
         </tr>
 
         <c:forEach var="substance" items="${substances}">
@@ -29,14 +34,19 @@
         </c:forEach>
 
     </table>
+    <br/>
 
-    <h1>Generaattorit</h1>
-    <table class="storageTable">
+    <h2>Generaattorit</h2>
+    <table class="listing">
+        <col width="200px"/>
+        <col width="100px"/>
+        <col width="100px"/>
+        <col width="100px"/>
         <tr>
-            <th>Aine</th>
-            <th class="maara">Määrä</th>
-            <th>Vanhimman päiväys</th>
-            <th>Huom</th>
+            <th class="amount">Lkm</th>
+            <th class="substance">Tuotenimi</th>
+            <th class="oldest">Vanhenemassa</th>
+            <th class="warnigs">Varoitukset</th>
         </tr>
 
         <c:forEach var="substance" items="${substances}">
@@ -50,14 +60,20 @@
             </c:if>
         </c:forEach>
     </table>
+    <br/>
 
-    <h1>Muut</h1>      
-    <table class="storageTable">
+    <h2>Muut</h2>   
+    <br/>
+    <table class="listing">
+        <col width="200px"/>
+        <col width="100px"/>
+        <col width="100px"/>
+        <col width="100px"/>
         <tr>
-            <th>Aine</th>
-            <th class="maara">Määrä</th>
-            <th>Vanhimman päiväys</th>
-            <th>Huom</th>
+            <th class="amount">Lkm</th>
+            <th class="substance">Tuotenimi</th>
+            <th class="oldest">Vanhenemassa</th>
+            <th class="warnigs">Varoitukset</th>
         </tr>
 
         <c:forEach var="substance" items="${substances}">

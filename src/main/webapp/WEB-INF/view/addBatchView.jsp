@@ -34,12 +34,6 @@
             <tr>
                 <td>Eränumero</td>
                 <td><form:input path="batchNumber" type="text"/><form:errors path="batchNumber"/></td>
-                
-            </tr>
-            <tr>
-                <td>Määrä</td>
-                <td><form:input path="amount" type="number"/><form:errors path="amount"/></td>
-                <td></td>
             </tr>
             <tr>
                 <td>Saapumispäivä</td>
@@ -60,6 +54,11 @@
                         </form:select> <form:input path="storageLocations[0][1]" type="number"/> kpl<br/> 
                     </div></td>
                 <td><button type="button" onClick="addStorage(1, ${batch.storageLocationsCount})">Lisää varastopaikka</button></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>Määrä yhteensä</td>
+                <td><form:input path="amount" type="number"/><form:errors path="amount"/>kpl</td>
                 <td></td>
             </tr>
             <tr>

@@ -177,3 +177,15 @@ p.note {
     float: right;
     padding-right: 15px;
 }
+
+#hours, #minutes {
+    width: 50px;
+}
+
+#klo {
+    padding-left: 90px;
+}
+
+#pvm {
+    padding-left: 100px;
+}

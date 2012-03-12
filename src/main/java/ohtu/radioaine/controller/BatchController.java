@@ -18,7 +18,6 @@ import ohtu.radioaine.service.BatchService;
 import ohtu.radioaine.service.EventService;
 import ohtu.radioaine.service.SubstanceService;
 import ohtu.radioaine.tools.EventHandler;
-import ohtu.radioaine.tools.EventHandler3;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -72,18 +71,18 @@ public class BatchController {
     }
 
     @RequestMapping(value = "batch", method = RequestMethod.POST)
-    public String addBatch(@Valid @ModelAttribute("batch") BatchFormObject bfm, BindingResult result) {
+    public String addBatch(@Valid @ModelAttribute("batch") BatchFormObject bfo, BindingResult result) {
         if (result.hasErrors()) {
             return "addBatchView";
         }
-        Batch batch = createBatch(bfm);
-        Batch temp = batchService.read(batch.getBatchNumber(), bfm.getSubstance());
+        Batch batch = createBatch(bfo);
+        Batch temp = batchService.read(batch.getBatchNumber(), bfo.getSubstance());
         if (temp == null) {
             batch = batchService.createOrUpdate(batch);
             Event event = EventHandler.newBatchEvent(batch);
             eventService.createOrUpdate(event);
         } else {
-            batch = updateBatchSaato(temp.getId(), bfm);
+            batch = updateBatchSaato(temp.getId(), bfo);
         }
         return "redirect:/batch/" + batch.getId();
     }
@@ -117,16 +116,16 @@ public class BatchController {
         batch.setSubstanceVolume(bfo.getSubstanceVolume());
         batch.setBatchNumber(bfo.getBatchNumber());
         batch.setNote(bfo.getNote());
-        
+
         int temp = 0;
         for (int i = 0; i < bfo.getStorageLocations().length; i++) {
             temp += bfo.getStorageLocations()[i][1];
         }
         bfo.setAmount(temp);
-        
-        
+
+
         System.out.println("bfo.getAmount() : " + bfo.getAmount());
-       
+
         if (batch.getSubstance().getId() != bfo.getSubstance()) {
             int oldAmount = batch.getAmount();
             batch.setAmount(bfo.getAmount());
@@ -151,7 +150,7 @@ public class BatchController {
 
     private int amountChange(Batch batch, BatchFormObject bfm) {
         int tempAmount;
-        for(int i = 0; i < bfm.getStorageLocations().length; i++)   {
+        for (int i = 0; i < bfm.getStorageLocations().length; i++) {
             System.out.println("kaapissa " + i + " " + bfm.getStorageLocations()[i][1] + " kpl");
         }
         System.out.println("bfm.getAmount() : " + bfm.getAmount());

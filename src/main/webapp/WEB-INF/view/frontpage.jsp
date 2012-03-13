@@ -14,12 +14,22 @@
     </h2>
 </p>
 <p>
-<form method="link" action="createEluate">
-    <input type="submit" value="LUO ELUAATTI">
-</form>
-<form method="link" action="createRadioMedicine">
-    <input type="submit" value="LUO RADIOLÄÄKE">
-</form>
+<table class="noborder">
+    <tr>
+        <td class="elbutton">
+            <form method="link" action="createEluate">
+                <input type="submit" value="Kirjaa eluaatti">
+            </form>
+        </td>
+        <td>
+           <form method="link" action="createRadioMedicine">
+                <input type="submit" value="Kirjaa radiolääke">
+            </form> 
+        </td>
+    </tr>
+</table>
+
+
 </p>
 <p>
 <table class="listing">

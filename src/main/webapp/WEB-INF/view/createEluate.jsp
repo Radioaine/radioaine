@@ -14,8 +14,6 @@
 <div id="contents">
     <h2>Uusi eluaatti</h2>
 
-
-
     <form:form commandName="eluate" action="createEluate" method="POST">
         <table class="noborder">
             <tr>
@@ -63,7 +61,7 @@
             </tr>
             <tr>
                 <td>Aktiivisuus:</td>
-                <td><form:input path="volume" type="number"/><form:errors path="volume"/> GBq</td>
+                <td><form:input path="strength" type="text"/><form:errors path="volume"/>GBq</td>
             </tr>
             <tr>
                 <td>Huomautuksia:</td>

@@ -87,7 +87,6 @@
             </c:if>
         </c:forEach>
     </table>
-    <br/>
-    <a href="generateTestDB">Generoi testitietokanta</a>
+
 </div>
 <%@include file="footer.jsp" %>

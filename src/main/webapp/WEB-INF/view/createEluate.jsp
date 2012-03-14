@@ -2,9 +2,9 @@
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<script type="text/javascript" src="<c:url value="/script/ui.datepicker-fi.js" />"></script>
-<%@include file="header.jsp" %>
 
+<%@include file="header.jsp" %>
+<script type="text/javascript" src="<c:url value="/script/ui.datepicker-fi.js" />"></script>
 <script>
     $(function() {
         $( "#eluatingtime" ).datepicker();

@@ -3,7 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
-<%@include file="header.jsp" %>
+<%@include file="headerstorage.jsp" %>
 
 <div id="contents">
     <h1>Erä ${batch.batchNumber}</h1>

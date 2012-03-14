@@ -3,7 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
-<%@include file="header.jsp" %>
+<%@include file="headerfront.jsp" %>
 
 <div id="contents">
     <h2>Uusi radiolääke</h2>

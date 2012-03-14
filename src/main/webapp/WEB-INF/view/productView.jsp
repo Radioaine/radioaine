@@ -1,7 +1,7 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
-<%@include file="header.jsp" %>
+<%@include file="headerstorage.jsp" %>
 
 <div id="contents">
     

@@ -2,7 +2,7 @@
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <script type="text/javascript" src="<c:url value="/css/script.js" />"></script>
-<%@include file="header.jsp" %>
+<%@include file="headeradmin.jsp" %>
 
 <div id="contents">
     <h1>${substance.name}</h1>

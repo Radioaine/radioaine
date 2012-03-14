@@ -4,6 +4,7 @@
  */
 package ohtu.radioaine.domain;
 
+import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.List;
 import javax.persistence.*;
@@ -11,10 +12,11 @@ import javax.persistence.*;
 /**
  * Entity for radiomedicine. Extends Product. Used to create table RadioMedicine
  * to DB
+ *
  * @author rmjheino
  */
 @Entity
-public class RadioMedicine extends Product {
+public class RadioMedicine implements Serializable{
 
     @Id
     @GeneratedValue(strategy = GenerationType.TABLE)
@@ -22,19 +24,26 @@ public class RadioMedicine extends Product {
     private Long id;
     @Column
     private double strength;
+    @Column
     private int volume;
-    private Timestamp timestamp;
+    @Column
+    private Timestamp date;
+    @Column
     private String signature;
+    @Column
     private String note;
+    @Column
     private int storageLocation;
-    
+    @Column(nullable = false)
+    private String name;
+    @Column
+    private String preparer;
     @OneToMany
     private List<Eluate> eluates;
     @OneToMany
     private List<Batch> solvents;
     @OneToMany
     private List<Batch> kits;
-    
 
     public List<Eluate> getEluates() {
         return eluates;
@@ -93,11 +102,11 @@ public class RadioMedicine extends Product {
     }
 
     public Timestamp getTimestamp() {
-        return timestamp;
+        return date;
     }
 
     public void setTimestamp(Timestamp timestamp) {
-        this.timestamp = timestamp;
+        this.date = timestamp;
     }
 
     public long getId() {
@@ -115,7 +124,6 @@ public class RadioMedicine extends Product {
     public void setVolume(int volume) {
         this.volume = volume;
     }
-
 //    public List<Eluate> getEluate() {
 //        return eluate;
 //    }

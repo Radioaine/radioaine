@@ -49,13 +49,13 @@ public class EluateController {
         if (result.hasErrors()) {
             return "createEluate";
         }
-        Eluate temp = eluateService.createOrUpdate(createEluate(efo));
-        return "redirect:/Eluate/" + temp.getId();
+        Eluate newEluate = eluateService.createOrUpdate(createEluate(efo));
+        return "redirect:/Eluate/" + newEluate.getId();
     }
 
     @RequestMapping("Eluate/{id}")
     public String eluateView(@PathVariable Integer id) {
-        return "Eluate/" + id;
+        return "frontpage";
     }
 
     /**
@@ -87,9 +87,6 @@ public class EluateController {
 
         eluate.setGenerators(generators);
         eluate.setSolvents(solvents);
-
-        eluateService.createOrUpdate(eluate);
-
         return eluate;
     }
 }

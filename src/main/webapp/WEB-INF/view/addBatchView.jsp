@@ -21,7 +21,7 @@
     <form:form commandName="batch" action="batch" method="POST">
         <table class="noborder">
             <tr>
-                <td>Tuote</td>
+                <td class="name">Tuote</td>
                 <td>
                     <form:select path="substance">
                         <c:forEach var="substance" items="${substances}">
@@ -46,36 +46,43 @@
                 <td></td>
             </tr>
             <tr>
-                <td>Sijainti</td>
+                <td valign="top">Sijainti</td>
                 <td><div id="varastot"><form:select path="storageLocations[0][0]">
                             <c:forEach var="locations" items="${batch.storageLocations}" varStatus="i">
                                 <form:option value="${i.index+1}">Jääkaappi ${i.index+1}</form:option>
                             </c:forEach>
-                        </form:select> <form:input path="storageLocations[0][1]" type="number"/> kpl<br/> 
-                    </div></td>
-                <td><button type="button" onClick="addStorage(1, ${batch.storageLocationsCount})">Lisää varastopaikka</button></td>
+                        </form:select> <form:input path="storageLocations[0][1]" type="number" size="3"/> kpl<br/> 
+                    </div>
+                </td>
+                <td valign="bottom"><button type="button" onClick="addStorage(1, ${batch.storageLocationsCount})">Lisää varastopaikka</button></td>
                 <td></td>
             </tr>
             <tr>
                 <td>Määrä yhteensä</td>
-                <td><form:input path="amount" type="number"/><form:errors path="amount"/>kpl</td>
+                <td><form:input path="amount" type="number" size="3" /><form:errors path="amount"/> kpl</td>
                 <td></td>
             </tr>
             <tr>
-                <td>Huomioita</td>
-                <td><form:textarea path="note" type="text"/><form:errors path="note"/></td>
+                <td>Huomautuksia</td>
+                <td><form:input path="note" type="text" size="70"/><form:errors path="note"/></td>
                 <td></td>
-            </tr>
-            <tr>
-                <td>Nimikirjaimet</td>
-                <td><form:input path="signature" type="text" id="signature"/><form:errors path="signature"/></td>
-                <td></td>
-            </tr>
-            <tr>
-                <td><input type="submit" value="Tallenna" />  </td>
-                <td>&nbsp;&nbsp;<input type="submit" value="Peruuta"/></td>
             </tr>
         </table>
+        
+        <br/>
+        
+        <table class="noborder">
+            <tr>
+                <td class="name">Nimikirjaimet</td>
+                <td><form:input path="signature" type="text" id="signature" size="6"/><form:errors path="signature"/></td>
+                <td></td>
+            </tr>
+        </table>
+        
+        <br/>
+            
+        <input type="submit" value="Tallenna" /> &nbsp;&nbsp;<input type="submit" value="Peruuta"/>
+        
     </form:form>
         
 </div>

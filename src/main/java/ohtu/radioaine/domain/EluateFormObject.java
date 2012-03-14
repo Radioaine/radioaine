@@ -1,46 +1,35 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package ohtu.radioaine.domain;
 
-import java.util.List;
-
-/**
- *
- * @author jahyvone
- */
 public class EluateFormObject {
 
     private Long id;
     // Descripes radioactive strength
     private double strength;
     private int volume;
-    private String timestamp;
+    private String date;
+    private String hours;
+    private String minutes;
     private String signature;
     private String note;
     private int storageLocation;
-    
-    private List<Batch> generators;
-    private List<Batch> solvents;
+    private int generator;
+    private int solvent;
 
-    public List<Batch> getGenerators() {
-        return generators;
+    public int getGenerator() {
+        return generator;
     }
 
-    public void setGenerators(List<Batch> generators) {
-        this.generators = generators;
+    public void setGenerator(int generators) {
+        this.generator = generators;
     }
 
-    public List<Batch> getSolvents() {
-        return solvents;
+    public int getSolvent() {
+        return solvent;
     }
 
-    public void setSolvents(List<Batch> solvents) {
-        this.solvents = solvents;
+    public void setSolvent(int solvent) {
+        this.solvent = solvent;
     }
-
-    
 
     public Long getId() {
         return id;
@@ -82,12 +71,28 @@ public class EluateFormObject {
         this.strength = strength;
     }
 
-    public String getTimestamp() {
-        return timestamp;
+    public String getDate() {
+        return date;
     }
 
-    public void setTimestamp(String timestamp) {
-        this.timestamp = timestamp;
+    public void setDate(String timestamp) {
+        this.date = timestamp;
+    }
+
+    public String getHours() {
+        return hours;
+    }
+
+    public void setHours(String hours) {
+        this.hours = hours;
+    }
+
+    public String getMinutes() {
+        return minutes;
+    }
+
+    public void setMinutes(String minutes) {
+        this.minutes = minutes;
     }
 
     public int getVolume() {
@@ -97,7 +102,4 @@ public class EluateFormObject {
     public void setVolume(int volume) {
         this.volume = volume;
     }
-    
-    
-    
 }

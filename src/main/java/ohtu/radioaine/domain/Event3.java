@@ -40,12 +40,12 @@ public class Event3 implements Serializable {
     inverseJoinColumns = {
         @JoinColumn(name = "substance_id")})
     private List<Substance> substances;
-    @OneToMany(cascade = CascadeType.MERGE)
-    @JoinTable(joinColumns = {
-        @JoinColumn(name = "event_id")},
-    inverseJoinColumns = {
-        @JoinColumn(name = "product_id")})
-    private List<Product> products;
+//    @OneToMany(cascade = CascadeType.MERGE)
+//    @JoinTable(joinColumns = {
+//        @JoinColumn(name = "event_id")},
+//    inverseJoinColumns = {
+//        @JoinColumn(name = "product_id")})
+//    private List<Product> products;
     @OneToMany(cascade = CascadeType.MERGE)
     @JoinTable(joinColumns = {
         @JoinColumn(name = "event_id")},
@@ -81,13 +81,13 @@ public class Event3 implements Serializable {
         this.eluates = eluates;
     }
 
-    public List<Product> getProducts() {
-        return products;
-    }
-
-    public void setProducts(List<Product> products) {
-        this.products = products;
-    }
+//    public List<Product> getProducts() {
+//        return products;
+//    }
+//
+//    public void setProducts(List<Product> products) {
+//        this.products = products;
+//    }
 
     public List<RadioMedicine> getRadioMedicines() {
         return radioMedicines;

@@ -1,34 +1,39 @@
 /*
  * 
  */
-
 package ohtu.radioaine.domain;
 
+import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.List;
 import javax.persistence.*;
 
-
 /**
  * Entity for eluate. Used to create table Eluate to DB. Extends Product
+ *
  * @author rmjheino
  */
-
 @Entity
-public class Eluate extends Product {
+public class Eluate implements Serializable{
 
     @Id
     @GeneratedValue(strategy = GenerationType.TABLE)
     @Column(nullable = false)
     private Long id;
-    // Descripes radioactive strength
+    @Column
     private double strength;
+    @Column
     private int volume;
-    private Timestamp timestamp;
+    @Column
+    private Timestamp date;
+    @Column
     private String signature;
+    @Column
     private String note;
+    @Column
     private int storageLocation;
-    
+    @Column
+    private String preparer;
     @OneToMany
     private List<Batch> generators;
     @OneToMany
@@ -66,8 +71,6 @@ public class Eluate extends Product {
         this.generators = generators;
     }
 
-    
-
     public List<Batch> getSolvents() {
         return solvents;
     }
@@ -75,8 +78,6 @@ public class Eluate extends Product {
     public void setSolvents(List<Batch> solvents) {
         this.solvents = solvents;
     }
-
-    
 
     public String getsignature() {
         return signature;
@@ -97,7 +98,7 @@ public class Eluate extends Product {
     public long getId() {
         return id;
     }
-    
+
     public void setId(Long id) {
         this.id = id;
     }
@@ -109,13 +110,12 @@ public class Eluate extends Product {
     public void setStrength(double strength) {
         this.strength = strength;
     }
-    
+
     public Timestamp getTimestamp() {
-        return timestamp;
+        return date;
     }
 
     public void setTimestamp(Timestamp timestamp) {
-        this.timestamp = timestamp;
+        this.date = timestamp;
     }
-
 }

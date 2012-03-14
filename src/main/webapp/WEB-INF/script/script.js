@@ -30,9 +30,9 @@ function addStorage(usedStorageLocationsCount, storageLocationsCount){
     newdiv.id = "varasto"+counter;
     var newHTML = "<select name=\"storageLocations["+(counter-1)+"][0]\">";
     for(var i = 0; i < storageLocationsCount; i++)  {
-        newHTML += "<option value=\""+(i+1)+"\">Jääkaappi"+(i+1)+"</option>";
+        newHTML += "<option value=\""+(i+1)+"\">Jääkaappi "+(i+1)+"</option>";
     }
-    newHTML += "</select><input type=\"number\" name=\"storageLocations["+(counter-1)+"][1]\"> kappaletta <button type=\"button\" onClick=\"removeStorage("+counter+")\">Poista varasto</button>";
+    newHTML += "</select> <input type=\"number\" size=\"3\" name=\"storageLocations["+(counter-1)+"][1] \"> kpl &nbsp; <button type=\"button\" onClick=\"removeStorage("+counter+")\">Poista</button>";
     newdiv.innerHTML = newHTML;
     counter++;
     storage.appendChild(newdiv);

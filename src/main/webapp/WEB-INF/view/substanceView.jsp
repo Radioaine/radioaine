@@ -7,7 +7,7 @@
     
     <h1>Lääkeaineet</h1>
     
-    <table id="listaus">
+    <table class="noborder">
         <c:forEach var="substance" items="${substances}">
             <tr>
                 <td>

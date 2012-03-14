@@ -81,7 +81,7 @@
         
         <br/>
             
-        <input type="submit" value="Tallenna" /> &nbsp;&nbsp;<input type="submit" value="Peruuta"/>
+        <input type="submit" value="Tallenna" /> &nbsp;&nbsp;<input type="button" value="Peruuta" onClick="parent.location = '${pageContext.servletContext.contextPath}/storage'"/>
         
     </form:form>
         

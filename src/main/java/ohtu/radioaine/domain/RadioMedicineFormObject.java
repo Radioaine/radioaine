@@ -25,11 +25,11 @@ public class RadioMedicineFormObject {
         this.eluate = eluate;
     }
 
-    public int getKits() {
+    public int getKit() {
         return kit;
     }
 
-    public void setKits(int kit) {
+    public void setKit(int kit) {
         this.kit = kit;
     }
 

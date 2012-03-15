@@ -12,30 +12,45 @@
             <tr>
                 <td>Valitse aine</td>
             </tr>
-
+            <form:form commandName="radioMedicine" action="createRadioMedicine" method="POST">
+                <tr>
+                    Valitse eluaatti<br />
+                    <form:select class="substance" path="solvent">
+                        <c:forEach var="eluate" items="${eluates}">
+                                <form:option value="${eluate.id}">Klo ${eluate.date}, ${eluate.name}, ${eluate.strength}, ${eluate.volume}, Kaappi ${eluate.storageLocation}, ${eluate.signature}</form:option>
+                        </c:forEach>
+                    </form:select>
+                </tr>
             <tr>
-                
-                <form:form commandName="radioMedicine" action="createRadioMedicine" method="POST">
                 <td>   
                     <select>
-                        <option onClick="setType(1)">Eluaatti</option>
-                        <option onClick="setType(2)">Kitti</option>
-                        <option onClick="setType(3)">Muu</option>
+                        <option>Kitti</option>
+                        <option>Muu</option>
                     </select>
                 </td>
                 <td>
-                    <form:select class="substance" path="solvent">
+                    <form:select class="substance" path="kit">
                         <c:forEach var="substance" items="${substances}">
-                            <c:if test="${substance.type == '2'}">
+                            <c:if test="${substance.type == '0'}">
                                 <form:option value="${substance.id}">${substance.name}</form:option>
                             </c:if>
                         </c:forEach>
                     </form:select><br/>
                 </td>
                 <td>
-                    <form:select class="batch" path="solvent">
+                    <form:select class="batch" path="kit">
                         <c:forEach var="batch" items="${batches}">
-                                <form:option value="${batch.id}">${batch.batchNumber}</form:option>
+                            <c:forEach var="storage" items="${batch.storageLocations}">
+                                <c:if test="${storage[1] != '0'}">
+                                    <form:option value="${batch.id}">Erä ${batch.batchNumber}, Kaappi ${storage[0]}, 
+                                        Laatu 
+                                        <c:if test="${batch.qualityCheck=='0'}">tekemättä</c:if>
+                                        <c:if test="${batch.qualityCheck=='1'}">hyväksytty</c:if>
+                                        <c:if test="${batch.qualityCheck=='2'}">hylätty</c:if>
+                                        , vanh. ${batch.expDate}
+                                    </form:option>
+                                </c:if>
+                            </c:forEach>
                         </c:forEach>
                     </form:select>
                 </td>

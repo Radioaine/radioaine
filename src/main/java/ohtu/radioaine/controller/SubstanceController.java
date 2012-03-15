@@ -59,7 +59,7 @@ public class SubstanceController {
     }
     
     @RequestMapping(value = "updateSubstance/{id}", method = RequestMethod.POST)
-    public String substanceUpdate(@Valid @ModelAttribute("substance") SubstanceFormObject sfm, 
+    public String updateSubstance(@Valid @ModelAttribute("substance") SubstanceFormObject sfm, 
     BindingResult result, 
     Model model, 
     @PathVariable Integer id){
@@ -79,7 +79,8 @@ public class SubstanceController {
     }
     
     @RequestMapping(value = "updateSubstance/{id}", method = RequestMethod.GET)
-    public String update(Model model, @PathVariable Integer id) {
+    public String updateSubstanceView(Model model, @PathVariable Integer id) {
+        System.out.println(id);
         model.addAttribute("substance", substanceService.read(id));
         return "substanceUpdateView";
     }

@@ -50,7 +50,7 @@ public class EluateController {
             return "createEluate";
         }
         Eluate newEluate = eluateService.createOrUpdate(createEluate(efo));
-        return "redirect:/Eluate/" + newEluate.getId();
+        return "redirect:/frontpage";
     }
 
     @RequestMapping("Eluate/{id}")
@@ -65,7 +65,7 @@ public class EluateController {
      */
     private Eluate createEluate(EluateFormObject efo) {
         Eluate eluate = new Eluate();
-
+        System.out.println(efo.getStrength());
         eluate.setStrength(efo.getStrength());
         eluate.setVolume(efo.getVolume());
         eluate.setTimestamp(Time.parseDate(efo.getDate()));

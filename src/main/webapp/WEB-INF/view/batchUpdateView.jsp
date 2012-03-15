@@ -3,7 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <script type="text/javascript" src="<c:url value="/css/script.js" />"></script>
-<%@include file="header.jsp" %>
+<%@include file="headerstorage.jsp" %>
 
 <script>
     $(function() {

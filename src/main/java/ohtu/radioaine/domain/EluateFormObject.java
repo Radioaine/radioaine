@@ -2,8 +2,6 @@ package ohtu.radioaine.domain;
 
 public class EluateFormObject {
 
-    private Long id;
-    // Descripes radioactive strength
     private double strength;
     private int volume;
     private String date;
@@ -29,14 +27,6 @@ public class EluateFormObject {
 
     public void setSolvent(int solvent) {
         this.solvent = solvent;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getNote() {

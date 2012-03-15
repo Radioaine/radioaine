@@ -1,23 +1,23 @@
 
 
-function sivuLadattu() {
-    var linkit = document.querySelectorAll("a");
-  
-    for (var i = 0; i < linkit.length; ++i) {
-        if (document.location.href.match(linkit[i].href)) {
-            linkit[i].className += "current";
-            linkit[i].href = "";
-        }
-    }
-}
-
-
-if(window.addEventListener) {
-    window.addEventListener('load',sivuLadattu); //W3C
-}
-else {
-    window.attachEvent('onload',sivuLadattu); //IE
-}
+//function sivuLadattu() {
+//    var linkit = document.querySelectorAll("a");
+//  
+//    for (var i = 0; i < linkit.length; ++i) {
+//        if (document.location.href.match(linkit[i].href)) {
+//            linkit[i].className += "current";
+//            linkit[i].href = "";
+//        }
+//    }
+//}
+//
+//
+//if(window.addEventListener) {
+//    window.addEventListener('load',sivuLadattu); //W3C
+//}
+//else {
+//    window.attachEvent('onload',sivuLadattu); //IE
+//}
 
 
 var counter = 2;

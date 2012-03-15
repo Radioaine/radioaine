@@ -121,14 +121,13 @@
                 <td>
                     <button type="button">Lisää</button>
                 </td>
-        </form:form>
             </tr>
 
         </table>
     </p>
     <p>
 
-        <form action="frontpage.html" method="post">
+        <!--<form action="frontpage.html" method="post">-->
         <table class="noborder">
 
             <tr>
@@ -139,27 +138,31 @@
 
             <tr>
                 <td>Valmistusaika</td>
-                <td><input required type="text" name="hour" size="2" />:<input required type="text" name="minute" size="2" /></td>
-                <td><input required type="text" name="date" size="8" value="3.3.2012" /> <!--Tähän oletusarvoisesti näkymään kuluva päivä--></td>
+                <td>
+                    <form:input path="hours" type="text" id="hours" size="2"/><form:errors path="hours"/>:<form:input 
+                    path="minutes" type="text" id="minutes" size="2"/><form:errors path="minutes"/>
+                    <form:input path="date" type="text" id="eluatingtime"/><form:errors path="date"/>
+                </td>
             </tr>
 
             <tr>
                 <td>Aktiivisuus</td>
-                <td>
-                    <input type="text" name="activity" size="5" />
+                
+                    <!--<input type="text" name="activity" size="5" />
                     <select>
                         <option>GBq</option>
                         <option>MBq</option>
                     </select>
-                    &nbsp;
+                    &nbsp;-->
+                <td>
+                    <form:input path="strength" type="text"/><form:errors path="strength"/>GBq
                 </td>
             </tr>
 
             <tr>
                 <td>Tilavuus</td>
                 <td>
-                    <input type="text" name="volume" size="5" />
-                    <input type="text" name="volumeUnit" size="4"  value="ml"/>
+                    <form:input path="volume" type="text"/><form:errors path="volume"/>ml
                 </td>
             </tr>
 
@@ -170,11 +173,17 @@
             <tr>
                 <td class="name">Sijainti</td>
                 <td>
-                    <select>
-                        <option>Valitse</option>
-                        <option>1. krs jääkaappi</option>
-                        <option>2. krs jääkaappi</option>
-                    </select>
+                    <!-- IHAN HIVREELLÄ TAVALLA TEHTY -->
+                    <form:select path="storageLocation">
+                        <c:forEach var="batch" items="${batches}" varStatus="i">
+                            <c:if test="${i.index == 1}">
+                                <c:forEach var="location" items="${batch.storageLocations}" varStatus="j">
+                                    <form:option value="${j.index + 1}">Kaappi ${j.index + 1}</form:option>
+                                </c:forEach>
+                            </c:if>
+                        </c:forEach>
+
+                    </form:select>
                 </td>
             </tr>
 
@@ -197,7 +206,7 @@
         <br/>
         <input type="submit" value="Tallenna" /> &nbsp; &nbsp;<input type="submit" value="Peruuta"/><!-- disabled="disabled"-->
 
-        </form>
+        </form:form>
 
     </p>
 </div>

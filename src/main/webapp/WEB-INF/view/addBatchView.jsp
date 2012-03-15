@@ -59,7 +59,7 @@
             </tr>
             <tr>
                 <td>Määrä yhteensä</td>
-                <td><form:input path="amount" type="number" size="3" /><form:errors path="amount"/> kpl</td>
+                <td><form:input path="amount" value="test" type="number" size="3" /><form:errors path="amount"/> kpl</td>
                 <td></td>
             </tr>
             <tr>

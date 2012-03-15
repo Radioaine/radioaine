@@ -4,6 +4,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <%@include file="header.jsp" %>
+<script type="text/javascript" src="<c:url value="/script/ui.datepicker-fi.js" />"></script>
 
 <div id="contents">
     <h2>Uusi radiolääke</h2>
@@ -14,10 +15,37 @@
             </tr>
 
             <tr>
+                
+                <form:form commandName="radioMedicine" action="createRadioMedicine" method="POST">
+                <td>   
+                    <select>
+                        <option onClick="setType(1)">Eluaatti</option>
+                        <option onClick="setType(2)">Kitti</option>
+                        <option onClick="setType(3)">Muu</option>
+                    </select>
+                </td>
+                <td>
+                    <form:select class="substance" path="solvent">
+                        <c:forEach var="substance" items="${substances}">
+                            <c:if test="${substance.type == '2'}">
+                                <form:option value="${substance.id}">${substance.name}</form:option>
+                            </c:if>
+                        </c:forEach>
+                    </form:select><br/>
+                </td>
+                <td>
+                    <form:select class="batch" path="solvent">
+                        <c:forEach var="batch" items="${batches}">
+                                <form:option value="${batch.id}">${batch.batchNumber}</form:option>
+                        </c:forEach>
+                    </form:select>
+                </td>
+                </tr>
+                <tr>
                 <td>   
                     <select>
                         <option>Eluaatti</option>
-                        <option selected="selected">Kitti</option>
+                        <option>Kitti</option>
                         <option>Muu</option>
                     </select>
                 </td>
@@ -78,7 +106,8 @@
                 </td>
                 <td>
                     <button type="button">Lisää</button>
-                </td>       
+                </td>
+        </form:form>
             </tr>
 
         </table>

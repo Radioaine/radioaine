@@ -45,9 +45,11 @@ public class EluateController {
     public String createEluate(Model model) {
         model.addAttribute("eluate", new EluateFormObject());
         model.addAttribute("generators", getSpecificTypesFromSubstances(substanceService.list(), GENERATOR));
-        List<Batch> batches = batchService.list();
-        model.addAttribute("kits", getSpecificTypesFromBatches(batches, KIT));
-        model.addAttribute("solvents", getSpecificTypesFromBatches(batches, SOLVENT));
+//        List<Batch> batches = batchService.list();
+//        model.addAttribute("kits", getSpecificTypesFromBatches(batches, KIT));
+//        model.addAttribute("solvents", getSpecificTypesFromBatches(batches, SOLVENT));
+        model.addAttribute("kits", batchService.getBatchesByType(KIT));
+        model.addAttribute("solvents", batchService.getBatchesByType(SOLVENT));
         return "createEluate";
     }
 

@@ -10,6 +10,7 @@ import ohtu.radioaine.domain.Batch;
 
 /**
  * DB methods for Batch
+ *
  * @author rmjheino
  */
 @Repository
@@ -17,10 +18,10 @@ public class JPABatchDBDao implements BatchDBDao {
 
     @PersistenceContext
     EntityManager entityManager;
-    
+
     @Override
     public Batch createOrUpdate(Batch instance) {
-       return entityManager.merge(instance);
+        return entityManager.merge(instance);
     }
 
     @Override
@@ -43,22 +44,30 @@ public class JPABatchDBDao implements BatchDBDao {
         Query q = entityManager.createQuery("SELECT e FROM Batch e");
         return q.getResultList();
     }
-    
+
     @Override
     public List<Batch> listSubstanceBatches(int id) {
-        Query q = entityManager.createQuery("SELECT e FROM Batch e WHERE e.substance.id="+id);
+        Query q = entityManager.createQuery("SELECT e FROM Batch e WHERE e.substance.id=" + id);
         return q.getResultList();
     }
 
     @Override
     public Batch read(String batchNumber, int substance) {
-        try{
-            Query q = entityManager.createQuery("SELECT e FROM Batch e WHERE e.batchNumber='"+batchNumber+"' AND e.substance.id="+substance);
-            return (Batch)q.getSingleResult();
-        }catch(NoResultException e){
+        try {
+            Query q = entityManager.createQuery("SELECT e FROM Batch e WHERE e.batchNumber='" + batchNumber + "' AND e.substance.id=" + substance);
+            return (Batch) q.getSingleResult();
+        } catch (NoResultException e) {
             return null;
-        }  
+        }
     }
-    
-    
+
+    @Override
+    public List<Batch> getBatchesByType(int type) {
+        try {
+            Query q = entityManager.createQuery("SELECT e FROM Batch e WHERE e IN (SELECT * FROM Batch_Substance where Substance.name IN (SELECT s FROM Substance s WHERE s.type='" + type + "')) ORDER BY expDate ASC");
+            return q.getResultList();
+        } catch (NoResultException e) {
+            return null;
+        }
+    }
 }

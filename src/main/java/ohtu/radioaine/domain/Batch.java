@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.Date;
 import javax.persistence.*;
+import ohtu.radioaine.tools.Time;
 
 /**
  * Entity for a batch of products. Used to create table BATCH to database.

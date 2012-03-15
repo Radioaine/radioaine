@@ -7,12 +7,12 @@ import javax.persistence.*;
 
 /**
  * Entity for a batch of products. Used to create table BATCH to database.
+ *
  * @author radioaine
  */
 @Entity
 public class Batch implements Serializable {
 
-    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(nullable = false)
@@ -21,11 +21,8 @@ public class Batch implements Serializable {
     private String batchNumber;
     @Column
     private int amount;
-
-    
     @Column
     private int substanceVolume;
-
     //Products of this batch are made of this substance
     @ManyToOne
     private Substance substance;
@@ -42,7 +39,7 @@ public class Batch implements Serializable {
     private String note;
     private int storageLocationsCount = 10;
     private int[][] storageLocations = new int[storageLocationsCount][2];
-    
+
     public Eluate getEluate() {
         return eluate;
     }
@@ -50,8 +47,7 @@ public class Batch implements Serializable {
     public void setEluate(Eluate eluate) {
         this.eluate = eluate;
     }
-    
-    
+
     public String getSignature() {
         return signature;
     }
@@ -67,7 +63,7 @@ public class Batch implements Serializable {
     public void setStorageLocations(int[][] storageLocations) {
         this.storageLocations = storageLocations;
     }
-    
+
     public int getStorageLocationsCount() {
         return storageLocationsCount;
     }
@@ -75,7 +71,7 @@ public class Batch implements Serializable {
     public void setStorageLocationsCount(int storageLocationsCount) {
         this.storageLocationsCount = storageLocationsCount;
     }
-    
+
     public int getSubstanceVolume() {
         return substanceVolume;
     }
@@ -83,7 +79,7 @@ public class Batch implements Serializable {
     public void setSubstanceVolume(int substanceVolume) {
         this.substanceVolume = substanceVolume;
     }
-    
+
     public int getAmount() {
         return amount;
     }
@@ -91,7 +87,7 @@ public class Batch implements Serializable {
     public void setAmount(int amount) {
         this.amount = amount;
     }
-    
+
     public Timestamp getArrivalDate() {
         return arrivalDate;
     }
@@ -119,7 +115,7 @@ public class Batch implements Serializable {
     public String getBatchNumber() {
         return batchNumber;
     }
-    
+
     public int getId() {
         return id;
     }
@@ -127,7 +123,6 @@ public class Batch implements Serializable {
     public void setId(int id) {
         this.id = id;
     }
-    
 
     public void setBatchNumber(String batchNumber) {
         this.batchNumber = batchNumber;
@@ -136,9 +131,10 @@ public class Batch implements Serializable {
     public String getManufacturer() {
         return manufacturer;
     }
-    
+
     /**
      * Sets the manufacturer
+     *
      * @param manufacturer name of the manufacturer
      */
     public void setManufacturer(String manufacturer) {
@@ -164,7 +160,7 @@ public class Batch implements Serializable {
     public String toStringDB() {
         return "Batch" + "id=" + id + " batchNumber=" + batchNumber + " amount=" + amount + " substanceVolume=" + substanceVolume + " substance=" + substance + " arrivalDate=" + arrivalDate + " expDate=" + expDate + " qualityCheck=" + qualityCheck + " strength=" + strength + " manufacturer=" + manufacturer + " supplier=" + supplier + " note=" + note;
     }
-    
+
     public String toStringShow() {
         return "eränumero = " + batchNumber + " määrä = " + amount + " aine = " + substance + " saapumispvm = " + arrivalDate + " vanhenemispvm = " + expDate + " radioaktiivisuus = " + strength + " valmistaja = " + manufacturer + " toimittaja = " + supplier + " kommentit = " + note;
     }
@@ -184,12 +180,13 @@ public class Batch implements Serializable {
     public void setSupplier(String supplier) {
         this.supplier = supplier;
     }
-    
-    public int getCurrentStorageLocationsCount()   {
+
+    public int getCurrentStorageLocationsCount() {
         int temp = 0;
-        for(int i=0; i < storageLocations.length; i++)  {
-            if(storageLocations[i][1] > 0)
+        for (int i = 0; i < storageLocations.length; i++) {
+            if (storageLocations[i][1] > 0) {
                 temp++;
+            }
         }
         return temp;
     }

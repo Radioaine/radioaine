@@ -18,33 +18,29 @@
         <table class="noborder">
             <tr>
                 <td>Generaattori:</td>
-                <td><form:select path="generator">
-                        <c:forEach var="substance" items="${substances}">
-                            <c:if test="${substance.type == '1'}">
-                                <form:option value="${substance.id}">${substance.name}</form:option>
-                            </c:if>
+                <td><form:select path="generators">
+                        <c:forEach var="generator" items="${generators}">
+                            <form:option value="${generator.id}">${generator.name}</form:option>
                         </c:forEach>
                     </form:select>
                 </td>
             </tr>
             <tr>
                 <td>Kitti:</td>
-                <td><form:select path="generator">
-                        <c:forEach var="substance" items="${substances}">
-                            <c:if test="${substance.type == '0'}">
-                                <form:option value="${substance.id}">${substance.name}</form:option>
-                            </c:if>
+                <td><form:select path="kits">
+                        <c:forEach var="kit" items="${kits}">
+                            <form:option value="${kit.id}">${kit.substance.name},
+                                ${kit.batchNumber}, <fmt:formatDate value="${kit.expDate}" pattern="dd.MM.yyyy"/></form:option>
                         </c:forEach>
                     </form:select>
                 </td>
             </tr>
             <tr>
                 <td>Liuotin:</td>
-                <td><form:select path="solvent">
-                        <c:forEach var="substance" items="${substances}">
-                            <c:if test="${substance.type == '2'}">
-                                <form:option value="${substance.id}">${substance.name}</form:option>
-                            </c:if>
+                <td><form:select path="solvents">
+                        <c:forEach var="solvent" items="${solvents}">
+                            <form:option value="${solvent.id}">${solvent.substance.name},
+                                ${solvent.batchNumber}, <fmt:formatDate value="${solvent.expDate}" pattern="dd.MM.yyyy"/></form:option>
                         </c:forEach>
                     </form:select>
                 <td>

@@ -10,23 +10,32 @@ public class EluateFormObject {
     private String signature;
     private String note;
     private int storageLocation;
-    private int generator;
-    private int solvent;
+    private int generators;
+    private int solvents;
+    private int kits;
 
-    public int getGenerator() {
-        return generator;
+    public int getKits() {
+        return kits;
     }
 
-    public void setGenerator(int generators) {
-        this.generator = generators;
+    public void setKits(int kits) {
+        this.kits = kits;
     }
 
-    public int getSolvent() {
-        return solvent;
+    public int getGenerators() {
+        return generators;
     }
 
-    public void setSolvent(int solvent) {
-        this.solvent = solvent;
+    public void setGenerators(int generators) {
+        this.generators = generators;
+    }
+
+    public int getSolvents() {
+        return solvents;
+    }
+
+    public void setSolvents(int solvent) {
+        this.solvents = solvent;
     }
 
     public String getNote() {

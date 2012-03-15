@@ -6,6 +6,7 @@ import javax.validation.Valid;
 import ohtu.radioaine.domain.Batch;
 import ohtu.radioaine.domain.Eluate;
 import ohtu.radioaine.domain.EluateFormObject;
+import ohtu.radioaine.domain.Substance;
 import ohtu.radioaine.service.BatchService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -36,12 +37,38 @@ public class EluateController {
     private EventService eventService;
     @Autowired
     private SubstanceService substanceService;
+    int GENERATOR = 1;
+    int KIT = 0;
+    int SOLVENT = 2;
 
     @RequestMapping(value = "createEluate", method = RequestMethod.GET)
     public String createEluate(Model model) {
         model.addAttribute("eluate", new EluateFormObject());
-        model.addAttribute("substances", substanceService.list());
+        model.addAttribute("generators", getSpecificTypesFromSubstances(substanceService.list(), GENERATOR));
+        List<Batch> batches = batchService.list();
+        model.addAttribute("kits", getSpecificTypesFromBatches(batches, KIT));
+        model.addAttribute("solvents", getSpecificTypesFromBatches(batches, SOLVENT));
         return "createEluate";
+    }
+
+    private List<Substance> getSpecificTypesFromSubstances(List<Substance> substances, int type) {
+        List<Substance> typeList = new ArrayList<Substance>();
+        for (Substance substance : substances) {
+            if (substance.getType() == type) {
+                typeList.add(substance);
+            }
+        }
+        return typeList;
+    }
+
+    private List<Batch> getSpecificTypesFromBatches(List<Batch> batches, int type) {
+        List<Batch> typeList = new ArrayList<Batch>();
+        for (Batch batch : batches) {
+            if (batch.getSubstance().getType() == type) {
+                typeList.add(batch);
+            }
+        }
+        return typeList;
     }
 
     @RequestMapping(value = "createEluate", method = RequestMethod.POST)
@@ -52,7 +79,7 @@ public class EluateController {
         Eluate newEluate = eluateService.createOrUpdate(createEluate(efo));
         return "redirect:/frontpage";
     }
-
+    
     @RequestMapping("Eluate/{id}")
     public String eluateView(@PathVariable Integer id) {
         return "frontpage";
@@ -73,10 +100,13 @@ public class EluateController {
         eluate.setNote(efo.getNote());
         eluate.setStorageLocation(efo.getStorageLocation());
 
-        List<Batch> generators = new ArrayList<Batch>();
-        generators.add(batchService.read(efo.getGenerator()));
+        List<Substance> generators = new ArrayList<Substance>();
+        generators.add((Substance) substanceService.read(efo.getGenerators()));
+        List<Batch> kits = new ArrayList<Batch>();
+        kits.add(batchService.read(efo.getKits()));
         List<Batch> solvents = new ArrayList<Batch>();
-        solvents.add(batchService.read(efo.getSolvent()));
+        solvents.add(batchService.read(efo.getSolvents()));
+
 
 //        for (Batch generator : efo.getGenerators()) {
 //            generators.add((Batch) batchService.read(generator.getId()));
@@ -87,6 +117,7 @@ public class EluateController {
 
         eluate.setGenerators(generators);
         eluate.setSolvents(solvents);
+        eluate.setKits(kits);
         return eluate;
     }
 }

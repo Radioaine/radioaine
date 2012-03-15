@@ -69,7 +69,7 @@ public class RadioMedicineController {
         List<Batch> solvents = new ArrayList<Batch>();
         solvents.add(batchService.read(rmfo.getSolvent()));
         List<Batch> kits = new ArrayList<Batch>();
-        kits.add(batchService.read(rmfo.getKits()));
+        kits.add(batchService.read(rmfo.getKit()));
         
         radioMedicine.setEluates(eluates);
         radioMedicine.setSolvents(solvents);

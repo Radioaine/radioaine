@@ -1,7 +1,8 @@
 package ohtu.radioaine.domain;
 
-public class EluateFormObject {
+public class RadioMedicineFormObject {
 
+    private Long id;
     private double strength;
     private int volume;
     private String date;
@@ -10,32 +11,26 @@ public class EluateFormObject {
     private String signature;
     private String note;
     private int storageLocation;
-    private int generators;
-    private int solvents;
-    private int kits;
+    private String name;
+    private String preparer;
+    private int eluate;
+    private int solvent;
+    private int kit;
 
-    public int getKits() {
-        return kits;
+    public int getEluates() {
+        return eluate;
     }
 
-    public void setKits(int kits) {
-        this.kits = kits;
+    public void setEluates(int eluate) {
+        this.eluate = eluate;
     }
 
-    public int getGenerators() {
-        return generators;
+    public int getKit() {
+        return kit;
     }
 
-    public void setGenerators(int generators) {
-        this.generators = generators;
-    }
-
-    public int getSolvents() {
-        return solvents;
-    }
-
-    public void setSolvents(int solvent) {
-        this.solvents = solvent;
+    public void setKit(int kit) {
+        this.kit = kit;
     }
 
     public String getNote() {
@@ -52,6 +47,14 @@ public class EluateFormObject {
 
     public void setSignature(String signature) {
         this.signature = signature;
+    }
+
+    public int getSolvent() {
+        return solvent;
+    }
+
+    public void setSolvent(int solvent) {
+        this.solvent = solvent;
     }
 
     public int getStorageLocation() {
@@ -74,8 +77,8 @@ public class EluateFormObject {
         return date;
     }
 
-    public void setDate(String timestamp) {
-        this.date = timestamp;
+    public void setDate(String date) {
+        this.date = date;
     }
 
     public String getHours() {
@@ -92,6 +95,30 @@ public class EluateFormObject {
 
     public void setMinutes(String minutes) {
         this.minutes = minutes;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getPreparer() {
+        return preparer;
+    }
+
+    public void setPreparer(String preparer) {
+        this.preparer = preparer;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public int getVolume() {

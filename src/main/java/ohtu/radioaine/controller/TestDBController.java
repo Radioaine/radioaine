@@ -7,6 +7,7 @@ import ohtu.radioaine.service.BatchService;
 import ohtu.radioaine.service.EventService;
 import ohtu.radioaine.service.SubstanceService;
 import ohtu.radioaine.tools.EventHandler;
+import ohtu.radioaine.tools.Time;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -32,8 +33,9 @@ public class TestDBController {
         {"Ceretec Exametazine Agent kittipakkaus 5 inj.plo", "3", "4", "false", "true", "Lääkefirma Perttilä", "Oy GE Healthcare Bio-Sciences Ab", "0"},
         {"Geneerinen generaattori", "3", "4", "true", "false", "Lääkefirma Perttilä", "Oy GE Healthcare Bio-Sciences Ab", "1"},
         {"Suolaliuos plo", "3", "4", "true", "false", "Lääkefirma Perttilä", "Oy GE Healthcare Bio-Sciences Ab", "2"}};
-    private String[][] batches = {{"123445EE", "8", "30", "0", "Jeejeee paljon huomautettavaa"},
-        {"99AADD22", "3", "10", "1", "puolet rikki"},{"AAD175", "3", "10", "2", "1 lainassa"}};
+    private String[][] batches = {{"123445EE", "8", "30", "0", "Jeejeee paljon huomautettavaa", "12.2.2012"},
+        {"99AADD22", "3", "10", "1", "puolet rikki", "13.2.2012"}, {"AAD175", "3", "10", "2", "1 lainassa", "13.6.2012"},
+        {"AAD175", "3", "10", "2", "1 lainassa", "13.6.2012"}, {"AAD175", "3", "10", "2", "1 lainassa", "13.6.2012"}};
 
     @RequestMapping("generateTestDB")
     public String createDB() {
@@ -61,26 +63,28 @@ public class TestDBController {
         for (int i = 0; i < batches.length; i++) {
             Batch batch = new Batch();
             batch.setBatchNumber(batches[i][0]);
-            
+
             batch.setAmount(Integer.parseInt(batches[i][1]));
             int[][] storageLocations = new int[10][2];
             storageLocations[0][0] = 1;
             storageLocations[0][1] = Integer.parseInt(batches[i][1]);
             batch.setStorageLocations(storageLocations);
-            
+
+            batch.setExpDate(Time.parseDate(batches[i][5]));
+
             batch.setSubstanceVolume(Integer.parseInt(batches[i][2]));
             batch.setQualityCheck(Integer.parseInt(batches[i][3]));
             batch.setNote(batches[i][4]);
-            Substance substance = (Substance) substanceService.read(1);
+            Substance substance = (Substance) substanceService.read(i + 1);
             substance.setTotalAmount(substance.getTotalAmount() + batch.getAmount());
             substanceService.createOrUpdate(substance);
-            
+
             batch.setSubstance(substance);
             batch.setManufacturer(substance.getManufacturer());
             batch.setSupplier(substance.getSupplier());
             batch.setSignature("testi db");
             batch = batchService.createOrUpdate(batch);
-            
+
             Event event = EventHandler.newBatchEvent(batch);
             eventService.createOrUpdate(event);
         }

@@ -1,6 +1,3 @@
-/*
- * 
- */
 package ohtu.radioaine.domain;
 
 import java.io.Serializable;
@@ -9,17 +6,17 @@ import java.util.List;
 import javax.persistence.*;
 
 /**
- * Entity for eluate. Used to create table Eluate to DB. Extends Product
+ * Entity for eluate. Used to create table Eluate to DB.
  *
  * @author rmjheino
  */
 @Entity
-public class Eluate implements Serializable{
+public class Eluate implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.TABLE)
     @Column(nullable = false)
-    private Long id;
+    private int id;
     @Column
     private double strength;
     @Column
@@ -32,12 +29,28 @@ public class Eluate implements Serializable{
     private String note;
     @Column
     private int storageLocation;
-    @Column
-    private String preparer;
     @OneToMany
-    private List<Batch> generators;
+    private List<Substance> generators;
     @OneToMany
     private List<Batch> solvents;
+    @OneToMany
+    private List<Batch> kits;
+
+    public Timestamp getDate() {
+        return date;
+    }
+
+    public void setDate(Timestamp date) {
+        this.date = date;
+    }
+
+    public List<Batch> getKits() {
+        return kits;
+    }
+
+    public void setKits(List<Batch> kits) {
+        this.kits = kits;
+    }
 
     public String getSignature() {
         return signature;
@@ -63,11 +76,11 @@ public class Eluate implements Serializable{
         this.volume = volume;
     }
 
-    public List<Batch> getGenerators() {
+    public List<Substance> getGenerators() {
         return generators;
     }
 
-    public void setGenerators(List<Batch> generators) {
+    public void setGenerators(List<Substance> generators) {
         this.generators = generators;
     }
 
@@ -95,11 +108,11 @@ public class Eluate implements Serializable{
         this.note = note;
     }
 
-    public long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
 

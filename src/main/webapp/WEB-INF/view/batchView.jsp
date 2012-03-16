@@ -115,12 +115,6 @@
         <tr>
     </table>
     <br />
-    <p>Poista erästä:</p>
-    <form action="${pageContext.servletContext.contextPath}/batchDelete/${batch.id}" method="POST">
-        Määrä: <input name="amount" type="number"/><br/>
-        Nimi: <input name="name" type="text"/><br/>
-        <input type="submit" value="Poista">
-    </form>
     <form action="${pageContext.servletContext.contextPath}/updateBatch/${batch.id}" method="POST">  
         <input type="submit" value="Muokkaa erän tietoja">
     </form>    

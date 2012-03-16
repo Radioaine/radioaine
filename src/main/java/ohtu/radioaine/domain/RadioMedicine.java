@@ -117,18 +117,11 @@ public class RadioMedicine implements Serializable{
         this.id = id;
     }
 
-    public double getVolume() {
+    public int getVolume() {
         return volume;
     }
 
     public void setVolume(int volume) {
         this.volume = volume;
     }
-//    public List<Eluate> getEluate() {
-//        return eluate;
-//    }
-//
-//    public void setEluate(Eluate eluate) {
-//        this.eluate.add(eluate);
-//    }
 }

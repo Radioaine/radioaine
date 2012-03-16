@@ -55,4 +55,10 @@ public class SimpleBatchService implements BatchService {
     public Batch read(String batchNumber, int substance) {
         return storageDao.read(batchNumber, substance);
     }
+    
+    @Override
+    public List<Batch> getBatchesByType(int type) {
+        return storageDao.getBatchesByType(type);
+    }
+    
 }

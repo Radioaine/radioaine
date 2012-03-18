@@ -16,12 +16,12 @@
         <tr>
             <td class="elbutton">
                 <form method="link" action="createEluate">
-                    <input type="submit" value="Kirjaa eluaatti">
+                    <input type="submit" value="Luo eluaatti">
                 </form>
             </td>
             <td>
                 <form method="link" action="createRadioMedicine">
-                    <input type="submit" value="Kirjaa radiolääke">
+                    <input type="submit" value="Luo radiolääke">
                 </form> 
             </td>
         </tr>
@@ -44,7 +44,7 @@
         <tr>
             <th colspan="2">Klo</th>
             <th>Aine</th>
-            <th>Vahvuus</th>
+            <th>Aktiivisuus</th>
             <th>Määrä</th>
             <th>Sijainti</th>
             <th>Tekijä</th>
@@ -97,7 +97,7 @@
         </tr>          
     </table>
 </p>
-<p>
+<!--<p>
 <h2>Muut käytetyt aineet</h2>
 </p>
 <p>
@@ -116,6 +116,6 @@
         <td>Valmis lääke 3</td>
     </tr>
 </table>
-</p>
+</p>-->
 </div>
 <%@include file="footer.jsp" %>

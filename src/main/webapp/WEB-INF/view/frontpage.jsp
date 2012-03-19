@@ -1,5 +1,6 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
 <%@include file="headerfront.jsp" %>
 
@@ -13,6 +14,7 @@
     </h2>
 
     <table class="noborder">
+        <br>
         <tr>
             <td class="elbutton">
                 <form method="link" action="createEluate">
@@ -26,11 +28,31 @@
             </td>
         </tr>
     </table>
+    <br>
+    <table class="listing">
+        <tr>
+            <th>Klo</th>
+            <th>Aine</th>
+            <th>Aktiivisuus</th>
+            <th>Määrä</th>
+            <th>Sijainti</th>
+            <th>Tekijä</th>
+            <th></th> <!--sarake lisäysnapille-->
+        </tr>
+        <c:forEach var="eluate" items="${eluates}">
+            <tr>
+                <td><fmt:formatDate value="${eluate.date}" pattern="HH:mm"/> </td>
+                <td><c:forEach var="kit" items="${eluate.kits}">
+                        ${kit.substance.name}
+                    </c:forEach></td>
+                <td>${eluate.strength} GBq</td>
+                <td>${eluate.volume} ml</td>
+                <td>${eluate.storageLocation}</td>
+                <td>${eluate.signature}</td>
+            </tr>
+        </c:forEach>
 
-    <c:forEach var="eluate" items="${eluates}">
-        <p>${eluate.id} ${eluate.strength}</p>
-    </c:forEach>
-
+    </table>
     <p>
     <table class="listing">
         <col width="30px"/>

@@ -20,7 +20,7 @@
                 <td>Generaattori:</td>
                 <td><form:select path="generators">
                         <c:forEach var="generator" items="${generators}">
-                            <form:option value="${generator.id}">${generator.name}</form:option>
+                            <form:option value="${generator.id}">${generator.substance.name}</form:option>
                         </c:forEach>
                     </form:select>
                 </td>
@@ -37,10 +37,10 @@
             </tr>
             <tr>
                 <td>Liuotin:</td>
-                <td><form:select path="solvents">
-                        <c:forEach var="solvent" items="${solvents}">
-                            <form:option value="${solvent.id}">${solvent.substance.name},
-                                ${solvent.batchNumber}, <fmt:formatDate value="${solvent.expDate}" pattern="dd.MM.yyyy"/></form:option>
+                <td><form:select path="others">
+                        <c:forEach var="other" items="${others}">
+                            <form:option value="${other.id}">${other.substance.name},
+                                ${other.batchNumber}, <fmt:formatDate value="${other.expDate}" pattern="dd.MM.yyyy"/></form:option>
                         </c:forEach>
                     </form:select>
                 <td>
@@ -57,7 +57,11 @@
             </tr>
             <tr>
                 <td>Aktiivisuus:</td>
-                <td><form:input path="strength" type="text"/><form:errors path="volume"/>GBq</td>
+                <td><form:input path="strength" type="text"/><form:errors path="strength"/>GBq</td>
+            </tr>
+            <tr>
+                <td>Aktiivisuus:</td>
+                <td><form:input path="volume" type="text"/><form:errors path="volume"/>ml</td>
             </tr>
             <tr>
                 <td>Huomautuksia:</td>

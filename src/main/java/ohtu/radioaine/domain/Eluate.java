@@ -30,10 +30,13 @@ public class Eluate implements Serializable {
     @Column
     private int storageLocation;
     @OneToMany
-    private List<Substance> generators;
+    @JoinColumn(name = "ELUATE_GENERATORS")
+    private List<Batch> generators;
     @OneToMany
-    private List<Batch> solvents;
+    @JoinColumn(name = "ELUATE_OTHERS")
+    private List<Batch> others;
     @OneToMany
+    @JoinColumn(name = "ELUATE_KITS")
     private List<Batch> kits;
 
     public Timestamp getDate() {
@@ -76,20 +79,20 @@ public class Eluate implements Serializable {
         this.volume = volume;
     }
 
-    public List<Substance> getGenerators() {
+    public List<Batch> getGenerators() {
         return generators;
     }
 
-    public void setGenerators(List<Substance> generators) {
+    public void setGenerators(List<Batch> generators) {
         this.generators = generators;
     }
 
-    public List<Batch> getSolvents() {
-        return solvents;
+    public List<Batch> getOthers() {
+        return others;
     }
 
-    public void setSolvents(List<Batch> solvents) {
-        this.solvents = solvents;
+    public void setOthers(List<Batch> other) {
+        this.others = other;
     }
 
     public String getsignature() {

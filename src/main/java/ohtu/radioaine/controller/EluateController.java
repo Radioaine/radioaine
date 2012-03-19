@@ -39,7 +39,7 @@ public class EluateController {
     private SubstanceService substanceService;
     int GENERATOR = 1;
     int KIT = 0;
-    int SOLVENT = 2;
+    int OTHER = 2;
 
     @RequestMapping(value = "createEluate", method = RequestMethod.GET)
     public String createEluate(Model model) {
@@ -47,9 +47,10 @@ public class EluateController {
         model.addAttribute("generators", getSpecificTypesFromSubstances(substanceService.list(), GENERATOR));
 //        List<Batch> batches = batchService.list();
 //        model.addAttribute("kits", getSpecificTypesFromBatches(batches, KIT));
-//        model.addAttribute("solvents", getSpecificTypesFromBatches(batches, SOLVENT));
+//        model.addAttribute("solvents", getSpecificTypesFromBatches(batches, OTHER));
+        model.addAttribute("generators", batchService.getBatchesByType(GENERATOR));
         model.addAttribute("kits", batchService.getBatchesByType(KIT));
-        model.addAttribute("solvents", batchService.getBatchesByType(SOLVENT));
+        model.addAttribute("others", batchService.getBatchesByType(OTHER));
         return "createEluate";
     }
 
@@ -81,7 +82,7 @@ public class EluateController {
         Eluate newEluate = eluateService.createOrUpdate(createEluate(efo));
         return "redirect:/frontpage";
     }
-    
+
     @RequestMapping("Eluate/{id}")
     public String eluateView(@PathVariable Integer id) {
         return "frontpage";
@@ -97,28 +98,38 @@ public class EluateController {
         System.out.println(efo.getStrength());
         eluate.setStrength(efo.getStrength());
         eluate.setVolume(efo.getVolume());
-        eluate.setTimestamp(Time.parseDate(efo.getDate()));
+        eluate.setTimestamp(Time.parseTimeStamp(efo.getDate() + " " + efo.getHours() + ":" + efo.getMinutes()));
         eluate.setSignature(efo.getSignature());
         eluate.setNote(efo.getNote());
         eluate.setStorageLocation(efo.getStorageLocation());
 
-        List<Substance> generators = new ArrayList<Substance>();
-        generators.add((Substance) substanceService.read(efo.getGenerators()));
+//        System.out.println("EFOIDT");
+//        System.out.println(efo.getGenerators());
+//        Batch generator = batchService.read(efo.getGenerators());
+//        System.out.println(generator.getId());
+//        System.out.println(efo.getOthers());
+//        Batch otherss = batchService.read(efo.getOthers());
+//        System.out.println(otherss.getId());
+//        System.out.println(efo.getKits());
+//        Batch kitsi = batchService.read(efo.getKits());
+//        System.out.println(kitsi.getId());
+        List<Batch> generators = new ArrayList<Batch>();
+        generators.add(batchService.read(efo.getGenerators()));
         List<Batch> kits = new ArrayList<Batch>();
         kits.add(batchService.read(efo.getKits()));
-        List<Batch> solvents = new ArrayList<Batch>();
-        solvents.add(batchService.read(efo.getSolvents()));
+        List<Batch> others = new ArrayList<Batch>();
+        others.add(batchService.read(efo.getOthers()));
 
 
-//        for (Batch generator : efo.getGenerators()) {
+//        for (Batch generator : efo.getOthers()) {
 //            generators.add((Batch) batchService.read(generator.getId()));
 //        }
-//        for (Batch solvent : efo.getSolvents()) {
+//        for (Batch solvent : efo.getOther()) {
 //            generators.add((Batch) batchService.read(solvent.getId()));
 //        }
 
         eluate.setGenerators(generators);
-        eluate.setSolvents(solvents);
+        eluate.setOthers(others);
         eluate.setKits(kits);
         return eluate;
     }

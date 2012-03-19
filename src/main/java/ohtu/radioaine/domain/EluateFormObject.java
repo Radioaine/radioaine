@@ -11,7 +11,7 @@ public class EluateFormObject {
     private String note;
     private int storageLocation;
     private int generators;
-    private int solvents;
+    private int others;
     private int kits;
 
     public int getKits() {
@@ -30,12 +30,12 @@ public class EluateFormObject {
         this.generators = generators;
     }
 
-    public int getSolvents() {
-        return solvents;
+    public int getOthers() {
+        return others;
     }
 
-    public void setSolvents(int solvent) {
-        this.solvents = solvent;
+    public void setOthers(int other) {
+        this.others = other;
     }
 
     public String getNote() {

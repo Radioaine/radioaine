@@ -9,6 +9,7 @@ import ohtu.radioaine.domain.Batch;
 
 /**
  * Implementation for Batch service methods.
+ *
  * @author rmjheino
  */
 @Service
@@ -28,7 +29,7 @@ public class SimpleBatchService implements BatchService {
     public List<Batch> list() {
         return storageDao.list();
     }
-    
+
     @Override
     @Transactional(readOnly = true)
     public Batch read(int id) {
@@ -43,7 +44,7 @@ public class SimpleBatchService implements BatchService {
             storageDao.delete(e);
         }
     }
-    
+
     @Override
     @Transactional(readOnly = true)
     public List<Batch> listSubstanceBatches(int id) {
@@ -55,10 +56,14 @@ public class SimpleBatchService implements BatchService {
     public Batch read(String batchNumber, int substance) {
         return storageDao.read(batchNumber, substance);
     }
-    
+
     @Override
     public List<Batch> getBatchesByType(int type) {
         return storageDao.getBatchesByType(type);
     }
-    
+
+//    @Override
+//    public List<Batch> getGeneratorBatches(int type) {
+//        return storageDao.getBatchesByType(type);
+//    }
 }

@@ -4,12 +4,15 @@
  */
 package ohtu.radioaine.domain;
 
+import javax.validation.constraints.NotNull;
+
 /**
  *
  * @author jahyvone
  */
 public class SubstanceFormObject {
-
+    
+    @NotNull(message = "Nimi ei saa olla tyhjä")
     private String name;
     private int type;
     private int alertLimit1;

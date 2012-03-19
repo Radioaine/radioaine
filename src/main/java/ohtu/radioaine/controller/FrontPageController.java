@@ -10,26 +10,27 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 /**
  * Controllers for frontpage
+ *
  * @author rmjheino
  */
 @Controller
 public class FrontPageController {
-    
+
+    int GENERATOR = 1;
     @Autowired
     private EluateService eluateService;
-
     @Autowired
-    private BatchService esinePalvelu;
+    private BatchService batchService;
 
     @RequestMapping("*")
     public String list() {
         return "redirect:/frontpage";
     }
-    
+
     @RequestMapping(value = "frontpage", method = RequestMethod.GET)
     public String frontPage(Model model) {
         model.addAttribute("eluates", eluateService.list());
+        model.addAttribute("generators", batchService.getBatchesByType(GENERATOR));
         return "frontpage";
     }
-
 }

@@ -1,12 +1,20 @@
 package ohtu.radioaine.domain;
 
-public class EluateFormObject {
+import javax.validation.constraints.NotNull;
 
+public class EluateFormObject {
+    
+    @NotNull(message = "Aktiivisuus ei saa olla tyhjä")
     private double strength;
+    @NotNull(message = "Tilavuus ei saa olla tyhjä")
     private int volume;
+    @NotNull(message = "Päivämäärä ei saa olla tyhjä")
     private String date;
+    @NotNull(message = "Tuntikenttä ei saa olla tyhjä")
     private String hours;
+    @NotNull(message = "Minuuttikenttä ei saa olla tyhjä")
     private String minutes;
+    @NotNull(message = "Nimi ei saa olla tyhjä")
     private String signature;
     private String note;
     private int storageLocation;

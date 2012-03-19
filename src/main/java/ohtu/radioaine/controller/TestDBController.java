@@ -33,9 +33,9 @@ public class TestDBController {
         {"Ceretec Exametazine Agent kittipakkaus 5 inj.plo", "3", "4", "false", "true", "Lääkefirma Perttilä", "Oy GE Healthcare Bio-Sciences Ab", "0"},
         {"Geneerinen generaattori", "3", "4", "true", "false", "Lääkefirma Perttilä", "Oy GE Healthcare Bio-Sciences Ab", "1"},
         {"Suolaliuos plo", "3", "4", "true", "false", "Lääkefirma Perttilä", "Oy GE Healthcare Bio-Sciences Ab", "2"}};
-    private String[][] batches = {{"123445EE", "8", "30", "0", "Jeejeee paljon huomautettavaa", "12.2.2012"},
-        {"99AADD22", "3", "10", "1", "puolet rikki", "13.2.2012"}, {"AAD175", "3", "10", "2", "1 lainassa", "13.6.2012"},
-        {"AAD175", "3", "10", "2", "1 lainassa", "13.6.2012"}, {"AAD175", "3", "10", "2", "1 lainassa", "13.6.2012"}};
+    private String[][] batches = {{"123445EE", "8", "30", "0", "Jeejeee paljon huomautettavaa", "12.2.2012 08:35"},
+        {"99AADD22", "3", "10", "1", "puolet rikki", "13.2.2012 10:35"}, {"AAD175", "3", "10", "2", "1 lainassa", "13.6.2012 11:55"},
+        {"AAD175", "3", "10", "2", "1 lainassa", "13.6.2012 12:45"}, {"AAD175", "3", "10", "2", "1 lainassa", "13.6.2012 09:23"}};
 
     @RequestMapping("generateTestDB")
     public String createDB() {
@@ -70,7 +70,7 @@ public class TestDBController {
             storageLocations[0][1] = Integer.parseInt(batches[i][1]);
             batch.setStorageLocations(storageLocations);
 
-            batch.setExpDate(Time.parseDate(batches[i][5]));
+            batch.setExpDate(Time.parseTimeStamp(batches[i][5]));
 
             batch.setSubstanceVolume(Integer.parseInt(batches[i][2]));
             batch.setQualityCheck(Integer.parseInt(batches[i][3]));

@@ -60,7 +60,7 @@
                 <td><form:input path="strength" type="text"/><form:errors path="strength"/>GBq</td>
             </tr>
             <tr>
-                <td>Aktiivisuus:</td>
+                <td>Tilavuus:</td>
                 <td><form:input path="volume" type="text"/><form:errors path="volume"/>ml</td>
             </tr>
             <tr>

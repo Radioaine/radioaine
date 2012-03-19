@@ -51,7 +51,6 @@
                 <td>${eluate.signature}</td>
             </tr>
         </c:forEach>
-
     </table>
     <p>
     <table class="listing">

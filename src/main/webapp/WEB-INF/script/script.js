@@ -1,5 +1,4 @@
 
-
 //function sivuLadattu() {
 //    var linkit = document.querySelectorAll("a");
 //  
@@ -50,3 +49,4 @@ function qualityResults(){
     var holder = document.querySelector("#qualityCheck");
     holder.innerHTML = "<form action=\"doCheck\"><select name=\"qualityCheck\"><option value=\"1\">Hyväksytty</option><option value=\"2\">Hylätty</option></select>"
 }
+

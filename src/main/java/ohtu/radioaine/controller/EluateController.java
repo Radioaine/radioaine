@@ -103,30 +103,23 @@ public class EluateController {
         eluate.setNote(efo.getNote());
         eluate.setStorageLocation(efo.getStorageLocation());
 
-//        System.out.println("EFOIDT");
-//        System.out.println(efo.getGenerators());
-//        Batch generator = batchService.read(efo.getGenerators());
-//        System.out.println(generator.getId());
-//        System.out.println(efo.getOthers());
-//        Batch otherss = batchService.read(efo.getOthers());
-//        System.out.println(otherss.getId());
-//        System.out.println(efo.getKits());
-//        Batch kitsi = batchService.read(efo.getKits());
-//        System.out.println(kitsi.getId());
         List<Batch> generators = new ArrayList<Batch>();
-        generators.add(batchService.read(efo.getGenerators()));
+        int[] generatorsTable = efo.getGenerators();
+        for (int i = 0; i < generatorsTable.length; ++i) {
+            generators.add(batchService.read(generatorsTable[i]));
+        }
+
         List<Batch> kits = new ArrayList<Batch>();
-        kits.add(batchService.read(efo.getKits()));
+        int[] kitsTable = efo.getGenerators();
+        for (int i = 0; i < kitsTable.length; ++i) {
+            kits.add(batchService.read(kitsTable[i]));
+        }
+
         List<Batch> others = new ArrayList<Batch>();
-        others.add(batchService.read(efo.getOthers()));
-
-
-//        for (Batch generator : efo.getOthers()) {
-//            generators.add((Batch) batchService.read(generator.getId()));
-//        }
-//        for (Batch solvent : efo.getOther()) {
-//            generators.add((Batch) batchService.read(solvent.getId()));
-//        }
+        int[] othersTable = efo.getGenerators();
+        for (int i = 0; i < othersTable.length; ++i) {
+            others.add(batchService.read(othersTable[i]));
+        }
 
         eluate.setGenerators(generators);
         eluate.setOthers(others);

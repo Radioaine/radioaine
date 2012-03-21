@@ -18,31 +18,31 @@ public class EluateFormObject {
     private String signature;
     private String note;
     private int storageLocation;
-    private int generators;
-    private int others;
-    private int kits;
+    private int[] generators = new int[5];
+    private int[] others = new int[5];
+    private int[] kits = new int[5];
 
-    public int getKits() {
+    public int[] getKits() {
         return kits;
     }
 
-    public void setKits(int kits) {
+    public void setKits(int[] kits) {
         this.kits = kits;
     }
 
-    public int getGenerators() {
+    public int[] getGenerators() {
         return generators;
     }
 
-    public void setGenerators(int generators) {
+    public void setGenerators(int[] generators) {
         this.generators = generators;
     }
 
-    public int getOthers() {
+    public int[] getOthers() {
         return others;
     }
 
-    public void setOthers(int other) {
+    public void setOthers(int[] other) {
         this.others = other;
     }
 

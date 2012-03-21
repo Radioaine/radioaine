@@ -110,13 +110,13 @@ public class EluateController {
         }
 
         List<Batch> kits = new ArrayList<Batch>();
-        int[] kitsTable = efo.getGenerators();
+        int[] kitsTable = efo.getKits();
         for (int i = 0; i < kitsTable.length; ++i) {
             kits.add(batchService.read(kitsTable[i]));
         }
 
         List<Batch> others = new ArrayList<Batch>();
-        int[] othersTable = efo.getGenerators();
+        int[] othersTable = efo.getOthers();
         for (int i = 0; i < othersTable.length; ++i) {
             others.add(batchService.read(othersTable[i]));
         }

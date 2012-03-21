@@ -26,7 +26,7 @@
                 </td>
             </tr>
             <tr>
-                <td>Kitti:</td>
+                <td>Kitit:</td>
                 <td><form:select path="kits">
                         <c:forEach var="kit" items="${kits}">
                             <form:option value="${kit.id}">${kit.substance.name},
@@ -36,7 +36,7 @@
                 </td>
             </tr>
             <tr>
-                <td>Liuotin:</td>
+                <td>Muut:</td>
                 <td><form:select path="others">
                         <c:forEach var="other" items="${others}">
                             <form:option value="${other.id}">${other.substance.name},

@@ -43,7 +43,7 @@
             <tr>
                 <td><fmt:formatDate value="${eluate.date}" pattern="HH:mm"/> </td>
                 <td><c:forEach var="kit" items="${eluate.kits}">
-                        ${kit.substance.name}
+                        ${kit.substance.name}<br>
                     </c:forEach></td>
                 <td>${eluate.strength} GBq</td>
                 <td>${eluate.volume} ml</td>

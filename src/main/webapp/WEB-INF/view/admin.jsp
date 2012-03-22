@@ -6,6 +6,7 @@
 
     <h2>Hallitse aineita</h2>
     <a href="<c:out value="${pageContext.servletContext.contextPath}" />/addSubstance">Lisää uusi lääkeaine</a><br />
-    <a href="<c:out value="${pageContext.servletContext.contextPath}" />/substanceView">Muokkaa lääkeaineiden tietoja</a>
+    <a href="<c:out value="${pageContext.servletContext.contextPath}" />/substanceView">Muokkaa lääkeaineiden tietoja</a><br />
+    <a href="<c:out value="${pageContext.servletContext.contextPath}" />/historyView">Historia</a>
 </div>
 <%@include file="footer.jsp" %>

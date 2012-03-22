@@ -89,6 +89,8 @@ public class TestDBController {
             substance.setSupplier(substances[i][6]);
             substance.setType(Integer.parseInt(substances[i][7]));
             substanceService.createOrUpdate(substance);
+            Event event = EventHandler.newSubstanceEvent(substance);
+            eventService.createOrUpdate(event);
         }
     }
 

@@ -12,7 +12,7 @@
 
         <tr>
             <td>Aine</td>
-            <td>${batch.substance}</a></td>
+            <td>${batch.substance.name}</a></td>
         </tr>
         <tr>
             <td>Jäljellä</td>

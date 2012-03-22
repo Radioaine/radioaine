@@ -89,7 +89,7 @@ public class TestDBController {
             substance.setSupplier(substances[i][6]);
             substance.setType(Integer.parseInt(substances[i][7]));
             substanceService.createOrUpdate(substance);
-            Event event = EventHandler.newSubstanceEvent(substance);
+            Event event = EventHandler.newSubstanceEvent(substance, "test db");
             eventService.createOrUpdate(event);
         }
     }
@@ -129,7 +129,7 @@ public class TestDBController {
                 batch.setSignature("testi db");
                 batch = batchService.createOrUpdate(batch);
 
-                Event event = EventHandler.newBatchEvent(batch);
+                Event event = EventHandler.newBatchEvent(batch, "test db");
                 eventService.createOrUpdate(event);
             }
         }

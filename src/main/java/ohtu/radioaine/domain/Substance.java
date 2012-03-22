@@ -37,6 +37,15 @@ public class Substance implements Serializable {
     private int totalAmount;
     @Column
     private Timestamp oldestDate;
+    private String signature;
+
+    public String getSignature() {
+        return signature;
+    }
+
+    public void setSignature(String signature) {
+        this.signature = signature;
+    }
 
     public Substance() {
         totalAmount = 0;

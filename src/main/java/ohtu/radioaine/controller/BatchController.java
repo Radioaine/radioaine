@@ -101,15 +101,19 @@ public class BatchController {
             BindingResult result,
             Model model,
             @PathVariable Integer id) {
+        System.out.println("ZZZ");
         if (result.hasErrors()) {
+            System.out.println("ZZZ2");
             return "redirect:/updateBatch/" + id;
         }
+        System.out.println("ZZZ3");
         updateBatch(id, bfm);
 
         return "redirect:/batch/" + id;
     }
 
     private Batch updateBatch(Integer id, BatchFormObject bfo) {
+        System.out.println("GGG");
         Batch batch = batchService.read(id);
         Substance substance = batch.getSubstance();
         batch.setStorageLocations(bfo.getStorageLocations());
@@ -127,6 +131,7 @@ public class BatchController {
         System.out.println("bfo.getAmount() : " + bfo.getAmount());
 
         if (batch.getSubstance().getId() != bfo.getSubstance()) {
+            System.out.println("XXX");
             int oldAmount = batch.getAmount();
             batch.setAmount(bfo.getAmount());
             Substance newSubstance = (Substance) substanceService.read(bfo.getSubstance());
@@ -135,6 +140,7 @@ public class BatchController {
             batch.setSubstance(newSubstance);
             substanceService.createOrUpdate(newSubstance);
         } else {
+            System.out.println("YYY");
             int amountChange = amountChange(batch, bfo);
             batch.setAmount(batch.getAmount() + amountChange);
             substance.setTotalAmount(substance.getTotalAmount() + amountChange);

@@ -19,9 +19,9 @@ public class Event implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    @Column
+    @Column (length = 1000)
     String happening;
-    @Column
+    @Column (length = 1000)
     String info;
     @Column
     private Timestamp timestamp;

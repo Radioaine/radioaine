@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
     <artifactId>radioaine</artifactId>
     <packaging>war</packaging>
-    <version>1.0-SNAPSHOT</version>
+    <version>1</version>
 
     <name>radioaine</name>
     <url>http://maven.apache.org</url>
@@ -15,7 +15,6 @@
         <eclipselink-jpa-version>2.0.0</eclipselink-jpa-version>
         <hsqldb-version>1.8.0.10</hsqldb-version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <netbeans.hint.deploy.server>gfv3ee6</netbeans.hint.deploy.server>
     </properties>
 
     <dependencies>
@@ -107,7 +106,14 @@
             <artifactId>javax.persistence</artifactId>
             <version>${eclipselink-jpa-version}</version>
         </dependency>
-               
+        
+        <!--mysql-->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>5.1.18</version>
+        </dependency>
+        
             
         <dependency>
             <groupId>org.hsqldb</groupId>

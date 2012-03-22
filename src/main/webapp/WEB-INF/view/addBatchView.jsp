@@ -47,11 +47,11 @@
             </tr>
             <tr>
                 <td valign="top">Sijainti</td>
-                <td><div id="varastot"><form:select path="storageLocations[0][0]">
+                <td><div id="varastot"><form:select  path="storageLocations[0][0]">
                             <c:forEach var="locations" items="${batch.storageLocations}" varStatus="i">
                                 <form:option value="${i.index+1}">Jääkaappi ${i.index+1}</form:option>
                             </c:forEach>
-                        </form:select> <form:input path="storageLocations[0][1]" type="number" size="3"/> kpl<br/> 
+                        </form:select> <form:input onchange="countAmount()" id="storageAmount" path="storageLocations[0][1]" type="number" size="3"/> kpl<br/> 
                     </div>
                 </td>
                 <td valign="bottom"><button type="button" onClick="addStorage(1, ${batch.storageLocationsCount})">Lisää varastopaikka</button></td>
@@ -59,7 +59,7 @@
             </tr>
             <tr>
                 <td>Määrä yhteensä</td>
-                <td><form:input path="amount" value="test" type="number" size="3" /><form:errors path="amount"/> kpl</td>
+                <td id="t">0</td>
                 <td></td>
             </tr>
             <tr>

@@ -1,19 +1,20 @@
-var counter1 = 2;
-var counter2 = 0;
+var storageCounter = 2;
+var eluateCounter = 0;
+var selectionCounter = 0;
 
 function addStorage(usedStorageLocationsCount, storageLocationsCount){
-    if(usedStorageLocationsCount > 0 && usedStorageLocationsCount >= counter1)
-        counter1 = usedStorageLocationsCount + 1;
+    if(usedStorageLocationsCount > 0 && usedStorageLocationsCount >= storageCounter)
+        storageCounter = usedStorageLocationsCount + 1;
     var storage = document.querySelector("#varastot");
     var newdiv = document.createElement("div");
-    newdiv.id = "varasto"+counter1;
-    var newHTML = "<select name=\"storageLocations["+(counter1-1)+"][0]\">";
+    newdiv.id = "varasto"+storageCounter;
+    var newHTML = "<select name=\"storageLocations["+(storageCounter-1)+"][0]\">";
     for(var i = 0; i < storageLocationsCount; i++)  {
         newHTML += "<option value=\""+(i+1)+"\">Jääkaappi "+(i+1)+"</option>";
     }
-    newHTML += "</select> <input type=\"number\" size=\"3\" name=\"storageLocations["+(counter-1)+"][1] \"> kpl &nbsp; <button type=\"button\" onClick=\"removeStorage("+counter+")\">Poista</button>";
+    newHTML += "</select> <input onchange=\"countAmount()\" value=\"0\" id=\"storageAmount\" type=\"number\" size=\"3\" name=\"storageLocations["+(storageCounter-1)+"][1] \"> kpl &nbsp; <button type=\"button\" onClick=\"removeStorage("+storageCounter+")\">Poista</button>";
     newdiv.innerHTML = newHTML;
-    counter1++;
+    storageCounter++;
     storage.appendChild(newdiv);
 }
 
@@ -21,8 +22,9 @@ function addStorage(usedStorageLocationsCount, storageLocationsCount){
 function removeStorage(number){
     var storage = document.querySelector("#varastot");
     var remove = document.querySelector("#varasto"+number);
-    counter--;
+    storageCounter--;
     storage.removeChild(remove);
+    countAmount();
 }
 
 function qualityResults(){
@@ -31,11 +33,28 @@ function qualityResults(){
 }
 
 function eluateAmounts(e){
-    console.log(e.target);
-    var newI = document.createElement("input");
-    newI.innerHTML = "type=\"number\" name=\"amount"+counter2+"\"";
-    counter2++;
-    document.querySelector("#selected").appendChild(newI);
-    newI.outerHTML= e.toElement.innerText+newI.outerHTML+"<br />";
+    var newDiv = document.createElement("div");
+    newDiv.id = "selection"+selectionCounter;
+    var newHTML = "<button type=\"button\" onclick=\"removeSelection("+newDiv.id+")\">Poista</button>"+e.target.innerHTML+"<input id=\""+e.target.value+"\"\>";
+    newDiv.innerHTML = newHTML;
+    selectionCounter++;
+    document.querySelector("#selected").appendChild(newDiv);
+    console.log(newDiv);
+}
+
+function removeSelection(elem){
+    console.log(elem);
+    document.querySelector("#"+elem.id).parentNode.removeChild(elem);
+    selectionCounter--;
+}
+
+function countAmount(){
+    var total=0;
+    var amounts = document.querySelectorAll("#storageAmount");
+    for(var i=0; i<amounts.length; i++){
+        total += parseInt(amounts[i].value);
+    }
+    document.querySelector("#t").innerText = total+" kpl";
+    
 }
 

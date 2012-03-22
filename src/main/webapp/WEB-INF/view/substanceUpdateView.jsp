@@ -15,7 +15,17 @@
         </tr>
         <tr>
             <td>Tyyppi</td>
-            <td>${substance.type}</td>
+            <td><c:choose>
+                    <c:when test="${substance.type=='0'}">
+                        Kitti
+                    </c:when>
+                    <c:when test="${substance.type=='1'}">
+                        Generaattori
+                    </c:when>
+                    <c:otherwise>
+                        Muu
+                    </c:otherwise>
+                </c:choose></td>
         </tr>
         <tr>
             <td>Valmistaja</td>
@@ -53,9 +63,9 @@
     <form:form commandName="substance" action="${pageContext.servletContext.contextPath}/updateSubstance/${substance.id}" method="POST">
         Aine: <form:input path="name" type="text"/><form:errors path="name"/><br/>
         Tyyppi: <form:select path="type">
-            <form:option value="Kit">Kitti</form:option>
-            <form:option value="Generator">Generaattori</form:option>
-            <form:option value="Other">Muu</form:option>
+            <form:option value="0">Kitti</form:option>
+            <form:option value="1">Generaattori</form:option>
+            <form:option value="2">Muu</form:option>
         </form:select><br/>
         Valmistaja: <form:input path="manufacturer" type="text"/><form:errors path="manufacturer"/><br/>
         Toimittaja: <form:input path="supplier" type="text"/><form:errors path="supplier"/><br/>

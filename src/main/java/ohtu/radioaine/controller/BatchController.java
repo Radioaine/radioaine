@@ -50,10 +50,13 @@ public class BatchController {
     @RequestMapping(value = "doCheck/{id}+{sid}", method = RequestMethod.POST)
     public String qualityCheck(@PathVariable Integer id,
             @PathVariable Integer sid,
+            @RequestParam String sig,
             @RequestParam Integer qualityCheck) {
         Batch temp = batchService.read(id);
         temp.setQualityCheck(qualityCheck);
         batchService.createOrUpdate(temp);
+        Event event = EventHandler.qualityCheckEvent(temp, sig);
+        eventService.createOrUpdate(event);
         return "redirect:/substance/" + sid;
     }
 
@@ -79,7 +82,7 @@ public class BatchController {
         Batch temp = batchService.read(batch.getBatchNumber(), bfo.getSubstance());
         if (temp == null) {
             batch = batchService.createOrUpdate(batch);
-            Event event = EventHandler.newBatchEvent(batch);
+            Event event = EventHandler.newBatchEvent(batch, bfo.getSignature());
             eventService.createOrUpdate(event);
         } else {
             batch = updateBatchSaato(temp.getId(), bfo);
@@ -87,14 +90,13 @@ public class BatchController {
         return "redirect:/batch/" + batch.getId();
     }
 
-    //Batchin päivittämiseen kesken
     @RequestMapping(value = "updateBatch/{id}")
     public String batchUpdateRequest(Model model, @PathVariable Integer id) {
         model.addAttribute("substances", substanceService.list());
         model.addAttribute("batch", batchService.read(id));
         return "batchUpdateView";
     }
-    //Batchin päivittämiseen keskenlog
+ 
 
     @RequestMapping(value = "updateBatch/{id}", method = RequestMethod.POST)
     public String batchUpdate(@Valid @ModelAttribute("batch") BatchFormObject bfm,
@@ -104,14 +106,17 @@ public class BatchController {
         System.out.println("ZZZ");
         if (result.hasErrors()) {
             System.out.println("ZZZ2");
+            System.out.println(result);
             return "redirect:/updateBatch/" + id;
         }
         System.out.println("ZZZ3");
         updateBatch(id, bfm);
-
         return "redirect:/batch/" + id;
     }
 
+    
+
+  
     private Batch updateBatch(Integer id, BatchFormObject bfo) {
         System.out.println("GGG");
         Batch batch = batchService.read(id);
@@ -120,16 +125,12 @@ public class BatchController {
         batch.setSubstanceVolume(bfo.getSubstanceVolume());
         batch.setBatchNumber(bfo.getBatchNumber());
         batch.setNote(bfo.getNote());
-
         int temp = 0;
         for (int i = 0; i < bfo.getStorageLocations().length; i++) {
             temp += bfo.getStorageLocations()[i][1];
         }
         bfo.setAmount(temp);
-
-
         System.out.println("bfo.getAmount() : " + bfo.getAmount());
-
         if (batch.getSubstance().getId() != bfo.getSubstance()) {
             System.out.println("XXX");
             int oldAmount = batch.getAmount();
@@ -147,9 +148,7 @@ public class BatchController {
         }
         batch = batchService.createOrUpdate(batch);
         substanceService.createOrUpdate(substance);
-//        Event3 event = EventHandler3.updateBatchEvent(batch, bfo.getUserName());
-//        eventService.createOrUpdate(event);
-        Event event = EventHandler.updateBatchEvent(batch);
+        Event event = EventHandler.updateBatchEvent(batch, bfo.getSignature());
         eventService.createOrUpdate(event);
         return batch;
     }
@@ -176,7 +175,6 @@ public class BatchController {
     public String deleteBatch(@RequestParam String name, @RequestParam Integer amount, @PathVariable Integer id) {
         Batch batch = batchService.read(id);
         Substance substance = batch.getSubstance();
-
         int total = batch.getAmount() - amount;
         if (total >= 0 && name.length() >= 1) {
             substance.setTotalAmount(substance.getTotalAmount() - amount);
@@ -186,27 +184,19 @@ public class BatchController {
         }
         return "redirect:/batch/" + id;
     }
-
-    /**
-     *
-     * @param bfo
-     * @return
-     */
+    
     private Batch createBatch(BatchFormObject bfo) {
         Batch batch = new Batch();
         batch.setBatchNumber(bfo.getBatchNumber());
         batch.setNote(bfo.getNote());
         batch.setArrivalDate(Time.parseDate(bfo.getArrivalDate()));
         batch.setExpDate((Time.parseDate(bfo.getExpDate())));
-
-        //Counts and sets the correct amount of the batch from storageLocations
         int temp = 0;
         for (int i = 0; i < bfo.getStorageLocations().length; i++) {
             temp += bfo.getStorageLocations()[i][1];
         }
 
         bfo.setAmount(temp);
-
         batch.setAmount(bfo.getAmount());
         batch.setSubstanceVolume(bfo.getSubstanceVolume());
         batch.setStorageLocations(bfo.getStorageLocations());
@@ -223,7 +213,7 @@ public class BatchController {
         Batch batch = batchService.read(id);
         batch.setAmount(batch.getAmount() + bfm.getAmount());
         batch.setNote(batch.getNote() + "\n" + bfm.getNote());
-        Event event = EventHandler.addToBatchEvent(batch);
+        Event event = EventHandler.addToBatchEvent(batch, bfm.getSignature());
         eventService.createOrUpdate(event);
         return batchService.createOrUpdate(batch);
 

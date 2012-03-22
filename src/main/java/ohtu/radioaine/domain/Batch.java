@@ -162,6 +162,7 @@ public class Batch implements Serializable {
     public String toStringShow() {
         return "eränumero = " + batchNumber + " määrä = " + amount + " aine = " + substance.getName() + " saapumispvm = " + arrivalDate + " vanhenemispvm = " + expDate + " radioaktiivisuus = " + strength + " valmistaja = " + manufacturer + " toimittaja = " + supplier + " kommentit = " + note;
     }
+    
 
     public Substance getSubstance() {
         return substance;

@@ -20,6 +20,15 @@ public class SubstanceFormObject {
     private boolean needsColdStorage;
     private String manufacturer;
     private String supplier;
+    private String signature;
+
+    public String getSignature() {
+        return signature;
+    }
+
+    public void setSignature(String signature) {
+        this.signature = signature;
+    }
 
     public int getType() {
         return type;

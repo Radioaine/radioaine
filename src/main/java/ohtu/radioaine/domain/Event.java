@@ -25,6 +25,16 @@ public class Event implements Serializable {
     String info;
     @Column
     private Timestamp timestamp;
+    @Column
+    private String signature;
+
+    public String getSignature() {
+        return signature;
+    }
+
+    public void setSignature(String signature) {
+        this.signature = signature;
+    }
     
     public Event() {
         timestamp = Time.getTimestamp();

@@ -44,7 +44,8 @@
                                 <option value="1">Hyväksytty</option>
                                 <option value="2">Hylätty</option>
                             </select>
-                            <input type="submit" value="Kirjaa tulos">
+                            <input type="text" name="sig" size="3" />
+                            <input type="submit" value="Kirjaa tulos" />
                         </form>
                     </c:otherwise>
                 </c:choose>

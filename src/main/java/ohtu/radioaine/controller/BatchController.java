@@ -52,11 +52,20 @@ public class BatchController {
             @PathVariable Integer sid,
             @RequestParam String sig,
             @RequestParam Integer qualityCheck) {
-        Batch temp = batchService.read(id);
-        temp.setQualityCheck(qualityCheck);
-        batchService.createOrUpdate(temp);
-        Event event = EventHandler.qualityCheckEvent(temp, sig);
+        if (sig.length() < 2) {
+            if (sid <= 0) {
+                return "redirect:/batch/" + id;
+            }
+            return "redirect:/substance/" + sid;
+        }
+        Batch batch = batchService.read(id);
+        batch.setQualityCheck(qualityCheck);
+        batchService.createOrUpdate(batch);
+        Event event = EventHandler.qualityCheckEvent(batch, sig);
         eventService.createOrUpdate(event);
+        if (sid <= 0) {
+            return "redirect:/batch/" + id;
+        }
         return "redirect:/substance/" + sid;
     }
 
@@ -96,7 +105,6 @@ public class BatchController {
         model.addAttribute("batch", batchService.read(id));
         return "batchUpdateView";
     }
- 
 
     @RequestMapping(value = "updateBatch/{id}", method = RequestMethod.POST)
     public String batchUpdate(@Valid @ModelAttribute("batch") BatchFormObject bfm,
@@ -114,9 +122,6 @@ public class BatchController {
         return "redirect:/batch/" + id;
     }
 
-    
-
-  
     private Batch updateBatch(Integer id, BatchFormObject bfo) {
         System.out.println("GGG");
         Batch batch = batchService.read(id);
@@ -184,7 +189,7 @@ public class BatchController {
         }
         return "redirect:/batch/" + id;
     }
-    
+
     private Batch createBatch(BatchFormObject bfo) {
         Batch batch = new Batch();
         batch.setBatchNumber(bfo.getBatchNumber());

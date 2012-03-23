@@ -44,27 +44,28 @@
         </tr>
         <tr>
             <td>Laadunvarmistus</td>
-            <td>
+            <td id="qualityCheck">
                 <c:choose>
                     <c:when test="${batch.qualityCheck==1}">
-                        Ok
+                        Hyväksytty
                     </c:when>
                     <c:when test="${batch.qualityCheck==2}">
-                        Hylätty
+                        <p style="background-color: red">Hylätty</p>
                     </c:when>
                     <c:otherwise>
-                        <form style="background-color: yellow" action="${pageContext.servletContext.contextPath}/doCheck/${batch.id}+${batch.substance.id}" method="POST">
+                        <form style="background-color: yellow" action="${pageContext.servletContext.contextPath}/doCheck/${batch.id}+0" method="POST">
                             <select name="qualityCheck">
                                 <option value="1">Hyväksytty</option>
                                 <option value="2">Hylätty</option>
                             </select>
-                            <input type="submit" value="Kirjaa tulos">
+                            <input type="text" name="sig" size="3" />
+                            <input type="submit" value="Kirjaa tulos" />
                         </form>
                     </c:otherwise>
                 </c:choose>
             </td>
         </tr>
-        
+
         <c:forEach var="location" varStatus="i" items="${batch.storageLocations}">
             <c:choose>
                 <c:when test="${batch.storageLocations[i.index][1] > 0}">

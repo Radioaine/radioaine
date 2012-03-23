@@ -64,7 +64,7 @@ public class JPABatchDBDao implements BatchDBDao {
     @Override
     public List<Batch> getBatchesByType(int type) {
         try {
-            Query q = entityManager.createQuery("SELECT b FROM Batch b WHERE b.substance.type=" + type);
+            Query q = entityManager.createQuery("SELECT b FROM Batch b WHERE b.amount > 0 AND b.substance.type=" + type + "ORDER BY b.substance.name, b.expDate");
             return q.getResultList();
         } catch (NoResultException e) {
             return null;

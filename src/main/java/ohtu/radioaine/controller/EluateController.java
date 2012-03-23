@@ -113,18 +113,21 @@ public class EluateController {
         List<Batch> generators = new ArrayList<Batch>();
         int[] generatorsTable = efo.getGenerators();
         for (int i = 0; i < generatorsTable.length; ++i) {
+            
             generators.add(batchService.read(generatorsTable[i]));
         }
 
         List<Batch> kits = new ArrayList<Batch>();
         int[] kitsTable = efo.getKits();
         for (int i = 0; i < kitsTable.length; ++i) {
+            
             kits.add(batchService.read(kitsTable[i]));
         }
 
         List<Batch> others = new ArrayList<Batch>();
         int[] othersTable = efo.getOthers();
         for (int i = 0; i < othersTable.length; ++i) {
+            
             others.add(batchService.read(othersTable[i]));
         }
 

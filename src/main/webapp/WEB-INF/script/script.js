@@ -33,9 +33,19 @@ function qualityResults(){
 }
 
 function eluateAmounts(e){
+    console.log(e.target.id);
     var newDiv = document.createElement("div");
     newDiv.id = "selection"+selectionCounter;
-    var newHTML = "<button type=\"button\" onclick=\"removeSelection("+newDiv.id+")\">Poista</button>"+e.target.innerHTML+"<input type=\"hidden\" name=\"generators\" value=\""+e.target.value+"\"\>";
+    var newHTML = "";
+    if(e.target.id == "0"){
+        newHTML = "<button type=\"button\" onclick=\"removeSelection("+newDiv.id+")\">Poista</button>"+e.target.innerHTML+"<input type=\"hidden\" name=\"generators\" value=\""+e.target.value+"\"\>";
+    }
+    else if(e.target.id == "1"){
+        newHTML = "<button type=\"button\" onclick=\"removeSelection("+newDiv.id+")\">Poista</button>"+e.target.innerHTML+"<input type=\"hidden\" name=\"kits\" value=\""+e.target.value+"\"\>";
+    }
+    else{     
+        newHTML = "<button type=\"button\" onclick=\"removeSelection("+newDiv.id+")\">Poista</button>"+e.target.innerHTML+"<input type=\"hidden\" name=\"others\" value=\""+e.target.value+"\"\>";
+    }
     newDiv.innerHTML = newHTML;
     selectionCounter++;
     document.querySelector("#selected").appendChild(newDiv);

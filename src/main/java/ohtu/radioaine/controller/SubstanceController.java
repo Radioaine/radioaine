@@ -4,6 +4,7 @@ import javax.validation.Valid;
 import ohtu.radioaine.domain.Substance;
 import ohtu.radioaine.domain.SubstanceFormObject;
 import ohtu.radioaine.service.BatchService;
+import ohtu.radioaine.service.EventService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,26 +20,29 @@ public class SubstanceController {
 
     @Autowired
     private SubstanceService substanceService;
-    
     @Autowired
     private BatchService batchService;
-
+    @Autowired
+    private EventService eventService;
+    
     @RequestMapping(value = "substance/{id}", method = RequestMethod.GET)
     public String getSubstanceById(@PathVariable Integer id, Model model) {
-        model.addAttribute("substance", substanceService.read(id));
+        Substance substance = (Substance) substanceService.read(id);
+        model.addAttribute("substance", substance);
         model.addAttribute("substanceBatches", batchService.listSubstanceBatches(id));
+        model.addAttribute("substanceHistory", eventService.list(substance.getName()));
         return "substanceBatches";
     }
 
     @RequestMapping(value = "substance", method = RequestMethod.POST)
     public String addSubstance(@Valid @ModelAttribute("substance") SubstanceFormObject sfo, BindingResult result) {
-        if(result.hasErrors()) {
+        if (result.hasErrors()) {
             return "addSubstanceView";
         }
         substanceService.createOrUpdate(createSubstance(sfo));
         return "redirect:/substanceList";
     }
-    
+
     private Substance createSubstance(SubstanceFormObject sfo) {
         Substance substance = new Substance();
         substance.setType(sfo.getType());
@@ -48,7 +52,7 @@ public class SubstanceController {
         substance.setAlertLimit1(sfo.getAlertLimit1());
         substance.setAlertLimit2(sfo.getAlertLimit2());
         substance.setTotalAmount(0);
-        
+
         return substance;
     }
 
@@ -57,13 +61,13 @@ public class SubstanceController {
         model.addAttribute("substances", substanceService.list());
         return "substanceViewTest";
     }
-    
+
     @RequestMapping(value = "updateSubstance/{id}", method = RequestMethod.POST)
-    public String updateSubstance(@Valid @ModelAttribute("substance") SubstanceFormObject sfm, 
-    BindingResult result, 
-    Model model, 
-    @PathVariable Integer id){
-        Substance temp = (Substance)substanceService.read(id);
+    public String updateSubstance(@Valid @ModelAttribute("substance") SubstanceFormObject sfm,
+            BindingResult result,
+            Model model,
+            @PathVariable Integer id) {
+        Substance temp = (Substance) substanceService.read(id);
         Substance substance = new Substance();
         substance.setId(temp.getId());
         substance.setName(sfm.getName());
@@ -74,10 +78,10 @@ public class SubstanceController {
         substance.setManufacturer(sfm.getManufacturer());
         substance.setSupplier(sfm.getSupplier());
         substanceService.createOrUpdate(substance);
-        
-        return "redirect:/updateSubstance/"+id;
+
+        return "redirect:/updateSubstance/" + id;
     }
-    
+
     @RequestMapping(value = "updateSubstance/{id}", method = RequestMethod.GET)
     public String updateSubstanceView(Model model, @PathVariable Integer id) {
         System.out.println(id);

@@ -139,7 +139,7 @@ public class EluateController {
 
     private void updateAmounts(List<Batch> generators, List<Batch> others, List<Batch> kits) {
         for (Batch gen : generators) {
-            Batch batch = batchService.read(gen.getBatchNumber(), gen.getSubstance().getId());
+            Batch batch = batchService.read(gen.getId());
             Substance substance = (Substance) substanceService.read(batch.getSubstance().getId());
             batch.useOne();
             substance.useOne();
@@ -147,7 +147,7 @@ public class EluateController {
             substanceService.createOrUpdate(substance);
         }
         for (Batch other : others) {
-            Batch batch = batchService.read(other.getBatchNumber(), other.getSubstance().getId());
+            Batch batch = batchService.read(other.getId());
             Substance substance = (Substance) substanceService.read(batch.getSubstance().getId());
             batch.useOne();
             substance.useOne();
@@ -155,7 +155,7 @@ public class EluateController {
             substanceService.createOrUpdate(substance);
         }
         for (Batch kit : kits) {
-            Batch batch = batchService.read(kit.getBatchNumber(), kit.getSubstance().getId());
+            Batch batch = batchService.read(kit.getId());
             Substance substance = (Substance) substanceService.read(batch.getSubstance().getId());
             batch.useOne();
             substance.useOne();

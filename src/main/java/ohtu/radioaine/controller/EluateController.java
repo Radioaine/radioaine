@@ -41,6 +41,12 @@ public class EluateController {
     int KIT = 0;
     int OTHER = 2;
 
+    @RequestMapping(value = "eluate/{id}", method = RequestMethod.GET)
+    public String getEluateById(@PathVariable Integer id, Model model) {
+        model.addAttribute("eluate", eluateService.read(id));
+        return "eluateView";
+    }
+    
     @RequestMapping(value = "createEluate", method = RequestMethod.GET)
     public String createEluate(Model model) {
         model.addAttribute("eluate", new EluateFormObject());

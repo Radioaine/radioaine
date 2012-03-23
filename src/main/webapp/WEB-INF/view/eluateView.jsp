@@ -6,30 +6,50 @@
 <%@include file="headerstorage.jsp" %>
 
 <div id="contents">
-    <h1>Eluaatti ${eluate.id}</h1>
+    <h1>Eluaatti</h1>
+    <c:forEach var="generator" items="${eluate.generators}">
+        <b>${generator.substance.name}</b><br>
+    </c:forEach>
 
-    <table id="reunaton">
+    <c:forEach var="kit" items="${eluate.kits}">
+        <b>${kit.substance.name}</b><br>
+    </c:forEach>
+
+    <c:forEach var="other" items="${eluate.others}">
+        <b>${other.substance.name}</b><br>
+    </c:forEach>
+
+
+    <br>
+    <table>
+
         <tr>
-            <td>Generaattorit</td>
-            <c:forEach var="gen" items="${eluate.generators}">
-                <td>${gen.substance.name}</td><br /> 
-            </c:forEach>
+            <td>Aktiivisuus</td>
+            <td>${eluate.strength}</a></td>
         </tr>
         <tr>
-            <td>Kitit</td>
-            <c:forEach var="kit" items="${eluate.kits}">
-                <td>${kit.substance.name}</td><br /> 
-            </c:forEach>
+            <td>Tilavuus</td>
+            <td>${eluate.volume} ml</td>
         </tr>
         <tr>
-            <td>Muut</td>
-            <c:forEach var="other" items="${eluate.others}">
-                <td>${other.substance.name}</td><br /> 
-            </c:forEach>
+            <td>Vahvuus</td>
+            <td>${eluate.strength} GBq</td>
         </tr>
- 
+        <tr>
+            <td>Luotu</td>
+            <td><fmt:formatDate value="${eluate.date}" pattern="dd.MM.yyyy HH:mm"/></td>
+        </tr>
+        <tr>
+            <td>Kommentit</td>
+            <td>${eluate.note}</td>
+        </tr>
+        <tr>
+            <td>Tekijä</td>
+            <td>${eluate.signature}</td>
+        </tr>
+
     </table>
-      
 </div>
+
 
 <%@include file="footer.jsp" %>

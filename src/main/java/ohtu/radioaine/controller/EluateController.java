@@ -50,40 +50,15 @@ public class EluateController {
     @RequestMapping(value = "createEluate", method = RequestMethod.GET)
     public String createEluate(Model model) {
         model.addAttribute("eluate", new EluateFormObject());
-        model.addAttribute("generators", getSpecificTypesFromSubstances(substanceService.list(), GENERATOR));
-//        List<Batch> batches = batchService.list();
-//        model.addAttribute("kits", getSpecificTypesFromBatches(batches, KIT));
-//        model.addAttribute("solvents", getSpecificTypesFromBatches(batches, OTHER));
         model.addAttribute("generators", batchService.getBatchesByType(GENERATOR));
         model.addAttribute("kits", batchService.getBatchesByType(KIT));
         model.addAttribute("others", batchService.getBatchesByType(OTHER));
         return "createEluate";
     }
 
-    private List<Substance> getSpecificTypesFromSubstances(List<Substance> substances, int type) {
-        List<Substance> typeList = new ArrayList<Substance>();
-        for (Substance substance : substances) {
-            if (substance.getType() == type) {
-                typeList.add(substance);
-            }
-        }
-        return typeList;
-    }
-
-    private List<Batch> getSpecificTypesFromBatches(List<Batch> batches, int type) {
-        List<Batch> typeList = new ArrayList<Batch>();
-        for (Batch batch : batches) {
-            if (batch.getSubstance().getType() == type) {
-                typeList.add(batch);
-            }
-        }
-        return typeList;
-    }
-
     @RequestMapping(value = "createEluate", method = RequestMethod.POST)
     public String newEluate(@Valid @ModelAttribute("eluate") EluateFormObject efo, BindingResult result) {
         if (result.hasErrors()) {
-            System.out.println(result);
             return "createEluate";
         }
         Eluate newEluate = eluateService.createOrUpdate(createEluate(efo));
@@ -103,7 +78,7 @@ public class EluateController {
     private Eluate createEluate(EluateFormObject efo) {
         Eluate eluate = new Eluate();
         System.out.println(efo.getStrength());
-        eluate.setStrength(efo.getStrength());
+        eluate.setStrength(Double.parseDouble(efo.getStrength()));
         eluate.setVolume(efo.getVolume());
         eluate.setTimestamp(Time.parseTimeStamp(efo.getDate() + " " + efo.getHours() + ":" + efo.getMinutes()));
         eluate.setSignature(efo.getSignature());
@@ -113,54 +88,24 @@ public class EluateController {
         List<Batch> generators = new ArrayList<Batch>();
         int[] generatorsTable = efo.getGenerators();
         for (int i = 0; i < generatorsTable.length; ++i) {
-            
             generators.add(batchService.read(generatorsTable[i]));
         }
 
         List<Batch> kits = new ArrayList<Batch>();
         int[] kitsTable = efo.getKits();
         for (int i = 0; i < kitsTable.length; ++i) {
-            
             kits.add(batchService.read(kitsTable[i]));
         }
 
         List<Batch> others = new ArrayList<Batch>();
         int[] othersTable = efo.getOthers();
         for (int i = 0; i < othersTable.length; ++i) {
-            
             others.add(batchService.read(othersTable[i]));
         }
-        updateAmounts(generators, others, kits);
+
         eluate.setGenerators(generators);
         eluate.setOthers(others);
         eluate.setKits(kits);
         return eluate;
-    }
-
-    private void updateAmounts(List<Batch> generators, List<Batch> others, List<Batch> kits) {
-        for( Batch gen : generators){
-            Batch batch = batchService.read(gen.getBatchNumber(), gen.getSubstance().getId());
-            Substance substance = (Substance)substanceService.read(batch.getSubstance().getId());
-            batch.useOne();
-            substance.useOne();
-            batchService.createOrUpdate(batch);
-            substanceService.createOrUpdate(substance);         
-        }
-        for( Batch other : others){
-            Batch batch = batchService.read(other.getBatchNumber(), other.getSubstance().getId());
-            Substance substance = (Substance)substanceService.read(batch.getSubstance().getId());
-            batch.useOne();
-            substance.useOne();
-            batchService.createOrUpdate(batch);
-            substanceService.createOrUpdate(substance);
-        }
-        for( Batch kit : kits){
-            Batch batch = batchService.read(kit.getBatchNumber(), kit.getSubstance().getId());
-            Substance substance = (Substance)substanceService.read(batch.getSubstance().getId());
-            batch.useOne();
-            substance.useOne();
-            batchService.createOrUpdate(batch);
-            substanceService.createOrUpdate(substance);
-        }
     }
 }

@@ -35,7 +35,7 @@ function qualityResults(){
 function eluateAmounts(e){
     var newDiv = document.createElement("div");
     newDiv.id = "selection"+selectionCounter;
-    var newHTML = "<button type=\"button\" onclick=\"removeSelection("+newDiv.id+")\">Poista</button>"+e.target.innerHTML+"<input id=\""+e.target.value+"\"\>";
+    var newHTML = "<button type=\"button\" onclick=\"removeSelection("+newDiv.id+")\">Poista</button>"+e.target.innerHTML+"<input type=\"hidden\" name=\"generators\" value=\""+e.target.value+"\"\>";
     newDiv.innerHTML = newHTML;
     selectionCounter++;
     document.querySelector("#selected").appendChild(newDiv);

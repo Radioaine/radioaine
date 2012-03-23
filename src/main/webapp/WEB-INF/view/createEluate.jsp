@@ -25,16 +25,16 @@
         <table class="noborder">
             <tr>
                 <td>Generaattori:</td>
-                <td onclick="eluateAmounts(event)"><form:select path="generators">
+                <td><select multiple="multiple" onclick="eluateAmounts(event)">
                         <c:forEach var="generator" items="${generators}">
-                            <form:option  value="${generator.id}">${generator.substance.name}</form:option>
+                            <option  value="${generator.id}">${generator.substance.name}</option>
                         </c:forEach>
-                    </form:select>
+                    </select>
                 </td>
             </tr>
             <tr>
                 <td>Kitit:</td>
-                <td onclick="eluateAmounts(event)"><form:select path="kits">
+                <td><form:select onclick="eluateAmounts(event)" path="kits">
                         <c:forEach var="kit" items="${kits}">
                             <form:option value="${kit.id}">${kit.substance.name},
                                 ${kit.batchNumber}, <fmt:formatDate value="${kit.expDate}" pattern="dd.MM.yyyy"/></form:option>
@@ -44,7 +44,7 @@
             </tr>
             <tr>
                 <td>Muut:</td>
-                <td onclick="eluateAmounts(event)"><form:select path="others">
+                <td><form:select onclick="eluateAmounts(event)" path="others">
                         <c:forEach var="other" items="${others}">
                             <form:option value="${other.id}">${other.substance.name},
                                 ${other.batchNumber}, <fmt:formatDate value="${other.expDate}" pattern="dd.MM.yyyy"/></form:option>

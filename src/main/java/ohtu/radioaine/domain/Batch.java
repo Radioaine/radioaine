@@ -130,11 +130,6 @@ public class Batch implements Serializable {
         return manufacturer;
     }
 
-    /**
-     * Sets the manufacturer
-     *
-     * @param manufacturer name of the manufacturer
-     */
     public void setManufacturer(String manufacturer) {
         this.manufacturer = manufacturer;
     }
@@ -188,5 +183,9 @@ public class Batch implements Serializable {
             }
         }
         return temp;
+    }
+    
+    public void useOne(){
+        amount--;
     }
 }

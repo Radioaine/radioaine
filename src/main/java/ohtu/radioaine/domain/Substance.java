@@ -156,5 +156,7 @@ public class Substance implements Serializable {
         return "NIMI= " + name + ", TYYPPI= " + type + ", HÄLYRAJA1= " + alertLimit1 + ", HÄLYRAJA2= " + alertLimit2 + ", KYLMÄSÄILYTYS= " + needsColdStorage + ", VALMISTAJA= " + manufacturer + ", TOIMITTAJA= " + supplier;
     }
 
-    
+    public void useOne(){
+        totalAmount--;
+    }
 }

@@ -41,6 +41,12 @@ public class EluateController {
     int KIT = 0;
     int OTHER = 2;
 
+    @RequestMapping(value = "eluate/{id}", method = RequestMethod.GET)
+    public String getEluateById(@PathVariable Integer id, Model model) {
+        model.addAttribute("eluate", eluateService.read(id));
+        return "eluateView";
+    }
+    
     @RequestMapping(value = "createEluate", method = RequestMethod.GET)
     public String createEluate(Model model) {
         model.addAttribute("eluate", new EluateFormObject());
@@ -77,6 +83,7 @@ public class EluateController {
     @RequestMapping(value = "createEluate", method = RequestMethod.POST)
     public String newEluate(@Valid @ModelAttribute("eluate") EluateFormObject efo, BindingResult result) {
         if (result.hasErrors()) {
+            System.out.println(result);
             return "createEluate";
         }
         Eluate newEluate = eluateService.createOrUpdate(createEluate(efo));
@@ -106,24 +113,54 @@ public class EluateController {
         List<Batch> generators = new ArrayList<Batch>();
         int[] generatorsTable = efo.getGenerators();
         for (int i = 0; i < generatorsTable.length; ++i) {
+            
             generators.add(batchService.read(generatorsTable[i]));
         }
 
         List<Batch> kits = new ArrayList<Batch>();
         int[] kitsTable = efo.getKits();
         for (int i = 0; i < kitsTable.length; ++i) {
+            
             kits.add(batchService.read(kitsTable[i]));
         }
 
         List<Batch> others = new ArrayList<Batch>();
         int[] othersTable = efo.getOthers();
         for (int i = 0; i < othersTable.length; ++i) {
+            
             others.add(batchService.read(othersTable[i]));
         }
-
+        updateAmounts(generators, others, kits);
         eluate.setGenerators(generators);
         eluate.setOthers(others);
         eluate.setKits(kits);
         return eluate;
+    }
+
+    private void updateAmounts(List<Batch> generators, List<Batch> others, List<Batch> kits) {
+        for( Batch gen : generators){
+            Batch batch = batchService.read(gen.getBatchNumber(), gen.getSubstance().getId());
+            Substance substance = (Substance)substanceService.read(batch.getSubstance().getId());
+            batch.useOne();
+            substance.useOne();
+            batchService.createOrUpdate(batch);
+            substanceService.createOrUpdate(substance);         
+        }
+        for( Batch other : others){
+            Batch batch = batchService.read(other.getBatchNumber(), other.getSubstance().getId());
+            Substance substance = (Substance)substanceService.read(batch.getSubstance().getId());
+            batch.useOne();
+            substance.useOne();
+            batchService.createOrUpdate(batch);
+            substanceService.createOrUpdate(substance);
+        }
+        for( Batch kit : kits){
+            Batch batch = batchService.read(kit.getBatchNumber(), kit.getSubstance().getId());
+            Substance substance = (Substance)substanceService.read(batch.getSubstance().getId());
+            batch.useOne();
+            substance.useOne();
+            batchService.createOrUpdate(batch);
+            substanceService.createOrUpdate(substance);
+        }
     }
 }

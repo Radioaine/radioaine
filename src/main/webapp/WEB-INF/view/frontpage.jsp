@@ -43,7 +43,7 @@
             <tr>
                 <td><fmt:formatDate value="${eluate.date}" pattern="HH:mm"/> </td>
                 <td><c:forEach var="generator" items="${eluate.generators}">
-                        <a href="eluate/${eluate.id}">${generator.substance.name}</a><br>
+                        <a href="eluate/${eluate.id}"><b>${generator.substance.name}</b></a><br>
                     </c:forEach></td>
                 <td>${eluate.strength} GBq</td>
                 <td>${eluate.volume} ml</td>
@@ -54,7 +54,7 @@
             <c:forEach var="radioMed" items="${radioMeds}">
                 <c:if test="${radioMed.eluates[0].id == eluate.id}">  
                     <tr>
-                        <td><span class="pad"><fmt:formatDate value="${radioMed.date}" pattern="HH:mm"/></span> </td>
+                        <td><fmt:formatDate value="${radioMed.date}" pattern="HH:mm"/></td>
                         <td><c:forEach var="kit" items="${radioMed.kits}">
                                 <a href="RadioMedicine/${radioMed.id}">${kit.substance.name}</a><br>
                             </c:forEach></td>

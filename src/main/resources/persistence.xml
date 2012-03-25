@@ -10,6 +10,7 @@
     <class>ohtu.radioaine.domain.Substance</class>
     <class>ohtu.radioaine.domain.Event</class>
     <class>ohtu.radioaine.domain.Event2</class>
+    <class>ohtu.radioaine.domain.Storage</class>
     <exclude-unlisted-classes>true</exclude-unlisted-classes>
     <properties>
       <property name="showSql" value="true"/>

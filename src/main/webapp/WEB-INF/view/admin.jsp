@@ -68,7 +68,6 @@
 			<form method="link" action="admin.html">
 				<input type="submit" value="Kuittaa nähdyksi">
 			</form>
-
 			
     </div>
 <%@include file="footer.jsp" %>

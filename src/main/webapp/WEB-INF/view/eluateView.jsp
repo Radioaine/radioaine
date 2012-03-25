@@ -11,10 +11,6 @@
         <b>${generator.substance.name}</b><br>
     </c:forEach>
 
-    <c:forEach var="kit" items="${eluate.kits}">
-        <b>${kit.substance.name}</b><br>
-    </c:forEach>
-
     <c:forEach var="other" items="${eluate.others}">
         <b>${other.substance.name}</b><br>
     </c:forEach>

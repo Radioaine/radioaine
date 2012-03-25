@@ -11,6 +11,13 @@
 
 }
 </script>
+<script type="text/javascript" src="<c:url value="/script/ui.datepicker-fi.js" />"></script>
+<script>
+    $(function() {
+        $( "#creationtime" ).datepicker();
+    });
+</script>
+
 <div id="contents">
     <h2>Uusi radiolääke</h2>
     <form:form commandName="radioMedicine" action="createRadioMedicine" method="POST">
@@ -60,7 +67,7 @@
                 <td>Luontiaika:</td>
                 <td><form:input path="hours" type="text" id="hours" size="2"/><form:errors path="hours"/>:<form:input
                         path="minutes" type="text" id="minutes" size="2"/><form:errors path="minutes"/>
-                    <form:input path="date" type="text" id="eluatingtime"/><form:errors path="date"/></td>
+                    <form:input path="date" type="text" id="creationtime"/><form:errors path="date"/></td>
             </tr>
             <tr>
                 <td>Aktiivisuus:</td>

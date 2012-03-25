@@ -38,7 +38,7 @@
                         <c:forEach var="kit" items="${kits}">
                             <option id="1" value="${kit.id}">${kit.substance.name},
                                 ${kit.batchNumber}, <fmt:formatDate value="${kit.expDate}" pattern="dd.MM.yyyy"/></option>
-                        </c:forEach>
+                            </c:forEach>
                     </select>
                 </td>
             </tr>
@@ -48,7 +48,7 @@
                         <c:forEach var="other" items="${others}">
                             <option id="2" value="${other.id}">${other.substance.name},
                                 ${other.batchNumber}, <fmt:formatDate value="${other.expDate}" pattern="dd.MM.yyyy"/></option>
-                        </c:forEach>
+                            </c:forEach>
                     </select>
                 <td>
             </tr>

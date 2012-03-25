@@ -1,13 +1,21 @@
 package ohtu.radioaine.domain;
 
+import javax.validation.constraints.NotNull;
+
 public class RadioMedicineFormObject {
 
 
-    private double strength;
+    @NotNull(message = "Aktiivisuus ei saa olla tyhjä")
+    private String strength;
+    @NotNull(message = "Tilavuus ei saa olla tyhjä")
     private int volume;
+    @NotNull(message = "Päiväys ei saa olla tyhjä")
     private String date;
+    @NotNull(message = "Tunnit ei saa olla tyhjä")
     private String hours;
+    @NotNull(message = "Eränumero ei saa olla tyhjä")
     private String minutes;
+    @NotNull(message = "Nimi ei saa olla tyhjä")
     private String signature;
     private String note;
     private int storageLocation;
@@ -65,12 +73,12 @@ public class RadioMedicineFormObject {
         this.storageLocation = storageLocation;
     }
 
-    public double getStrength() {
+    public String getStrength() {
         return strength;
     }
 
-    public void setStrength(double strength) {
-        this.strength = strength;
+    public void setStrength(String strength) {
+        this.strength = strength.replaceAll(",", ".");
     }
 
     public String getDate() {

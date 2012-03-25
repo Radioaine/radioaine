@@ -5,16 +5,7 @@
 <%@include file="headerfront.jsp" %>
 
 <div id="contents">
-    <h2>Valmisteet 
-        <script>
-            var myDate = new Date();
-            var displayDate = (myDate.getDate()) + '.' + (myDate.getMonth()+1) + '.' + myDate.getFullYear();
-            document.write(displayDate);
-        </script>
-    </h2>
-
     <table class="noborder">
-        <br>
         <tr>
             <td class="elbutton">
                 <form method="link" action="createEluate">
@@ -28,6 +19,15 @@
             </td>
         </tr>
     </table>
+    <br>
+    <h2>Valmisteet 
+        <script>
+            var myDate = new Date();
+            var displayDate = (myDate.getDate()) + '.' + (myDate.getMonth()+1) + '.' + myDate.getFullYear();
+            document.write(displayDate);
+        </script>
+    </h2>
+
     <br>
     <table class="listing">
         <th>Eluaatit:</th>
@@ -69,7 +69,7 @@
             <tr>
                 <td><fmt:formatDate value="${radioMed.date}" pattern="HH:mm"/> </td>
                 <td><c:forEach var="kit" items="${radioMed.kits}">
-                        <a href="RadioMedicine/${radioMed.id}">Laeke</a><br>
+                        <a href="RadioMedicine/${radioMed.id}">Lääke x</a><br>
                     </c:forEach></td>
                 <td>${radioMed.strength} GBq</td>
                 <td>${radioMed.volume} ml</td>

@@ -33,16 +33,6 @@
                 </td>
             </tr>
             <tr>
-                <td>Kitit:</td>
-                <td><select multiple="multiple" onclick="eluateAmounts(event)">
-                        <c:forEach var="kit" items="${kits}">
-                            <option id="1" value="${kit.id}">${kit.substance.name},
-                                ${kit.batchNumber}, <fmt:formatDate value="${kit.expDate}" pattern="dd.MM.yyyy"/></option>
-                            </c:forEach>
-                    </select>
-                </td>
-            </tr>
-            <tr>
                 <td>Muut:</td>
                 <td><select multiple="multiple" onclick="eluateAmounts(event)" >
                         <c:forEach var="other" items="${others}">

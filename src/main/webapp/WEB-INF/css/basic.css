@@ -119,6 +119,10 @@ tr.red td {
     background-color: #FFA1A1;
 }
 
+tr.orange td {
+    background-color: #FFAA5F
+}
+
 body {
     background: #E6FCE7;
     color: #333;
@@ -190,3 +194,7 @@ p.note {
 #pvm {
     padding-left: 100px;
 }
+
+/*.pad {
+    padding-left: 40px;
+}*/

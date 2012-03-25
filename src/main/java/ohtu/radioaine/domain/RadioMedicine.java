@@ -21,7 +21,7 @@ public class RadioMedicine implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.TABLE)
     @Column(nullable = false)
-    private Long id;
+    private int id;
     @Column
     private double strength;
     @Column
@@ -34,15 +34,17 @@ public class RadioMedicine implements Serializable{
     private String note;
     @Column
     private int storageLocation;
-    @Column(nullable = false)
     private String name;
     @Column
     private String preparer;
     @OneToMany
+    @JoinColumn(name = "RADIOMEDICINE_ELUATES")
     private List<Eluate> eluates;
     @OneToMany
-    private List<Batch> solvents;
+    @JoinColumn(name = "RADIOMEDICINE_OTHERS")
+    private List<Batch> others;
     @OneToMany
+    @JoinColumn(name = "RADIOMEDICINE_KITS")
     private List<Batch> kits;
 
     public List<Eluate> getEluates() {
@@ -77,12 +79,20 @@ public class RadioMedicine implements Serializable{
         this.signature = signature;
     }
 
-    public List<Batch> getSolvents() {
-        return solvents;
+    public List<Batch> getOthers() {
+        return others;
     }
 
-    public void setSolvents(List<Batch> solvents) {
-        this.solvents = solvents;
+    public void setOthers(List<Batch> others) {
+        this.others = others;
+    }
+
+    public Timestamp getTimestamp() {
+        return date;
+    }
+    
+    public void setTimestamp(Timestamp timestamp) {
+        this.date = timestamp;
     }
 
     public int getStorageLocation() {
@@ -101,19 +111,19 @@ public class RadioMedicine implements Serializable{
         this.strength = strength;
     }
 
-    public Timestamp getTimestamp() {
+    public Timestamp getDate() {
         return date;
     }
 
-    public void setTimestamp(Timestamp timestamp) {
+    public void setDate(Timestamp timestamp) {
         this.date = timestamp;
     }
 
-    public long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
 

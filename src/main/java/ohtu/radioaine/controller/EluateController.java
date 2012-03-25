@@ -76,16 +76,7 @@ public class EluateController {
         return "redirect:/frontpage";
     }
 
-    @RequestMapping("Eluate/{id}")
-    public String eluateView(@PathVariable Integer id) {
-        return "frontpage";
-    }
 
-    /**
-     *
-     * @param efo
-     * @return
-     */
     private Eluate createEluate(EluateFormObject efo) {
         Eluate eluate = new Eluate();
         System.out.println(efo.getStrength());

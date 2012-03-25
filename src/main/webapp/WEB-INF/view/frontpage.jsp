@@ -30,6 +30,7 @@
     </table>
     <br>
     <table class="listing">
+        <th>Eluaatit:</th>
         <tr>
             <th>Klo</th>
             <th>Aine</th>
@@ -38,7 +39,7 @@
             <th>Sijainti</th>
             <th>Tekijä</th>
             <th></th> <!--sarake lisäysnapille-->
-        </tr>
+        </tr>  
         <c:forEach var="eluate" items="${eluates}">
             <tr>
                 <td><fmt:formatDate value="${eluate.date}" pattern="HH:mm"/> </td>
@@ -50,7 +51,32 @@
                 <td>${eluate.storageLocation}</td>
                 <td>${eluate.signature}</td>
             </tr>
-        </c:forEach>
+        </c:forEach>    
+    </table>
+    <br />
+    <table class="listing">
+        <th>Radiolääkkeet:</th>
+        <tr>
+            <th>Klo</th>
+            <th>Aine</th>
+            <th>Aktiivisuus</th>
+            <th>Määrä</th>
+            <th>Sijainti</th>
+            <th>Tekijä</th>
+            <th></th> <!--sarake lisäysnapille-->
+        </tr>  
+        <c:forEach var="radioMed" items="${radioMeds}">
+            <tr>
+                <td><fmt:formatDate value="${radioMed.date}" pattern="HH:mm"/> </td>
+                <td><c:forEach var="kit" items="${radioMed.kits}">
+                        <a href="RadioMedicine/${radioMed.id}">Laeke</a><br>
+                    </c:forEach></td>
+                <td>${radioMed.strength} GBq</td>
+                <td>${radioMed.volume} ml</td>
+                <td>${radioMed.storageLocation}</td>
+                <td>${radioMed.signature}</td>
+            </tr>
+        </c:forEach>    
     </table>
     <p>
     <table class="listing">

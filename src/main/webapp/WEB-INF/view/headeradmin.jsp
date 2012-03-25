@@ -22,6 +22,12 @@
                 <li><a href="<c:out value="${pageContext.servletContext.contextPath}" />/frontpage">VALMISTUS</a></li>
                 <li><a href="<c:out value="${pageContext.servletContext.contextPath}" />/storage">VARASTO</a></li>
                 <li><a class="current" href="<c:out value="${pageContext.servletContext.contextPath}"/>/admin">HALLINTA</a></li>
+                <ul id="secondary">
+				<li><a href="admin.html">Huomautukset</a></li>
+				<li><a href="historyView.html">Historiatiedot ja raportit</a></li>
+				<li><a href="substanceView.html">Aineiden tiedot</a></li>
+				<li><a href="other.html" class="last">Ylläpito</a></li>
+		</ul>  
             </ul>
             <span id="headertimestamp">
                 <script>

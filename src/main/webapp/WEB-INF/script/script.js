@@ -43,6 +43,9 @@ function eluateAmounts(e){
     else if(e.target.id == "1"){
         newHTML = "<button type=\"button\" onclick=\"removeSelection("+newDiv.id+")\">Poista</button>"+e.target.innerHTML+"<input type=\"hidden\" name=\"kits\" value=\""+e.target.value+"\"\>";
     }
+    else if(e.target.id == "3"){
+        newHTML = "<button type=\"button\" onclick=\"removeSelection("+newDiv.id+")\">Poista</button>"+e.target.innerHTML+"<input type=\"hidden\" name=\"eluates\" value=\""+e.target.value+"\"\>";
+    }
     else{     
         newHTML = "<button type=\"button\" onclick=\"removeSelection("+newDiv.id+")\">Poista</button>"+e.target.innerHTML+"<input type=\"hidden\" name=\"others\" value=\""+e.target.value+"\"\>";
     }
@@ -51,6 +54,8 @@ function eluateAmounts(e){
     document.querySelector("#selected").appendChild(newDiv);
     console.log(newDiv);
 }
+
+
 
 function removeSelection(elem){
     console.log(elem);

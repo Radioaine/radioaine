@@ -2,7 +2,7 @@ package ohtu.radioaine.domain;
 
 public class RadioMedicineFormObject {
 
-    private Long id;
+
     private double strength;
     private int volume;
     private String date;
@@ -13,24 +13,32 @@ public class RadioMedicineFormObject {
     private int storageLocation;
     private String name;
     private String preparer;
-    private int eluate;
-    private int solvent;
-    private int kit;
+    private int[] eluates = new int[5];
+    private int[] others = new int[5];
+    private int[] kits = new int[5];
 
-    public int getEluates() {
-        return eluate;
+    public int[] getEluates() {
+        return eluates;
     }
 
-    public void setEluates(int eluate) {
-        this.eluate = eluate;
+    public void setEluates(int[] eluates) {
+        this.eluates = eluates;
     }
 
-    public int getKit() {
-        return kit;
+    public int[] getKits() {
+        return kits;
     }
 
-    public void setKit(int kit) {
-        this.kit = kit;
+    public void setKits(int[] kits) {
+        this.kits = kits;
+    }
+
+    public int[] getOthers() {
+        return others;
+    }
+
+    public void setOthers(int[] others) {
+        this.others = others;
     }
 
     public String getNote() {
@@ -47,14 +55,6 @@ public class RadioMedicineFormObject {
 
     public void setSignature(String signature) {
         this.signature = signature;
-    }
-
-    public int getSolvent() {
-        return solvent;
-    }
-
-    public void setSolvent(int solvent) {
-        this.solvent = solvent;
     }
 
     public int getStorageLocation() {
@@ -111,14 +111,6 @@ public class RadioMedicineFormObject {
 
     public void setPreparer(String preparer) {
         this.preparer = preparer;
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public int getVolume() {

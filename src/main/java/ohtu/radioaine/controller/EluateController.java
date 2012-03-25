@@ -39,28 +39,21 @@ public class EluateController {
     private SubstanceService substanceService;
     int GENERATOR = 1;
     int KIT = 0;
-    int SOLVENT = 2;
+    int OTHER = 2;
+
+    @RequestMapping(value = "eluate/{id}", method = RequestMethod.GET)
+    public String getEluateById(@PathVariable Integer id, Model model) {
+        model.addAttribute("eluate", eluateService.read(id));
+        return "eluateView";
+    }
 
     @RequestMapping(value = "createEluate", method = RequestMethod.GET)
     public String createEluate(Model model) {
         model.addAttribute("eluate", new EluateFormObject());
-        model.addAttribute("generators", getSpecificTypesFromSubstances(substanceService.list(), GENERATOR));
-//        List<Batch> batches = batchService.list();
-//        model.addAttribute("kits", getSpecificTypesFromBatches(batches, KIT));
-//        model.addAttribute("solvents", getSpecificTypesFromBatches(batches, SOLVENT));
+        model.addAttribute("generators", batchService.getBatchesByType(GENERATOR));
         model.addAttribute("kits", batchService.getBatchesByType(KIT));
-        model.addAttribute("solvents", batchService.getBatchesByType(SOLVENT));
+        model.addAttribute("others", batchService.getBatchesByType(OTHER));
         return "createEluate";
-    }
-
-    private List<Substance> getSpecificTypesFromSubstances(List<Substance> substances, int type) {
-        List<Substance> typeList = new ArrayList<Substance>();
-        for (Substance substance : substances) {
-            if (substance.getType() == type) {
-                typeList.add(substance);
-            }
-        }
-        return typeList;
     }
 
     private List<Batch> getSpecificTypesFromBatches(List<Batch> batches, int type) {
@@ -76,12 +69,13 @@ public class EluateController {
     @RequestMapping(value = "createEluate", method = RequestMethod.POST)
     public String newEluate(@Valid @ModelAttribute("eluate") EluateFormObject efo, BindingResult result) {
         if (result.hasErrors()) {
+            System.out.println(result);
             return "createEluate";
         }
         Eluate newEluate = eluateService.createOrUpdate(createEluate(efo));
         return "redirect:/frontpage";
     }
-    
+
     @RequestMapping("Eluate/{id}")
     public String eluateView(@PathVariable Integer id) {
         return "frontpage";
@@ -95,31 +89,64 @@ public class EluateController {
     private Eluate createEluate(EluateFormObject efo) {
         Eluate eluate = new Eluate();
         System.out.println(efo.getStrength());
-        eluate.setStrength(efo.getStrength());
+        eluate.setStrength(Double.parseDouble(efo.getStrength()));
         eluate.setVolume(efo.getVolume());
-        eluate.setTimestamp(Time.parseDate(efo.getDate()));
+        eluate.setTimestamp(Time.parseTimeStamp(efo.getDate() + " " + efo.getHours() + ":" + efo.getMinutes()));
         eluate.setSignature(efo.getSignature());
         eluate.setNote(efo.getNote());
         eluate.setStorageLocation(efo.getStorageLocation());
 
-        List<Substance> generators = new ArrayList<Substance>();
-        generators.add((Substance) substanceService.read(efo.getGenerators()));
+        List<Batch> generators = new ArrayList<Batch>();
+        int[] generatorsTable = efo.getGenerators();
+        for (int i = 0; i < generatorsTable.length; ++i) {
+
+            generators.add(batchService.read(generatorsTable[i]));
+        }
+
         List<Batch> kits = new ArrayList<Batch>();
-        kits.add(batchService.read(efo.getKits()));
-        List<Batch> solvents = new ArrayList<Batch>();
-        solvents.add(batchService.read(efo.getSolvents()));
+        int[] kitsTable = efo.getKits();
+        for (int i = 0; i < kitsTable.length; ++i) {
 
+            kits.add(batchService.read(kitsTable[i]));
+        }
 
-//        for (Batch generator : efo.getGenerators()) {
-//            generators.add((Batch) batchService.read(generator.getId()));
-//        }
-//        for (Batch solvent : efo.getSolvents()) {
-//            generators.add((Batch) batchService.read(solvent.getId()));
-//        }
+        List<Batch> others = new ArrayList<Batch>();
+        int[] othersTable = efo.getOthers();
+        for (int i = 0; i < othersTable.length; ++i) {
 
+            others.add(batchService.read(othersTable[i]));
+        }
+        updateAmounts(generators, others, kits);
         eluate.setGenerators(generators);
-        eluate.setSolvents(solvents);
+        eluate.setOthers(others);
         eluate.setKits(kits);
         return eluate;
+    }
+
+    private void updateAmounts(List<Batch> generators, List<Batch> others, List<Batch> kits) {
+        for (Batch gen : generators) {
+            Batch batch = batchService.read(gen.getId());
+            Substance substance = (Substance) substanceService.read(batch.getSubstance().getId());
+            batch.useOne();
+            substance.useOne();
+            batchService.createOrUpdate(batch);
+            substanceService.createOrUpdate(substance);
+        }
+        for (Batch other : others) {
+            Batch batch = batchService.read(other.getId());
+            Substance substance = (Substance) substanceService.read(batch.getSubstance().getId());
+            batch.useOne();
+            substance.useOne();
+            batchService.createOrUpdate(batch);
+            substanceService.createOrUpdate(substance);
+        }
+        for (Batch kit : kits) {
+            Batch batch = batchService.read(kit.getId());
+            Substance substance = (Substance) substanceService.read(batch.getSubstance().getId());
+            batch.useOne();
+            substance.useOne();
+            batchService.createOrUpdate(batch);
+            substanceService.createOrUpdate(substance);
+        }
     }
 }

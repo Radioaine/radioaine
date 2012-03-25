@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import ohtu.radioaine.service.EventService;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  * Controllers for historypage
@@ -27,6 +28,12 @@ public class HistoryController {
     @RequestMapping("seekModify")
     public String modified(Model model) {
         model.addAttribute("modified", eventService.list("type=modify"));
+        return "historyView";
+    }
+    
+    @RequestMapping("seek")
+    public String seekByName(@RequestParam String searchString, Model model) {   
+        model.addAttribute("results", eventService.list(searchString));
         return "historyView";
     }
 

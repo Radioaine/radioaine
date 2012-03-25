@@ -6,9 +6,9 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
-
 /**
  * Tools for managing time
+ *
  * @author Radioaine
  */
 public class Time {
@@ -35,6 +35,11 @@ public class Time {
 
     public static Timestamp parseDate(String time) {
         return parseTime(time, "dd.MM.yyyy");
+
+    }
+
+    public static Timestamp parseTimeStamp(String time) {
+        return parseTime(time, "dd.MM.yyyy HH:mm");
 
     }
 }

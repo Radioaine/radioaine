@@ -1,5 +1,6 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
 <%@include file="headerfront.jsp" %>
 
@@ -13,24 +14,44 @@
     </h2>
 
     <table class="noborder">
+        <br>
         <tr>
             <td class="elbutton">
                 <form method="link" action="createEluate">
-                    <input type="submit" value="Kirjaa eluaatti">
+                    <input type="submit" value="Luo eluaatti">
                 </form>
             </td>
             <td>
                 <form method="link" action="createRadioMedicine">
-                    <input type="submit" value="Kirjaa radiolääke">
+                    <input type="submit" value="Luo radiolääke">
                 </form> 
             </td>
         </tr>
     </table>
-
-    <c:forEach var="eluate" items="${eluates}">
-        <p>${eluate.id} ${eluate.strength}</p>
-    </c:forEach>
-
+    <br>
+    <table class="listing">
+        <tr>
+            <th>Klo</th>
+            <th>Aine</th>
+            <th>Aktiivisuus</th>
+            <th>Määrä</th>
+            <th>Sijainti</th>
+            <th>Tekijä</th>
+            <th></th> <!--sarake lisäysnapille-->
+        </tr>
+        <c:forEach var="eluate" items="${eluates}">
+            <tr>
+                <td><fmt:formatDate value="${eluate.date}" pattern="HH:mm"/> </td>
+                <td><c:forEach var="kit" items="${eluate.kits}">
+                        <a href="eluate/${eluate.id}">${kit.substance.name}</a><br>
+                    </c:forEach></td>
+                <td>${eluate.strength} GBq</td>
+                <td>${eluate.volume} ml</td>
+                <td>${eluate.storageLocation}</td>
+                <td>${eluate.signature}</td>
+            </tr>
+        </c:forEach>
+    </table>
     <p>
     <table class="listing">
         <col width="30px"/>
@@ -44,7 +65,7 @@
         <tr>
             <th colspan="2">Klo</th>
             <th>Aine</th>
-            <th>Vahvuus</th>
+            <th>Aktiivisuus</th>
             <th>Määrä</th>
             <th>Sijainti</th>
             <th>Tekijä</th>
@@ -97,7 +118,7 @@
         </tr>          
     </table>
 </p>
-<p>
+<!--<p>
 <h2>Muut käytetyt aineet</h2>
 </p>
 <p>
@@ -116,6 +137,6 @@
         <td>Valmis lääke 3</td>
     </tr>
 </table>
-</p>
+</p>-->
 </div>
 <%@include file="footer.jsp" %>

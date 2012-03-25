@@ -25,7 +25,7 @@
 
         <tr>
             <td>Aine</td>
-            <td>${batch.substance}</a></td>
+            <td>${batch.substance.name}</a></td>
         </tr>
         <tr>
             <td>Jäljellä</td>
@@ -118,6 +118,7 @@
         </div>
         <button type="button" onClick="addStorage(${batch.currentStorageLocationsCount},${batch.storageLocationsCount})">Lisää varastopaikka</button><br />
         Huomioita: <br /><form:textarea path="note" type="text"/><form:errors path="note"/><br/>
+        Nimikirjaimet: <form:input path="signature" type="text" id="signature" size="6"/><form:errors path="signature"/><br />
         <input type="submit" value="Tallenna muutokset">
         <input type="button" value="Peruuta" onClick="parent.location = '${pageContext.servletContext.contextPath}/batch/${batch.id}'" />
     </form:form>

@@ -50,7 +50,7 @@ public class JPAEventDBDAO implements EventDBDao {
 
     @Override
     public List<Event> list(String arg) {
-        Query q = entityManager.createQuery("SELECT e FROM Event e WHERE e.happening LIKE '%type=modify%'");
+        Query q = entityManager.createQuery("SELECT e FROM Event e WHERE e.happening LIKE '%"+arg+"%'");
         return q.getResultList();
     }
     

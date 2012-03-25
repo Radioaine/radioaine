@@ -15,34 +15,41 @@
     <h2>Uusi eluaatti</h2>
 
     <form:form commandName="eluate" action="createEluate" method="POST">
+        <table style="float: right;">
+            <th>Valitut</th>
+            <tr>
+                <td style="float: right; border: none; font-size: 90%;" id="selected"></td>
+                </td>
+            </tr>
+        </table>
         <table class="noborder">
             <tr>
                 <td>Generaattori:</td>
-                <td><form:select path="generators">
+                <td><select multiple="multiple" onclick="eluateAmounts(event)">
                         <c:forEach var="generator" items="${generators}">
-                            <form:option value="${generator.id}">${generator.name}</form:option>
+                            <option id="0"  value="${generator.id}">${generator.substance.name}</option>
                         </c:forEach>
-                    </form:select>
+                    </select>
                 </td>
             </tr>
             <tr>
-                <td>Kitti:</td>
-                <td><form:select path="kits">
+                <td>Kitit:</td>
+                <td><select multiple="multiple" onclick="eluateAmounts(event)">
                         <c:forEach var="kit" items="${kits}">
-                            <form:option value="${kit.id}">${kit.substance.name},
-                                ${kit.batchNumber}, <fmt:formatDate value="${kit.expDate}" pattern="dd.MM.yyyy"/></form:option>
+                            <option id="1" value="${kit.id}">${kit.substance.name},
+                                ${kit.batchNumber}, <fmt:formatDate value="${kit.expDate}" pattern="dd.MM.yyyy"/></option>
                         </c:forEach>
-                    </form:select>
+                    </select>
                 </td>
             </tr>
             <tr>
-                <td>Liuotin:</td>
-                <td><form:select path="solvents">
-                        <c:forEach var="solvent" items="${solvents}">
-                            <form:option value="${solvent.id}">${solvent.substance.name},
-                                ${solvent.batchNumber}, <fmt:formatDate value="${solvent.expDate}" pattern="dd.MM.yyyy"/></form:option>
+                <td>Muut:</td>
+                <td><select multiple="multiple" onclick="eluateAmounts(event)" >
+                        <c:forEach var="other" items="${others}">
+                            <option id="2" value="${other.id}">${other.substance.name},
+                                ${other.batchNumber}, <fmt:formatDate value="${other.expDate}" pattern="dd.MM.yyyy"/></option>
                         </c:forEach>
-                    </form:select>
+                    </select>
                 <td>
             </tr>
             <tr>
@@ -57,7 +64,11 @@
             </tr>
             <tr>
                 <td>Aktiivisuus:</td>
-                <td><form:input path="strength" type="text"/><form:errors path="volume"/>GBq</td>
+                <td><form:input path="strength" type="text"/><form:errors path="strength"/>GBq</td>
+            </tr>
+            <tr>
+                <td>Tilavuus:</td>
+                <td><form:input path="volume" type="text"/><form:errors path="volume"/>ml</td>
             </tr>
             <tr>
                 <td>Huomautuksia:</td>

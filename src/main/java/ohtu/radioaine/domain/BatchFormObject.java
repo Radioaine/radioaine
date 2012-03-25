@@ -28,6 +28,7 @@ public class BatchFormObject {
     private String note;
     private int storageLocationsCount = 10;
     private int[][] storageLocations = new int[storageLocationsCount][2];
+    @NotNull(message = "Nimi ei saa olla tyhjä")
     private String signature;
 
     public int[][] getStorageLocations() {

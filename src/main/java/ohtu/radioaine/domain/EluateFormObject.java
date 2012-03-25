@@ -1,41 +1,49 @@
 package ohtu.radioaine.domain;
 
+import javax.validation.constraints.NotNull;
+
 public class EluateFormObject {
 
-    private double strength;
+    @NotNull(message = "Aktiivisuus ei saa olla tyhjä")
+    private String strength;
+    @NotNull(message = "Tilavuus ei saa olla tyhjä")
     private int volume;
+    @NotNull(message = "Päivämäärä ei saa olla tyhjä")
     private String date;
+    @NotNull(message = "Tuntikenttä ei saa olla tyhjä")
     private String hours;
+    @NotNull(message = "Minuuttikenttä ei saa olla tyhjä")
     private String minutes;
+    @NotNull(message = "Nimi ei saa olla tyhjä")
     private String signature;
     private String note;
     private int storageLocation;
-    private int generators;
-    private int solvents;
-    private int kits;
+    private int[] generators = new int[5];
+    private int[] others = new int[5];
+    private int[] kits = new int[5];
 
-    public int getKits() {
+    public int[] getKits() {
         return kits;
     }
 
-    public void setKits(int kits) {
+    public void setKits(int[] kits) {
         this.kits = kits;
     }
 
-    public int getGenerators() {
+    public int[] getGenerators() {
         return generators;
     }
 
-    public void setGenerators(int generators) {
+    public void setGenerators(int[] generators) {
         this.generators = generators;
     }
 
-    public int getSolvents() {
-        return solvents;
+    public int[] getOthers() {
+        return others;
     }
 
-    public void setSolvents(int solvent) {
-        this.solvents = solvent;
+    public void setOthers(int[] other) {
+        this.others = other;
     }
 
     public String getNote() {
@@ -62,12 +70,12 @@ public class EluateFormObject {
         this.storageLocation = storageLocation;
     }
 
-    public double getStrength() {
+    public String getStrength() {
         return strength;
     }
 
-    public void setStrength(double strength) {
-        this.strength = strength;
+    public void setStrength(String strength) {
+        this.strength = strength.replaceAll(",", ".");
     }
 
     public String getDate() {

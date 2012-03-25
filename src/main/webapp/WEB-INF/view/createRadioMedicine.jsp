@@ -4,7 +4,13 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <%@include file="headerfront.jsp" %>
+<script>
+    function checkType()    {
+    var newdiv = document.createElement("tr");
+    substance =  '${substances}';
 
+}
+</script>
 <div id="contents">
     <h2>Uusi radiolääke</h2>
     <p>
@@ -21,11 +27,12 @@
                         </c:forEach>
                     </form:select>
                 </tr>
-            <tr>
+            <tr id="temp">
                 <td>   
-                    <select>
-                        <option>Kitti</option>
-                        <option>Muu</option>
+                    <select id="type1" onchange="checkType()">
+                        <option value="-1">Valitse</option>
+                        <option value="0">Kitti</option>
+                        <option value="2">Muu</option>
                     </select>
                 </td>
                 <td>
@@ -54,8 +61,8 @@
                         </c:forEach>
                     </form:select>
                 </td>
-                </tr>
-                <tr>
+            </tr>
+                <!--<tr>
                 <td>   
                     <select>
                         <option>Eluaatti</option>
@@ -121,7 +128,7 @@
                 <td>
                     <button type="button">Lisää</button>
                 </td>
-            </tr>
+            </tr>-->
 
         </table>
     </p>
@@ -189,7 +196,7 @@
 
             <tr>
                 <td>Huomautuksia</td>
-                <td><input type="text" name="comments" size="70" /></td>
+                <td><form:textarea path="note" type="text"/><form:errors path="note"/></td>
             </tr>
 
         </table>
@@ -199,7 +206,7 @@
         <table class="noborder">
             <tr>
                 <td class="name">Nimikirjaimet</td>
-                <td><input required type="text" name="initials" size="6" /></td>
+                <td><form:input path="signature" type="text" id="signature"/><form:errors path="signature"/></td>
             </tr>
         </table>
 

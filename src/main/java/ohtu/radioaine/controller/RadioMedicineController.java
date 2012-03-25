@@ -71,6 +71,7 @@ public class RadioMedicineController {
         radioMedicine.setSignature(rmfo.getSignature());
         radioMedicine.setVolume(rmfo.getVolume());
         radioMedicine.setDate(Time.parseDate(rmfo.getDate()));
+        radioMedicine.setStrength(Double.parseDouble(rmfo.getStrength()));
         radioMedicine.setStorageLocation(rmfo.getStorageLocation());
         radioMedicine.setTimestamp(Time.parseTimeStamp(rmfo.getDate() + " " + rmfo.getHours() + ":" + rmfo.getMinutes()));
         List<Eluate> eluates = new ArrayList<Eluate>();

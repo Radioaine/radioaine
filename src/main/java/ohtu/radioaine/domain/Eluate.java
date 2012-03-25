@@ -35,9 +35,9 @@ public class Eluate implements Serializable {
     @OneToMany
     @JoinColumn(name = "ELUATE_OTHERS")
     private List<Batch> others;
-    @OneToMany
-    @JoinColumn(name = "ELUATE_KITS")
-    private List<Batch> kits;
+//    @OneToMany
+//    @JoinColumn(name = "ELUATE_KITS")
+//    private List<Batch> kits;
 
     public Timestamp getDate() {
         return date;
@@ -47,13 +47,13 @@ public class Eluate implements Serializable {
         this.date = date;
     }
 
-    public List<Batch> getKits() {
-        return kits;
-    }
-
-    public void setKits(List<Batch> kits) {
-        this.kits = kits;
-    }
+//    public List<Batch> getKits() {
+//        return kits;
+//    }
+//
+//    public void setKits(List<Batch> kits) {
+//        this.kits = kits;
+//    }
 
     public String getSignature() {
         return signature;

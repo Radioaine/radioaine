@@ -50,24 +50,10 @@ public class EluateController {
     @RequestMapping(value = "createEluate", method = RequestMethod.GET)
     public String createEluate(Model model) {
         model.addAttribute("eluate", new EluateFormObject());
-        model.addAttribute("generators", getSpecificTypesFromSubstances(substanceService.list(), GENERATOR));
-//        List<Batch> batches = batchService.list();
-//        model.addAttribute("kits", getSpecificTypesFromBatches(batches, KIT));
-//        model.addAttribute("solvents", getSpecificTypesFromBatches(batches, OTHER));
         model.addAttribute("generators", batchService.getBatchesByType(GENERATOR));
         model.addAttribute("kits", batchService.getBatchesByType(KIT));
         model.addAttribute("others", batchService.getBatchesByType(OTHER));
         return "createEluate";
-    }
-
-    private List<Substance> getSpecificTypesFromSubstances(List<Substance> substances, int type) {
-        List<Substance> typeList = new ArrayList<Substance>();
-        for (Substance substance : substances) {
-            if (substance.getType() == type) {
-                typeList.add(substance);
-            }
-        }
-        return typeList;
     }
 
     private List<Batch> getSpecificTypesFromBatches(List<Batch> batches, int type) {
@@ -90,16 +76,7 @@ public class EluateController {
         return "redirect:/frontpage";
     }
 
-    @RequestMapping("Eluate/{id}")
-    public String eluateView(@PathVariable Integer id) {
-        return "frontpage";
-    }
 
-    /**
-     *
-     * @param efo
-     * @return
-     */
     private Eluate createEluate(EluateFormObject efo) {
         Eluate eluate = new Eluate();
         System.out.println(efo.getStrength());

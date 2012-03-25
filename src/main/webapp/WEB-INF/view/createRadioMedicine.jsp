@@ -13,208 +13,77 @@
 </script>
 <div id="contents">
     <h2>Uusi radiolääke</h2>
-    <p>
+    <form:form commandName="radioMedicine" action="createRadioMedicine" method="POST">
+        <table style="float: right;">
+            <th>Valitut</th>
+            <tr>
+                <td style="float: right; border: none; font-size: 90%;" id="selected"></td>
+                </td>
+            </tr>
+        </table>
         <table class="noborder">
             <tr>
-                <td>Valitse aine</td>
-            </tr>
-            <form:form commandName="radioMedicine" action="createRadioMedicine" method="POST">
-                <tr>
-                    Valitse eluaatti<br />
-                    <form:select class="substance" path="solvent">
+                <td>Eluaattit:</td>
+                    <td>
+                    <select multiple="multiple" onclick="eluateAmounts(event)" >
                         <c:forEach var="eluate" items="${eluates}">
-                                <form:option value="${eluate.id}">Klo ${eluate.date}, ${eluate.name}, ${eluate.strength}, ${eluate.volume}, Kaappi ${eluate.storageLocation}, ${eluate.signature}</form:option>
+                                <option id="3" value="${eluate.id}">Klo ${eluate.date}, ${eluate.strength}, ${eluate.volume}, Kaappi ${eluate.storageLocation}, ${eluate.signature}</option>
                         </c:forEach>
-                    </form:select>
+                    </select>
+                    </td>
                 </tr>
-            <tr id="temp">
-                <td>   
-                    <select id="type1" onchange="checkType()">
-                        <option value="-1">Valitse</option>
-                        <option value="0">Kitti</option>
-                        <option value="2">Muu</option>
-                    </select>
-                </td>
-                <td>
-                    <form:select class="substance" path="kit">
-                        <c:forEach var="substance" items="${substances}">
-                            <c:if test="${substance.type == '0'}">
-                                <form:option value="${substance.id}">${substance.name}</form:option>
-                            </c:if>
+            <tr>
+                <td>Kitit:</td>
+                <td><select multiple="multiple" onclick="eluateAmounts(event)">
+                        <c:forEach var="kit" items="${kits}">
+                            <option id="1" value="${kit.id}">${kit.substance.name},
+                                ${kit.batchNumber}, <fmt:formatDate value="${kit.expDate}" pattern="dd.MM.yyyy"/></option>
                         </c:forEach>
-                    </form:select><br/>
+                    </select>
                 </td>
-                <td>
-                    <form:select class="batch" path="kit">
-                        <c:forEach var="batch" items="${batches}">
-                            <c:forEach var="storage" items="${batch.storageLocations}">
-                                <c:if test="${storage[1] != '0'}">
-                                    <form:option value="${batch.id}">Erä ${batch.batchNumber}, Kaappi ${storage[0]}, 
-                                        Laatu 
-                                        <c:if test="${batch.qualityCheck=='0'}">tekemättä</c:if>
-                                        <c:if test="${batch.qualityCheck=='1'}">hyväksytty</c:if>
-                                        <c:if test="${batch.qualityCheck=='2'}">hylätty</c:if>
-                                        , vanh. ${batch.expDate}
-                                    </form:option>
-                                </c:if>
-                            </c:forEach>
+            </tr>
+            <tr>
+                <td>Muut:</td>
+                <td><select multiple="multiple" onclick="eluateAmounts(event)" >
+                        <c:forEach var="other" items="${others}">
+                            <option id="2" value="${other.id}">${other.substance.name},
+                                ${other.batchNumber}, <fmt:formatDate value="${other.expDate}" pattern="dd.MM.yyyy"/></option>
                         </c:forEach>
-                    </form:select>
-                </td>
-            </tr>
-                <!--<tr>
-                <td>   
-                    <select>
-                        <option>Eluaatti</option>
-                        <option>Kitti</option>
-                        <option>Muu</option>
                     </select>
-                </td>
                 <td>
-                    <select class="substance">
-                        <option>Angiocis 20.12mg</option>
-                        <option>Bridatec</option>
-                        <option>Ceretec Exametazine Agent</option>
-                        <option>Ceretec Stabilised</option>
-                        <option>Myoview</option>
-                        <option>Nanocoll</option>
-                        <option>Nephromag 0.2mg</option>
-                        <option>Octreoscan (In-111)</option>
-                        <option>Pentacis</option>
-                        <option>Technescan HDP</option>
-                        <option>Vasculocis HSA</option>
-                        <option>Technescan DMSA</option>
-                        <option>Technescan Sestamibi</option>
-                        <option>Technescan LyoMAA</option>
-                    </select>
-
-                    
-                </td>
-                <td>
-                    <select class="batch">
-                        <option>Erä 1234567, 1.krs, Laatu OK, vanh. 27.5.2012</option>
-                        <option>Erä 1234568</option>
-                        <option>Erä 1234569</option>
-                    </select>
-                </td>       
             </tr>
-
             <tr>
-                <td>   
-                    <select>
-                        <option>Valitse</option>
-                        <option>Eluaatti</option>
-                        <option>Kitti</option>
-                        <option selected="selected">Muu</option>
-                    </select>
-                </td>
-                <td>
-                    <select class="substance">
-                        <option>Valitse</option>
-                        <option>Keittosuolaliuos 1000 ml</option>
-                        <option>Keittosuolaliuos 100 ml</option>
-                        <option>Keittosuolaliuos 10 ml</option>
-                    </select>
-                </td>
-                <td>
-                    <select class="batch">
-                        <option selected="selected"> </option>
-                        <option>Erä 1234567, 2.krs jääkaappi, Laatu OK, vanh. 27.5.2012</option>
-                        <option>Erä 1234568</option>
-                        <option>Erä 1234569</option>
-                    </select>
-                    <br/>
-                </td>
-                <td>
-                    <button type="button">Lisää</button>
-                </td>
-            </tr>-->
-
-        </table>
-    </p>
-    <p>
-
-        <!--<form action="frontpage.html" method="post">-->
-        <table class="noborder">
-
-            <tr>
-                <td class="name"></td>
-                <td>Klo</td>
-                <td>Pvm</td>
+                <td></td>
+                <td>Klo<span id="pvm">Pvm</span></td>
             </tr>
-
             <tr>
-                <td>Valmistusaika</td>
-                <td>
-                    <form:input path="hours" type="text" id="hours" size="2"/><form:errors path="hours"/>:<form:input 
-                    path="minutes" type="text" id="minutes" size="2"/><form:errors path="minutes"/>
-                    <form:input path="date" type="text" id="eluatingtime"/><form:errors path="date"/>
-                </td>
+                <td>Luontiaika:</td>
+                <td><form:input path="hours" type="text" id="hours" size="2"/><form:errors path="hours"/>:<form:input
+                        path="minutes" type="text" id="minutes" size="2"/><form:errors path="minutes"/>
+                    <form:input path="date" type="text" id="eluatingtime"/><form:errors path="date"/></td>
             </tr>
-
             <tr>
-                <td>Aktiivisuus</td>
-                
-                    <!--<input type="text" name="activity" size="5" />
-                    <select>
-                        <option>GBq</option>
-                        <option>MBq</option>
-                    </select>
-                    &nbsp;-->
-                <td>
-                    <form:input path="strength" type="text"/><form:errors path="strength"/>GBq
-                </td>
+                <td>Aktiivisuus:</td>
+                <td><form:input path="strength" type="text"/><form:errors path="strength"/>GBq</td>
             </tr>
-
             <tr>
-                <td>Tilavuus</td>
-                <td>
-                    <form:input path="volume" type="text"/><form:errors path="volume"/>ml
-                </td>
+                <td>Tilavuus:</td>
+                <td><form:input path="volume" type="text"/><form:errors path="volume"/>ml</td>
             </tr>
-
-        </table>
-
-        <table class="noborder">
-
             <tr>
-                <td class="name">Sijainti</td>
-                <td>
-                    <!-- IHAN HIVREELLÄ TAVALLA TEHTY -->
-                    <form:select path="storageLocation">
-                        <c:forEach var="batch" items="${batches}" varStatus="i">
-                            <c:if test="${i.index == 1}">
-                                <c:forEach var="location" items="${batch.storageLocations}" varStatus="j">
-                                    <form:option value="${j.index + 1}">Kaappi ${j.index + 1}</form:option>
-                                </c:forEach>
-                            </c:if>
-                        </c:forEach>
-
-                    </form:select>
-                </td>
-            </tr>
-
-            <tr>
-                <td>Huomautuksia</td>
+                <td>Huomautuksia:</td>
                 <td><form:textarea path="note" type="text"/><form:errors path="note"/></td>
             </tr>
-
-        </table>
-
-        <br/>
-
-        <table class="noborder">
             <tr>
-                <td class="name">Nimikirjaimet</td>
+                <td>Nimikirjaimet:</td>
                 <td><form:input path="signature" type="text" id="signature"/><form:errors path="signature"/></td>
+            </tr>
+            <tr>
+                <td><input type="submit" value="Tallenna"></td>
+                <td><input type="button" value="Peruuta" onClick="parent.location = '${pageContext.servletContext.contextPath}/frontpage'" /></td>
             </tr>
         </table>
 
-        <br/>
-        <input type="submit" value="Tallenna" /> &nbsp; &nbsp;<input type="submit" value="Peruuta"/><!-- disabled="disabled"-->
-
-        </form:form>
-
-    </p>
+    </form:form>
 </div>
 <%@include file="footer.jsp" %>      

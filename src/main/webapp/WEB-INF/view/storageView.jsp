@@ -45,7 +45,7 @@
         <tr>
             <th class="amount">Lkm</th>
             <th class="substance">Tuotenimi</th>
-            <th class="oldest">Vanhenemassa</th>
+            <th class="oldest">Käytettävä ennen</th>
             <th class="warnigs">Varoitukset</th>
         </tr>
 
@@ -72,7 +72,7 @@
         <tr>
             <th class="amount">Lkm</th>
             <th class="substance">Tuotenimi</th>
-            <th class="oldest">Vanhenemassa</th>
+            <th class="oldest">Käytettävä ennen</th>
             <th class="warnigs">Varoitukset</th>
         </tr>
 

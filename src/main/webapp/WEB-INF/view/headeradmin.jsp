@@ -26,7 +26,7 @@
 				<li><a href="admin.html">Huomautukset</a></li>
 				<li><a href="historyView.html">Historiatiedot ja raportit</a></li>
 				<li><a href="substanceView.html">Aineiden tiedot</a></li>
-				<li><a href="other.html" class="last">Ylläpito</a></li>
+				<li><a href="yllapito" class="last">Ylläpito</a></li>
 		</ul>  
             </ul>
             <span id="headertimestamp">

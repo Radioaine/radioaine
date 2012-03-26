@@ -31,7 +31,18 @@ public class Substance implements Serializable {
     private Timestamp oldestDate;
     private String signature;
     private String[] statusMessages = new String[3];
+    private int qualityStatus;
 
+    public int getQualityStatus() {
+        return qualityStatus;
+    }
+
+    public void setQualityStatus(int qualityStatus) {
+        this.qualityStatus = qualityStatus;
+    }
+    
+    
+    
     public String[] getStatusMessages() {
         return statusMessages;
     }

@@ -101,6 +101,22 @@
 					<td>Loppu</td>
                                     </tr>
                                 </c:if>
+                                <c:if test="${substance.qualityStatus == 0}">
+                                    <tr class="orange">
+					<td class="center">${date}</td>
+					<td><a href="substance/${substance.id}">${substance.name}</a></td>
+					<td>${substance.oldestDate}</td>
+					<td>Laadunvarmistus puuttuu</td>
+                                    </tr>
+                                </c:if>
+                                <c:if test="${substance.qualityStatus == 2}">
+                                    <tr class="red">
+					<td class="center">${date}</td>
+					<td><a href="substance/${substance.id}">${substance.name}</a></td>
+					<td>${substance.oldestDate}</td>
+					<td>Kaikki erät hylätty</td>
+                                    </tr>
+                                </c:if>
                                         
                   
                                 </c:forEach>

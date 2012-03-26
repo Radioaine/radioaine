@@ -89,6 +89,7 @@ public class TestDBController {
             substance.setSupplier(substances[i][6]);
             substance.setType(Integer.parseInt(substances[i][7]));
             substance.setOldestDate(Time.parseTimeStamp("13.6.2050 10:00"));
+            substance.setQualityStatus(0);
             substanceService.createOrUpdate(substance);
             Event event = EventHandler.newSubstanceEvent(substance, "test db");
             eventService.createOrUpdate(event);

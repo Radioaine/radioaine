@@ -9,6 +9,7 @@
  */
 package ohtu.radioaine.controller;
 
+import java.util.List;
 import javax.validation.Valid;
 import ohtu.radioaine.domain.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -61,6 +62,7 @@ public class BatchController {
         Batch batch = batchService.read(id);
         batch.setQualityCheck(qualityCheck);
         batchService.createOrUpdate(batch);
+        updateSubstance(batch.getSubstance());
         Event event = EventHandler.qualityCheckEvent(batch, sig);
         eventService.createOrUpdate(event);
         if (sid <= 0) {
@@ -225,5 +227,23 @@ public class BatchController {
         eventService.createOrUpdate(event);
         return batchService.createOrUpdate(batch);
 
+    }
+
+    private void updateSubstance(Substance substance) {
+        Substance temp = (Substance) substanceService.read(substance.getId());
+        int status = temp.getQualityStatus();
+        
+        List<Batch> batches = batchService.listSubstanceBatches(temp.getId());
+        for(Batch batch : batches){
+            if(batch.getQualityCheck() == 2 && status == 0 ){ 
+                status = 2;
+            }
+            else if(batch.getQualityCheck() == 1 && (status == 0 | status == 2)){ 
+                status = 1;
+            }
+        }
+        
+        temp.setQualityStatus(status);
+        substanceService.createOrUpdate(temp);
     }
 }

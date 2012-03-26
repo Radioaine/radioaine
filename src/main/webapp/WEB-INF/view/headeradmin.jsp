@@ -1,4 +1,5 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -26,15 +27,15 @@
 				<li><a href="admin.html">Huomautukset</a></li>
 				<li><a href="historyView.html">Historiatiedot ja raportit</a></li>
 				<li><a href="substanceView.html">Aineiden tiedot</a></li>
-				<li><a href="other.html" class="last">Ylläpito</a></li>
+				<li><a href="yllapito" class="last">Ylläpito</a></li>
 		</ul>  
             </ul>
             <span id="headertimestamp">
-                <script>
-                    var myDate = new Date();
-                    var displayDate = (myDate.getDate()) + '.' + (myDate.getMonth()+1) + '.' + myDate.getFullYear() + ' ' + myDate.getHours() + ':' + myDate.getMinutes();
-                    document.write(displayDate);
-                </script>
+                <c:set var="currentDate" value="<%=new java.util.Date()%>"/>
+                <fmt:formatDate pattern="dd.MM.yyyy" value="${currentDate}" var="date"/>
+                <fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${currentDate}" var="compareDate"/>
+                
+                ${compareDate}
             </span>
         </div>
         <div id="main">

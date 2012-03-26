@@ -65,9 +65,9 @@
             </tr>
             <tr>
                 <td>Luontiaika:</td>
-                <td><form:input path="hours" type="text" id="hours" size="2"/><form:errors path="hours"/>:<form:input
-                        path="minutes" type="text" id="minutes" size="2"/><form:errors path="minutes"/>
-                    <form:input path="date" type="text" id="creationtime"/><form:errors path="date"/></td>
+                <td><form:input path="hours" type="text" id="hours" size="2" value="${hours}"/><form:errors path="hours"/>:<form:input
+                        path="minutes" type="text" id="minutes" size="2" value="${minutes}"/><form:errors path="minutes"/>
+                    <form:input path="date" type="text" id="creationtime" value="${date}"/><form:errors path="date"/></td>
             </tr>
             <tr>
                 <td>Aktiivisuus:</td>

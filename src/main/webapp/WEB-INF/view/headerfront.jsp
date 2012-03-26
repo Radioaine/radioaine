@@ -1,4 +1,5 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -23,12 +24,17 @@
                 <li><a href="<c:out value="${pageContext.servletContext.contextPath}" />/storage">VARASTO</a></li>
                 <li><a href="<c:out value="${pageContext.servletContext.contextPath}" />/admin">HALLINTA</a></li>
             </ul>
+            
             <span id="headertimestamp">
                 <script>
                     var myDate = new Date();
                     var displayDate = (myDate.getDate()) + '.' + (myDate.getMonth()+1) + '.' + myDate.getFullYear() + ' ' + myDate.getHours() + ':' + myDate.getMinutes();
                     document.write(displayDate);
-                </script>
+                </script><br />
+                <c:set var="currentDate" value="<%=new java.util.Date()%>"/>
+                <fmt:formatDate pattern="dd.MM.yyyy" value="${currentDate}" var="date"/>
+                <fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${currentDate}" var="compareDate"/>
+                ${compareDate}         
             </span>
         </div>
         <div id="main">

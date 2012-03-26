@@ -48,7 +48,7 @@
             </tr>
             <tr>
                 <td>Eluointiaika:</td>
-                <td><form:input path="hours" type="text" id="hours" size="2"/><form:errors path="hours"/>:<form:input
+                <td><form:input path="hours" type="text" id="hours" value=myDate.getHours() size="2"/><form:errors path="hours"/>:<form:input
                         path="minutes" type="text" id="minutes" size="2"/><form:errors path="minutes"/>
                     <form:input path="date" type="text" id="eluatingtime"/><form:errors path="date"/></td>
             </tr>

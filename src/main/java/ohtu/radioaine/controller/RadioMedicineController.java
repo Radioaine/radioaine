@@ -51,10 +51,11 @@ public class RadioMedicineController {
     @RequestMapping(value = "createRadioMedicine", method = RequestMethod.POST)
     public String newRadioMedicine(@Valid @ModelAttribute("radioMedicine") RadioMedicineFormObject rmfo, BindingResult result) {
         if (result.hasErrors()) {
+            System.out.println(result);
             return "createRadioMedicine";
         }
         RadioMedicine newRadioMedicine = radioMedService.createOrUpdate(createRD(rmfo));
-        return "redirect:/RadioMedicine/" + newRadioMedicine.getId();
+        return "redirect:/frontpage/";
     }
     
     @RequestMapping("RadioMedicine/{id}")

@@ -1,11 +1,9 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+
 
 <%@include file="headeradmin.jsp" %>
-<c:set var="currentDate" value="<%=new java.util.Date()%>"/>
-<fmt:formatDate pattern="dd.MM.yyyy" value="${currentDate}" var="date"/>
-<fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${currentDate}" var="compareDate"/>
+
 <div id="contents">
     <table class="listing">
 			

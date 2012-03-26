@@ -41,8 +41,6 @@ public class Substance implements Serializable {
         this.qualityStatus = qualityStatus;
     }
     
-    
-    
     public String[] getStatusMessages() {
         return statusMessages;
     }

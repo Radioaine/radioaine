@@ -1,6 +1,5 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
 <%@include file="headerfront.jsp" %>
 
@@ -21,11 +20,7 @@
     </table>
     <br>
     <h2>Valmisteet 
-        <script>
-            var myDate = new Date();
-            var displayDate = (myDate.getDate()) + '.' + (myDate.getMonth()+1) + '.' + myDate.getFullYear();
-            document.write(displayDate);
-        </script>
+        
     </h2>
 
     <br>

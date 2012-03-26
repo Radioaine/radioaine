@@ -34,6 +34,7 @@
                 <c:set var="currentDate" value="<%=new java.util.Date()%>"/>
                 <fmt:formatDate pattern="dd.MM.yyyy" value="${currentDate}" var="date"/>
                 <fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${currentDate}" var="compareDate"/>
+                
                 ${compareDate}
             </span>
         </div>

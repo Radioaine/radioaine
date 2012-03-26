@@ -11,6 +11,7 @@
     });
 </script>
 
+
 <div id="contents">
     <h2>Uusi eluaatti</h2>
 
@@ -48,9 +49,9 @@
             </tr>
             <tr>
                 <td>Eluointiaika:</td>
-                <td><form:input path="hours" type="text" id="hours" value=myDate.getHours() size="2"/><form:errors path="hours"/>:<form:input
-                        path="minutes" type="text" id="minutes" size="2"/><form:errors path="minutes"/>
-                    <form:input path="date" type="text" id="eluatingtime"/><form:errors path="date"/></td>
+                <td><form:input path="hours" type="text" id="hours" value="${hours}" size="2"/><form:errors path="hours"/>:<form:input
+                        path="minutes" type="text" id="minutes" size="2" value="${minutes}"/><form:errors path="minutes"/>
+                    <form:input path="date" type="text" id="eluatingtime" value="${date}"/><form:errors path="date"/></td>
             </tr>
             <tr>
                 <td>Aktiivisuus:</td>

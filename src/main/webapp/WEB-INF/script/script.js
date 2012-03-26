@@ -55,7 +55,10 @@ function eluateAmounts(e){
     console.log(newDiv);
 }
 
-
+function revealForm(){
+    document.querySelector("#butski").parentNode.removeChild(document.querySelector("#butski"));
+    document.querySelector("#removeForm").style.cssText = "display: inline;";
+}
 
 function removeSelection(elem){
     console.log(elem);

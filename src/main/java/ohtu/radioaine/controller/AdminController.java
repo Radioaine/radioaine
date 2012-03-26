@@ -33,7 +33,8 @@ public class AdminController {
     private StorageService storageService;
   
     @RequestMapping("admin")
-    public String adminView() {
+    public String adminView(Model model) {
+        model.addAttribute("substances", substanceService.list());
         return "admin";
     }
     

@@ -51,7 +51,7 @@ public class TestDBController {
         {"NaCl 30 ml", "3", "4", "true", "false", "Lääkefirma Perttilä", "Oy GE Healthcare Bio-Sciences Ab", "2"},
         {"NaCl 1000 ml", "3", "4", "true", "false", "Lääkefirma Perttilä", "Oy GE Healthcare Bio-Sciences Ab", "2"}};
     private String[][] batches = {
-        {"123445EE", "8", "30", "0", "Paljon huomautettavaa", "12.2.2012 08:35"},
+        {"123445EE", "8", "30", "0", "Paljon huomautettavaa", "12.2.2010 08:35"},
         {"99AADD22", "3", "10", "1", "puolet rikki", "13.2.2012 10:35"},
         {"AAD453343175", "3", "10", "2", "1 lainassa", "13.6.2012 11:55"},
         {"AAt43tD435175", "3", "10", "2", "1 lainassa", "13.6.2012 12:45"},
@@ -88,6 +88,7 @@ public class TestDBController {
             substance.setManufacturer(substances[i][5]);
             substance.setSupplier(substances[i][6]);
             substance.setType(Integer.parseInt(substances[i][7]));
+            substance.setOldestDate(Time.parseTimeStamp("13.6.2050 10:00"));
             substanceService.createOrUpdate(substance);
             Event event = EventHandler.newSubstanceEvent(substance, "test db");
             eventService.createOrUpdate(event);
@@ -120,6 +121,9 @@ public class TestDBController {
                 batch.setNote(batches[randomNumber][4]);
 
                 Substance substance = (Substance) substanceService.read(i + 1);
+                if(substance.getOldestDate().compareTo(batch.getExpDate()) > 0){
+                    substance.setOldestDate(batch.getExpDate());
+                }
                 substance.setTotalAmount(substance.getTotalAmount() + batch.getAmount());
                 substanceService.createOrUpdate(substance);
 

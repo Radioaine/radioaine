@@ -206,6 +206,9 @@ public class BatchController {
         batch.setSubstanceVolume(bfo.getSubstanceVolume());
         batch.setStorageLocations(bfo.getStorageLocations());
         Substance substance = (Substance) substanceService.read(bfo.getSubstance());
+        if(batch.getExpDate().compareTo(substance.getOldestDate()) < 0){
+            substance.setOldestDate(batch.getExpDate());
+        }
         substance.setTotalAmount(substance.getTotalAmount() + bfo.getAmount());
         substanceService.createOrUpdate(substance);
         batch.setSubstance(substance);

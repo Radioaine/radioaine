@@ -38,6 +38,7 @@ public class Batch implements Serializable {
     private String note;
     private int storageLocationsCount = 10;
     private int[][] storageLocations = new int[storageLocationsCount][2];
+    private int status;
     
 //    @ManyToOne
 //    private List<Storage> storages;
@@ -50,6 +51,14 @@ public class Batch implements Serializable {
 //        this.storages = storages;
 //    }
 
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
+    }
+    
     public Eluate getEluate() {
         return eluate;
     }

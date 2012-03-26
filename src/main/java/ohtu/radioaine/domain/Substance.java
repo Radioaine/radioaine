@@ -21,24 +21,25 @@ public class Substance implements Serializable {
     private String name;
     @Column(nullable = false)
     private int type;
-    @Column
     private int alertLimit1;
-    @Column
     private int alertLimit2;
-    @Column
     private boolean ordered;
-    @Column
     private boolean needsColdStorage;
-    @Column
     private String manufacturer;
-    @Column
     private String supplier;
-    @Column
     private int totalAmount;
-    @Column
     private Timestamp oldestDate;
     private String signature;
+    private String[] statusMessages = new String[3];
 
+    public String[] getStatusMessages() {
+        return statusMessages;
+    }
+
+    public void setStatusMessages(String[] statusMessages) {
+        this.statusMessages = statusMessages;
+    }
+    
     public String getSignature() {
         return signature;
     }

@@ -129,6 +129,7 @@
             </select><input type="number" size="3" name="amount"/> kappaletta<br />
             Kirjaaja:<input type="text"  name="signature"/><br />             
             <input type="submit" value="Poista" />
+            <input type="button" value="Peruuta" onClick="parent.location = '/radioaine/batch/${batch.id}'" />
         </form>
         
     </div>

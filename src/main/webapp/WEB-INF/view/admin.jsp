@@ -80,6 +80,12 @@
 					<td><a href="substance/${substance.id}">${substance.name}</a></td>
 					<td>${substance.oldestDate}</td>
 					<td>Vanhentuneita eriä</td>
+                                        <td><form action="addStatusComment/${substance.id}+0" method="POST" >
+                                                <input name="comment" type="text" value="${substance.statusMessages[0]}" />
+                                                <button type="submit">Tallenna kommentti</button>
+                                            </form>
+                                        </td>
+                                        
                                     </tr>
                                 </c:if>
                                     <!--Tähän aineitten hälytysrajat-->
@@ -89,6 +95,11 @@
 					<td><a href="substance/${substance.id}">${substance.name}</a></td>
 					<td>${substance.oldestDate}</td>
 					<td>Vähissä</td>
+                                        <td><form action="addStatusComment/${substance.id}+1" method="POST" >
+                                                <input name="comment" type="text" value="${substance.statusMessages[1]}" />
+                                                <button type="submit">Tallenna kommentti</button>
+                                            </form>
+                                        </td>
                                     </tr>
                                 </c:if>
                                 <c:if test="${substance.totalAmount == 0}">
@@ -97,6 +108,11 @@
 					<td><a href="substance/${substance.id}">${substance.name}</a></td>
 					<td>${substance.oldestDate}</td>
 					<td>Loppu</td>
+                                        <td><form action="addStatusComment/${substance.id}+1" method="POST" >
+                                                <input name="comment" type="text" value="${substance.statusMessages[1]}" />
+                                                <button type="submit">Tallenna kommentti</button>
+                                            </form>
+                                        </td>
                                     </tr>
                                 </c:if>
                                 <c:if test="${substance.qualityStatus == 0}">
@@ -105,6 +121,11 @@
 					<td><a href="substance/${substance.id}">${substance.name}</a></td>
 					<td>${substance.oldestDate}</td>
 					<td>Laadunvarmistus puuttuu</td>
+                                        <td><form action="addStatusComment/${substance.id}+2" method="POST" >
+                                                <input name="comment" type="text" value="${substance.statusMessages[2]}" />
+                                                <button type="submit">Tallenna kommentti</button>
+                                            </form>
+                                        </td>
                                     </tr>
                                 </c:if>
                                 <c:if test="${substance.qualityStatus == 2}">
@@ -113,18 +134,21 @@
 					<td><a href="substance/${substance.id}">${substance.name}</a></td>
 					<td>${substance.oldestDate}</td>
 					<td>Kaikki erät hylätty</td>
+                                        <td><form action="addStatusComment/${substance.id}+2" method="POST" >
+                                                <input name="comment" type="text" value="${substance.statusMessages[2]}" />
+                                                <button type="submit">Tallenna kommentti</button>
+                                            </form>
+                                        </td>
                                     </tr>
                                 </c:if>
-                                        
+                                            
                   
                                 </c:forEach>
 				
 			</table>
 			</br>
 			
-			<form method="link" action="admin.html">
-				<input type="submit" value="Kuittaa nähdyksi">
-			</form>
+			
 			
     </div>
 <%@include file="footer.jsp" %>

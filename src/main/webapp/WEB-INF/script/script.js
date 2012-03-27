@@ -64,6 +64,17 @@ function removeSelection(elem){
     selectionCounter--;
 }
 
+function addComment(e){
+    var temp = e.target.parentNode;
+    var newForm = document.createElement("form");
+    newForm.action = "addStatusComment/"+e.target.value+"+"+e.target.id;
+    newForm.method= "POST";
+    newForm.innerHTML = "<input type=\"text\" name=\"comment\" /><button type=\"submit\">Tallenna</button>";
+    temp.removeChild(e.target);
+    temp.appendChild(newForm);
+    console.log(e.target.parentNode);
+}
+
 function countAmount(){
     var total=0;
     var amounts = document.getElementsByClassName("temp");

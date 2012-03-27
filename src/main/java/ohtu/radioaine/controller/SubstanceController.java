@@ -94,4 +94,6 @@ public class SubstanceController {
         model.addAttribute("substance", new SubstanceFormObject());
         return "addSubstanceView";
     }
+    
+    
 }

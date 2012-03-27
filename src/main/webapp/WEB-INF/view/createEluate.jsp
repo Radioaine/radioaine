@@ -59,7 +59,11 @@
             </tr>
             <tr>
                 <td>Tilavuus:</td>
-                <td><form:input path="volume" type="text"/><form:errors path="volume"/>ml</td>
+                <td><form:select path="volume" type="text">
+                        <form:option value="5"/>
+                        <form:option value="10"/>
+                        <form:option value="11"/>
+                </form:select><form:errors path="volume"/>ml</td>
             </tr>
             <tr>
                 <td>Huomautuksia:</td>

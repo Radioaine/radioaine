@@ -2,7 +2,6 @@
  * :
  *  - admin: directs caller to admin page.
  */
-
 package ohtu.radioaine.controller;
 
 import javax.validation.Valid;
@@ -20,36 +19,41 @@ import org.springframework.web.bind.annotation.*;
 
 /**
  * Controllers for admin page.
+ *
  * @author rmjheino
- * 
+ *
  */
 @Controller
 public class AdminController {
 
     @Autowired
     private SubstanceService substanceService;
-    
     @Autowired
     private StorageService storageService;
-  
+
     @RequestMapping("admin")
     public String adminView(Model model) {
         model.addAttribute("substances", substanceService.list());
         return "admin";
     }
-    
+
+    @RequestMapping("management")
+    public String managementView(Model model) {
+        return "management";
+    }
+
     @RequestMapping("substanceView")
     public String substancesUpdate(Model model) {
         model.addAttribute("substances", substanceService.list());
         return "substanceView";
     }
-    
+
     @RequestMapping(value = "addStorage", method = RequestMethod.GET)
     public String addStorageView(Model model) {
         model.addAttribute("storage", new StorageFormObject());
         return "addStorageView";
     }
-    
+
     @RequestMapping(value = "addStorage", method = RequestMethod.POST)
     public String addStorage(@Valid @ModelAttribute("storage") StorageFormObject sfo, BindingResult result) {
         if (result.hasErrors()) {
@@ -58,30 +62,29 @@ public class AdminController {
         storageService.createOrUpdate(createStorage(sfo));
         return "redirect:/storagesView";
     }
-    
+
     @RequestMapping("storagesView")
     public String storageView(Model model) {
         model.addAttribute("storages", storageService.list());
         return "storagesView";
     }
-    
+
     private Storage createStorage(StorageFormObject sfo) {
         Storage storage = new Storage();
         storage.setName(sfo.getName());
 
         return storage;
     }
-    
+
     @RequestMapping(value = "addStatusComment/{sid}+{cid}")
-    public String addStatusComment(@RequestParam String comment, 
-    @PathVariable Integer sid,
-    @PathVariable Integer cid ){
-        Substance temp = (Substance)substanceService.read(sid);
-        String [] comments = temp.getStatusMessages();
+    public String addStatusComment(@RequestParam String comment,
+            @PathVariable Integer sid,
+            @PathVariable Integer cid) {
+        Substance temp = (Substance) substanceService.read(sid);
+        String[] comments = temp.getStatusMessages();
         comments[cid] = comment;
         temp.setStatusMessages(comments);
         substanceService.createOrUpdate(temp);
         return "redirect:/admin";
     }
-    
 }

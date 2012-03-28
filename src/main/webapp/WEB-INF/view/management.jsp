@@ -4,6 +4,9 @@
 
 <%@include file="headeradmin.jsp" %>
 <div id="contents">
-    Tänne varastopaikkojen ylläpito.
+    
+    <a href="<c:out value="${pageContext.servletContext.contextPath}" />/addSubstance">Lisää uusi lääkeaine</a><br />
+    <a href="<c:out value="${pageContext.servletContext.contextPath}" />/addStorageLocation">Lisää uusi varastopaikka</a><br />
+    
 </div>
 <%@include file="footer.jsp" %>

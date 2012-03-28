@@ -24,20 +24,7 @@
                 <li><a href="<c:out value="${pageContext.servletContext.contextPath}" />/storage">VARASTO</a></li>
                 <li><a href="<c:out value="${pageContext.servletContext.contextPath}" />/admin">HALLINTA</a></li>
             </ul>
-            
-            <span id="headertimestamp">
-                <script>
-                    var myDate = new Date();
-                    var displayDate = (myDate.getDate()) + '.' + (myDate.getMonth()+1) + '.' + myDate.getFullYear() + ' ' + myDate.getHours() + ':' + myDate.getMinutes();
-                    document.write(displayDate);
-                </script><br />
-                <c:set var="currentDate" value="<%=new java.util.Date()%>"/>
-                <fmt:formatDate pattern="dd.MM.yyyy" value="${currentDate}" var="date"/>
-                <fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${currentDate}" var="compareDate"/>
-                <fmt:formatDate pattern="HH" value="${currentDate}" var="hours"/>
-                <fmt:formatDate pattern="mm" value="${currentDate}" var="minutes"/>
-                <fmt:formatDate pattern="dd.MM.yyyy" value="${currentDate}" var="date"/>
-                ${compareDate}         
-            </span>
+
+            <%@include file="headerDate.jsp" %>
         </div>
         <div id="main">

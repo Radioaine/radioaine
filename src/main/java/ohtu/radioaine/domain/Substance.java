@@ -21,6 +21,7 @@ public class Substance implements Serializable {
     private String name;
     @Column(nullable = false)
     private int type;
+    private int halflife;
     private int alertLimit1;
     private int alertLimit2;
     private boolean ordered;
@@ -168,5 +169,13 @@ public class Substance implements Serializable {
 
     public void useOne(){
         totalAmount--;
+    }
+
+    public int getHalflife() {
+        return halflife;
+    }
+
+    public void setHalflife(int halflife) {
+        this.halflife = halflife;
     }
 }

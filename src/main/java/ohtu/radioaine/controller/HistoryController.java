@@ -32,9 +32,14 @@ public class HistoryController {
     }
     
     @RequestMapping("seek")
-    public String seekByName(@RequestParam String searchString, Model model) {   
-        model.addAttribute("results", eventService.list(searchString));
-        return "historyView";
+    public String seekByName(@RequestParam String[] reports, Model model) {
+        int counter = 1;
+        for(String str : reports){
+            model.addAttribute("raport"+counter, eventService.list(""));
+            counter++;
+        }
+        
+        return "history";
     }
 
 }

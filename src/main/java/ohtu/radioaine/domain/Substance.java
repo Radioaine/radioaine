@@ -166,15 +166,8 @@ public class Substance implements Serializable {
     public void setNeedsColdStorage(boolean needsColdStorage) {
         this.needsColdStorage = needsColdStorage;
     }
-
     
-    public String toStringDB() {
-        return "Substance{" + "id=" + id + ", name=" + name + ", type=" + type + ", alertLimit1=" + alertLimit1 + ", alertLimit2=" + alertLimit2 + ", ordered=" + ordered + ", needsColdStorage=" + needsColdStorage + ", manufacturer=" + manufacturer + ", supplier=" + supplier + ", totalAmount=" + totalAmount + ", oldestDate=" + oldestDate + '}';
-    }
     
-    public String toStringShow() {
-        return "NIMI= " + name + ", TYYPPI= " + type + ", HÄLYRAJA1= " + alertLimit1 + ", HÄLYRAJA2= " + alertLimit2 + ", KYLMÄSÄILYTYS= " + needsColdStorage + ", VALMISTAJA= " + manufacturer + ", TOIMITTAJA= " + supplier;
-    }
 
     public void useOne(){
         totalAmount--;

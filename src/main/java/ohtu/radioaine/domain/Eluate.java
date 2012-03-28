@@ -152,6 +152,10 @@ public class Eluate implements Serializable {
     public void setUnit(int unit) {
         this.unit = unit;
     }
-    
+
+    @Override
+    public String toString() {
+        return "Eluate{" + "id=" + id + ", strength=" + strength + ", unit=" + unit + ", volume=" + volume + ", date=" + date + ", signature=" + signature + ", note=" + note + ", storageLocation=" + storageLocation + ", generators=" + generators + ", others=" + others + '}';
+    }
     
 }

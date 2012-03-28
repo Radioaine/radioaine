@@ -70,7 +70,8 @@
             <c:choose>
                 <c:when test="${batch.storageLocations[i.index][1] > 0}">
                     <tr>
-                        <td>Jääkaapissa ${batch.storageLocations[i.index][0]} on ${location[1]} kappaletta</td>  
+                        <td>${storages[(batch.storageLocations[i.index][0]-1)].name}</td>
+                        <td>${location[1]} kpl</td>
                     </tr>  
                 </c:when>
             </c:choose>

@@ -81,8 +81,9 @@
             <c:choose>
                 <c:when test="${batch.storageLocations[i.index][1] > 0}">
                     <tr>
-                        <td>Jääkaapissa ${batch.storageLocations[i.index][0]} on ${location[1]} kappaletta</td>     
-                    </tr>  
+                        <td>${storages[(batch.storageLocations[i.index][0]-1)].name}</td>     
+                        <td>${location[1]} kpl</td>
+                    </tr>
                 </c:when>
             </c:choose>
         </c:forEach>
@@ -108,15 +109,15 @@
                 <c:choose>
                     <c:when test="${batch.storageLocations[status.index][1] > 0}">
                         <form:select path="storageLocations[${status.index}][0]"> 
-                            <c:forEach var="locations" items="${batch.storageLocations}" varStatus="i">
-                                <form:option value="${i.index+1}">Jääkaappi ${i.index+1}</form:option>
+                            <c:forEach var="locations" items="${storages}" varStatus="i">
+                                <form:option value="${i.index+1}">${storages[i.index].name}</form:option>
                             </c:forEach>
                         </form:select> <form:input path="storageLocations[${status.index}][1]" type="number"/> kappaletta<br/>
                     </c:when>
                 </c:choose>
             </c:forEach>
         </div>
-        <button type="button" onClick="addStorage(${batch.currentStorageLocationsCount},${batch.storageLocationsCount})">Lisää varastopaikka</button><br />
+        <button type="button" onClick="addStorage(${batch.currentStorageLocationsCount},${batch.storageLocationsCount}, ${storageNames})">Lisää varastopaikka</button><br />
         Huomioita: <br /><form:textarea path="note" type="text"/><form:errors path="note"/><br/>
         Nimikirjaimet: <form:input path="signature" type="text" id="signature" size="6"/><form:errors path="signature"/><br />
         <input type="submit" value="Tallenna muutokset">

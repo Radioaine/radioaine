@@ -2,16 +2,17 @@ var storageCounter = 2;
 var eluateCounter = 0;
 var selectionCounter = 0;
 
-function addStorage(usedStorageLocationsCount, storageLocationsCount){
+function addStorage(usedStorageLocationsCount, storageLocationsCount, names){
+    var p = names.split("^separate^");
     if(usedStorageLocationsCount > 0 && usedStorageLocationsCount >= storageCounter)
         storageCounter = usedStorageLocationsCount + 1;
     var storage = document.getElementById("varastot");
     var newdiv = document.createElement("div");
-    
+
     newdiv.id = "varasto"+storageCounter;
     var newHTML = "<select name=\"storageLocations["+(storageCounter-1)+"][0]\">";
-    for(var i = 0; i < storageLocationsCount; i++)  {
-        newHTML += "<option value=\""+(i+1)+"\">Jääkaappi "+(i+1)+"</option>";
+    for(var i = 0; i < (p.length-1); i++)  {
+        newHTML += "<option value=\""+(i+1)+"\">"+ p[i] +"</option>";
     }
     newHTML += "</select> <input class=\"temp\" onchange=\"countAmount()\" value=\"0\" id=\"storageAmount\" type=\"number\" size=\"3\" name=\"storageLocations["+(storageCounter-1)+"][1] \"> kpl &nbsp; <button type=\"button\" onClick=\"removeStorage("+storageCounter+")\">Poista</button>";
     newdiv.innerHTML = newHTML;
@@ -83,6 +84,32 @@ function countAmount(){
         total += parseInt(amounts[i].value);
     }
     document.getElementById("t").innerText = total+" kpl";
+    
+}
+
+function editStorageName(id)  {
+    var storage = document.getElementById("name"+id);
+    var parent = document.getElementById("editButton"+id);
+    var editButton = document.getElementById("edit"+id);
+    var storageText = storage.innerText;
+    storage.innerHTML = "<input id=inp"+id+">";
+    parent.removeChild(editButton);
+    
+    parent.innerHTML = "</input><button type=\"submit\" onClick=\"saveStorageName("+id+")\">Tallenna</button>";
+    var inp = document.getElementById("inp"+id);
+    inp.value = storageText;
+
+}
+
+function saveStorageName(id)  {
+    
+    var storage = document.getElementById("inp"+id);
+    var storageNewText = storage.value;
+    
+    console.log(storageNewText);
+}
+
+function removeStorage()    {
     
 }
 

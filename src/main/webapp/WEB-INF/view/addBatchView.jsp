@@ -56,8 +56,8 @@
                         </form:select> <form:input class="temp" onchange="countAmount()" id="storageAmount" path="storageLocations[0][1]" type="number" size="3"/> kpl<br/> 
                     </div>
                 </td>
-                <td valign="bottom"><button type="button" onClick="addStorage(1, ${batch.storageLocationsCount})">Lisää varastopaikka</button></td>
-                <td></td>
+                <td valign="bottom"><button type="button" onClick="addStorage(1, ${batch.storageLocationsCount}, ${storageNames})">Lisää varastopaikka</button></td>
+                <td>${storageNames}</td>
             </tr>
             <tr>
                 <td>Määrä yhteensä</td>

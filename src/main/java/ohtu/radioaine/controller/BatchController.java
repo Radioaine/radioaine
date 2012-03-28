@@ -87,10 +87,11 @@ public class BatchController {
         model.addAttribute("substances", substanceService.list());
         model.addAttribute("storages", storageService.list());
         
-        String[] names = new String[storageService.storageNamesList().size()];
-        for(int i = 0; i < names.length; i++)   {
-            names[i] = storageService.storageNamesList().get(i);
+        String names = "'"; 
+        for(int i = 0; i < storageService.storageNamesList().size(); i++)   {
+            names += storageService.storageNamesList().get(i) + "^separate^";
         }
+        names += "'";
         model.addAttribute("storageNames", names);
         
         return "addBatchView";
@@ -118,6 +119,12 @@ public class BatchController {
         model.addAttribute("substances", substanceService.list());
         model.addAttribute("batch", batchService.read(id));
         model.addAttribute("storages", storageService.list());
+        String names = "'"; 
+        for(int i = 0; i < storageService.storageNamesList().size(); i++)   {
+            names += storageService.storageNamesList().get(i) + "^separate^";
+        }
+        names += "'";
+        model.addAttribute("storageNames", names);
         return "batchUpdateView";
     }
 

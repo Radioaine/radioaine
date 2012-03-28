@@ -3,9 +3,11 @@ package ohtu.radioaine.controller;
 import java.util.Random;
 import ohtu.radioaine.domain.Batch;
 import ohtu.radioaine.domain.Event;
+import ohtu.radioaine.domain.Storage;
 import ohtu.radioaine.domain.Substance;
 import ohtu.radioaine.service.BatchService;
 import ohtu.radioaine.service.EventService;
+import ohtu.radioaine.service.StorageService;
 import ohtu.radioaine.service.SubstanceService;
 import ohtu.radioaine.tools.EventHandler;
 import ohtu.radioaine.tools.Time;
@@ -29,6 +31,8 @@ public class TestDBController {
     private BatchService batchService;
     @Autowired
     private EventService eventService;
+    @Autowired
+    private StorageService storageService;
     private String[][] substances = {
         // Kitit
         {"Angiocis 20.12mg", "10", "12", "true", "false", "Lääkefirma Jamppa", "Magnum Medical Finland Oy", "0"},
@@ -69,14 +73,27 @@ public class TestDBController {
         {"äsd123445EE", "8", "30", "0", "Jeejeee paljon huomautettavaa", "12.2.2012 08:35"},
         // {"hgfj799AADD22", "3", "10", "1", "puolet rikki", "13.2.2012 10:35"},
         {"FSHAAD175", "3", "10", "2", "1 lainassa", "13.6.2012 11:55"}};
+    
+    private String[] storages = {"Alakerran kaappi", "Yläkerran kaappi", "Varastokaappi", "Hoitajien kaappi"};
 
     @RequestMapping("generateTestDB")
     public String createDB() {
         createSubstances();
         createBatches();
+        createStorages();
         return "redirect:/storage";
     }
-
+    
+    private void createStorages()   {
+        for (int i = 0; i < storages.length; i++) {
+            Storage storage = new Storage();
+            storage.setName(storages[i]);
+            storageService.createOrUpdate(storage);
+//            Event event = EventHandler.newStorageEvent(storage, "test db");
+//            eventService.createOrUpdate(event);
+        }
+    }
+    
     private void createSubstances() {
         for (int i = 0; i < substances.length; i++) {
             Substance substance = new Substance();

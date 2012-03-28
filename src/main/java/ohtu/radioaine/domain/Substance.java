@@ -30,10 +30,19 @@ public class Substance implements Serializable {
     private String supplier;
     private int totalAmount;
     private Timestamp oldestDate;
+    private Timestamp warningDate;
     private String signature;
     private String[] statusMessages = new String[3];
     private int qualityStatus;
 
+    public Timestamp getWarningDate() {
+        return warningDate;
+    }
+
+    public void setWarningDate(Timestamp warningDate) {
+        this.warningDate = warningDate;
+    }
+    
     public int getQualityStatus() {
         return qualityStatus;
     }

@@ -1,8 +1,8 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-
-
 <%@include file="headeradmin.jsp" %>
+<fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${warning}" var="wDate"/>
+
 
 <div id="contents">
     <table class="listing">
@@ -80,6 +80,20 @@
                     <td><a href="substance/${substance.id}">${substance.name}</a></td>
                     <td>${substance.oldestDate}</td>
                     <td>Vanhentuneita eriä</td>
+                    <td><form action="addStatusComment/${substance.id}+0" method="POST" >
+                            <input name="comment" type="text" value="${substance.statusMessages[0]}" />
+                            <button type="submit">Tallenna kommentti</button>
+                        </form>
+                    </td>
+
+                </tr>
+            </c:if>
+            <c:if test="${substance.warningDate < wDate}">
+                <tr class="blue">
+                    <td class="center">${date}</td>
+                    <td><a href="substance/${substance.id}">${substance.name}</a></td>
+                    <td>${substance.oldestDate}</td>
+                    <td>Huomaa päiväys</td>
                     <td><form action="addStatusComment/${substance.id}+0" method="POST" >
                             <input name="comment" type="text" value="${substance.statusMessages[0]}" />
                             <button type="submit">Tallenna kommentti</button>

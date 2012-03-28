@@ -19,9 +19,7 @@ public class Batch implements Serializable {
     private int id;
     @Column(nullable = false)
     private String batchNumber;
-    @Column
     private int amount;
-    @Column
     private int substanceVolume;
     //Products of this batch are made of this substance
     @ManyToOne
@@ -50,7 +48,7 @@ public class Batch implements Serializable {
 //    public void setStorages(List<Storage> storages) {
 //        this.storages = storages;
 //    }
-
+    
     public int getStatus() {
         return status;
     }

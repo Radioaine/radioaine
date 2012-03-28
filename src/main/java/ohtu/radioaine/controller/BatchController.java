@@ -152,6 +152,8 @@ public class BatchController {
         batch.setSubstanceVolume(bfo.getSubstanceVolume());
         batch.setBatchNumber(bfo.getBatchNumber());
         batch.setNote(bfo.getNote());
+        batch.setArrivalDate(Time.parseDate(bfo.getArrivalDate()));
+        batch.setExpDate(Time.parseDate(bfo.getExpDate()));
         int temp = 0;
         for (int i = 0; i < bfo.getStorageLocations().length; i++) {
             temp += bfo.getStorageLocations()[i][1];
@@ -230,6 +232,7 @@ public class BatchController {
         Substance substance = (Substance) substanceService.read(bfo.getSubstance());
         if(batch.getExpDate().compareTo(substance.getOldestDate()) < 0){
             substance.setOldestDate(batch.getExpDate());
+            substance.setWarningDate(Time.parseWarningDate(batch.getExpDate()));
         }
         substance.setTotalAmount(substance.getTotalAmount() + bfo.getAmount());
         substanceService.createOrUpdate(substance);

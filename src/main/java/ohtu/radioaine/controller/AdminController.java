@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import ohtu.radioaine.service.SubstanceService;
+import ohtu.radioaine.tools.Time;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
@@ -34,6 +35,7 @@ public class AdminController {
     @RequestMapping("admin")
     public String adminView(Model model) {
         model.addAttribute("substances", substanceService.list());
+        model.addAttribute("warning", Time.getWarningDate());
         return "admin";
     }
 

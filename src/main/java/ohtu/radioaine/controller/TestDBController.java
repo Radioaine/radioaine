@@ -56,8 +56,8 @@ public class TestDBController {
         {"NaCl 1000 ml", "3", "4", "true", "false", "Lääkefirma Perttilä", "Oy GE Healthcare Bio-Sciences Ab", "2"}};
     private String[][] batches = {
         {"123445EE", "8", "30", "0", "Paljon huomautettavaa", "12.2.2010 08:35"},
-        {"99AADD22", "3", "10", "1", "puolet rikki", "13.2.2012 10:35"},
-        {"AAD453343175", "3", "10", "2", "1 lainassa", "13.6.2012 11:55"},
+        {"99AADD22", "3", "10", "1", "puolet rikki", "03.4.2012 10:35"},
+        {"AAD453343175", "3", "10", "2", "1 lainassa", "13.4.2012 11:55"},
         {"AAt43tD435175", "3", "10", "2", "1 lainassa", "13.6.2012 12:45"},
         {"assfaAAD175", "3", "10", "2", "1 lainassa", "13.6.2012 09:23"},
         {"asdas123445EE", "8", "30", "0", "Jeejeee paljon huomautettavaa", "12.2.2012 08:35"},
@@ -68,7 +68,7 @@ public class TestDBController {
         {"123445EE", "8", "30", "0", "Jeejeee paljon huomautettavaa", "12.2.2012 08:35"},
         {"547u399AADD22", "3", "10", "1", "puolet rikki", "13.2.2012 10:35"},
         {"9678AAD175", "3", "10", "2", "1 lainassa", "13.6.2012 11:55"},
-        {"+09+09AAD175", "3", "10", "2", "1 lainassa", "13.6.2012 12:45"},
+        {"+09+09AAD175", "3", "10", "2", "1 lainassa", "13.4.2012 11:55"},
         {"´+0AAD175", "3", "10", "2", "1 lainassa", "13.6.2012 09:23"},
         {"äsd123445EE", "8", "30", "0", "Jeejeee paljon huomautettavaa", "12.2.2012 08:35"},
         // {"hgfj799AADD22", "3", "10", "1", "puolet rikki", "13.2.2012 10:35"},
@@ -106,7 +106,9 @@ public class TestDBController {
             substance.setSupplier(substances[i][6]);
             substance.setType(Integer.parseInt(substances[i][7]));
             substance.setOldestDate(Time.parseTimeStamp("13.6.2050 10:00"));
-            substance.setQualityStatus(0);
+            Random randomGenerator = new Random();
+            int randomInt = randomGenerator.nextInt(3);
+            substance.setQualityStatus(randomInt);
             substanceService.createOrUpdate(substance);
             Event event = EventHandler.newSubstanceEvent(substance, "test db");
             eventService.createOrUpdate(event);
@@ -133,7 +135,6 @@ public class TestDBController {
                 batch.setStorageLocations(storageLocations);
 
                 batch.setExpDate(Time.parseTimeStamp(batches[randomNumber][5]));
-
                 batch.setSubstanceVolume(Integer.parseInt(batches[randomNumber][2]));
                 batch.setQualityCheck(Integer.parseInt(batches[randomNumber][3]));
                 batch.setNote(batches[randomNumber][4]);
@@ -141,6 +142,7 @@ public class TestDBController {
                 Substance substance = (Substance) substanceService.read(i + 1);
                 if(substance.getOldestDate().compareTo(batch.getExpDate()) > 0){
                     substance.setOldestDate(batch.getExpDate());
+                    substance.setWarningDate(Time.parseWarningDate(batch.getExpDate()));
                 }
                 substance.setTotalAmount(substance.getTotalAmount() + batch.getAmount());
                 substanceService.createOrUpdate(substance);

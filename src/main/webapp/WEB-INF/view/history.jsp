@@ -5,7 +5,13 @@
     <h1>Saapuneet</h1>
     <c:forEach var="event" items="${raport1}">
         <p><fmt:formatDate value="${event.timestamp}" pattern="dd.MM.yyyy HH:mm:ss"/>
-            ${event.info}   
+            ${event.info}
+                <c:forTokens items="${event.info}" var="info" delims="name=">
+                    <c:if test="${info == 'Ceretec'}">
+                        <c:out value="${info}++" />
+                    </c:if>
+                </c:forTokens>
+                    
     </c:forEach>
 </div>
 

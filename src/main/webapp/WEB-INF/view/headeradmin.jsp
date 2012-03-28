@@ -24,18 +24,12 @@
                 <li><a href="<c:out value="${pageContext.servletContext.contextPath}" />/storage">VARASTO</a></li>
                 <li><a class="current" href="<c:out value="${pageContext.servletContext.contextPath}"/>/admin">HALLINTA</a></li>
                 <ul id="secondary">
-				<li><a href="admin.html">Huomautukset</a></li>
-				<li><a href="historyView.html">Historiatiedot ja raportit</a></li>
-				<li><a href="substanceView.html">Aineiden tiedot</a></li>
-				<li><a href="yllapito" class="last">Ylläpito</a></li>
-		</ul>  
+                    <li><a href="admin">Huomautukset</a></li>
+                    <li><a href="historyView">Historiatiedot ja raportit</a></li>
+                    <li><a href="substanceView">Aineiden tiedot</a></li>
+                    <li><a href="management" class="last">Ylläpito</a></li>
+                </ul>  
             </ul>
-            <span id="headertimestamp">
-                <c:set var="currentDate" value="<%=new java.util.Date()%>"/>
-                <fmt:formatDate pattern="dd.MM.yyyy" value="${currentDate}" var="date"/>
-                <fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${currentDate}" var="compareDate"/>
-                
-                ${compareDate}
-            </span>
+            <%@include file="headerDate.jsp" %>
         </div>
         <div id="main">

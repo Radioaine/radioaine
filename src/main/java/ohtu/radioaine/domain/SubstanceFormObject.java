@@ -11,10 +11,11 @@ import javax.validation.constraints.NotNull;
  * @author jahyvone
  */
 public class SubstanceFormObject {
-    
+
     @NotNull(message = "Nimi ei saa olla tyhjä")
     private String name;
     private int type;
+    private int halflife;
     private int alertLimit1;
     private int alertLimit2;
     private boolean needsColdStorage;
@@ -37,7 +38,7 @@ public class SubstanceFormObject {
     public void setType(int type) {
         this.type = type;
     }
-    
+
     public int getAlertLimit1() {
         return alertLimit1;
     }
@@ -84,5 +85,13 @@ public class SubstanceFormObject {
 
     public void setSupplier(String supplier) {
         this.supplier = supplier;
+    }
+
+    public int getHalflife() {
+        return halflife;
+    }
+
+    public void setHalflife(int halflife) {
+        this.halflife = halflife;
     }
 }

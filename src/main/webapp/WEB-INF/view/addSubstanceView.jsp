@@ -23,6 +23,11 @@
                     </form:select></td>
             </tr>
             <tr>
+                <td>Puoliintumisaika (jos on):</td>
+                <td><form:input path="halflife" type="text"/><form:errors path="halflife"/></td>
+            </tr>
+            
+            <tr>
                 <td>Valmistaja:</td>
                 <td><form:input path="manufacturer" type="text"/><form:errors path="manufacturer"/></td>
             </tr>

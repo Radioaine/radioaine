@@ -57,7 +57,7 @@
                     </div>
                 </td>
                 <td valign="bottom"><button type="button" onClick="addStorage(1, ${batch.storageLocationsCount}, ${storageNames})">Lisää varastopaikka</button></td>
-                <td>${storageNames}</td>
+                <td></td>
             </tr>
             <tr>
                 <td>Määrä yhteensä</td>

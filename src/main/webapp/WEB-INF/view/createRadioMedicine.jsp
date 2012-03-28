@@ -78,6 +78,14 @@
                 <td><form:input path="volume" type="text"/><form:errors path="volume"/>ml</td>
             </tr>
             <tr>
+                <td>Varastopaikka</td>
+                <td><form:select  path="storageLocation">
+                    <c:forEach var="storage" items="${storages}" varStatus="i">
+                        <form:option value="${i.index+1}">${storage.name}</form:option>
+                    </c:forEach>
+                 </form:select></td>
+            </tr>
+            <tr>
                 <td>Huomautuksia:</td>
                 <td><form:textarea path="note" type="text"/><form:errors path="note"/></td>
             </tr>

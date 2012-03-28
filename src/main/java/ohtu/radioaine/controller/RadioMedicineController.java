@@ -4,15 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.validation.Valid;
 import ohtu.radioaine.domain.*;
+import ohtu.radioaine.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import ohtu.radioaine.service.BatchService;
-import ohtu.radioaine.service.SubstanceService;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMethod;
-import ohtu.radioaine.service.EluateService;
-import ohtu.radioaine.service.RadioMedService;
 import ohtu.radioaine.tools.Time;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -37,6 +34,9 @@ public class RadioMedicineController {
     @Autowired
     private RadioMedService radioMedService;
     
+    @Autowired
+    private StorageService storageService;
+    
     @RequestMapping(value = "createRadioMedicine", method = RequestMethod.GET)
     public String createRadioMedicineView(Model model) {
         model.addAttribute("radioMedicine", new RadioMedicineFormObject());
@@ -44,6 +44,7 @@ public class RadioMedicineController {
         model.addAttribute("kits", batchService.getBatchesByType(KIT));
         model.addAttribute("others", batchService.getBatchesByType(OTHER));
         model.addAttribute("eluates", eluateService.list());
+        model.addAttribute("storages", storageService.list());
         
         return "createRadioMedicine";
     }

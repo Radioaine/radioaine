@@ -21,5 +21,4 @@ public interface StorageService {
 
     public void delete(int id);
 
-    public List<Storage> listByStorageType(int type);
 }

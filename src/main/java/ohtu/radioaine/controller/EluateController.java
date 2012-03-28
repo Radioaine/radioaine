@@ -7,13 +7,10 @@ import ohtu.radioaine.domain.Batch;
 import ohtu.radioaine.domain.Eluate;
 import ohtu.radioaine.domain.EluateFormObject;
 import ohtu.radioaine.domain.Substance;
-import ohtu.radioaine.service.BatchService;
+import ohtu.radioaine.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import ohtu.radioaine.service.EluateService;
-import ohtu.radioaine.service.EventService;
-import ohtu.radioaine.service.SubstanceService;
 import ohtu.radioaine.tools.Time;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -37,6 +34,8 @@ public class EluateController {
     private EventService eventService;
     @Autowired
     private SubstanceService substanceService;
+    @Autowired
+    private StorageService storageService;
     int GENERATOR = 1;
     int KIT = 0;
     int OTHER = 2;
@@ -52,6 +51,7 @@ public class EluateController {
         model.addAttribute("eluate", new EluateFormObject());
         model.addAttribute("generators", batchService.getBatchesByType(GENERATOR));
         model.addAttribute("others", batchService.getBatchesByType(OTHER));
+        model.addAttribute("storages",  storageService.list());
         return "createEluate";
     }
 

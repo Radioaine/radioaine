@@ -42,7 +42,13 @@
                     </c:forEach></td>
                 <td>${eluate.strength} GBq</td>
                 <td>${eluate.volume} ml</td>
-                <td>${eluate.storageLocation}</td>
+                <td>
+                    <c:forEach var="storage" items="${storages}" varStatus="i">
+                        <c:if test="${eluate.storageLocation == storage.id}">
+                            ${storage.name}
+                        </c:if>
+                    </c:forEach>
+                </td>
                 <td>${eluate.signature}</td>
             </tr>
 
@@ -55,7 +61,13 @@
                             </c:forEach></td>
                         <td>${radioMed.strength} GBq</td>
                         <td>${radioMed.volume} ml</td>
-                        <td>${radioMed.storageLocation}</td>
+                        <td>
+                            <c:forEach var="storage" items="${storages}" varStatus="i">
+                                <c:if test="${radioMed.storageLocation == storage.id}">
+                                    ${storage.name}
+                                </c:if>
+                            </c:forEach>
+                        </td>
                         <td>${radioMed.signature}</td>
                     </tr>
                 </c:if>   

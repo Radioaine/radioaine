@@ -14,17 +14,6 @@
                 <td><form:input path="name" type="text"/><form:errors path="name"/></td>
             </tr>
             <tr>
-                <td>Tyyppi:</td>
-                <td><form:select path="storageType">
-                        <form:option value="0">Kylmä</form:option>
-                        <form:option value="1">Lämmin</form:option>
-                    </form:select></td>
-            </tr>
-            <tr>
-                <td>Lisätietoja:</td>
-                <td><form:input path="notes" type="text"/><form:errors path="notes"/></td>
-            </tr>
-            <tr>
                 <td><input type="submit" value="Lisää"></td>
             </tr>
         </table>

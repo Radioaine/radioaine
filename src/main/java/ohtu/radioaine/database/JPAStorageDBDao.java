@@ -45,10 +45,4 @@ public class JPAStorageDBDao implements StorageDBDao    {
         Query q = entityManager.createQuery("SELECT b FROM Storage b");
         return q.getResultList();
     }
-    
-    @Override
-    public List<Storage> listByStorageType(int type) {
-        Query q = entityManager.createQuery("SELECT b FROM Batch b WHERE b.storageType=" + type);
-        return q.getResultList();
-    }
 }

@@ -67,9 +67,7 @@ public class AdminController {
     
     private Storage createStorage(StorageFormObject sfo) {
         Storage storage = new Storage();
-        storage.setStorageType(sfo.getStorageType());
         storage.setName(sfo.getName());
-        storage.setNotes(sfo.getNotes());
 
         return storage;
     }

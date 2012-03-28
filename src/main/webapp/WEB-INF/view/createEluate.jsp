@@ -63,7 +63,15 @@
                         <form:option value="5"/>
                         <form:option value="10"/>
                         <form:option value="11"/>
-                </form:select><form:errors path="volume"/>ml</td>
+                    </form:select><form:errors path="volume"/>ml</td>
+            </tr>
+            <tr>
+                <td>Varastopaikka</td>
+                <td><form:select  path="storageLocation">
+                    <c:forEach var="storage" items="${storages}" varStatus="i">
+                        <form:option value="${i.index+1}">${storage.name}</form:option>
+                    </c:forEach>
+                 </form:select></td>
             </tr>
             <tr>
                 <td>Huomautuksia:</td>

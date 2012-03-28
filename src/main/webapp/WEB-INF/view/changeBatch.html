@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Radioaine</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" type="text/css" href="basic.css" />
+    <link rel="stylesheet" type="text/css" href="tabs.css" />
+</head>
+
+<body>
+    <h1><a href="frontpage.html">Radioaine</a></h1>
+    <div id="header">
+    <ul id="primary">
+        <li><a href="frontpage.html">VALMISTUS</a></li>
+        <li><a href="storage.html" class="selected">VARASTO</a></li>
+        <li><a href="admin.html">HALLINTA</a></li>
+    </ul>
+    </div>
+    <div id="main">
+        <div id="contents">
+                   
+            <h2>Angiocis 20.12mg / Eränumero 99A89796</h2>
+            <br/>
+           
+            <table class="noborder">
+               
+                <tr>
+                    <td class="name">Vanhenemispäivä</td>
+                    <td class="substance"><input id="expDate" name="expDate" type="text" size="8" value="5.3.2012"/></td>
+                    <td></td>
+                </tr>
+
+                <tr>
+                    <td>Laadunvarmistus</td>
+                    <td id="qualityCheck">
+                       <form action="/radioaine/doCheck/1+1" method="POST">
+                           <select name="qualityCheck">
+                                <option value="0" selected="selected">Suorittamatta</option>
+                               <option value="1">Hyväksytty</option>
+                               <option value="2">Hylätty</option>
+                           </select>
+                           <input type="submit" value="Kirjaa tulos">
+                       </form>
+                    </td>
+                    <td></td>
+                </tr>
+                       
+                <tr>
+                    <td>Sijainti</td>
+                    <td>
+                        <select>
+                            <option value="1" selected="selected">Jääkaappi 1</option>
+                            <option value="2">Jääkaappi 2</option>
+                            <option value="3">Jääkaappi 3</option>
+                            <option value="4">Jääkaappi 4</option>
+                            <option value="5">Jääkaappi 5</option>
+                            <option value="6">Jääkaappi 6</option>
+                            <option value="7">Jääkaappi 7</option>
+                        </select> &nbsp; &nbsp;
+                        <input id="storageLocations01" name="storageLocations[0][1]" type="number" size="3" value="2"/> kpl
+                    </td>
+                    <td></td>
+                </tr>
+               
+                <tr>
+                    <td></td>
+                    <td>
+                        <select>
+                            <option value="1">Jääkaappi 1</option>
+                            <option value="2" selected="selected">Jääkaappi 2</option>
+                            <option value="3">Jääkaappi 3</option>
+                            <option value="4">Jääkaappi 4</option>
+                            <option value="5">Jääkaappi 5</option>
+                            <option value="6">Jääkaappi 6</option>
+                            <option value="7">Jääkaappi 7</option>
+                        </select> &nbsp; &nbsp;
+                        <input id="storageLocations01" name="storageLocations[0][1]" type="number" size="3" value="3"/> kpl
+                    </td>
+                    <td><button type="button" onClick="addStorage(1, 10)">Lisää varastopaikka</button></td>
+                </tr>
+               
+                <tr>
+                    <td>Määrä yhteensä</td>
+                    <td><input type="number" size="3" value="5" disabled="disabled"/> kpl</td>
+                </tr>
+               
+                <tr>
+                    <td>Huomautuksia</td>
+                    <td colspan="2"><input type="text" name="comments" size="70" value="1 pullo käytetty ilman laadunvarmistusta 17.2.2012"/></td>
+                </tr>
+                   
+            </table>
+           
+            <br/>
+           
+            <br/>
+
+                <table class="noborder">
+                    <tr>
+                        <td class="name">Nimikirjaimet</td>
+                        <td><input required type="text" name="initials" size="6" /></td>
+                    </tr>
+                </table>
+
+                <br/>
+               
+                <input type="submit" value="Tallenna" /> &nbsp; &nbsp;<input type="submit" value="Peruuta"/>
+               
+            </form>
+   
+        </div>
+    </div>
+</body>
+</html>
+
+

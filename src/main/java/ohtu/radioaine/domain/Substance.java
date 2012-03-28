@@ -21,24 +21,34 @@ public class Substance implements Serializable {
     private String name;
     @Column(nullable = false)
     private int type;
-    @Column
     private int alertLimit1;
-    @Column
     private int alertLimit2;
-    @Column
     private boolean ordered;
-    @Column
     private boolean needsColdStorage;
-    @Column
     private String manufacturer;
-    @Column
     private String supplier;
-    @Column
     private int totalAmount;
-    @Column
     private Timestamp oldestDate;
     private String signature;
+    private String[] statusMessages = new String[3];
+    private int qualityStatus;
 
+    public int getQualityStatus() {
+        return qualityStatus;
+    }
+
+    public void setQualityStatus(int qualityStatus) {
+        this.qualityStatus = qualityStatus;
+    }
+    
+    public String[] getStatusMessages() {
+        return statusMessages;
+    }
+
+    public void setStatusMessages(String[] statusMessages) {
+        this.statusMessages = statusMessages;
+    }
+    
     public String getSignature() {
         return signature;
     }
@@ -156,5 +166,7 @@ public class Substance implements Serializable {
         return "NIMI= " + name + ", TYYPPI= " + type + ", HÄLYRAJA1= " + alertLimit1 + ", HÄLYRAJA2= " + alertLimit2 + ", KYLMÄSÄILYTYS= " + needsColdStorage + ", VALMISTAJA= " + manufacturer + ", TOIMITTAJA= " + supplier;
     }
 
-    
+    public void useOne(){
+        totalAmount--;
+    }
 }

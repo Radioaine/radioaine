@@ -1,20 +1,10 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
 <%@include file="headerfront.jsp" %>
 
 <div id="contents">
-    <h2>Valmisteet 
-        <script>
-            var myDate = new Date();
-            var displayDate = (myDate.getDate()) + '.' + (myDate.getMonth()+1) + '.' + myDate.getFullYear();
-            document.write(displayDate);
-        </script>
-    </h2>
-
     <table class="noborder">
-        <br>
         <tr>
             <td class="elbutton">
                 <form method="link" action="createEluate">
@@ -29,114 +19,60 @@
         </tr>
     </table>
     <br>
-    <table class="listing">
-        <tr>
-            <th>Klo</th>
-            <th>Aine</th>
-            <th>Aktiivisuus</th>
-            <th>Määrä</th>
-            <th>Sijainti</th>
-            <th>Tekijä</th>
-            <th></th> <!--sarake lisäysnapille-->
-        </tr>
-        <c:forEach var="eluate" items="${eluates}">
+    <h2>Valmisteet 
+        
+    </h2>
+
+    <br>
+    <c:forEach var="eluate" items="${eluates}">
+        <table class="listing">
+            <tr>
+                <th>Klo</th>
+                <th>Aine</th>
+                <th>Aktiivisuus</th>
+                <th>Määrä</th>
+                <th>Sijainti</th>
+                <th>Tekijä</th>
+                <th></th> <!--sarake lisäysnapille-->
+            </tr>  
             <tr>
                 <td><fmt:formatDate value="${eluate.date}" pattern="HH:mm"/> </td>
-                <td><c:forEach var="kit" items="${eluate.kits}">
-                        <a href="eluate/${eluate.id}">${kit.substance.name}</a><br>
+                <td><c:forEach var="generator" items="${eluate.generators}">
+                        <a href="eluate/${eluate.id}"><b>${generator.substance.name}</b></a><br>
                     </c:forEach></td>
                 <td>${eluate.strength} GBq</td>
                 <td>${eluate.volume} ml</td>
-                <td>${eluate.storageLocation}</td>
+                <td>
+                    <c:forEach var="storage" items="${storages}" varStatus="i">
+                        <c:if test="${eluate.storageLocation == storage.id}">
+                            ${storage.name}
+                        </c:if>
+                    </c:forEach>
+                </td>
                 <td>${eluate.signature}</td>
             </tr>
-        </c:forEach>
-    </table>
-    <p>
-    <table class="listing">
-        <col width="30px"/>
-        <col width="60px"/>
-        <col width="200px"/>
-        <col width="100px"/>
-        <col width="100px"/>
-        <col width="100px"/>
-        <col width="70px"/>
-        <col width="200px"/>
-        <tr>
-            <th colspan="2">Klo</th>
-            <th>Aine</th>
-            <th>Aktiivisuus</th>
-            <th>Määrä</th>
-            <th>Sijainti</th>
-            <th>Tekijä</th>
-            <th></th> <!--sarake lisäysnapille-->
-        </tr>
-        <tr>            
-            <td colspan="2">7:34</td>
-            <td><a>Molybdeeni 99</a></td>
-            <td>30,2 GBq</td>
-            <td>11 ml</td>
-            <td>1. krs</td>
-            <td>MK</td>
-        </tr>
-        <tr>
-            <td class="noborder"></td>
-            <td>7:48</td>
-            <td>Myoview</td>
-            <td>5,39 GBq</td>
-            <td>4 ml</td>
-            <td>1. krs</td>
-            <td>MK</td>
-        </tr>
-        <tr>
-            <th class="noborder"></th>
-            <td>8:22</td>
-            <td><a>NephroMAG</a></td>
-            <td>3,20 GBq</td>
-            <td>5 ml</td>
-            <td>2. krs</td>
-            <td>MK</td>
-        </tr>
-    </table>
-    </br>           
-    <table class="listing">
-        <col width="30px"/>
-        <col width="60px"/>
-        <col width="200px"/>
-        <col width="100px"/>
-        <col width="100px"/>
-        <col width="100px"/>
-        <col width="70px"/>
-        <col width="200px"/>
-        <tr> 
-            <td colspan="2">8:54</td>
-            <td><a>Molybdeeni 99</a></td>
-            <td>66,6 GBq</td>
-            <td>10 ml</td>
-            <td>2. krs</td>
-            <td>RHN</td>
-        </tr>          
-    </table>
-</p>
-<!--<p>
-<h2>Muut käytetyt aineet</h2>
-</p>
-<p>
-<table class="listing">
-    <col width="200px"/>
-    <tr>
-        <th>Aine</th>
-    </tr>
-    <tr>
-        <td>Valmis lääke 1</td>
-    </tr>
-    <tr>
-        <td>Valmis lääke 2</td>
-    </tr>
-    <tr>
-        <td>Valmis lääke 3</td>
-    </tr>
-</table>
-</p>-->
+
+            <c:forEach var="radioMed" items="${radioMeds}">
+                <c:if test="${radioMed.eluates[0].id == eluate.id}">  
+                    <tr>
+                        <td><fmt:formatDate value="${radioMed.date}" pattern="HH:mm"/></td>
+                        <td><c:forEach var="kit" items="${radioMed.kits}">
+                                <a href="RadioMedicine/${radioMed.id}">${kit.substance.name}</a><br>
+                            </c:forEach></td>
+                        <td>${radioMed.strength} GBq</td>
+                        <td>${radioMed.volume} ml</td>
+                        <td>
+                            <c:forEach var="storage" items="${storages}" varStatus="i">
+                                <c:if test="${radioMed.storageLocation == storage.id}">
+                                    ${storage.name}
+                                </c:if>
+                            </c:forEach>
+                        </td>
+                        <td>${radioMed.signature}</td>
+                    </tr>
+                </c:if>   
+            </c:forEach> 
+        </table>        
+    </c:forEach>    
 </div>
 <%@include file="footer.jsp" %>

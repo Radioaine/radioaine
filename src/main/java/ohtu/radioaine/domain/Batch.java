@@ -2,6 +2,7 @@ package ohtu.radioaine.domain;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
+import java.util.List;
 import javax.persistence.*;
 
 /**
@@ -35,9 +36,29 @@ public class Batch implements Serializable {
     private String manufacturer;
     private String supplier;
     private String note;
-    private int storageLocationsCount = 10;
+    private int storageLocationsCount = 100;
     private int[][] storageLocations = new int[storageLocationsCount][2];
+    private int status;
+    
+//    @ManyToOne
+//    private List<Storage> storages;
+//
+//    public List<Storage> getStorages() {
+//        return storages;
+//    }
+//
+//    public void setStorages(List<Storage> storages) {
+//        this.storages = storages;
+//    }
 
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
+    }
+    
     public Eluate getEluate() {
         return eluate;
     }
@@ -130,11 +151,6 @@ public class Batch implements Serializable {
         return manufacturer;
     }
 
-    /**
-     * Sets the manufacturer
-     *
-     * @param manufacturer name of the manufacturer
-     */
     public void setManufacturer(String manufacturer) {
         this.manufacturer = manufacturer;
     }
@@ -188,5 +204,9 @@ public class Batch implements Serializable {
             }
         }
         return temp;
+    }
+    
+    public void useOne(){
+        amount--;
     }
 }

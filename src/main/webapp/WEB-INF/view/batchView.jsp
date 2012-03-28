@@ -116,9 +116,23 @@
         <tr>
     </table>
     <br />
-    <form action="${pageContext.servletContext.contextPath}/updateBatch/${batch.id}" method="POST">  
-        <input type="submit" value="Muokkaa erän tietoja">
-    </form>    
+    <div id="batchButtons">
+        <form action="${pageContext.servletContext.contextPath}/updateBatch/${batch.id}" method="POST">  
+            <input type="submit" value="Muokkaa erän tietoja" />
+        </form>
+            <button id="butski" onclick="revealForm()" type="button">Poista erästä</button>
+        <form id="removeForm" style="display: none;" action="${pageContext.servletContext.contextPath}/removeFromBatch/${batch.id}" method="POST">  
+            Varastopaikasta<select name="storageLocation">
+                <option value="1">Jääkaappi 1</option>
+                <option value="2">Jääkaappi 2</option>
+                <option value="3">Jääkaappi 3</option>
+            </select><input type="number" size="3" name="amount"/> kappaletta<br />
+            Kirjaaja:<input type="text"  name="signature"/><br />             
+            <input type="submit" value="Poista" />
+            <input type="button" value="Peruuta" onClick="parent.location = '/radioaine/batch/${batch.id}'" />
+        </form>
+        
+    </div>
 </div>
 
 <%@include file="footer.jsp" %>

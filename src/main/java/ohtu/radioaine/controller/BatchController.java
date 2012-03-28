@@ -9,6 +9,7 @@
  */
 package ohtu.radioaine.controller;
 
+import java.util.List;
 import javax.validation.Valid;
 import ohtu.radioaine.domain.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import ohtu.radioaine.service.BatchService;
 import ohtu.radioaine.service.EventService;
+import ohtu.radioaine.service.StorageService;
 import ohtu.radioaine.service.SubstanceService;
 import ohtu.radioaine.tools.EventHandler;
 import org.springframework.ui.Model;
@@ -40,10 +42,13 @@ public class BatchController {
     private SubstanceService substanceService;
     @Autowired
     private EventService eventService;
+    @Autowired
+    private StorageService storageService;
 
     @RequestMapping(value = "batch/{id}", method = RequestMethod.GET)
     public String getBatchById(@PathVariable Integer id, Model model) {
         model.addAttribute("batch", batchService.read(id));
+        model.addAttribute("storages", storageService.list());
         return "batchView";
     }
 
@@ -61,6 +66,7 @@ public class BatchController {
         Batch batch = batchService.read(id);
         batch.setQualityCheck(qualityCheck);
         batchService.createOrUpdate(batch);
+        updateSubstance(batch.getSubstance());
         Event event = EventHandler.qualityCheckEvent(batch, sig);
         eventService.createOrUpdate(event);
         if (sid <= 0) {
@@ -79,6 +85,14 @@ public class BatchController {
     public String addbatchView(Model model) {
         model.addAttribute("batch", new BatchFormObject());
         model.addAttribute("substances", substanceService.list());
+        model.addAttribute("storages", storageService.list());
+        
+        String[] names = new String[storageService.storageNamesList().size()];
+        for(int i = 0; i < names.length; i++)   {
+            names[i] = storageService.storageNamesList().get(i);
+        }
+        model.addAttribute("storageNames", names);
+        
         return "addBatchView";
     }
 
@@ -103,6 +117,7 @@ public class BatchController {
     public String batchUpdateRequest(Model model, @PathVariable Integer id) {
         model.addAttribute("substances", substanceService.list());
         model.addAttribute("batch", batchService.read(id));
+        model.addAttribute("storages", storageService.list());
         return "batchUpdateView";
     }
 
@@ -206,6 +221,9 @@ public class BatchController {
         batch.setSubstanceVolume(bfo.getSubstanceVolume());
         batch.setStorageLocations(bfo.getStorageLocations());
         Substance substance = (Substance) substanceService.read(bfo.getSubstance());
+        if(batch.getExpDate().compareTo(substance.getOldestDate()) < 0){
+            substance.setOldestDate(batch.getExpDate());
+        }
         substance.setTotalAmount(substance.getTotalAmount() + bfo.getAmount());
         substanceService.createOrUpdate(substance);
         batch.setSubstance(substance);
@@ -222,5 +240,23 @@ public class BatchController {
         eventService.createOrUpdate(event);
         return batchService.createOrUpdate(batch);
 
+    }
+
+    private void updateSubstance(Substance substance) {
+        Substance temp = (Substance) substanceService.read(substance.getId());
+        int status = temp.getQualityStatus();
+        
+        List<Batch> batches = batchService.listSubstanceBatches(temp.getId());
+        for(Batch batch : batches){
+            if(batch.getQualityCheck() == 2 && status == 0 ){ 
+                status = 2;
+            }
+            else if(batch.getQualityCheck() == 1 && (status == 0 | status == 2)){ 
+                status = 1;
+            }
+        }
+        
+        temp.setQualityStatus(status);
+        substanceService.createOrUpdate(temp);
     }
 }

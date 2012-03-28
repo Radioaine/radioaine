@@ -6,41 +6,46 @@
 <%@include file="headerstorage.jsp" %>
 
 <div id="contents">
-    <h1>Eluaatti</h1>
-    <c:forEach var="generator" items="${eluate.generators}">
-        <b>${generator.substance.name}</b><br>
+    <h1>Radiolääke ${radioMedicine.id}</h1>
+    <c:forEach var="eluate" items="${radioMedicine.eluates}">
+        <b>Eluaatti ${eluate.id}</b><br>
     </c:forEach>
 
-    <c:forEach var="other" items="${eluate.others}">
+    <c:forEach var="kit" items="${radioMedicine.kits}">
+        <b>${kit.substance.name}</b><br>
+    </c:forEach>
+
+    <c:forEach var="other" items="${radioMedicine.others}">
         <b>${other.substance.name}</b><br>
     </c:forEach>
-        
+
+
     <br>
     <table>
 
         <tr>
             <td>Aktiivisuus</td>
-            <td>${eluate.strength}</a></td>
+            <td>${radioMedicine.strength}</a></td>
         </tr>
         <tr>
             <td>Tilavuus</td>
-            <td>${eluate.volume} ml</td>
+            <td>${radioMedicine.volume} ml</td>
         </tr>
         <tr>
             <td>Vahvuus</td>
-            <td>${eluate.strength} GBq</td>
+            <td>${radioMedicine.strength} GBq</td>
         </tr>
         <tr>
             <td>Luotu</td>
-            <td><fmt:formatDate value="${eluate.date}" pattern="dd.MM.yyyy HH:mm"/></td>
+            <td><fmt:formatDate value="${radioMedicine.date}" pattern="dd.MM.yyyy HH:mm"/></td>
         </tr>
         <tr>
             <td>Kommentit</td>
-            <td>${eluate.note}</td>
+            <td>${radioMedicine.note}</td>
         </tr>
         <tr>
             <td>Tekijä</td>
-            <td>${eluate.signature}</td>
+            <td>${radioMedicine.signature}</td>
         </tr>
 
     </table>

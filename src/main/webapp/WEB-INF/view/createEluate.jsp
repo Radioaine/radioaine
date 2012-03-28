@@ -11,6 +11,7 @@
     });
 </script>
 
+
 <div id="contents">
     <h2>Uusi eluaatti</h2>
 
@@ -25,31 +26,21 @@
         <table class="noborder">
             <tr>
                 <td>Generaattori:</td>
-                <td onclick="eluateAmounts(event)"><form:select path="generators">
+                <td><select multiple="multiple" onclick="eluateAmounts(event)">
                         <c:forEach var="generator" items="${generators}">
-                            <form:option  value="${generator.id}">${generator.substance.name}</form:option>
+                            <option id="0"  value="${generator.id}">${generator.substance.name}</option>
                         </c:forEach>
-                    </form:select>
-                </td>
-            </tr>
-            <tr>
-                <td>Kitit:</td>
-                <td onclick="eluateAmounts(event)"><form:select path="kits">
-                        <c:forEach var="kit" items="${kits}">
-                            <form:option value="${kit.id}">${kit.substance.name},
-                                ${kit.batchNumber}, <fmt:formatDate value="${kit.expDate}" pattern="dd.MM.yyyy"/></form:option>
-                        </c:forEach>
-                    </form:select>
+                    </select>
                 </td>
             </tr>
             <tr>
                 <td>Muut:</td>
-                <td onclick="eluateAmounts(event)"><form:select path="others">
+                <td><select multiple="multiple" onclick="eluateAmounts(event)" >
                         <c:forEach var="other" items="${others}">
-                            <form:option value="${other.id}">${other.substance.name},
-                                ${other.batchNumber}, <fmt:formatDate value="${other.expDate}" pattern="dd.MM.yyyy"/></form:option>
-                        </c:forEach>
-                    </form:select>
+                            <option id="2" value="${other.id}">${other.substance.name},
+                                ${other.batchNumber}, <fmt:formatDate value="${other.expDate}" pattern="dd.MM.yyyy"/></option>
+                            </c:forEach>
+                    </select>
                 <td>
             </tr>
             <tr>
@@ -58,9 +49,9 @@
             </tr>
             <tr>
                 <td>Eluointiaika:</td>
-                <td><form:input path="hours" type="text" id="hours" size="2"/><form:errors path="hours"/>:<form:input
-                        path="minutes" type="text" id="minutes" size="2"/><form:errors path="minutes"/>
-                    <form:input path="date" type="text" id="eluatingtime"/><form:errors path="date"/></td>
+                <td><form:input path="hours" type="text" id="hours" value="${hours}" size="2"/><form:errors path="hours"/>:<form:input
+                        path="minutes" type="text" id="minutes" size="2" value="${minutes}"/><form:errors path="minutes"/>
+                    <form:input path="date" type="text" id="eluatingtime" value="${date}"/><form:errors path="date"/></td>
             </tr>
             <tr>
                 <td>Aktiivisuus:</td>
@@ -68,7 +59,19 @@
             </tr>
             <tr>
                 <td>Tilavuus:</td>
-                <td><form:input path="volume" type="text"/><form:errors path="volume"/>ml</td>
+                <td><form:select path="volume" type="text">
+                        <form:option value="5"/>
+                        <form:option value="10"/>
+                        <form:option value="11"/>
+                    </form:select><form:errors path="volume"/>ml</td>
+            </tr>
+            <tr>
+                <td>Varastopaikka</td>
+                <td><form:select  path="storageLocation">
+                    <c:forEach var="storage" items="${storages}" varStatus="i">
+                        <form:option value="${i.index+1}">${storage.name}</form:option>
+                    </c:forEach>
+                 </form:select></td>
             </tr>
             <tr>
                 <td>Huomautuksia:</td>

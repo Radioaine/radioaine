@@ -4,14 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.validation.Valid;
 import ohtu.radioaine.domain.*;
+import ohtu.radioaine.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import ohtu.radioaine.service.BatchService;
-import ohtu.radioaine.service.SubstanceService;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMethod;
-import ohtu.radioaine.service.EluateService;
 import ohtu.radioaine.tools.Time;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -19,6 +17,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 @Controller
 public class RadioMedicineController {
+    
+    int GENERATOR = 1;
+    int KIT = 0;
+    int OTHER = 2;
 
     @Autowired
     private BatchService batchService;
@@ -29,13 +31,20 @@ public class RadioMedicineController {
     @Autowired
     private EluateService eluateService;
     
+    @Autowired
+    private RadioMedService radioMedService;
+    
+    @Autowired
+    private StorageService storageService;
+    
     @RequestMapping(value = "createRadioMedicine", method = RequestMethod.GET)
     public String createRadioMedicineView(Model model) {
-        //model.addAttribute("eluates", eluateService.list());
         model.addAttribute("radioMedicine", new RadioMedicineFormObject());
-        model.addAttribute("substances", substanceService.list());
-        model.addAttribute("batches", batchService.list());
-        model.addAttribute("substanceBatches", batchService.listSubstanceBatches(2));
+        model.addAttribute("generators", batchService.getBatchesByType(GENERATOR));
+        model.addAttribute("kits", batchService.getBatchesByType(KIT));
+        model.addAttribute("others", batchService.getBatchesByType(OTHER));
+        model.addAttribute("eluates", eluateService.list());
+        model.addAttribute("storages", storageService.list());
         
         return "createRadioMedicine";
     }
@@ -43,15 +52,17 @@ public class RadioMedicineController {
     @RequestMapping(value = "createRadioMedicine", method = RequestMethod.POST)
     public String newRadioMedicine(@Valid @ModelAttribute("radioMedicine") RadioMedicineFormObject rmfo, BindingResult result) {
         if (result.hasErrors()) {
+            System.out.println(result);
             return "createRadioMedicine";
         }
-        RadioMedicine newRadioMedicine = createRD(rmfo);
-        return "redirect:/RadioMedicine/" + newRadioMedicine.getId();
+        RadioMedicine newRadioMedicine = radioMedService.createOrUpdate(createRD(rmfo));
+        return "redirect:/frontpage/";
     }
     
     @RequestMapping("RadioMedicine/{id}")
-    public String radioMedicineView(@PathVariable Integer id) {
-        return "frontpage";
+    public String radioMedicineView(Model model, @PathVariable Integer id) {
+        model.addAttribute("radioMedicine", radioMedService.read(id));
+        return "radioMedicineView";
     }
     
 
@@ -61,18 +72,33 @@ public class RadioMedicineController {
         radioMedicine.setNote(rmfo.getNote());
         radioMedicine.setSignature(rmfo.getSignature());
         radioMedicine.setVolume(rmfo.getVolume());
-        radioMedicine.setTimestamp(Time.parseDate(rmfo.getDate()));
+        radioMedicine.setDate(Time.parseDate(rmfo.getDate()));
+        radioMedicine.setStrength(Double.parseDouble(rmfo.getStrength()));
         radioMedicine.setStorageLocation(rmfo.getStorageLocation());
-        
+        radioMedicine.setTimestamp(Time.parseTimeStamp(rmfo.getDate() + " " + rmfo.getHours() + ":" + rmfo.getMinutes()));
         List<Eluate> eluates = new ArrayList<Eluate>();
-        eluates.add(eluateService.read(rmfo.getEluates()));
-        List<Batch> solvents = new ArrayList<Batch>();
-        solvents.add(batchService.read(rmfo.getSolvent()));
+        int[] eluatesTable = rmfo.getEluates();
+        for (int i = 0; i < eluatesTable.length; ++i) {
+
+            eluates.add(eluateService.read(eluatesTable[i]));
+        }
+
         List<Batch> kits = new ArrayList<Batch>();
-        kits.add(batchService.read(rmfo.getKit()));
+        int[] kitsTable = rmfo.getKits();
+        for (int i = 0; i < kitsTable.length; ++i) {
+
+            kits.add(batchService.read(kitsTable[i]));
+        }
+
+        List<Batch> others = new ArrayList<Batch>();
+        int[] othersTable = rmfo.getOthers();
+        for (int i = 0; i < othersTable.length; ++i) {
+
+            others.add(batchService.read(othersTable[i]));
+        }
         
         radioMedicine.setEluates(eluates);
-        radioMedicine.setSolvents(solvents);
+        radioMedicine.setOthers(others);
         radioMedicine.setKits(kits);
         
         return radioMedicine;

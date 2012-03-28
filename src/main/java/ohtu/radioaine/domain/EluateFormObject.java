@@ -3,9 +3,9 @@ package ohtu.radioaine.domain;
 import javax.validation.constraints.NotNull;
 
 public class EluateFormObject {
-    
+
     @NotNull(message = "Aktiivisuus ei saa olla tyhjä")
-    private double strength;
+    private String strength;
     @NotNull(message = "Tilavuus ei saa olla tyhjä")
     private int volume;
     @NotNull(message = "Päivämäärä ei saa olla tyhjä")
@@ -70,12 +70,12 @@ public class EluateFormObject {
         this.storageLocation = storageLocation;
     }
 
-    public double getStrength() {
+    public String getStrength() {
         return strength;
     }
 
-    public void setStrength(double strength) {
-        this.strength = strength;
+    public void setStrength(String strength) {
+        this.strength = strength.replaceAll(",", ".");
     }
 
     public String getDate() {

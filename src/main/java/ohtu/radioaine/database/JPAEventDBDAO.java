@@ -4,6 +4,7 @@
  */
 package ohtu.radioaine.database;
 
+import java.sql.Timestamp;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -25,6 +26,12 @@ public class JPAEventDBDAO implements EventDBDao {
     @Override
     public List<Event> list() {
         Query q = entityManager.createQuery("SELECT e FROM Event e");
+        return q.getResultList();
+    }
+    
+    @Override
+    public List<Event> list(String name) {
+        Query q = entityManager.createQuery("SELECT e FROM Event e WHERE e.name="+name);
         return q.getResultList();
     }
 
@@ -49,8 +56,8 @@ public class JPAEventDBDAO implements EventDBDao {
     }
 
     @Override
-    public List<Event> list(String arg) {
-        Query q = entityManager.createQuery("SELECT e FROM Event e WHERE e.info LIKE '%type=arrived%'");
+    public List<Event> listArrivedByDate(Timestamp start, Timestamp end) {
+        Query q = entityManager.createQuery("SELECT e FROM Event e WHERE e.arrivalDate between '"+start+"' AND '"+end+"'");
         return q.getResultList();
     }
     

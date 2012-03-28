@@ -21,6 +21,7 @@ public class EventHandler {
     public static Event newBatchEvent(Batch batch, String sig) {
         Event event = new Event();
         event.setInfo("type=arrived "+batch.toString());
+        event.setArrivalDate(batch.getArrivalDate());
         return event;
     }
 
@@ -44,7 +45,7 @@ public class EventHandler {
     
     public static Event newSubstanceEvent(Substance substance, String sig){
         Event event = new Event();
-        event.setHappening("type=newSubstance "+substance.toString());
+        event.setInfo("type=newSubstance "+substance.toString());
         return event;
     }  
 }

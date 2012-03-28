@@ -4,6 +4,7 @@
  */
 package ohtu.radioaine.service;
 
+import java.sql.Timestamp;
 import java.util.List;
 import ohtu.radioaine.database.EventDBDao;
 import ohtu.radioaine.domain.Event;
@@ -50,7 +51,12 @@ public class SimpleEventService implements EventService {
     }
 
     @Override
-    public List<Event> list(String arg) {
-        return storageDao.list(arg);
+    public List<Event> listArrivedByDate(Timestamp start, Timestamp end) {
+        return storageDao.listArrivedByDate(start, end);
+    }
+
+    @Override
+    public List<Event> list(String name) {
+        return storageDao.list(name);
     }
 }

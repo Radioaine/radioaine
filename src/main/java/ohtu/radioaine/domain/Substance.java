@@ -166,8 +166,11 @@ public class Substance implements Serializable {
     public void setNeedsColdStorage(boolean needsColdStorage) {
         this.needsColdStorage = needsColdStorage;
     }
-    
-    
+
+    @Override
+    public String toString() {
+        return "Substance{" + "id=" + id + ", name=" + name + ", type=" + type + ", halflife=" + halflife + ", alertLimit1=" + alertLimit1 + ", alertLimit2=" + alertLimit2 + ", ordered=" + ordered + ", needsColdStorage=" + needsColdStorage + ", manufacturer=" + manufacturer + ", supplier=" + supplier + ", totalAmount=" + totalAmount + ", oldestDate=" + oldestDate + ", warningDate=" + warningDate + ", signature=" + signature + ", statusMessages=" + statusMessages + ", qualityStatus=" + qualityStatus + '}';
+    }
 
     public void useOne(){
         totalAmount--;

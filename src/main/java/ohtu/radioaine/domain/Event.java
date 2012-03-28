@@ -19,8 +19,7 @@ public class Event implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    @Column (length = 1000)
-    String happening;
+    Timestamp arrivalDate;
     @Column (length = 1000)
     String info;
     @Column
@@ -28,6 +27,14 @@ public class Event implements Serializable {
     @Column
     private String signature;
 
+    public Timestamp getArrivalDate() {
+        return arrivalDate;
+    }
+
+    public void setArrivalDate(Timestamp arrivalDate) {
+        this.arrivalDate = arrivalDate;
+    }
+    
     public String getSignature() {
         return signature;
     }
@@ -40,20 +47,12 @@ public class Event implements Serializable {
         timestamp = Time.getTimestamp();
     }
 
-    public String getHappening() {
-        return happening;
-    }
-
     public String getInfo() {
         return info;
     }
 
     public void setInfo(String info) {
         this.info = info;
-    }
-
-    public void setHappening(String happening) {
-        this.happening = happening;
     }
 
     public int getId() {

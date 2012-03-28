@@ -1,11 +1,14 @@
 package ohtu.radioaine.controller;
 
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.List;
 import ohtu.radioaine.domain.Event3;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import ohtu.radioaine.service.EventService;
+import ohtu.radioaine.tools.Time;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -32,10 +35,18 @@ public class HistoryController {
     }
     
     @RequestMapping("seek")
-    public String seekByName(@RequestParam String[] reports, Model model) {
+    public String seekByName(@RequestParam String[] reports, 
+    Model model,
+    @RequestParam String start,
+    @RequestParam String end) {
         int counter = 1;
+        
+        Timestamp startDate = Time.parseTimeStamp(start+" 00:00");
+        Timestamp endDate = Time.parseTimeStamp(end+" 00:00");
+        System.out.println(startDate);
+        System.out.println(endDate);
         for(String str : reports){
-            model.addAttribute("raport"+counter, eventService.list(""));
+            model.addAttribute("raport"+counter, eventService.listArrivedByDate(startDate, endDate));
             counter++;
         }
         

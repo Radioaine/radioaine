@@ -36,7 +36,7 @@ public class Batch implements Serializable {
     private String manufacturer;
     private String supplier;
     private String note;
-    private int storageLocationsCount = 10;
+    private int storageLocationsCount = 100;
     private int[][] storageLocations = new int[storageLocationsCount][2];
     private int status;
     

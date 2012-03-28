@@ -17,6 +17,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import ohtu.radioaine.service.BatchService;
 import ohtu.radioaine.service.EventService;
+import ohtu.radioaine.service.StorageService;
 import ohtu.radioaine.service.SubstanceService;
 import ohtu.radioaine.tools.EventHandler;
 import org.springframework.ui.Model;
@@ -41,10 +42,13 @@ public class BatchController {
     private SubstanceService substanceService;
     @Autowired
     private EventService eventService;
+    @Autowired
+    private StorageService storageService;
 
     @RequestMapping(value = "batch/{id}", method = RequestMethod.GET)
     public String getBatchById(@PathVariable Integer id, Model model) {
         model.addAttribute("batch", batchService.read(id));
+        model.addAttribute("storages", storageService.list());
         return "batchView";
     }
 
@@ -81,6 +85,14 @@ public class BatchController {
     public String addbatchView(Model model) {
         model.addAttribute("batch", new BatchFormObject());
         model.addAttribute("substances", substanceService.list());
+        model.addAttribute("storages", storageService.list());
+        
+        String[] names = new String[storageService.storageNamesList().size()];
+        for(int i = 0; i < names.length; i++)   {
+            names[i] = storageService.storageNamesList().get(i);
+        }
+        model.addAttribute("storageNames", names);
+        
         return "addBatchView";
     }
 
@@ -105,6 +117,7 @@ public class BatchController {
     public String batchUpdateRequest(Model model, @PathVariable Integer id) {
         model.addAttribute("substances", substanceService.list());
         model.addAttribute("batch", batchService.read(id));
+        model.addAttribute("storages", storageService.list());
         return "batchUpdateView";
     }
 

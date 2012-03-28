@@ -7,6 +7,7 @@ function addStorage(usedStorageLocationsCount, storageLocationsCount){
         storageCounter = usedStorageLocationsCount + 1;
     var storage = document.getElementById("varastot");
     var newdiv = document.createElement("div");
+    
     newdiv.id = "varasto"+storageCounter;
     var newHTML = "<select name=\"storageLocations["+(storageCounter-1)+"][0]\">";
     for(var i = 0; i < storageLocationsCount; i++)  {

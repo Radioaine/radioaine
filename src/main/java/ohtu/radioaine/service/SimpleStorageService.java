@@ -47,4 +47,8 @@ public class SimpleStorageService implements StorageService {
         }
     }
     
+    public List<String> storageNamesList()  {
+        return storageDao.storageNamesList();
+    }
+    
 }

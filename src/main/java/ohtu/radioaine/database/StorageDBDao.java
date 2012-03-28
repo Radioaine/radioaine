@@ -13,4 +13,5 @@ import ohtu.radioaine.domain.Storage;
  */
 public interface StorageDBDao extends DAO<Storage> {
     public List<Storage> list();
+    public List<String> storageNamesList();
 }

@@ -45,4 +45,9 @@ public class JPAStorageDBDao implements StorageDBDao    {
         Query q = entityManager.createQuery("SELECT b FROM Storage b");
         return q.getResultList();
     }
+    
+    public List<String> storageNamesList()  {
+        Query q = entityManager.createQuery("SELECT b.name FROM Storage b");
+        return q.getResultList();
+    }
 }

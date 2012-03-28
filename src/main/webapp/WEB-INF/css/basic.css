@@ -85,6 +85,30 @@ td.center {
     width: 125px;
 }
 
+.date {
+	width: 90px;
+}
+
+.batch {
+	width: 130px;
+}
+
+.before {
+	width: 180px;
+}
+
+.reportAmount {
+	width: 50px;
+}
+
+.reportName {
+	width: 150px;
+}
+
+.reportReason {
+	width: 170px;
+}
+
 .oldest{
     width: 150px;
 }

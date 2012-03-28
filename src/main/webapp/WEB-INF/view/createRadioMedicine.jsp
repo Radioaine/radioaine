@@ -6,10 +6,10 @@
 <%@include file="headerfront.jsp" %>
 <script>
     function checkType()    {
-    var newdiv = document.createElement("tr");
-    substance =  '${substances}';
+        var newdiv = document.createElement("tr");
+        substance =  '${substances}';
 
-}
+    }
 </script>
 <script type="text/javascript" src="<c:url value="/script/ui.datepicker-fi.js" />"></script>
 <script>
@@ -31,21 +31,21 @@
         <table class="noborder">
             <tr>
                 <td>Eluaattit:</td>
-                    <td>
+                <td>
                     <select multiple="multiple" onclick="eluateAmounts(event)" >
                         <c:forEach var="eluate" items="${eluates}">
-                                <option id="3" value="${eluate.id}">Klo ${eluate.date}, ${eluate.strength}, ${eluate.volume}, Kaappi ${eluate.storageLocation}, ${eluate.signature}</option>
+                            <option id="3" value="${eluate.id}">Klo ${eluate.date}, ${eluate.strength}, ${eluate.volume}, Kaappi ${eluate.storageLocation}, ${eluate.signature}</option>
                         </c:forEach>
                     </select>
-                    </td>
-                </tr>
+                </td>
+            </tr>
             <tr>
                 <td>Kitit:</td>
                 <td><select multiple="multiple" onclick="eluateAmounts(event)">
                         <c:forEach var="kit" items="${kits}">
                             <option id="1" value="${kit.id}">${kit.substance.name},
                                 ${kit.batchNumber}, <fmt:formatDate value="${kit.expDate}" pattern="dd.MM.yyyy"/></option>
-                        </c:forEach>
+                            </c:forEach>
                     </select>
                 </td>
             </tr>
@@ -55,7 +55,7 @@
                         <c:forEach var="other" items="${others}">
                             <option id="2" value="${other.id}">${other.substance.name},
                                 ${other.batchNumber}, <fmt:formatDate value="${other.expDate}" pattern="dd.MM.yyyy"/></option>
-                        </c:forEach>
+                            </c:forEach>
                     </select>
                 <td>
             </tr>
@@ -71,7 +71,12 @@
             </tr>
             <tr>
                 <td>Aktiivisuus:</td>
-                <td><form:input path="strength" type="text"/><form:errors path="strength"/>GBq</td>
+                <td><form:input path="strength" type="text"/><form:errors path="strength"/>
+                    <form:select path="unit">
+                <option value="0">GBq</option>
+                <option value="1">MBq</option>
+            </form:select>
+            </td>
             </tr>
             <tr>
                 <td>Tilavuus:</td>
@@ -80,10 +85,10 @@
             <tr>
                 <td>Varastopaikka</td>
                 <td><form:select  path="storageLocation">
-                    <c:forEach var="storage" items="${storages}" varStatus="i">
-                        <form:option value="${i.index+1}">${storage.name}</form:option>
-                    </c:forEach>
-                 </form:select></td>
+                        <c:forEach var="storage" items="${storages}" varStatus="i">
+                            <form:option value="${i.index+1}">${storage.name}</form:option>
+                        </c:forEach>
+                    </form:select></td>
             </tr>
             <tr>
                 <td>Huomautuksia:</td>

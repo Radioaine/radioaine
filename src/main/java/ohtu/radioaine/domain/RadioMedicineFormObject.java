@@ -7,6 +7,7 @@ public class RadioMedicineFormObject {
 
     @NotNull(message = "Aktiivisuus ei saa olla tyhjä")
     private String strength;
+    private int unit;
     @NotNull(message = "Tilavuus ei saa olla tyhjä")
     private int volume;
     @NotNull(message = "Päiväys ei saa olla tyhjä")
@@ -128,4 +129,21 @@ public class RadioMedicineFormObject {
     public void setVolume(int volume) {
         this.volume = volume;
     }
+    
+        /**
+     * Unit used to measure strength
+     * @return unit 0 = GBq, 1 = MBq
+     */
+    public int getUnit() {
+        return unit;
+    }
+
+    /**
+     * Unit used to measure strength
+     * @param unit: 0 = GBq, 1 = MBq
+     */
+    public void setUnit(int unit) {
+        this.unit = unit;
+    }
+    
 }

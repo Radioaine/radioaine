@@ -79,6 +79,7 @@ public class EluateController {
         Eluate eluate = new Eluate();
         System.out.println(efo.getStrength());
         eluate.setStrength(Double.parseDouble(efo.getStrength()));
+        eluate.setUnit(efo.getUnit());
         eluate.setVolume(efo.getVolume());
         eluate.setTimestamp(Time.parseTimeStamp(efo.getDate() + " " + efo.getHours() + ":" + efo.getMinutes()));
         eluate.setSignature(efo.getSignature());

@@ -14,21 +14,26 @@
     <c:forEach var="other" items="${eluate.others}">
         <b>${other.substance.name}</b><br>
     </c:forEach>
-        
+
     <br>
     <table>
 
         <tr>
             <td>Aktiivisuus</td>
-            <td>${eluate.strength}</a></td>
+            <td>${eluate.strength}
+                <c:choose>
+                    <c:when test="${eluate.unit == 0}">
+                        GBq
+                    </c:when>
+                    <c:otherwise>
+                        MBq
+                    </c:otherwise>
+                </c:choose>
+            </td>
         </tr>
         <tr>
             <td>Tilavuus</td>
             <td>${eluate.volume} ml</td>
-        </tr>
-        <tr>
-            <td>Vahvuus</td>
-            <td>${eluate.strength} GBq</td>
         </tr>
         <tr>
             <td>Luotu</td>

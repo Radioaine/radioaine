@@ -11,6 +11,7 @@ package ohtu.radioaine.domain;
 public class StorageFormObject {
     private int id;
     private String name;
+    private boolean hidden;
 
     public int getId() {
         return id;
@@ -26,5 +27,13 @@ public class StorageFormObject {
 
     public void setName(String name) {
         this.name = name;
-    }  
+    }
+    
+    public boolean isHidden() {
+        return hidden;
+    }
+
+    public void setHidden(boolean hidden) {
+        this.hidden = hidden;
+    }
 }

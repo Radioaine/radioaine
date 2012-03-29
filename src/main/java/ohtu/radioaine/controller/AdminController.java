@@ -65,6 +65,15 @@ public class AdminController {
         if (result.hasErrors()) {
             return "addStoragesView";
         }
+        List<Storage> storageList = storageService.list();
+        for(Storage storage : storageList)  {
+            if(storage.isHidden() == true)  {
+                storage.setHidden(false);
+                storage.setName(sfo.getName());
+                storageService.createOrUpdate(storage);
+                return "redirect:/storagesView";
+            }
+        }
         storageService.createOrUpdate(createStorage(sfo));
         return "redirect:/storagesView";
     }
@@ -78,6 +87,7 @@ public class AdminController {
     private Storage createStorage(StorageFormObject sfo) {
         Storage storage = new Storage();
         storage.setName(sfo.getName());
+        storage.setHidden(false);
 
         return storage;
     }
@@ -113,8 +123,10 @@ public class AdminController {
             if(radioMedicine.getStorageLocation() == id)
                 return "redirect:/storagesView";
         }
+        Storage temp = storageService.read(id);
+        temp.setHidden(true);
+        storageService.createOrUpdate(temp);
         
-        storageService.delete(id);
         return "redirect:/storagesView";
     }
 

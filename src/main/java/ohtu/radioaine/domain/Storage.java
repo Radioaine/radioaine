@@ -19,6 +19,8 @@ public class Storage {
     private int id;
     @Column
     private String name;
+    @Column
+    private boolean hidden;
 
     public int getId() {
         return id;
@@ -34,5 +36,13 @@ public class Storage {
 
     public void setName(String name) {
         this.name = name;
+    }
+    
+    public boolean isHidden() {
+        return hidden;
+    }
+
+    public void setHidden(boolean hidden) {
+        this.hidden = hidden;
     }
 }

@@ -14,31 +14,33 @@
             <td><b>Nimi</b></td>
         </tr>
             <c:forEach var="storage" items="${storages}" varStatus="i">
-                <tr>
-                    <form action="${pageContext.servletContext.contextPath}/updateStorageName/${i.index+1}" method="POST">
+                <c:if test="${storage.hidden == false}">
+                    <tr>
+                        <form action="${pageContext.servletContext.contextPath}/updateStorageName/${i.index+1}" method="POST">
+                                <td>
+                                    <div id="name${i.index+1}">${storage.name}</div>
+                                    <input name="name" id="inp${i.index+1}" style="display: none;"></input>
+                                </td>
+                                <td id="editButton${i.index+1}">
+                                    <div id="edit${i.index+1}">
+                                        <button type="button" onClick="editStorageName(${i.index+1})">Muokkaa</button>
+
+                                    </div>
+                                    <div id="save${i.index+1}" style="display: none;">
+                                        <button type="submit">Tallenna</button>
+                                    </div>
+                                </td>
+                                <td id="cancel${i.index+1}" style="display: none;">
+                                    <button type="button" onClick="parent.location = '/radioaine/storagesView'">Peruuta</button>
+                                </td>
+                        </form>
+                        <form action="${pageContext.servletContext.contextPath}/removeStorageName/${i.index+1}" method="POST">
                             <td>
-                                <div id="name${i.index+1}">${storage.name}</div>
-                                <input name="name" id="inp${i.index+1}" style="display: none;"></input>
+                                <button id="remove${i.index+1}" type="submit">Poista</button>
                             </td>
-                            <td id="editButton${i.index+1}">
-                                <div id="edit${i.index+1}">
-                                    <button type="button" onClick="editStorageName(${i.index+1})">Muokkaa</button>
-                                    
-                                </div>
-                                <div id="save${i.index+1}" style="display: none;">
-                                    <button type="submit">Tallenna</button>
-                                </div>
-                            </td>
-                            <td id="cancel${i.index+1}" style="display: none;">
-                                <button type="button" onClick="parent.location = '/radioaine/storagesView'">Peruuta</button>
-                            </td>
-                    </form>
-                    <form action="${pageContext.servletContext.contextPath}/removeStorageName/${i.index+1}" method="POST">
-                        <td>
-                            <button id="remove${i.index+1}" type="submit">Poista</button>
-                        </td>
-                    </form>
-                </tr>
+                        </form>
+                    </tr>
+                </c:if>
             </c:forEach>
     </table>
 </div>

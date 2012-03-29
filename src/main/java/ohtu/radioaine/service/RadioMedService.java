@@ -4,6 +4,7 @@
  */
 package ohtu.radioaine.service;
 
+import java.sql.Timestamp;
 import java.util.List;
 import ohtu.radioaine.domain.RadioMedicine;
 
@@ -16,4 +17,6 @@ public interface RadioMedService {
     public List<RadioMedicine> list();
     public RadioMedicine read(int id);
     public void delete(int id);
+
+    public List<RadioMedicine> list(Timestamp startDate, Timestamp endDate);
 }

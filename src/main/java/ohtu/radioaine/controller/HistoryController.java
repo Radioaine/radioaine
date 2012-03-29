@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import ohtu.radioaine.service.EventService;
+import ohtu.radioaine.service.RadioMedService;
 import ohtu.radioaine.service.SubstanceService;
 import ohtu.radioaine.tools.Time;
 import org.springframework.ui.Model;
@@ -24,6 +25,8 @@ public class HistoryController {
     private BatchService batchService;
     @Autowired
     private SubstanceService substanceService;
+    @Autowired
+    private RadioMedService radioMedService;
     
     @RequestMapping("historyView")
     public String history(Model model) {
@@ -49,7 +52,16 @@ public class HistoryController {
         System.out.println(startDate);
         System.out.println(endDate);
         for(String str : reports){
-            model.addAttribute("raport"+counter, eventService.listArrivedByDate(startDate, endDate));
+            if(str.equals("arrived")){
+                model.addAttribute("arrived", eventService.listArrivedByDate(startDate, endDate));
+            }
+            else if(str.equals("removed")){
+                model.addAttribute("removed", eventService.listArrivedByDate(startDate, endDate));
+            }
+            else {
+                model.addAttribute("radioMeds", radioMedService.list(startDate, endDate));
+            }
+            
             counter++;
         }
         model.addAttribute("substances", substanceService.list());

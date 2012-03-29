@@ -4,6 +4,7 @@
  */
 package ohtu.radioaine.database;
 
+import java.sql.Timestamp;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -45,6 +46,12 @@ public class JPARadioMedDBDao implements RadioMedDBDao {
     @Override
     public RadioMedicine update(RadioMedicine instance) {
         throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public List<RadioMedicine> list(Timestamp startDate, Timestamp endDate) {
+        Query q = entityManager.createQuery("SELECT e FROM RadioMedicine e WHERE e.date between '"+startDate+"' AND '"+endDate+"'");
+        return q.getResultList();
     }
     
 }

@@ -10,9 +10,8 @@
             <tr>
                     <th colspan="5">${substance.name}</th>
             </tr>
-            <c:forEach var="event" items="${raport1}">
-                <c:if test="${event.substanceName == substance.name}">
-                
+            <c:forEach var="event" items="${arrived}">
+                <c:if test="${event.substanceName == substance.name}">        
                 <tr>
                     <td class="date">${event.arrivalDate}</td>
                     <td class="batch">eränumero ${event.batchNumber}</td>
@@ -22,6 +21,12 @@
                 </tr>
                 </c:if>
             </c:forEach>
+         </c:forEach>
+         <c:forEach var="radioMed" items="${radioMeds}">
+            <tr>
+                <td>Radiolääke ${radioMed.id}</td>
+                <td>Päiväys ${radioMed.date}</td>    
+            </tr>
          </c:forEach>
     </table>
     

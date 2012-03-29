@@ -1,5 +1,6 @@
 package ohtu.radioaine.database;
 
+import java.sql.Timestamp;
 import java.util.List;
 import ohtu.radioaine.domain.Batch;
 
@@ -11,6 +12,7 @@ import ohtu.radioaine.domain.Batch;
 public interface BatchDBDao extends DAO<Batch> {
 
     public List<Batch> list();
+    public List<Batch> list(Timestamp start, Timestamp end);
 
     public List<Batch> listSubstanceBatches(int id);
 

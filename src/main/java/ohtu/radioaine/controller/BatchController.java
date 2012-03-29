@@ -133,7 +133,7 @@ public class BatchController {
             BindingResult result,
             Model model,
             @PathVariable Integer id) {
-        System.out.println("ZZZ");
+
         
         //Checks if the new total amount differs from the old total amount and if it does, the update fails
         Batch temp = batchService.read(id);
@@ -143,7 +143,7 @@ public class BatchController {
         }
         
         if (result.hasErrors() || temp.getAmount() != newTotalAmount) {
-            System.out.println("ZZZ2");
+
             System.out.println(result);
             return "redirect:/updateBatch/" + id;
         }
@@ -153,7 +153,6 @@ public class BatchController {
     }
 
     private Batch updateBatch(Integer id, BatchFormObject bfo) {
-        System.out.println("GGG");
         Batch batch = batchService.read(id);
         Substance substance = batch.getSubstance();
         batch.setStorageLocations(bfo.getStorageLocations());
@@ -167,9 +166,8 @@ public class BatchController {
             temp += bfo.getStorageLocations()[i][1];
         }
         bfo.setAmount(temp);
-        System.out.println("bfo.getAmount() : " + bfo.getAmount());
+        //Checks if batch substance has been changed
         if (batch.getSubstance().getId() != bfo.getSubstance()) {
-            System.out.println("XXX");
             int oldAmount = batch.getAmount();
             batch.setAmount(bfo.getAmount());
             Substance newSubstance = (Substance) substanceService.read(bfo.getSubstance());
@@ -178,7 +176,6 @@ public class BatchController {
             batch.setSubstance(newSubstance);
             substanceService.createOrUpdate(newSubstance);
         } else {
-            System.out.println("YYY");
             int amountChange = amountChange(batch, bfo);
             batch.setAmount(batch.getAmount() + amountChange);
             substance.setTotalAmount(substance.getTotalAmount() + amountChange);

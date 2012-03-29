@@ -21,7 +21,13 @@ public class EventHandler {
     public static Event newBatchEvent(Batch batch, String sig) {
         Event event = new Event();
         event.setInfo("type=arrived "+batch.toString());
+        event.setAmount(batch.getAmount());
+        event.setBatchNumber(batch.getBatchNumber());
+        event.setNote(batch.getNote());
+        event.setSignature(sig);
+        event.setSubstanceName(batch.getSubstance().getName());
         event.setArrivalDate(batch.getArrivalDate());
+        event.setExpDate(batch.getExpDate());
         return event;
     }
 
@@ -33,6 +39,13 @@ public class EventHandler {
 
     public static Event addToBatchEvent(Batch batch, String sig) {
         Event event = new Event();
+        event.setAmount(batch.getAmount());
+        event.setBatchNumber(batch.getBatchNumber());
+        event.setNote(batch.getNote());
+        event.setSignature(sig);
+        event.setSubstanceName(batch.getSubstance().getName());
+        event.setArrivalDate(batch.getArrivalDate());
+        event.setExpDate(batch.getExpDate());
         event.setInfo("type=addToBatch "+batch.toString());
         return event;
     }
@@ -45,6 +58,7 @@ public class EventHandler {
     
     public static Event newSubstanceEvent(Substance substance, String sig){
         Event event = new Event();
+        event.setSignature(sig);
         event.setInfo("type=newSubstance "+substance.toString());
         return event;
     }  

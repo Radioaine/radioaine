@@ -1,5 +1,6 @@
 package ohtu.radioaine.database;
 
+import java.sql.Timestamp;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
@@ -69,5 +70,11 @@ public class JPABatchDBDao implements BatchDBDao {
         } catch (NoResultException e) {
             return null;
         }
+    }
+
+    @Override
+    public List<Batch> list(Timestamp start, Timestamp end) {
+        Query q = entityManager.createQuery("SELECT e FROM Batch e WHERE e.arrivalDate between '"+start+"' AND '"+end+"'");
+        return q.getResultList();
     }
 }

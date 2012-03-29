@@ -1,13 +1,12 @@
 package ohtu.radioaine.controller;
 
 import java.sql.Timestamp;
-import java.text.SimpleDateFormat;
-import java.util.List;
-import ohtu.radioaine.domain.Event3;
+import ohtu.radioaine.service.BatchService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import ohtu.radioaine.service.EventService;
+import ohtu.radioaine.service.SubstanceService;
 import ohtu.radioaine.tools.Time;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -21,6 +20,10 @@ public class HistoryController {
 
     @Autowired
     private EventService eventService;
+    @Autowired
+    private BatchService batchService;
+    @Autowired
+    private SubstanceService substanceService;
     
     @RequestMapping("historyView")
     public String history(Model model) {
@@ -49,8 +52,9 @@ public class HistoryController {
             model.addAttribute("raport"+counter, eventService.listArrivedByDate(startDate, endDate));
             counter++;
         }
+        model.addAttribute("substances", substanceService.list());
         
-        return "history";
+        return "raportView";
     }
 
 }

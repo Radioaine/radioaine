@@ -5,17 +5,26 @@
 <%@include file="headeradmin.jsp" %>
 
 <div id="contents">
+    <table class="noborder">
+        <c:forEach var="substance" items="${substances}">
+            <tr>
+                    <th colspan="5">${substance.name}</th>
+            </tr>
+            <c:forEach var="event" items="${raport1}">
+                <c:if test="${event.substanceName == substance.name}">
+                
+                <tr>
+                    <td class="date">${event.arrivalDate}</td>
+                    <td class="batch">eränumero ${event.batchNumber}</td>
+                    <td class="before">käyt. ennen ${event.expDate}</td>
+                    <td class="reportAmount">${event.amount} kpl</td>
+                    <td>${event.signature}</td>
+                </tr>
+                </c:if>
+            </c:forEach>
+         </c:forEach>
+    </table>
     
-    <c:forEach var="event" items="${raport1}">
-        <p><fmt:formatDate value="${event.timestamp}" pattern="dd.MM.yyyy HH:mm:ss"/>
-            ${event.info}
-                <c:forTokens items="${event.info}" var="info" delims="name=">
-                    <c:if test="${info == 'Ceretec'}">
-                        <c:out value="${info}++" />
-                    </c:if>
-                </c:forTokens>
-                    
-    </c:forEach>
             
     <div id="arrived">
 		<p>
@@ -120,7 +129,7 @@
 		
 		<div id="RadioMedQuantity">
 		<p>
-			<h2>Käyttökuntoon saatetut radiolääkkeet / lkm 1.1.2012-31.12.2012</h2>
+			<h2>Käyttäkuntoon saatetut radioläkkeet / lkm 1.1.2012-31.12.2012</h2>
 		</p>
 
 		<p>
@@ -145,7 +154,7 @@
 		<div id="RadioMedDetails">
 		
 		<p>
-			<h2>Käyttökuntoon saatetut radiolääkkeet 1.1.2012-31.12.2012</h2>
+			<h2>Käyttäkuntoon saatetut radiolääkkeet 1.1.2012-31.12.2012</h2>
 		</p>
 
 		<p>

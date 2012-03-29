@@ -80,52 +80,16 @@
             <td>Kommentit</td>
             <td>${batch.note}</td>
         </tr>
-
-    </table>
-    <br>
-    <h1>Tapahtumat</h1>
-    <table id="listaus">
-        <tr>
-            <th> </th>
-            <th>Tapahtuma</th>
-            <th>Tekijä</th>
-            <th>Tietoja</th>
-        </tr>
-        <tr>
-            <td>v</td>
-            <td>Siirretty Jääkaappiin 1 2kpl</td>
-            <td> </td>
-            <td> </td>
-        <tr>
-        <tr>
-            <td>v</td>
-            <td>Siirretty Jääkaappiin Jääkaappi 2 kpl</td>
-            <td> </td>
-            <td> </td>
-        <tr>
-        <tr>
-            <td>v</td>
-            <td>poistettu 1kpl</td>
-            <td>LT</td>
-            <td>Tippui lattialle</td>
-        <tr>
-        <tr>
-            <td></td>
-            <td>Valmistettu</td>
-            <td>LT</td>
-            <td></td>
-        <tr>
-    </table>
-    <br />
-    <div id="batchButtons">
-        <form action="${pageContext.servletContext.contextPath}/updateBatch/${batch.id}" method="POST">  
-            <input type="submit" value="Muokkaa erän tietoja" />
-        </form>
-
-        <form action="${pageContext.servletContext.contextPath}/removeFromBatch/${batch.id}">  
-            <input type="submit" value="Poista erästä" />
-        </form>      
-    </div>
+    </table><br />
+    <form action="${pageContext.servletContext.contextPath}/removeFromBatch/${batch.id}" method="POST">
+        <c:forEach var="location" varStatus="i" items="${batch.storageLocations}">
+            <c:choose>
+                <c:when test="${batch.storageLocations[i.index][1] > 0}">
+                    ${storages[(batch.storageLocations[i.index][0]-1)].name}<input type="number" name="amounts" /><br />
+                </c:when>
+            </c:choose>
+        </c:forEach>
+        <input type="submit" value="Poista" />
+    </form>
 </div>
 
-<%@include file="footer.jsp" %>

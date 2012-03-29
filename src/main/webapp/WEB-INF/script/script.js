@@ -92,10 +92,9 @@ function editStorageName(id)  {
     var parent = document.getElementById("editButton"+id);
     var editButton = document.getElementById("edit"+id);
     var storageText = storage.innerText;
-    storage.innerHTML = "<input id=inp"+id+">";
+    storage.innerHTML = "<form action=\"updateStorage/"+id+" method=\"POST\" ><input id=inp"+id+">";
     parent.removeChild(editButton);
-    
-    parent.innerHTML = "</input><button type=\"submit\" onClick=\"saveStorageName("+id+")\">Tallenna</button>";
+    parent.innerHTML = "</input><button type=\"submit\" onClick=\"saveStorageName("+id+")\">Tallenna</button></form>";
     var inp = document.getElementById("inp"+id);
     inp.value = storageText;
 

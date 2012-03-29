@@ -134,7 +134,15 @@ public class BatchController {
             Model model,
             @PathVariable Integer id) {
         System.out.println("ZZZ");
-        if (result.hasErrors()) {
+        
+        //Checks if the new total amount differs from the old total amount and if it does, the update fails
+        Batch temp = batchService.read(id);
+        int newTotalAmount = 0;
+        for (int i = 0; i < bfm.getStorageLocations().length; i++) {
+            newTotalAmount += bfm.getStorageLocations()[i][1];
+        }
+        
+        if (result.hasErrors() || temp.getAmount() != newTotalAmount) {
             System.out.println("ZZZ2");
             System.out.println(result);
             return "redirect:/updateBatch/" + id;

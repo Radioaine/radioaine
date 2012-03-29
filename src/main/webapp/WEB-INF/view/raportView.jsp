@@ -134,7 +134,7 @@
 		
 		<div id="RadioMedQuantity">
 		<p>
-			<h2>Käyttäkuntoon saatetut radioläkkeet / lkm 1.1.2012-31.12.2012</h2>
+			<h2>Käyttökuntoon saatetut radioläkkeet / lkm 1.1.2012-31.12.2012</h2>
 		</p>
 
 		<p>
@@ -159,12 +159,122 @@
 		<div id="RadioMedDetails">
 		
 		<p>
-			<h2>Käyttäkuntoon saatetut radiolääkkeet 1.1.2012-31.12.2012</h2>
+			<h2>Käyttökuntoon saatetut radiolääkkeet 1.1.2012-31.12.2012</h2>
 		</p>
 
+		<h4>3.1.2012</h4>
 		<p>
-
+		<table class="noborder">
+            <tr>
+                <td class="time">7.38</td>
+                <td class="reportName">Teknetiumeluaatti</td>
+                <td class="batch">erä 6758654</td>
+                <td class="before">käyt. ennen 3.3.2012</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>NaCl 100 ml</td>
+                <td>erä OIUHTTK</td>
+                <td>käyt. ennen 5.7.2012</td>
+                <td>5 ml</td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>Aktiivisuus</td>
+                <td>16,56 GBq</td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>Tilavuus</td>
+                <td>5 ml</td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>Käytettävä ennen</td>
+                <td>klo 12.38</td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>Huomautuksia</td>
+                <td colspan="3"></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>Nimikirjaimet</td>
+                <td>TT</td>
+                <td></td>
+                <td></td>
+            </tr>
+		</table>
 		</br>	
+		<table class="noborder">
+            <tr>
+                <td class="time">7.45</td>
+                <td class="reportName">Myoview</td>
+                <td class="batch">erä 15611654</td>
+                <td class="before">käyt. ennen 5.4.2012</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>Myoview</td>
+                <td>erä 15611654</td>
+                <td>käyt. ennen 5.4.2012</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>NaCl 100 ml</td>
+                <td>erä OIUHTTK</td>
+                <td>käyt. ennen 5.7.2012</td>
+                <td>10 ml</td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>Aktiivisuus</td>
+                <td>4,23 GBq</td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>Tilavuus</td>
+                <td>12 ml</td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>Käytettävä ennen</td>
+                <td>klo 12.45</td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>Huomautuksia</td>
+                <td colspan="3"></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>Nimikirjaimet</td>
+                <td>MM</td>
+                <td></td>
+                <td></td>
+            </tr>
+		</table>
+		</br>
 		</p>
 		
 		</div>

@@ -94,6 +94,9 @@ function editStorageName(id)  {
     document.getElementById("save"+id).style.cssText = "display: inline;";
     document.getElementById("cancel"+id).style.cssText = "display: inline;";
     document.getElementById("inp"+id).style.cssText = "display: inline;";
-
-    document.getElementById("inp"+id).value = document.getElementById("name"+id).innerText;
+    
+    if(document.getElementById("inp"+id).value != null)
+        document.getElementById("inp"+id).value = document.getElementById("name"+id).innerText;
+    else
+        document.getElementById("inp"+id).value = "";
 }

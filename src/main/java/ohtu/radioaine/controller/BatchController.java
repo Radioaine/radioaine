@@ -51,6 +51,7 @@ public class BatchController {
         model.addAttribute("storages", storageService.list());
         return "batchView";
     }
+    
 
     @RequestMapping(value = "doCheck/{id}+{sid}", method = RequestMethod.POST)
     public String qualityCheck(@PathVariable Integer id,
@@ -96,7 +97,31 @@ public class BatchController {
         
         return "addBatchView";
     }
-
+    
+    @RequestMapping(value = "removeFromBatch/{id}", method = RequestMethod.GET)
+    public String removeFromBatchView(@PathVariable Integer id, Model model) {
+        model.addAttribute("batch", batchService.read(id));
+        model.addAttribute("storages", storageService.list());
+        return "removeFromBatchView";
+    }
+    
+    @RequestMapping(value = "removeFromBatch/{id}", method = RequestMethod.POST)
+    public String removeFromBatch(@PathVariable Integer id, @RequestParam Integer[] amounts ) {
+        System.out.println(amounts[0]);
+        Batch temp = batchService.read(id);
+        int[][] locs = temp.getStorageLocations();
+        for(int i=0; i<amounts.length;++i){
+            if(amounts[i] != null){
+                System.out.println(locs[i][1]);
+                locs[i][1] -= amounts[i];
+                System.out.println(locs[i][1]);
+            }
+        }
+        temp.setStorageLocations(locs);
+        batchService.createOrUpdate(temp);
+        return "redirect:/batch/" + id;
+    }
+    
     @RequestMapping(value = "batch", method = RequestMethod.POST)
     public String addBatch(@Valid @ModelAttribute("batch") BatchFormObject bfo, BindingResult result) {
         if (result.hasErrors()) {

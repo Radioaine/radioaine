@@ -4,15 +4,13 @@
  */
 package ohtu.radioaine.controller;
 
+import java.util.List;
 import javax.validation.Valid;
-import ohtu.radioaine.domain.Storage;
-import ohtu.radioaine.domain.StorageFormObject;
-import ohtu.radioaine.domain.Substance;
-import ohtu.radioaine.service.StorageService;
+import ohtu.radioaine.domain.*;
+import ohtu.radioaine.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import ohtu.radioaine.service.SubstanceService;
 import ohtu.radioaine.tools.Time;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -31,6 +29,12 @@ public class AdminController {
     private SubstanceService substanceService;
     @Autowired
     private StorageService storageService;
+    @Autowired
+    private BatchService batchService;
+    @Autowired
+    private EluateService eluateService;
+    @Autowired
+    private RadioMedService radioMedService;
 
     @RequestMapping("admin")
     public String adminView(Model model) {
@@ -76,6 +80,42 @@ public class AdminController {
         storage.setName(sfo.getName());
 
         return storage;
+    }
+    
+    @RequestMapping(value = "updateStorageName/{id}", method = RequestMethod.POST)
+    public String updateStorageName(@RequestParam String name, @PathVariable Integer id) {
+        Storage temp = storageService.read(id);
+        temp.setName(name);
+        storageService.createOrUpdate(temp);
+        System.out.println("uusi nimi on: " + storageService.read(id).getName());
+        return "redirect:/storagesView";
+    }
+    
+    @RequestMapping(value = "removeStorageName/{id}", method = RequestMethod.POST)
+    public String removeStorageName(@PathVariable Integer id) {
+        List<Batch> batchList = batchService.list();
+        List<Eluate> eluateList = eluateService.list();
+        List<RadioMedicine> radioMedicineList = radioMedService.list();
+        
+        //removes the storage only if it is not used in any batches, eluates or radiomedicines
+        for(Batch batch : batchList)    {
+            int[][] locations = batch.getStorageLocations();
+            for(int i=0; i < locations.length; i++) {
+                if(locations[i][0] == id)
+                    return "redirect:/storagesView";
+            }
+        }
+        for(Eluate eluate : eluateList)    {
+            if(eluate.getStorageLocation() == id)
+                return "redirect:/storagesView";
+        }
+        for(RadioMedicine radioMedicine : radioMedicineList)    {
+            if(radioMedicine.getStorageLocation() == id)
+                return "redirect:/storagesView";
+        }
+        
+        storageService.delete(id);
+        return "redirect:/storagesView";
     }
 
     @RequestMapping(value = "addStatusComment/{sid}+{cid}")

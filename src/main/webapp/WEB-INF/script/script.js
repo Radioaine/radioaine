@@ -88,27 +88,12 @@ function countAmount(){
 }
 
 function editStorageName(id)  {
-    var storage = document.getElementById("name"+id);
-    var parent = document.getElementById("editButton"+id);
-    var editButton = document.getElementById("edit"+id);
-    var storageText = storage.innerText;
-    storage.innerHTML = "<form action=\"updateStorage/"+id+" method=\"POST\" ><input id=inp"+id+">";
-    parent.removeChild(editButton);
-    parent.innerHTML = "</input><button type=\"submit\" onClick=\"saveStorageName("+id+")\">Tallenna</button></form>";
-    var inp = document.getElementById("inp"+id);
-    inp.value = storageText;
+    document.getElementById("edit"+id).style.cssText = "display: none;";
+    document.getElementById("name"+id).style.cssText = "display: none;";
+    document.getElementById("remove"+id).style.cssText = "display: none;";
+    document.getElementById("save"+id).style.cssText = "display: inline;";
+    document.getElementById("cancel"+id).style.cssText = "display: inline;";
+    document.getElementById("inp"+id).style.cssText = "display: inline;";
 
+    document.getElementById("inp"+id).value = document.getElementById("name"+id).innerText;
 }
-
-function saveStorageName(id)  {
-    
-    var storage = document.getElementById("inp"+id);
-    var storageNewText = storage.value;
-    
-    console.log(storageNewText);
-}
-
-function removeStorage()    {
-    
-}
-

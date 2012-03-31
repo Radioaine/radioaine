@@ -51,7 +51,7 @@ public class RadioMedicineController {
             return "createRadioMedicine";
         }
         RadioMedicine newRadioMedicine = radioMedService.createOrUpdate(createRD(rmfo));
-        return "redirect:/frontpage/";
+        return "redirect:/frontpage";
     }
 
     @RequestMapping("RadioMedicine/{id}")

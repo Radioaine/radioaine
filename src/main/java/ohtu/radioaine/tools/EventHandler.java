@@ -50,6 +50,14 @@ public class EventHandler {
         return event;
     }
     
+    public static Event removeFromBatchEvent(Batch batch, String sig, String reason) {
+        Event event = new Event();
+        event.setNote(reason);
+        event.setSignature(sig);
+        event.setInfo("type=modifyBatch "+batch.toString());
+        return event;
+    }
+    
     public static Event qualityCheckEvent(Batch batch, String sig) {
         Event event = new Event();
         event.setInfo("type=qualityCheck "+batch.toString());

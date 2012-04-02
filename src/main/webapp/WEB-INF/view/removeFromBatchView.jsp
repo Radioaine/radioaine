@@ -89,6 +89,8 @@
                 </c:when>
             </c:choose>
         </c:forEach>
+        Poiston syy: <input type="text" name="reason" /><br />
+        Nimikirjaimet: <input type="text" name="remover" /><br />
         <input type="submit" value="Poista" />
     </form>
 </div>

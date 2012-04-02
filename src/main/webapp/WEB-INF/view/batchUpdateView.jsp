@@ -2,9 +2,8 @@
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<script type="text/javascript" src="<c:url value="/css/script.js" />"></script>
 <%@include file="headerstorage.jsp" %>
-
+<script type="text/javascript" src="<c:url value="/script/ui.datepicker-fi.js" />"></script>
 <script>
     $(function() {
         $( "#arrivalDate" ).datepicker();
@@ -16,7 +15,6 @@
     
     
 </script>
-<script type="text/javascript" src="script/ui.datepicker-fi.js"></script>
 
 <div id="contents">
     <h1>Erä ${batch.batchNumber}</h1>
@@ -41,11 +39,11 @@
         </tr>
         <tr>
             <td>Saapunut</td>
-            <td><fmt:formatDate value="${batch.arrivalDate}" pattern="dd.MM.yyyy"/></td>
+            <td><fmt:formatDate value="${batch.arrivalDate}" pattern="dd.MM.yyyy" var="arrive"/>${arrive}</td>
         </tr>
         <tr>
             <td>Vanhenee</td>
-            <td><fmt:formatDate value="${batch.expDate}" pattern="dd.MM.yyyy"/></td>
+            <td><fmt:formatDate value="${batch.expDate}" pattern="dd.MM.yyyy" var="expire"/>${expire}</td>
         </tr>
         <tr>
             <td>Valmistaja</td>
@@ -94,16 +92,15 @@
 
     </table>
     <br>
-
     <form:form commandName="batch" action="${pageContext.servletContext.contextPath}/updateBatch/${batch.id}" method="POST">
         Aine: <form:select path="substance">
                     <form:options items="${substances}" itemValue="id" itemLabel="name"/>
               </form:select><br/>
-        Eränumero: <form:input path="batchNumber" type="text"/><form:errors path="batchNumber"/><br/>
+        Eränumero: <form:input path="batchNumber" type="text" /><form:errors path="batchNumber"/><br/>
         <!--Määrä: <form:input path="amount" type="number"/><form:errors path="amount"/><br/>-->
         Pakkauskoko: <form:input path="substanceVolume" type="number"/><form:errors path="substanceVolume"/><br/>
-        Saapumispäivä: <form:input path="arrivalDate" type="text" id="arrivalDate"/><form:errors path="arrivalDate"/><br/>
-        Vanhenemispäivä: <form:input path="expDate" type="text" id="expDate"/><form:errors path="expDate"/><br/>
+        Saapumispäivä: <form:input path="arrivalDate" type="text" id="arrivalDate" value="${arrive}"/><form:errors path="arrivalDate"/><br/>
+        Vanhenemispäivä: <form:input path="expDate" type="text" id="expDate" value="${expire}"/><form:errors path="expDate"/><br/>
         <div id="varastot">
             <c:forEach var="location" items="${batch.storageLocations}" varStatus="status">
                 <c:choose>

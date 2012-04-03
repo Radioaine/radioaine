@@ -37,7 +37,7 @@
             </tr>
             <tr>
                 <td>Saapumispäivä</td>
-                <td><form:input path="arrivalDate" type="text" id="arrivalDate"/><form:errors path="arrivalDate"/></td>
+                <td><form:input path="arrivalDate" type="text" value="${date}" id="arrivalDate"/><form:errors path="arrivalDate"/></td>
                 <td></td>
             </tr>
             <tr>
@@ -66,7 +66,7 @@
             </tr>
             <tr>
                 <td>Huomautuksia</td>
-                <td><form:input path="note" type="text" size="70"/><form:errors path="note"/></td>
+                <td><form:textarea path="note" type="text" /><form:errors path="note"/></td>
                 <td></td>
             </tr>
         </table>

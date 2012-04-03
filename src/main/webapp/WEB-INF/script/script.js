@@ -6,18 +6,17 @@ function addStorage(usedStorageLocationsCount, storageLocationsCount, names){
     var p = names.split("^separate^");
     if(usedStorageLocationsCount > 0 && usedStorageLocationsCount >= storageCounter)
         storageCounter = usedStorageLocationsCount + 1;
-    var storage = document.getElementById("varastot");
-    var newdiv = document.createElement("div");
-
-    newdiv.id = "varasto"+storageCounter;
+ 
+    
     var newHTML = "<select name=\"storageLocations["+(storageCounter-1)+"][0]\">";
     for(var i = 0; i < (p.length-1); i++)  {
         newHTML += "<option value=\""+(i+1)+"\">"+ p[i] +"</option>";
     }
     newHTML += "</select> <input class=\"temp\" onchange=\"countAmount()\" value=\"0\" id=\"storageAmount\" type=\"number\" size=\"3\" name=\"storageLocations["+(storageCounter-1)+"][1] \"> kpl &nbsp; <button type=\"button\" onClick=\"removeStorage("+storageCounter+")\">Poista</button>";
-    newdiv.innerHTML = newHTML;
+    var temp = $('<div>').attr("id", "varasto"+storageCounter );
+    temp.html(newHTML);
     storageCounter++;
-    storage.appendChild(newdiv);
+    $("#varastot").append(temp);
 }
 
 //Ongelma jossa jos lisää vaikka kome ja poistaa keskimmäisen niin numerointi menee sekaisin;
@@ -35,34 +34,28 @@ function qualityResults(){
 }
 
 function eluateAmounts(e){
-    var newDiv = document.createElement("div");
-    newDiv.id = "selection"+selectionCounter;
+    var temp = $('<div>').attr("id", "selection"+selectionCounter );
     var newHTML = "";
     if(e.target.id == "0"){
-        newHTML = "<button type=\"button\" onclick=\"removeSelection("+newDiv.id+")\">Poista</button>"+e.target.innerHTML+"<input type=\"hidden\" name=\"generators\" value=\""+e.target.value+"\"\>";
+        newHTML = "<button type=\"button\" onclick=\"removeSelection("+temp.attr('id')+")\">Poista</button>"+e.target.innerHTML+"<input type=\"hidden\" name=\"generators\" value=\""+e.target.value+"\"\>";
     }
     else if(e.target.id == "1"){
-        newHTML = "<button type=\"button\" onclick=\"removeSelection("+newDiv.id+")\">Poista</button>"+e.target.innerHTML+"<input type=\"hidden\" name=\"kits\" value=\""+e.target.value+"\"\>";
+        newHTML = "<button type=\"button\" onclick=\"removeSelection("+temp.attr('id')+")\">Poista</button>"+e.target.innerHTML+"<input type=\"hidden\" name=\"kits\" value=\""+e.target.value+"\"\>";
     }
     else if(e.target.id == "3"){
-        newHTML = "<button type=\"button\" onclick=\"removeSelection("+newDiv.id+")\">Poista</button>"+e.target.innerHTML+"<input type=\"hidden\" name=\"eluates\" value=\""+e.target.value+"\"\>";
+        newHTML = "<button type=\"button\" onclick=\"removeSelection("+temp.attr('id')+")\">Poista</button>"+e.target.innerHTML+"<input type=\"hidden\" name=\"eluates\" value=\""+e.target.value+"\"\>";
     }
     else{     
-        newHTML = "<button type=\"button\" onclick=\"removeSelection("+newDiv.id+")\">Poista</button>"+e.target.innerHTML+"<input type=\"hidden\" name=\"others\" value=\""+e.target.value+"\"\>";
+        newHTML = "<button type=\"button\" onclick=\"removeSelection("+temp.attr('id')+")\">Poista</button>"+e.target.innerHTML+"<input type=\"hidden\" name=\"others\" value=\""+e.target.value+"\"\>";
     }
-    newDiv.innerHTML = newHTML;
+    temp.html(newHTML);
     selectionCounter++;
-    document.getElementById("selected").appendChild(newDiv);
-}
-
-function revealForm(){
-    document.getElementById("butski").parentNode.removeChild(document.getElementById("butski"));
-    document.getElementById("removeForm").style.cssText = "display: inline;";
+    $("#selected").append(temp);
 }
 
 function removeSelection(elem){
     console.log(elem);
-    document.getElementById(""+elem.id).parentNode.removeChild(elem);
+    $("#"+elem.id).remove();
     selectionCounter--;
 }
 
@@ -79,11 +72,11 @@ function addComment(e){
 
 function countAmount(){
     var total=0;
-    var amounts = document.getElementsByClassName("temp");
+    var amounts = $(".temp");
     for(var i=0; i<amounts.length; i++){
         total += parseInt(amounts[i].value);
     }
-    document.getElementById("t").innerText = total+" kpl";
+    $("#t").text(total+" kpl");
     
 }
 

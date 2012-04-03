@@ -26,18 +26,18 @@
         <table class="noborder">
             <tr>
                 <td>Generaattori:</td>
-                <td><select multiple="multiple" onclick="eluateAmounts(event)">
+                <td><select multiple="multiple" >
                         <c:forEach var="generator" items="${generators}">
-                            <option id="0"  value="${generator.id}">${generator.substance.name}</option>
+                            <option id="0" onclick="eluateAmounts(event)"  value="${generator.id}">${generator.substance.name}</option>
                         </c:forEach>
                     </select>
                 </td>
             </tr>
             <tr>
                 <td>Muut:</td>
-                <td><select multiple="multiple" onclick="eluateAmounts(event)" >
+                <td><select multiple="multiple" >
                         <c:forEach var="other" items="${others}">
-                            <option id="2" value="${other.id}">${other.substance.name},
+                            <option id="2" onclick="eluateAmounts(event)" value="${other.id}">${other.substance.name},
                                 ${other.batchNumber}, <fmt:formatDate value="${other.expDate}" pattern="dd.MM.yyyy"/></option>
                             </c:forEach>
                     </select>

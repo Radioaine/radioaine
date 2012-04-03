@@ -134,7 +134,7 @@ public class TestDBController {
                 storageLocations[0][1] = Integer.parseInt(batches[randomNumber][1]);
                 batch.setStorageLocations(storageLocations);
                 batch.setArrivalDate(Time.parseTimeStamp(batches[randomNumber][5]));
-                batch.setExpDate(Time.parseTimeStamp("10.5.2012 00:00"));
+                batch.setExpDate(Time.parseTimeStamp("10.2.2012 00:00"));
                 batch.setSubstanceVolume(Integer.parseInt(batches[randomNumber][2]));
                 batch.setQualityCheck(Integer.parseInt(batches[randomNumber][3]));
                 batch.setNote(batches[randomNumber][4]);

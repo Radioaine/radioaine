@@ -22,6 +22,22 @@
                 </c:if>
             </c:forEach>
          </c:forEach>
+         <c:forEach var="substance" items="${substances}">
+            <tr>
+                    <th colspan="5">${substance.name}</th>
+            </tr>
+            <c:forEach var="event" items="${removed}">
+                <c:if test="${event.substanceName == substance.name}">        
+                <tr>
+                    <td class="date">${event.arrivalDate}</td>
+                    <td class="batch">eränumero ${event.batchNumber}</td>
+                    <td class="before">käyt. ennen ${event.expDate}</td>
+                    <td class="reportAmount">${event.amount} kpl</td>
+                    <td>${event.signature}</td>
+                </tr>
+                </c:if>
+            </c:forEach>
+         </c:forEach>
          <c:forEach var="radioMed" items="${radioMeds}">
             <tr>
                 <td>Radiolääke ${radioMed.id}</td>

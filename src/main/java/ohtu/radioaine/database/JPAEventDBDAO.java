@@ -54,10 +54,16 @@ public class JPAEventDBDAO implements EventDBDao {
     public Event update(Event instance) {
         return entityManager.merge(instance);
     }
-
+    
     @Override
-    public List<Event> listArrivedByDate(Timestamp start, Timestamp end) {
-        Query q = entityManager.createQuery("SELECT e FROM Event e WHERE e.arrivalDate between '"+start+"' AND '"+end+"'");
+    public List<Event> listArrived(Timestamp start, Timestamp end) {
+        Query q = entityManager.createQuery("SELECT e FROM Event e WHERE e.info LIKE '%type=arrived%' AND (e.arrivalDate between '"+start+"' AND '"+end+"')");
+        return q.getResultList();
+    }
+    
+    @Override
+    public List<Event> listRemoved(Timestamp start, Timestamp end) {
+        Query q = entityManager.createQuery("SELECT e FROM Event e WHERE e.info LIKE '%type=removed%' AND (e.arrivalDate between '"+start+"' AND '"+end+"')");
         return q.getResultList();
     }
     

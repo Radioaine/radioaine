@@ -51,12 +51,17 @@ public class SimpleEventService implements EventService {
     }
 
     @Override
-    public List<Event> listArrivedByDate(Timestamp start, Timestamp end) {
-        return storageDao.listArrivedByDate(start, end);
+    public List<Event> listArrived(Timestamp startDate, Timestamp endDate) {
+        return storageDao.listArrived(startDate, endDate);
     }
 
     @Override
     public List<Event> list(String name) {
         return storageDao.list(name);
+    }
+
+    @Override
+    public List<Event> listRemoved(Timestamp startDate, Timestamp endDate) {
+        return storageDao.listRemoved(startDate, endDate);
     }
 }

@@ -46,7 +46,7 @@ public class EventHandler {
         event.setSubstanceName(batch.getSubstance().getName());
         event.setArrivalDate(batch.getArrivalDate());
         event.setExpDate(batch.getExpDate());
-        event.setInfo("type=addToBatch "+batch.toString());
+        event.setInfo("type=arrived "+batch.toString());
         return event;
     }
     
@@ -54,7 +54,7 @@ public class EventHandler {
         Event event = new Event();
         event.setNote(reason);
         event.setSignature(sig);
-        event.setInfo("type=modifyBatch "+batch.toString());
+        event.setInfo("type=removed "+batch.toString());
         return event;
     }
     

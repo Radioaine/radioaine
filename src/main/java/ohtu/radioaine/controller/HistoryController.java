@@ -53,10 +53,10 @@ public class HistoryController {
         System.out.println(endDate);
         for(String str : reports){
             if(str.equals("arrived")){
-                model.addAttribute("arrived", eventService.listArrivedByDate(startDate, endDate));
+                model.addAttribute("arrived", eventService.listArrived(startDate, endDate));
             }
             else if(str.equals("removed")){
-                model.addAttribute("removed", eventService.listArrivedByDate(startDate, endDate));
+                model.addAttribute("removed", eventService.listRemoved(startDate, endDate));
             }
             else {
                 model.addAttribute("radioMeds", radioMedService.list(startDate, endDate));

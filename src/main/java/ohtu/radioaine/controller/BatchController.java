@@ -142,7 +142,7 @@ public class BatchController {
             Event event = EventHandler.newBatchEvent(batch, bfo.getSignature());
             eventService.createOrUpdate(event);
         } else {
-            batch = updateBatchSaato(temp.getId(), bfo);
+            batch = addToBatch(temp.getId(), bfo);
         }
         return "redirect:/batch/" + batch.getId();
     }
@@ -280,7 +280,7 @@ public class BatchController {
         return batch;
     }
 
-    private Batch updateBatchSaato(int id, BatchFormObject bfm) {
+    private Batch addToBatch(int id, BatchFormObject bfm) {
         Batch batch = batchService.read(id);
         batch.setAmount(batch.getAmount() + bfm.getAmount());
         batch.setNote(batch.getNote() + "\n" + bfm.getNote());

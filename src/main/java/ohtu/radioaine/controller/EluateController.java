@@ -74,6 +74,26 @@ public class EluateController {
         Eluate newEluate = eluateService.createOrUpdate(createEluate(efo));
         return "redirect:/frontpage";
     }
+    
+    @RequestMapping(value = "modifyEluate/{id}", method = RequestMethod.GET)
+    public String modifyEluate(Model model, @PathVariable Integer id) {
+       model.addAttribute("eluateForm", new EluateFormObject());
+       model.addAttribute("generators", batchService.getBatchesByType(GENERATOR));
+       model.addAttribute("others", batchService.getBatchesByType(OTHER));
+       model.addAttribute("storages",  storageService.list()); 
+       model.addAttribute("elaute", eluateService.read(id));
+        return "eluateUpdateView";
+    }
+    
+    @RequestMapping(value = "modifyEluate/{id}", method = RequestMethod.POST)
+    public String modifyEluate(@Valid @ModelAttribute("eluate") EluateFormObject efo, BindingResult result) {
+        if (result.hasErrors()) {
+            System.out.println(result);
+            return "createEluate";
+        }
+        Eluate newEluate = eluateService.createOrUpdate(createEluate(efo));
+        return "redirect:/frontpage";
+    }
 
     private Eluate createEluate(EluateFormObject efo) {
         Eluate eluate = new Eluate();
@@ -103,7 +123,7 @@ public class EluateController {
 
             others.add(batchService.read(othersTable[i]));
         }
-        updateAmounts(generators, others);
+//        updateAmounts(generators, others);
         eluate.setGenerators(generators);
         eluate.setOthers(others);
         return eluate;

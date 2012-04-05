@@ -31,6 +31,14 @@ select.batch {
     width: 350px;
 }
 
+select.list {
+    width: 600px;
+}
+
+select.am {
+    width: 65px;
+}
+
 table {
     border-collapse: collapse;
 }

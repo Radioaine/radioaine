@@ -37,16 +37,16 @@ function eluateAmounts(e){
     var temp = $('<div>').attr("id", "selection"+selectionCounter );
     var newHTML = "";
     if(e.target.id == "0"){
-        newHTML = "<button type=\"button\" onclick=\"removeSelection("+temp.attr('id')+")\">Poista</button>"+e.target.innerHTML+"<input type=\"hidden\" name=\"generators\" value=\""+e.target.value+"\"\>";
+        newHTML = "<button type=\"button\" onclick=\"removeSelection("+temp.attr('id')+")\">Poista</button> &nbsp;"+e.target.innerHTML+"<input type=\"hidden\" name=\"generators\" value=\""+e.target.value+"\"\>";
     }
     else if(e.target.id == "1"){
-        newHTML = "<button type=\"button\" onclick=\"removeSelection("+temp.attr('id')+")\">Poista</button>"+e.target.innerHTML+"<input type=\"hidden\" name=\"kits\" value=\""+e.target.value+"\"\>";
+        newHTML = "<button type=\"button\" onclick=\"removeSelection("+temp.attr('id')+")\">Poista</button> &nbsp;"+e.target.innerHTML+"<input type=\"hidden\" name=\"kits\" value=\""+e.target.value+"\"\>";
     }
     else if(e.target.id == "3"){
-        newHTML = "<button type=\"button\" onclick=\"removeSelection("+temp.attr('id')+")\">Poista</button>"+e.target.innerHTML+"<input type=\"hidden\" name=\"eluates\" value=\""+e.target.value+"\"\>";
+        newHTML = "<button type=\"button\" onclick=\"removeSelection("+temp.attr('id')+")\">Poista</button> &nbsp;"+e.target.innerHTML+"<input type=\"hidden\" name=\"eluates\" value=\""+e.target.value+"\"\>";
     }
     else{     
-        newHTML = "<button type=\"button\" onclick=\"removeSelection("+temp.attr('id')+")\">Poista</button>"+e.target.innerHTML+"<input type=\"hidden\" name=\"others\" value=\""+e.target.value+"\"\>";
+        newHTML = "<button type=\"button\" onclick=\"removeSelection("+temp.attr('id')+")\">Poista</button> &nbsp;"+e.target.innerHTML+"<input type=\"hidden\" name=\"others\" value=\""+e.target.value+"\"\>";
     }
     temp.html(newHTML);
     selectionCounter++;

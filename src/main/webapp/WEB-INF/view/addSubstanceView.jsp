@@ -4,8 +4,6 @@
 
 <%@include file="headeradmin.jsp" %>
 
-<!--KESKEN!-->
-
 <!--Tähän pitää jotenkin tuoda tieto siitä, minkä tyyppisen aineen lisäys on valittu-->
 
 <div id="contents">
@@ -43,7 +41,7 @@
             </tr>-->
             <c:if test="${substance.type=='1'}"> <!--Tämä tarvitaan vain, jos tyyppi on generaattori-->
                 <tr>
-                    <td>Valmistettava eluaatti</td> <!--Tämä vain jos tyyppi on generaattori-->
+                    <td>Valmistettava eluaatti</td>
                     <td><input id="genericName" name="genericName" type="text" value="TODO" class="substance"/></td>
                 </tr>
             </c:if>

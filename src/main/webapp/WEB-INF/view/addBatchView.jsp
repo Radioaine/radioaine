@@ -1,6 +1,6 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+
 <%@include file="headerstorage.jsp" %>
 <script type="text/javascript" src="<c:url value="/script/ui.datepicker-fi.js" />"></script>
 <script>
@@ -16,7 +16,7 @@
 </script>
 
 <div id="contents">
-    <h2>Lis√§√§ l√§hetys</h2>
+    <h2>Lis‰‰ l‰hetys</h2>
         
     <form:form commandName="batch" action="batch" method="POST">
         <table class="noborder">
@@ -29,19 +29,19 @@
                         </c:forEach>
                     </form:select>                            
                 </td>
-                <td>Pit√§√§k√∂ t√§ss√§ pysty√§ lis√§√§m√§√§n kategoriaan "Muu" tuote, jota ei ole lis√§tty j√§rjestelm√§√§n aineen lis√§√§misen kautta?</td>
+                <td>Pit‰‰kˆ t‰ss‰ pysty‰ lis‰‰m‰‰n kategoriaan "Muu" tuote, jota ei ole lis‰tty j‰rjestelm‰‰n aineen lis‰‰misen kautta?</td>
             </tr>
             <tr>
-                <td>Er√§numero</td>
+                <td>Er‰numero</td>
                 <td><form:input path="batchNumber" type="text"/><form:errors path="batchNumber"/></td>
             </tr>
             <tr>
-                <td>Saapumisp√§iv√§</td>
+                <td>Saapumisp‰iv‰</td>
                 <td><form:input path="arrivalDate" type="text" value="${date}" id="arrivalDate"/><form:errors path="arrivalDate"/></td>
                 <td></td>
             </tr>
             <tr>
-                <td>Vanhenemisp√§iv√§</td>
+                <td>Vanhenemisp‰iv‰</td>
                 <td><form:input path="expDate" type="text" id="expDate"/><form:errors path="expDate"/></td>
                 <td></td>
             </tr>
@@ -58,11 +58,11 @@
                         </form:select> <form:input class="temp" onchange="countAmount()" id="storageAmount" path="storageLocations[0][1]" type="number" size="3"/> kpl<br/> 
                     </div>
                 </td>
-                <td valign="bottom"><button type="button" onClick="addStorage(1, ${batch.storageLocationsCount}, ${storageNames})">Lis√§√§ varastopaikka</button></td>
+                <td valign="bottom"><button type="button" onClick="addStorage(1, ${batch.storageLocationsCount}, ${storageNames})">Lis‰‰ varastopaikka</button></td>
                 <td></td>
             </tr>
             <tr>
-                <td>M√§√§r√§ yhteens√§</td>
+                <td>M‰‰r‰ yhteens‰</td>
                 <td id="t">0</td>
                 <td></td>
             </tr>

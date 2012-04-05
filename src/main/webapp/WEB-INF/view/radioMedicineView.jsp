@@ -1,12 +1,11 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <%@include file="headerstorage.jsp" %>
 
 <div id="contents">
-    <h1>Radiol√§√§ke ${radioMedicine.id}</h1>
+    <h1>Radiol‰‰ke ${radioMedicine.id}</h1>
     <c:forEach var="eluate" items="${radioMedicine.eluates}">
         <b>Eluaatti ${eluate.id}</b><br>
     </c:forEach>
@@ -53,7 +52,7 @@
             <td>${radioMedicine.note}</td>
         </tr>
         <tr>
-            <td>Tekij√§</td>
+            <td>Tekij‰</td>
             <td>${radioMedicine.signature}</td>
         </tr>
 

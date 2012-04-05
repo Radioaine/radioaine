@@ -1,7 +1,6 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@include file="headerstorage.jsp" %>
 
 
@@ -41,22 +40,22 @@
 
             <tr>
                     <th class="amount">Lkm</th>
-                    <th class="batchnumber">Er√§numero</th>
-                    <th class="oldest">K√§ytett√§v√§ ennen</th>
+                    <th class="batchnumber">Er‰numero</th>
+                    <th class="oldest">K‰ytett‰v‰ ennen</th>
                     <th class="quality">Laadunvarmistus</th>
                     <th class="wide">Huomautuksia</th>
             </tr>
 
             <c:forEach var="batch" items="${substanceBatches}">
             <c:choose>
-                <c:when test="${batch.qualityCheck==1}"> <!--TODO: T√§h√§n my√∂s vanhentunut-->
+                <c:when test="${batch.qualityCheck==1}"> <!--TODO: T‰h‰n myˆs vanhentunut-->
                     <tr id="${batch.id}">
                 </c:when>
                 <c:when test="${batch.qualityCheck==2}">
                     <tr id="${batch.id}" class="red">
-                <!--TODO: T√§h√§n vanhenemish√§lytysrajan alittanut sinisell√§:
+                <!--TODO: T‰h‰n vanhenemish‰lytysrajan alittanut sinisell‰:
                 /c:when>
-                c:when (h√§lytysraja on alitettu)>
+                c:when (h‰lytysraja on alitettu)>
                     <tr id="{batch.id}" class="blue">
                 -->
                 </c:when>
@@ -70,16 +69,16 @@
                     <td id="qualityCheck">
                         <c:choose>
                             <c:when test="${batch.qualityCheck==1}">
-                                Hyv√§ksytty
+                                Hyv‰ksytty
                             </c:when>
                             <c:when test="${batch.qualityCheck==2}">
-                                Hyl√§tty
+                                Hyl‰tty
                             </c:when>
                             <c:otherwise>
                                 <form action="${pageContext.servletContext.contextPath}/doCheck/${batch.id}+${substance.id}" method="POST">
                                     <select name="qualityCheck">
-                                        <option value="1">Hyv√§ksytty</option>
-                                        <option value="2">Hyl√§tty</option>
+                                        <option value="1">Hyv‰ksytty</option>
+                                        <option value="2">Hyl‰tty</option>
                                     </select>
                                     <input type="text" name="sig" size="3" />
                                     <input type="submit" value="Kirjaa tulos" />

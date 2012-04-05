@@ -1,6 +1,5 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <script type="text/javascript" src="<c:url value="/css/script.js" />"></script>
 <%@include file="headeradmin.jsp" %>
 
@@ -42,7 +41,7 @@
                 </form:select>
             </td>
         </tr>
-        <c:if test="${substance.type=='1'}"> <!--T√§m√§ tarvitaan vain, jos tyyppi on generaattori-->
+        <c:if test="${substance.type=='1'}"> <!--T‰m‰ tarvitaan vain, jos tyyppi on generaattori-->
             <tr>
                 <td>Valmistettava eluaatti</td>
                 <td>TODO</td>
@@ -60,6 +59,7 @@
             <td><form:input path="supplier" type="text" class="substance"/><form:errors path="supplier"/></td>
         </tr>
         <tr>
+
             <td>Tilavuus</td>
             <td>TODO</td>
             <td><input path="size" type="text" value="TODO" class="substance"/></td>
@@ -69,7 +69,7 @@
             <td>TODO</td>
             <td><input path="strength" type="text" value="TODO" class="substance"/></td>
         </tr>
-        <c:if test="${substance.type=='1'}"><!--T√§m√§ tarvitaan vain, jos tyyppi on generaattori-->
+        <c:if test="${substance.type=='1'}"><!--T‰m‰ tarvitaan vain, jos tyyppi on generaattori-->
             <tr>
                 <td>Puoliintumisaika</td>
                 <td>${substance.halflife} tuntia</td>
@@ -86,21 +86,21 @@
         </tr>
         <tr>
             <td>Huomautus vanhenemisesta</td>
-            <td>${substance.alertLimit1} p√§iv√§√§ ennen</td>
-            <td><form:input path="alertLimit1" type="number"/><form:errors path="alertLimit1"/> p√§iv√§√§ ennen</td>
+            <td>${substance.alertLimit1} p‰iv‰‰ ennen</td>
+            <td><form:input path="alertLimit1" type="number"/><form:errors path="alertLimit1"/> p‰iv‰‰ ennen</td>
         </tr>
         <tr>
-            <td>Huomautus m√§√§r√§st√§, kun</td>
-            <td>${substance.alertLimit2} yksikk√∂√§ j√§ljell√§</td>
-            <td><form:input path="alertLimit2" type="number"/><form:errors path="alertLimit2"/> yksikk√∂√§ j√§ljell√§</td>
+            <td>Huomautus m‰‰r‰st‰, kun</td>
+            <td>${substance.alertLimit2} yksikkˆ‰ j‰ljell‰</td>
+            <td><form:input path="alertLimit2" type="number"/><form:errors path="alertLimit2"/> yksikkˆ‰ j‰ljell‰</td>
         </tr>
     </table>
-    <br>
 
     <br />
     <input type="submit" value="Tallenna">&nbsp; &nbsp;
     TODO<input type="button" value="Poista aine" onClick="parent.location = '${pageContext.servletContext.contextPath}/substanceView'" />&nbsp; &nbsp;
     <input type="button" value="Peruuta" onClick="parent.location = '${pageContext.servletContext.contextPath}/substanceView'" />
+
     </form:form>
 </div>
 

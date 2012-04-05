@@ -1,5 +1,4 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
 <%@include file="headeradmin.jsp" %>
@@ -33,10 +32,10 @@
         </br>
 
 
-        <input type="checkbox" name="reports" value="arrived" /> Saapuneet radiolÃ¤Ã¤kkeet <br />
-        <input type="checkbox" name="reports" value="removed" /> Poistuneet radiolÃ¤Ã¤kkeet <br />
-        <input type="checkbox" name="reports" value="RadioMedQuantity" /> KÃ¤yttÃ¶kuntoon saatetut radiolÃ¤Ã¤kkeet / lkm <br />
-        <input type="checkbox" name="reports" value="RadioMedDetails" /> KÃ¤yttÃ¶kuntoon saatetut radiolÃ¤Ã¤kkeet / tarkat tiedot <br />
+        <input type="checkbox" name="reports" value="arrived" /> Saapuneet radiolääkkeet <br />
+        <input type="checkbox" name="reports" value="removed" /> Poistuneet radiolääkkeet <br />
+        <input type="checkbox" name="reports" value="RadioMedQuantity" /> Käyttökuntoon saatetut radiolääkkeet / lkm <br />
+        <input type="checkbox" name="reports" value="RadioMedDetails" /> Käyttökuntoon saatetut radiolääkkeet / tarkat tiedot <br />
         <input type="submit" value="Luo raportti">
     </form>
     </p>
@@ -46,7 +45,7 @@
 
 <h2>Tapahtumien haku</h2>
 </br>
-<form action="/radioaine/seek">Etsi aineen nimellÃ¤ <input type="text" name="searchString"> <input type="submit" value="Hae"></form>
+<form action="/radioaine/seek">Etsi aineen nimellä <input type="text" name="searchString"> <input type="submit" value="Hae"></form>
 
 </div>
 <%@include file="footer.jsp" %>

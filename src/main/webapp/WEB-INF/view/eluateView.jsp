@@ -49,6 +49,9 @@
         </tr>
 
     </table>
+    <form action="${pageContext.servletContext.contextPath}/modifyEluate/${eluate.id}" method="GET">  
+            <input type="submit" value="Muokkaa erän tietoja" />
+    </form>
 </div>
 
 

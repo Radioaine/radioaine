@@ -74,11 +74,35 @@ public class EluateController {
         Eluate newEluate = eluateService.createOrUpdate(createEluate(efo));
         return "redirect:/frontpage";
     }
+    
+    @RequestMapping(value = "modifyEluate/{id}", method = RequestMethod.GET)
+    public String modifyEluate(Model model, @PathVariable Integer id) {
+       model.addAttribute("eluateForm", new EluateFormObject());
+       model.addAttribute("generators", batchService.getBatchesByType(GENERATOR));
+       model.addAttribute("others", batchService.getBatchesByType(OTHER));
+       model.addAttribute("storages",  storageService.list()); 
+       model.addAttribute("eluate", eluateService.read(id));
+        return "eluateUpdateView";
+    }
+    
+    @RequestMapping(value = "modifyEluate/{id}", method = RequestMethod.POST)
+    public String modifyEluate(@Valid @ModelAttribute("eluateForm") EluateFormObject efo, BindingResult result) {
+        if (result.hasErrors()) {
+            System.out.println(result);
+            return "createEluate";
+        }
+        Eluate newEluate = eluateService.createOrUpdate(createEluate(efo));
+        return "redirect:/frontpage";
+    }
 
     private Eluate createEluate(EluateFormObject efo) {
         Eluate eluate = new Eluate();
-        System.out.println(efo.getStrength());
-        eluate.setStrength(Double.parseDouble(efo.getStrength()));
+        if(efo.getStrength().equals("")){
+            eluate.setStrength(0.0);
+        }
+        else{
+            eluate.setStrength(Double.parseDouble(efo.getStrength()));
+        }
         eluate.setUnit(efo.getUnit());
         eluate.setVolume(efo.getVolume());
         eluate.setTimestamp(Time.parseTimeStamp(efo.getDate() + " " + efo.getHours() + ":" + efo.getMinutes()));
@@ -99,7 +123,7 @@ public class EluateController {
 
             others.add(batchService.read(othersTable[i]));
         }
-        updateAmounts(generators, others);
+//        updateAmounts(generators, others);
         eluate.setGenerators(generators);
         eluate.setOthers(others);
         return eluate;

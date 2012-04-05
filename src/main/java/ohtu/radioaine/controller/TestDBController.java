@@ -78,9 +78,10 @@ public class TestDBController {
 
     @RequestMapping("generateTestDB")
     public String createDB() {
+        createStorages();
         createSubstances();
         createBatches();
-        createStorages();
+        
         return "redirect:/storage";
     }
     
@@ -88,6 +89,8 @@ public class TestDBController {
         for (int i = 0; i < storages.length; i++) {
             Storage storage = new Storage();
             storage.setName(storages[i]);
+            storage.setHidden(false);
+            storage.setInUse(false);
             storageService.createOrUpdate(storage);
 //            Event event = EventHandler.newStorageEvent(storage, "test db");
 //            eventService.createOrUpdate(event);
@@ -132,6 +135,9 @@ public class TestDBController {
                 int[][] storageLocations = new int[10][2];
                 storageLocations[0][0] = 1;
                 storageLocations[0][1] = Integer.parseInt(batches[randomNumber][1]);
+                Storage storage = storageService.read(1);
+                storage.setInUse(true);
+                storageService.createOrUpdate(storage);
                 batch.setStorageLocations(storageLocations);
                 batch.setArrivalDate(Time.parseTimeStamp(batches[randomNumber][5]));
                 batch.setExpDate(Time.parseTimeStamp("10.2.2012 00:00"));

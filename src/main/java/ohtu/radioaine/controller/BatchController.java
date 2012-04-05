@@ -107,33 +107,31 @@ public class BatchController {
     
     @RequestMapping(value = "removeFromBatch/{id}", method = RequestMethod.POST)
     public String removeFromBatch(@PathVariable Integer id, @RequestParam Integer[] amounts, @RequestParam String remover, @RequestParam String reason) {
-        if(!remover.isEmpty() && !reason.isEmpty())    { 
-            System.out.println(amounts[0]);
-            Batch temp = batchService.read(id);
-            int[][] locs = temp.getStorageLocations();
-            int tempTotalAmount = 0;
-            for(int i=0; i<amounts.length;++i){
-                if(amounts[i] != null && amounts[i] > 0){
-                    System.out.println(locs[i][1]);
-                    locs[i][1] -= amounts[i];
-                    System.out.println(locs[i][1]);
-                }
-                tempTotalAmount = locs[i][1];
+        Batch temp = batchService.read(id);
+        int[][] locs = temp.getStorageLocations();
+        int tempTotalAmount = 0;
+        for(int i=0; i<amounts.length;++i){
+            if(amounts[i] != null && amounts[i] > 0 && locs[i][1] >= amounts[i])    {
+                System.out.println(locs[i][1]);
+                locs[i][1] -= amounts[i];
+                System.out.println(locs[i][1]);
             }
-            temp.setAmount(tempTotalAmount);
-            temp.setStorageLocations(locs);
-            batchService.createOrUpdate(temp);
-            Event event = EventHandler.removeFromBatchEvent(temp, remover, reason);
-            eventService.createOrUpdate(event);
-            
+            tempTotalAmount += locs[i][1];
         }
+        temp.setAmount(tempTotalAmount);
+        temp.setStorageLocations(locs);
+        batchService.createOrUpdate(temp);
+        Event event = EventHandler.removeFromBatchEvent(temp, reason, remover);
+        eventService.createOrUpdate(event);
+            
         return "redirect:/batch/" + id;
     }
     
     @RequestMapping(value = "batch", method = RequestMethod.POST)
     public String addBatch(@Valid @ModelAttribute("batch") BatchFormObject bfo, BindingResult result) {
         if (result.hasErrors()) {
-            return "addBatchView";
+            System.out.println(result);
+            return "redirect:/addBatch";
         }
         Batch batch = createBatch(bfo);
         Batch temp = batchService.read(batch.getBatchNumber(), bfo.getSubstance());

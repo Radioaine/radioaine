@@ -99,7 +99,9 @@
                 <td>Varastopaikka</td>
                 <td><form:select  path="storageLocation">
                         <c:forEach var="storage" items="${storages}" varStatus="i">
-                            <form:option value="${i.index+1}">${storage.name}</form:option>
+                            <c:if test="${storage.hidden == false}">
+                                <form:option value="${i.index+1}">${storage.name}</form:option>
+                            </c:if>
                         </c:forEach>
                     </form:select></td>
             </tr>

@@ -55,7 +55,7 @@
             </tr>
             <tr>
                 <td>Aktiivisuus:</td>
-                <td><input name="strength" type="text"/>
+                <td><input pattern="\d+(\.\d)?" name="strength" type="text"/>
                     <form:select path="unit">
                         <option value="0">GBq</option>
                         <option value="1">MBq</option>

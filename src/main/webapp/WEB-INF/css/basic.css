@@ -145,6 +145,10 @@ td.center {
     width: 270px;
 }
 
+.comm {
+    width: 300px;
+}
+
 tr.blue td {
     background-color: #BAC7FF;
 }

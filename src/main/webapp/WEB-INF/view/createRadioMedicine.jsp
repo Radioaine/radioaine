@@ -109,7 +109,7 @@
             </tr>
             <tr>
                 <td>Nimikirjaimet</td>
-                <td><form:input path="signature" type="text" id="signature"/><form:errors path="signature"/></td>
+                <td><form:input path="signature" type="text" id="signature" size="6"/><form:errors path="signature"/></td>
             </tr>
         </table>
         <br/>

@@ -57,14 +57,14 @@
             </tr>
             <tr>
 
-                <td>Eluointiaika:</td>
+                <td>Eluointiaika</td>
                 <td><input required name="hours" type="text" id="hours" value="${hours}" size="2"/>:<input
                         required name="minutes" type="text" id="minutes" size="2" value="${minutes}"/>
                     <input required name="date" type="text" id="eluatingtime" value="${date}"/></td>
             </tr>
             <tr>
-                <td>Aktiivisuus:</td>
-                <td><input pattern="\d+(\.\d)?" name="strength" type="text"/>
+                <td>Aktiivisuus</td>
+                <td><input pattern="\d+(\.\d)?" name="strength" type="text" size="5"/>
 
                     <form:select path="unit">
                         <option value="0">GBq</option>
@@ -97,7 +97,7 @@
             <tr>
 
                 <td>Nimikirjaimet:</td>
-                <td><input required name="signature" type="text" id="signature"/></td>
+                <td><input required name="signature" type="text" id="signature" size="6"/></td>
 
             </tr>
         </table>

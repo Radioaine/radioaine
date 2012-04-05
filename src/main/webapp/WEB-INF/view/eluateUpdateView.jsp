@@ -17,19 +17,18 @@
 
 <div id="contents">
     <h2>Eluuatin muokkaus</h2>
-    <c:forEach var="gene" items="${eluate.generators}">
-               ${gene.substance.name}, ${gene.batchNumber}
-    </c:forEach>
-    <br />
-    <br />
-    <c:forEach var="oth" items="${eluate.others}">
-               ${oth}
-    </c:forEach>
-    <form:form commandName="eluateForm" action="modifyEluate/${eluate.id}" method="POST">
+    
+    <form:form commandName="eluateForm" action="${pageContext.servletContext.contextPath}/modifyEluate/${eluate.id}" method="POST">
         <table style="float: right;">
             <th>Valitut</th>
             <tr>
-                <td style="float: right; border: none; font-size: 90%;" id="selected"></td>
+                <td style="float: right; border: none; font-size: 90%;" id="selected">
+                    <c:forEach var="gene" items="${eluate.generators}">
+                        <script> generateDivs("${gene.substance.name}", ${gene.id}, 0);</script>
+                    </c:forEach>
+                    <c:forEach var="oth" items="${eluate.others}">
+                        <script> generateDivs("${oth.substance.name}", ${oth.id}, 4);</script>
+                    </c:forEach>
                 </td>
             </tr>
         </table>
@@ -65,7 +64,7 @@
             </tr>
             <tr>
                 <td>Aktiivisuus:</td>
-                <td><input pattern="\d+(\.\d)?" name="strength" type="text"/>
+                <td><input pattern="\d+(\.\d)?" value="${eluate.strength}" name="strength" type="text"/>
                     <form:select path="unit">
                         <option value="0">GBq</option>
                         <option value="1">MBq</option>
@@ -75,11 +74,7 @@
             </tr>
             <tr>
                 <td>Tilavuus:</td>
-                <td><form:select path="volume" type="text">
-                        <form:option value="5"/>
-                        <form:option value="10"/>
-                        <form:option value="11"/>
-                    </form:select><form:errors path="volume"/>ml
+                <td><input type="text" name="volume" value="${eluate.volume}"/> ml
                 </td>
             </tr>
             <tr>
@@ -101,7 +96,7 @@
                 <td><input required name="signature" type="text" id="signature"/></td>
             </tr>
             <tr>
-                <td><input type="submit" value="Tallenna"></td>
+                <td><input type="submit" value="Tallenna muutokset"></td>
                 <td><input type="button" value="Peruuta" onClick="parent.location = '${pageContext.servletContext.contextPath}/frontpage'" /></td>
             </tr>
         </table>

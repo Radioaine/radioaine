@@ -86,23 +86,21 @@ public class EluateController {
     }
     
     @RequestMapping(value = "modifyEluate/{id}", method = RequestMethod.POST)
-    public String modifyEluate(@Valid @ModelAttribute("eluateForm") EluateFormObject efo, BindingResult result) {
+    public String modifyEluate(@Valid @ModelAttribute("eluateForm") EluateFormObject efo, 
+    BindingResult result,
+    @PathVariable Integer id) {
         if (result.hasErrors()) {
             System.out.println(result);
             return "createEluate";
         }
-        Eluate newEluate = eluateService.createOrUpdate(createEluate(efo));
+        updateEluate(id, efo);
         return "redirect:/frontpage";
     }
 
     private Eluate createEluate(EluateFormObject efo) {
         Eluate eluate = new Eluate();
-        if(efo.getStrength().equals("")){
-            eluate.setStrength(0.0);
-        }
-        else{
-            eluate.setStrength(Double.parseDouble(efo.getStrength()));
-        }
+        if(efo.getStrength().equals("")){ eluate.setStrength(0.0); }
+        else{ eluate.setStrength(Double.parseDouble(efo.getStrength())); }
         eluate.setUnit(efo.getUnit());
         eluate.setVolume(efo.getVolume());
         eluate.setTimestamp(Time.parseTimeStamp(efo.getDate() + " " + efo.getHours() + ":" + efo.getMinutes()));
@@ -113,14 +111,12 @@ public class EluateController {
         List<Batch> generators = new ArrayList<Batch>();
         int[] generatorsTable = efo.getGenerators();
         for (int i = 0; i < generatorsTable.length; ++i) {
-
             generators.add(batchService.read(generatorsTable[i]));
         }
 
         List<Batch> others = new ArrayList<Batch>();
         int[] othersTable = efo.getOthers();
         for (int i = 0; i < othersTable.length; ++i) {
-
             others.add(batchService.read(othersTable[i]));
         }
 //        updateAmounts(generators, others);
@@ -146,5 +142,33 @@ public class EluateController {
             batchService.createOrUpdate(batch);
             substanceService.createOrUpdate(substance);
         }
+    }
+
+    private void updateEluate(Integer id, EluateFormObject efo) {
+        Eluate eluate = eluateService.read(id);
+        if(efo.getStrength().equals("")){ eluate.setStrength(0.0); }
+        else{ eluate.setStrength(Double.parseDouble(efo.getStrength())); }
+        eluate.setUnit(efo.getUnit());
+        eluate.setVolume(efo.getVolume());
+        eluate.setTimestamp(Time.parseTimeStamp(efo.getDate() + " " + efo.getHours() + ":" + efo.getMinutes()));
+        eluate.setSignature(efo.getSignature());
+        eluate.setNote(efo.getNote());
+        eluate.setStorageLocation(efo.getStorageLocation());
+
+        List<Batch> generators = new ArrayList<Batch>();
+        int[] generatorsTable = efo.getGenerators();
+        for (int i = 0; i < generatorsTable.length; ++i) {
+            generators.add(batchService.read(generatorsTable[i]));
+        }
+
+        List<Batch> others = new ArrayList<Batch>();
+        int[] othersTable = efo.getOthers();
+        for (int i = 0; i < othersTable.length; ++i) {
+            others.add(batchService.read(othersTable[i]));
+        }
+//        updateAmounts(generators, others);
+        eluate.setGenerators(generators);
+        eluate.setOthers(others);
+        eluateService.createOrUpdate(eluate);
     }
 }

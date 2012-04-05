@@ -37,7 +37,7 @@
             </tr>
             <tr>
                 <td>Saapumispäivä</td>
-                <td><form:input path="arrivalDate" type="text" id="arrivalDate"/><form:errors path="arrivalDate"/></td>
+                <td><form:input path="arrivalDate" type="text" value="${date}" id="arrivalDate"/><form:errors path="arrivalDate"/></td>
                 <td></td>
             </tr>
             <tr>
@@ -47,14 +47,18 @@
             </tr>
             <tr>
                 <td valign="top">Sijainti</td>
-                <td><div id="varastot"><form:select  path="storageLocations[0][0]">
-                            <c:forEach var="locations" items="${batch.storageLocations}" varStatus="i">
-                                <form:option value="${i.index+1}">Jääkaappi ${i.index+1}</form:option>
+                <td>
+                    <div id="varastot">
+                        <form:select  path="storageLocations[0][0]">
+                            <c:forEach var="storage" items="${storages}" varStatus="i">
+                                <c:if test="${storage.hidden == false}">
+                                    <form:option value="${i.index+1}">${storage.name}</form:option>
+                                </c:if>
                             </c:forEach>
-                        </form:select> <form:input onchange="countAmount()" id="storageAmount" path="storageLocations[0][1]" type="number" size="3"/> kpl<br/> 
+                        </form:select> <form:input class="temp" onchange="countAmount()" id="storageAmount" path="storageLocations[0][1]" type="number" size="3"/> kpl<br/> 
                     </div>
                 </td>
-                <td valign="bottom"><button type="button" onClick="addStorage(1, ${batch.storageLocationsCount})">Lisää varastopaikka</button></td>
+                <td valign="bottom"><button type="button" onClick="addStorage(1, ${batch.storageLocationsCount}, ${storageNames})">Lisää varastopaikka</button></td>
                 <td></td>
             </tr>
             <tr>
@@ -64,7 +68,7 @@
             </tr>
             <tr>
                 <td>Huomautuksia</td>
-                <td><form:input path="note" type="text" size="70"/><form:errors path="note"/></td>
+                <td><form:textarea path="note" type="text" /><form:errors path="note"/></td>
                 <td></td>
             </tr>
         </table>

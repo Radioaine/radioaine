@@ -31,6 +31,14 @@ select.batch {
     width: 350px;
 }
 
+select.list {
+    width: 600px;
+}
+
+select.am {
+    width: 65px;
+}
+
 table {
     border-collapse: collapse;
 }
@@ -42,11 +50,12 @@ table.noborder td {
 table.listing {
     border: 0px;
     margin: none;
+    margin-bottom: 30px;
 }
 
 table.listing td {
     background-color: #FFF;
-    padding: 3px;
+    padding: 5px;
 }
 
 table.listing th {
@@ -55,6 +64,7 @@ table.listing th {
 
 td {
     border: 1px solid #333;
+    
 }
 
 table.eluate {
@@ -83,6 +93,34 @@ td.center {
     width: 125px;
 }
 
+.date {
+	width: 90px;
+}
+
+.time {
+	width: 60px;
+}
+
+.batch {
+	width: 130px;
+}
+
+.before {
+	width: 180px;
+}
+
+.reportAmount {
+	width: 50px;
+}
+
+.reportName {
+	width: 150px;
+}
+
+.reportReason {
+	width: 170px;
+}
+
 .oldest{
     width: 150px;
 }
@@ -104,7 +142,11 @@ td.center {
 }
 
 .quality {
-    width: 195px;
+    width: 270px;
+}
+
+.comm {
+    width: 300px;
 }
 
 tr.blue td {

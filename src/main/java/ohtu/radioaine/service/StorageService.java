@@ -20,6 +20,7 @@ public interface StorageService {
     public Storage read(int id);
 
     public void delete(int id);
+    
+    public List<String> storageNamesList();
 
-    public List<Storage> listByStorageType(int type);
 }

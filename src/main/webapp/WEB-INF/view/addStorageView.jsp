@@ -7,28 +7,17 @@
 <div id="contents">
     <h2>Lisää varasto</h2>
     
-    <form:form commandName="storage" action="addStorage" method="POST">
+    <form action="addStorage" method="POST">
         <table class="noborder">
             <tr>
                 <td>Nimi:</td>
-                <td><form:input path="name" type="text"/><form:errors path="name"/></td>
-            </tr>
-            <tr>
-                <td>Tyyppi:</td>
-                <td><form:select path="storageType">
-                        <form:option value="0">Kylmä</form:option>
-                        <form:option value="1">Lämmin</form:option>
-                    </form:select></td>
-            </tr>
-            <tr>
-                <td>Lisätietoja:</td>
-                <td><form:input path="notes" type="text"/><form:errors path="notes"/></td>
+                <td><input required name="name" type="text"/></td>
             </tr>
             <tr>
                 <td><input type="submit" value="Lisää"></td>
             </tr>
         </table>
-    </form:form>  
+    </form>  
 </div>
 
 <%@include file="footer.jsp" %>

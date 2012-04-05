@@ -52,6 +52,7 @@ public class SubstanceController {
         substance.setAlertLimit1(sfo.getAlertLimit1());
         substance.setAlertLimit2(sfo.getAlertLimit2());
         substance.setTotalAmount(0);
+        substance.setHalflife(sfo.getHalflife());
 
         return substance;
     }
@@ -77,6 +78,7 @@ public class SubstanceController {
         substance.setNeedsColdStorage(sfm.getNeedsColdStorage());
         substance.setManufacturer(sfm.getManufacturer());
         substance.setSupplier(sfm.getSupplier());
+        substance.setHalflife(sfm.getHalflife());
         substanceService.createOrUpdate(substance);
 
         return "redirect:/updateSubstance/" + id;
@@ -94,4 +96,6 @@ public class SubstanceController {
         model.addAttribute("substance", new SubstanceFormObject());
         return "addSubstanceView";
     }
+    
+    
 }

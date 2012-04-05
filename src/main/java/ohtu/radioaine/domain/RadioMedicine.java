@@ -37,6 +37,8 @@ public class RadioMedicine implements Serializable{
     private String name;
     @Column
     private String preparer;
+    @Column
+    private int unit;
     @OneToMany
     @JoinColumn(name = "RADIOMEDICINE_ELUATES")
     private List<Eluate> eluates;
@@ -134,4 +136,21 @@ public class RadioMedicine implements Serializable{
     public void setVolume(int volume) {
         this.volume = volume;
     }
+    
+        /**
+     * Unit used to measure strength
+     * @return unit 0 = GBq, 1 = MBq
+     */
+    public int getUnit() {
+        return unit;
+    }
+
+    /**
+     * Unit used to measure strength
+     * @param unit: 0 = GBq, 1 = MBq
+     */
+    public void setUnit(int unit) {
+        this.unit = unit;
+    }
+    
 }

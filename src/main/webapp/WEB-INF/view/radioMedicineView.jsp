@@ -33,7 +33,16 @@
         </tr>
         <tr>
             <td>Vahvuus</td>
-            <td>${radioMedicine.strength} GBq</td>
+            <td>${radioMedicine.strength}
+                <c:choose>
+                    <c:when test="${radioMedicine.unit == 0}">
+                        GBq
+                    </c:when>
+                    <c:otherwise>
+                        MBq
+                    </c:otherwise>
+                </c:choose>
+            </td>
         </tr>
         <tr>
             <td>Luotu</td>

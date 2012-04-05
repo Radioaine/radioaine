@@ -47,10 +47,8 @@ public class SimpleStorageService implements StorageService {
         }
     }
     
-    @Override
-    @Transactional(readOnly = true)
-    public List<Storage> listByStorageType(int type) {
-        return storageDao.listByStorageType(type);
+    public List<String> storageNamesList()  {
+        return storageDao.storageNamesList();
     }
     
 }

@@ -17,6 +17,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import ohtu.radioaine.service.BatchService;
 import ohtu.radioaine.service.EventService;
+import ohtu.radioaine.service.StorageService;
 import ohtu.radioaine.service.SubstanceService;
 import ohtu.radioaine.tools.EventHandler;
 import org.springframework.ui.Model;
@@ -41,12 +42,16 @@ public class BatchController {
     private SubstanceService substanceService;
     @Autowired
     private EventService eventService;
+    @Autowired
+    private StorageService storageService;
 
     @RequestMapping(value = "batch/{id}", method = RequestMethod.GET)
     public String getBatchById(@PathVariable Integer id, Model model) {
         model.addAttribute("batch", batchService.read(id));
+        model.addAttribute("storages", storageService.list());
         return "batchView";
     }
+    
 
     @RequestMapping(value = "doCheck/{id}+{sid}", method = RequestMethod.POST)
     public String qualityCheck(@PathVariable Integer id,
@@ -81,13 +86,55 @@ public class BatchController {
     public String addbatchView(Model model) {
         model.addAttribute("batch", new BatchFormObject());
         model.addAttribute("substances", substanceService.list());
+        model.addAttribute("storages", storageService.list());
+        
+        String names = "'"; 
+        for(int i = 0; i < storageService.storageNamesList().size(); i++)   {
+            if(!storageService.list().get(i).isHidden())
+                names += storageService.storageNamesList().get(i) + "^separate^";
+            else
+                names += "^hidden^^separate^";
+        }
+        names += "'";
+        model.addAttribute("storageNames", names);
+        
         return "addBatchView";
     }
-
+    
+    @RequestMapping(value = "removeFromBatch/{id}", method = RequestMethod.GET)
+    public String removeFromBatchView(@PathVariable Integer id, Model model) {
+        model.addAttribute("batch", batchService.read(id));
+        model.addAttribute("storages", storageService.list());
+        return "removeFromBatchView";
+    }
+    
+    @RequestMapping(value = "removeFromBatch/{id}", method = RequestMethod.POST)
+    public String removeFromBatch(@PathVariable Integer id, @RequestParam Integer[] amounts, @RequestParam String remover, @RequestParam String reason) {
+        Batch temp = batchService.read(id);
+        int[][] locs = temp.getStorageLocations();
+        int tempTotalAmount = 0;
+        for(int i=0; i<amounts.length;++i){
+            if(amounts[i] != null && amounts[i] > 0 && locs[i][1] >= amounts[i])    {
+                System.out.println(locs[i][1]);
+                locs[i][1] -= amounts[i];
+                System.out.println(locs[i][1]);
+            }
+            tempTotalAmount += locs[i][1];
+        }
+        temp.setAmount(tempTotalAmount);
+        temp.setStorageLocations(locs);
+        batchService.createOrUpdate(temp);
+        Event event = EventHandler.removeFromBatchEvent(temp, reason, remover);
+        eventService.createOrUpdate(event);
+            
+        return "redirect:/batch/" + id;
+    }
+    
     @RequestMapping(value = "batch", method = RequestMethod.POST)
     public String addBatch(@Valid @ModelAttribute("batch") BatchFormObject bfo, BindingResult result) {
         if (result.hasErrors()) {
-            return "addBatchView";
+            System.out.println(result);
+            return "redirect:/addBatch";
         }
         Batch batch = createBatch(bfo);
         Batch temp = batchService.read(batch.getBatchNumber(), bfo.getSubstance());
@@ -96,7 +143,7 @@ public class BatchController {
             Event event = EventHandler.newBatchEvent(batch, bfo.getSignature());
             eventService.createOrUpdate(event);
         } else {
-            batch = updateBatchSaato(temp.getId(), bfo);
+            batch = addToBatch(temp.getId(), bfo);
         }
         return "redirect:/batch/" + batch.getId();
     }
@@ -105,6 +152,13 @@ public class BatchController {
     public String batchUpdateRequest(Model model, @PathVariable Integer id) {
         model.addAttribute("substances", substanceService.list());
         model.addAttribute("batch", batchService.read(id));
+        model.addAttribute("storages", storageService.list());
+        String names = "'"; 
+        for(int i = 0; i < storageService.storageNamesList().size(); i++)   {
+            names += storageService.storageNamesList().get(i) + "^separate^";
+        }
+        names += "'";
+        model.addAttribute("storageNames", names);
         return "batchUpdateView";
     }
 
@@ -113,9 +167,17 @@ public class BatchController {
             BindingResult result,
             Model model,
             @PathVariable Integer id) {
-        System.out.println("ZZZ");
-        if (result.hasErrors()) {
-            System.out.println("ZZZ2");
+
+        
+        //Checks if the new total amount differs from the old total amount and if it does, the update fails
+        Batch temp = batchService.read(id);
+        int newTotalAmount = 0;
+        for (int i = 0; i < bfm.getStorageLocations().length; i++) {
+            newTotalAmount += bfm.getStorageLocations()[i][1];
+        }
+        
+        if (result.hasErrors() || temp.getAmount() != newTotalAmount) {
+
             System.out.println(result);
             return "redirect:/updateBatch/" + id;
         }
@@ -125,21 +187,21 @@ public class BatchController {
     }
 
     private Batch updateBatch(Integer id, BatchFormObject bfo) {
-        System.out.println("GGG");
         Batch batch = batchService.read(id);
         Substance substance = batch.getSubstance();
         batch.setStorageLocations(bfo.getStorageLocations());
         batch.setSubstanceVolume(bfo.getSubstanceVolume());
         batch.setBatchNumber(bfo.getBatchNumber());
         batch.setNote(bfo.getNote());
+        batch.setArrivalDate(Time.parseDate(bfo.getArrivalDate()));
+        batch.setExpDate(Time.parseDate(bfo.getExpDate()));
         int temp = 0;
         for (int i = 0; i < bfo.getStorageLocations().length; i++) {
             temp += bfo.getStorageLocations()[i][1];
         }
         bfo.setAmount(temp);
-        System.out.println("bfo.getAmount() : " + bfo.getAmount());
+        //Checks if batch substance has been changed
         if (batch.getSubstance().getId() != bfo.getSubstance()) {
-            System.out.println("XXX");
             int oldAmount = batch.getAmount();
             batch.setAmount(bfo.getAmount());
             Substance newSubstance = (Substance) substanceService.read(bfo.getSubstance());
@@ -148,7 +210,6 @@ public class BatchController {
             batch.setSubstance(newSubstance);
             substanceService.createOrUpdate(newSubstance);
         } else {
-            System.out.println("YYY");
             int amountChange = amountChange(batch, bfo);
             batch.setAmount(batch.getAmount() + amountChange);
             substance.setTotalAmount(substance.getTotalAmount() + amountChange);
@@ -210,6 +271,7 @@ public class BatchController {
         Substance substance = (Substance) substanceService.read(bfo.getSubstance());
         if(batch.getExpDate().compareTo(substance.getOldestDate()) < 0){
             substance.setOldestDate(batch.getExpDate());
+            substance.setWarningDate(Time.parseWarningDate(batch.getExpDate()));
         }
         substance.setTotalAmount(substance.getTotalAmount() + bfo.getAmount());
         substanceService.createOrUpdate(substance);
@@ -219,7 +281,7 @@ public class BatchController {
         return batch;
     }
 
-    private Batch updateBatchSaato(int id, BatchFormObject bfm) {
+    private Batch addToBatch(int id, BatchFormObject bfm) {
         Batch batch = batchService.read(id);
         batch.setAmount(batch.getAmount() + bfm.getAmount());
         batch.setNote(batch.getNote() + "\n" + bfm.getNote());

@@ -20,6 +20,8 @@ public class Eluate implements Serializable {
     @Column
     private double strength;
     @Column
+    private int unit;
+    @Column
     private int volume;
     @Column
     private Timestamp date;
@@ -134,4 +136,26 @@ public class Eluate implements Serializable {
     public void setTimestamp(Timestamp timestamp) {
         this.date = timestamp;
     }
+
+    /**
+     * Unit used to measure strength
+     * @return unit: 0 = GBq, 1 = MBq
+     */
+    public int getUnit() {
+        return unit;
+    }
+
+    /**
+     * Unit used to measure strength
+     * @param unit: 0 = GBq, 1 = MBq
+     */
+    public void setUnit(int unit) {
+        this.unit = unit;
+    }
+
+    @Override
+    public String toString() {
+        return "Eluate{" + "id=" + id + ", strength=" + strength + ", unit=" + unit + ", volume=" + volume + ", date=" + date + ", signature=" + signature + ", note=" + note + ", storageLocation=" + storageLocation + ", generators=" + generators + ", others=" + others + '}';
+    }
+    
 }

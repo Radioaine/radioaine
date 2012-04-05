@@ -4,6 +4,7 @@
  */
 package ohtu.radioaine.database;
 
+import java.sql.Timestamp;
 import java.util.List;
 import ohtu.radioaine.domain.RadioMedicine;
 
@@ -13,5 +14,7 @@ import ohtu.radioaine.domain.RadioMedicine;
  */
 public interface RadioMedDBDao extends DAO<RadioMedicine> {
     public List<RadioMedicine> list();
+
+    public List<RadioMedicine> list(Timestamp startDate, Timestamp endDate);
  
 }

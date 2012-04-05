@@ -1,5 +1,6 @@
 package ohtu.radioaine.service;
 
+import java.sql.Timestamp;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -66,4 +67,9 @@ public class SimpleBatchService implements BatchService {
 //    public List<Batch> getGeneratorBatches(int type) {
 //        return storageDao.getBatchesByType(type);
 //    }
+
+    @Override
+    public List<Batch> list(Timestamp start, Timestamp end) {
+        return storageDao.list(start, end);
+    }
 }

@@ -1,5 +1,6 @@
 package ohtu.radioaine.service;
 
+import java.sql.Timestamp;
 import java.util.List;
 import ohtu.radioaine.domain.Batch;
 
@@ -13,6 +14,7 @@ public interface BatchService {
     public Batch createOrUpdate(Batch batch);
 
     public List<Batch> list();
+    public List<Batch> list(Timestamp start, Timestamp end);
 
     public Batch read(int id);
 

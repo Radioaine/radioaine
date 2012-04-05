@@ -21,6 +21,7 @@ public class Substance implements Serializable {
     private String name;
     @Column(nullable = false)
     private int type;
+    private int halflife;
     private int alertLimit1;
     private int alertLimit2;
     private boolean ordered;
@@ -29,10 +30,19 @@ public class Substance implements Serializable {
     private String supplier;
     private int totalAmount;
     private Timestamp oldestDate;
+    private Timestamp warningDate;
     private String signature;
     private String[] statusMessages = new String[3];
     private int qualityStatus;
 
+    public Timestamp getWarningDate() {
+        return warningDate;
+    }
+
+    public void setWarningDate(Timestamp warningDate) {
+        this.warningDate = warningDate;
+    }
+    
     public int getQualityStatus() {
         return qualityStatus;
     }
@@ -157,16 +167,20 @@ public class Substance implements Serializable {
         this.needsColdStorage = needsColdStorage;
     }
 
-    
-    public String toStringDB() {
-        return "Substance{" + "id=" + id + ", name=" + name + ", type=" + type + ", alertLimit1=" + alertLimit1 + ", alertLimit2=" + alertLimit2 + ", ordered=" + ordered + ", needsColdStorage=" + needsColdStorage + ", manufacturer=" + manufacturer + ", supplier=" + supplier + ", totalAmount=" + totalAmount + ", oldestDate=" + oldestDate + '}';
-    }
-    
-    public String toStringShow() {
-        return "NIMI= " + name + ", TYYPPI= " + type + ", HÄLYRAJA1= " + alertLimit1 + ", HÄLYRAJA2= " + alertLimit2 + ", KYLMÄSÄILYTYS= " + needsColdStorage + ", VALMISTAJA= " + manufacturer + ", TOIMITTAJA= " + supplier;
+    @Override
+    public String toString() {
+        return "Substance{" + "id=" + id + ", name=" + name + ", type=" + type + ", halflife=" + halflife + ", alertLimit1=" + alertLimit1 + ", alertLimit2=" + alertLimit2 + ", ordered=" + ordered + ", needsColdStorage=" + needsColdStorage + ", manufacturer=" + manufacturer + ", supplier=" + supplier + ", totalAmount=" + totalAmount + ", oldestDate=" + oldestDate + ", warningDate=" + warningDate + ", signature=" + signature + ", statusMessages=" + statusMessages + ", qualityStatus=" + qualityStatus + '}';
     }
 
     public void useOne(){
         totalAmount--;
+    }
+
+    public int getHalflife() {
+        return halflife;
+    }
+
+    public void setHalflife(int halflife) {
+        this.halflife = halflife;
     }
 }

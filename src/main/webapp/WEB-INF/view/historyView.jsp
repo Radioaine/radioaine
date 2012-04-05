@@ -3,10 +3,22 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
 <%@include file="headeradmin.jsp" %>
+<script type="text/javascript" src="<c:url value="/script/ui.datepicker-fi.js" />"></script>
+<script>
+    $(function() {
+        $( "#start" ).datepicker();
+    });
+    
+    $(function() {
+        $( "#end" ).datepicker();
+    });
+    
+    
+</script>
 <div id="contents">
     <h2>Raportit</h2>
     <p>
-    <form>
+    <form action="${pageContext.servletContext.contextPath}/seek">
         <table class="noborder">
             <tr>
                 <td>Alkupvm</td>
@@ -21,16 +33,14 @@
         </br>
 
 
-        <input type="checkbox" name="report" value="arrived" /> Saapuneet radiolääkkeet <br />
-        <input type="checkbox" name="report" value="passivated" /> Poistuneet radiolääkkeet <br />
-        <input type="checkbox" name="report" value="" /> Käyttökuntoon saatetut radiolääkkeet / lkm <br />
-        <input type="checkbox" name="report" value="" /> Käyttökuntoon saatetut radiolääkkeet / tarkat tiedot
-    </form>
-    </p>
-
-    <form method="link" action="historyView.html">
+        <input type="checkbox" name="reports" value="arrived" /> Saapuneet radiolääkkeet <br />
+        <input type="checkbox" name="reports" value="removed" /> Poistuneet radiolääkkeet <br />
+        <input type="checkbox" name="reports" value="RadioMedQuantity" /> Käyttökuntoon saatetut radiolääkkeet / lkm <br />
+        <input type="checkbox" name="reports" value="RadioMedDetails" /> Käyttökuntoon saatetut radiolääkkeet / tarkat tiedot <br />
         <input type="submit" value="Luo raportti">
     </form>
+    </p>
+    
 </br>
 </br>
 

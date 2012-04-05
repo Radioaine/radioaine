@@ -20,10 +20,18 @@ public class Storage {
     @Column
     private String name;
     @Column
-    private int storageType;
+    private boolean hidden;
     @Column
-    private String notes;
+    private boolean inUse;
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+    
     public String getName() {
         return name;
     }
@@ -31,21 +39,21 @@ public class Storage {
     public void setName(String name) {
         this.name = name;
     }
-
-    public String getNotes() {
-        return notes;
+    
+    public boolean isHidden() {
+        return hidden;
     }
 
-    public void setNotes(String notes) {
-        this.notes = notes;
+    public void setHidden(boolean hidden) {
+        this.hidden = hidden;
     }
 
-    public int getStorageType() {
-        return storageType;
+    public boolean isInUse() {
+        return inUse;
     }
 
-    public void setStorageType(int storageType) {
-        this.storageType = storageType;
+    public void setInUse(boolean inUse) {
+        this.inUse = inUse;
     }
     
 }

@@ -4,6 +4,7 @@
  */
 package ohtu.radioaine.database;
 
+import java.sql.Timestamp;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -27,6 +28,12 @@ public class JPAEventDBDAO implements EventDBDao {
         Query q = entityManager.createQuery("SELECT e FROM Event e");
         return q.getResultList();
     }
+    
+    @Override
+    public List<Event> list(String name) {
+        Query q = entityManager.createQuery("SELECT e FROM Event e WHERE e.info LIKE'%"+name+"%'");
+        return q.getResultList();
+    }
 
     @Override
     public Event createOrUpdate(Event instance) {
@@ -47,10 +54,16 @@ public class JPAEventDBDAO implements EventDBDao {
     public Event update(Event instance) {
         return entityManager.merge(instance);
     }
-
+    
     @Override
-    public List<Event> list(String arg) {
-        Query q = entityManager.createQuery("SELECT e FROM Event e WHERE e.happening LIKE '%"+arg+"%'");
+    public List<Event> listArrived(Timestamp start, Timestamp end) {
+        Query q = entityManager.createQuery("SELECT e FROM Event e WHERE e.info LIKE '%type=arrived%' AND (e.arrivalDate between '"+start+"' AND '"+end+"')");
+        return q.getResultList();
+    }
+    
+    @Override
+    public List<Event> listRemoved(Timestamp start, Timestamp end) {
+        Query q = entityManager.createQuery("SELECT e FROM Event e WHERE e.info LIKE '%type=removed%' AND (e.arrivalDate between '"+start+"' AND '"+end+"')");
         return q.getResultList();
     }
     

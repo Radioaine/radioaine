@@ -7,12 +7,12 @@
     <table class="noborder">
         <tr>
             <td class="elbutton">
-                <form method="link" action="createEluate">
+                <form method="link" action="${pageContext.servletContext.contextPath}/createEluate">
                     <input type="submit" value="Luo eluaatti">
                 </form>
             </td>
             <td>
-                <form method="link" action="createRadioMedicine">
+                <form method="link" action="${pageContext.servletContext.contextPath}/createRadioMedicine">
                     <input type="submit" value="Luo radiolääke">
                 </form> 
             </td>
@@ -20,7 +20,7 @@
     </table>
     <br>
     <h2>Valmisteet 
-        
+
     </h2>
 
     <br>
@@ -40,27 +40,58 @@
                 <td><c:forEach var="generator" items="${eluate.generators}">
                         <a href="eluate/${eluate.id}"><b>${generator.substance.name}</b></a><br>
                     </c:forEach></td>
-                <td>${eluate.strength} GBq</td>
+                <td>${eluate.strength}
+                    <c:choose>
+                        <c:when test="${eluate.unit == 0}">
+                            GBq
+                        </c:when>
+                        <c:otherwise>
+                            MBq
+                        </c:otherwise>
+                    </c:choose>
+                </td>
                 <td>${eluate.volume} ml</td>
-                <td>${eluate.storageLocation}</td>
+                <td>
+                    <c:forEach var="storage" items="${storages}" varStatus="i">
+                        <c:if test="${eluate.storageLocation == storage.id}">
+                            ${storage.name}
+                        </c:if>
+                    </c:forEach>
+                </td>
                 <td>${eluate.signature}</td>
             </tr>
 
             <c:forEach var="radioMed" items="${radioMeds}">
-                <c:if test="${radioMed.eluates[0].id == eluate.id}">  
+                <c:if test="${radioMed.eluates[0].id == eluate.id}">
                     <tr>
                         <td><fmt:formatDate value="${radioMed.date}" pattern="HH:mm"/></td>
                         <td><c:forEach var="kit" items="${radioMed.kits}">
                                 <a href="RadioMedicine/${radioMed.id}">${kit.substance.name}</a><br>
                             </c:forEach></td>
-                        <td>${radioMed.strength} GBq</td>
+                        <td>${radioMed.strength}
+                            <c:choose>
+                                <c:when test="${radioMed.unit == 0}">
+                                    GBq
+                                </c:when>
+                                <c:otherwise>
+                                    MBq
+                                </c:otherwise>
+                            </c:choose>
+                        </td>
                         <td>${radioMed.volume} ml</td>
-                        <td>${radioMed.storageLocation}</td>
+                        <td>
+                            <c:forEach var="storage" items="${storages}" varStatus="i">
+                                <c:if test="${radioMed.storageLocation == storage.id}">
+                                    ${storage.name}
+                                </c:if>
+                            </c:forEach>
+                        </td>
                         <td>${radioMed.signature}</td>
                     </tr>
                 </c:if>   
             </c:forEach> 
-        </table>        
+        </table>
+        </br>
     </c:forEach>    
 </div>
 <%@include file="footer.jsp" %>

@@ -9,10 +9,18 @@ package ohtu.radioaine.domain;
  * @author Jarno
  */
 public class StorageFormObject {
+    private int id;
     private String name;
-    private int storageType;
-    private String notes;
+    private boolean hidden;
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+    
     public String getName() {
         return name;
     }
@@ -20,21 +28,12 @@ public class StorageFormObject {
     public void setName(String name) {
         this.name = name;
     }
-
-    public String getNotes() {
-        return notes;
-    }
-
-    public void setNotes(String notes) {
-        this.notes = notes;
-    }
-
-    public int getStorageType() {
-        return storageType;
-    }
-
-    public void setStorageType(int storageType) {
-        this.storageType = storageType;
-    }
     
+    public boolean isHidden() {
+        return hidden;
+    }
+
+    public void setHidden(boolean hidden) {
+        this.hidden = hidden;
+    }
 }

@@ -19,15 +19,65 @@ public class Event implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    private Timestamp arrivalDate;
+    private Timestamp expDate;
+    private String batchNumber;
+    private String note;
+    private String substanceName;
+    private int amount;
     @Column (length = 1000)
-    String happening;
-    @Column (length = 1000)
-    String info;
-    @Column
+    private String info;
     private Timestamp timestamp;
-    @Column
     private String signature;
 
+    public Timestamp getExpDate() {
+        return expDate;
+    }
+
+    public void setExpDate(Timestamp expDate) {
+        this.expDate = expDate;
+    }
+
+    public String getSubstanceName() {
+        return substanceName;
+    }
+
+    public void setSubstanceName(String substanceName) {
+        this.substanceName = substanceName;
+    }
+
+    public String getNote() {
+        return note;
+    }
+
+    public void setNote(String note) {
+        this.note = note;
+    }
+    
+    public int getAmount() {
+        return amount;
+    }
+
+    public void setAmount(int amount) {
+        this.amount = amount;
+    }
+
+    public String getBatchNumber() {
+        return batchNumber;
+    }
+
+    public void setBatchNumber(String batchNumber) {
+        this.batchNumber = batchNumber;
+    }
+    
+    public Timestamp getArrivalDate() {
+        return arrivalDate;
+    }
+
+    public void setArrivalDate(Timestamp arrivalDate) {
+        this.arrivalDate = arrivalDate;
+    }
+    
     public String getSignature() {
         return signature;
     }
@@ -40,20 +90,12 @@ public class Event implements Serializable {
         timestamp = Time.getTimestamp();
     }
 
-    public String getHappening() {
-        return happening;
-    }
-
     public String getInfo() {
         return info;
     }
 
     public void setInfo(String info) {
         this.info = info;
-    }
-
-    public void setHappening(String happening) {
-        this.happening = happening;
     }
 
     public int getId() {

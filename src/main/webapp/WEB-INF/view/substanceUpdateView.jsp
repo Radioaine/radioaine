@@ -56,7 +56,12 @@
             <td>Hälytysraja 2</td>
             <td>${substance.alertLimit2}</td>
         </tr>
-        
+        <c:if test="${substance.type=='1'}">
+            <tr>
+                <td>Puoliintumisaika</td>
+                <td>${substance.halflife}</td>
+            </tr>   
+        </c:if>
     </table>
     <br>
     
@@ -75,6 +80,9 @@
         </form:select><br/>
         Hälytysraja 1: <form:input path="alertLimit1" type="number"/><form:errors path="alertLimit1"/><br/>
         Hälytysraja 2: <form:input path="alertLimit2" type="number"/><form:errors path="alertLimit2"/><br/>
+        <c:if test="${substance.type=='1'}">
+        Puoliintumisaika:<form:input path="halflife" type="number"/><form:errors path="halflife"/><br/> 
+        </c:if>
         <input type="submit" value="Tallenna muutokset">
     </form:form>
 </div>

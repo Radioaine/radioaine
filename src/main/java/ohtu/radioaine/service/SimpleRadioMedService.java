@@ -4,6 +4,7 @@
  */
 package ohtu.radioaine.service;
 
+import java.sql.Timestamp;
 import java.util.List;
 import ohtu.radioaine.database.RadioMedDBDao;
 import ohtu.radioaine.domain.RadioMedicine;
@@ -46,5 +47,10 @@ public class SimpleRadioMedService implements RadioMedService {
         if (e != null) {
             storageDao.delete(e);
         }
+    }
+
+    @Override
+    public List<RadioMedicine> list(Timestamp startDate, Timestamp endDate) {
+        return storageDao.list(startDate, endDate);
     }
 }

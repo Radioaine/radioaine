@@ -5,6 +5,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 
 /**
  * Tools for managing time
@@ -41,5 +42,18 @@ public class Time {
     public static Timestamp parseTimeStamp(String time) {
         return parseTime(time, "dd.MM.yyyy HH:mm");
 
+    }
+    
+    public static Timestamp parseWarningDate(Timestamp time){
+        long day = 84600000;
+        Timestamp temp = new Timestamp(time.getTime()-day*5);
+        return temp;
+    }
+
+    public static Date getWarningDate() {
+        GregorianCalendar cal = new GregorianCalendar();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        cal.add(GregorianCalendar.DAY_OF_MONTH, -6);   
+        return cal.getTime();
     }
 }

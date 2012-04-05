@@ -5,6 +5,7 @@
 package ohtu.radioaine.tools;
 
 import ohtu.radioaine.domain.Batch;
+import ohtu.radioaine.domain.Eluate;
 import ohtu.radioaine.domain.Event;
 import ohtu.radioaine.domain.Substance;
 import ohtu.radioaine.service.EventService;
@@ -20,36 +21,68 @@ public class EventHandler {
     
     public static Event newBatchEvent(Batch batch, String sig) {
         Event event = new Event();
-        event.setHappening("type=newBatch "+batch.toStringDB());
-        event.setInfo("Luotiin erä "+batch.toStringShow()+", kirjaaja= "+sig);
+        event.setInfo("type=arrived "+batch.toString());
+        event.setAmount(batch.getAmount());
+        event.setBatchNumber(batch.getBatchNumber());
+        event.setNote(batch.getNote());
+        event.setSignature(sig);
+        event.setSubstanceName(batch.getSubstance().getName());
+        event.setArrivalDate(batch.getArrivalDate());
+        event.setExpDate(batch.getExpDate());
         return event;
     }
 
     public static Event updateBatchEvent(Batch batch, String sig) {
         Event event = new Event();
-        event.setHappening("type=modifyBatch "+batch.toStringDB());
-        event.setInfo("Muokattiin "+batch.toStringShow()+", kirjaaja= "+sig);
+        event.setInfo("type=modifyBatch "+batch.toString());
         return event;
     }
 
     public static Event addToBatchEvent(Batch batch, String sig) {
         Event event = new Event();
-        event.setHappening("type=addToBatch "+batch.toStringDB());
-        event.setInfo("Lisättiin erään "+batch.toStringShow()+", kirjaaja= "+sig);
+        event.setAmount(batch.getAmount());
+        event.setBatchNumber(batch.getBatchNumber());
+        event.setNote(batch.getNote());
+        event.setSignature(sig);
+        event.setSubstanceName(batch.getSubstance().getName());
+        event.setArrivalDate(batch.getArrivalDate());
+        event.setExpDate(batch.getExpDate());
+        event.setInfo("type=arrived "+batch.toString());
+        return event;
+    }
+    
+    public static Event removeFromBatchEvent(Batch batch, String sig, String reason) {
+        Event event = new Event();
+        event.setNote(reason);
+        event.setSignature(sig);
+        event.setInfo("type=removed "+batch.toString());
         return event;
     }
     
     public static Event qualityCheckEvent(Batch batch, String sig) {
         Event event = new Event();
-        event.setHappening("type=qualityCheck "+batch.toStringDB());
-        event.setInfo("Suoritettiin laadunvarmistus aineen "+batch.getSubstance().getName()+" erälle "+batch.getBatchNumber()+", kirjaaja= "+sig);
+        event.setInfo("type=qualityCheck "+batch.toString());
         return event;
     }
     
     public static Event newSubstanceEvent(Substance substance, String sig){
         Event event = new Event();
-        event.setHappening("type=newSubstance "+substance.toStringDB());
-        event.setInfo("Lisättiin uusi aine "+substance.toStringShow()+", kirjaaja= "+sig);
+        event.setSignature(sig);
+        event.setInfo("type=newSubstance "+substance.toString());
         return event;
-    }  
+    }
+    
+    public static Event newEluateEvent(Eluate eluate, String sig){
+        Event event = new Event();
+        event.setSignature(sig);
+        event.setInfo("type=newEluate "+eluate.toString());
+        return event;
+    }
+    
+    public static Event updateEluateEvent(Eluate eluate, String sig){
+        Event event = new Event();
+        event.setSignature(sig);
+        event.setInfo("type=updateEluate "+eluate.toString());
+        return event;
+    }
 }

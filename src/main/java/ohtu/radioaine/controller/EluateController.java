@@ -77,8 +77,12 @@ public class EluateController {
 
     private Eluate createEluate(EluateFormObject efo) {
         Eluate eluate = new Eluate();
-        System.out.println(efo.getStrength());
-        eluate.setStrength(Double.parseDouble(efo.getStrength()));
+        if(efo.getStrength().equals("")){
+            eluate.setStrength(0.0);
+        }
+        else{
+            eluate.setStrength(Double.parseDouble(efo.getStrength()));
+        }
         eluate.setUnit(efo.getUnit());
         eluate.setVolume(efo.getVolume());
         eluate.setTimestamp(Time.parseTimeStamp(efo.getDate() + " " + efo.getHours() + ":" + efo.getMinutes()));

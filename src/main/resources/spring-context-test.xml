@@ -32,13 +32,18 @@
     <context:annotation-config />
     
     <!-- Käytetään muistiin ladattavaa tietokantaa -->
-    <jdbc:embedded-database id="dataSource" type="HSQL"/>
+     <bean class="org.springframework.jdbc.datasource.DriverManagerDataSource" id="dataSource"> 
+        <property value="com.mysql.jdbc.Driver" name="driverClassName"/> 
+        <property value="jdbc:mysql://users.cs.helsinki.fi:40001/radioaine" name="url"/> 
+        <property value="u" name="username"/> 
+        <property value="u" name="password"/> 
+    </bean>
 
     <!-- Käytetään EclipseLinkkiä JPA-toteutuksena, määritellään myös persistence.xml-tiedoston sijainti -->
     <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
         <!-- älä muuta persistence.xml -tiedoston sijaintia  -->
         <property name="persistenceXmlLocation" value="classpath:persistence.xml" />
-        <property name="persistenceUnitName" value="persistenceUnitEclipseLink" /> 
+        <property name="persistenceUnitName" value="radioaine" /> 
         <property name="dataSource" ref="dataSource"/>
         <property name="jpaVendorAdapter">
             <bean class="org.springframework.orm.jpa.vendor.EclipseLinkJpaVendorAdapter" />

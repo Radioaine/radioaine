@@ -103,8 +103,8 @@
         </table>
         <br/>
         
-        <td><input type="submit" value="Tallenna"></td>&nbsp; &nbsp;
-        <td><input type="button" value="Peruuta" onClick="parent.location = '${pageContext.servletContext.contextPath}/frontpage'" /></td>
+        <input type="submit" value="Tallenna">&nbsp; &nbsp;
+        <input type="button" value="Peruuta" onClick="parent.location = '${pageContext.servletContext.contextPath}/frontpage'" />
 
     </form:form>
 

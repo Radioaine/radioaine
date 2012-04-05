@@ -81,12 +81,12 @@ public class EluateController {
        model.addAttribute("generators", batchService.getBatchesByType(GENERATOR));
        model.addAttribute("others", batchService.getBatchesByType(OTHER));
        model.addAttribute("storages",  storageService.list()); 
-       model.addAttribute("elaute", eluateService.read(id));
+       model.addAttribute("eluate", eluateService.read(id));
         return "eluateUpdateView";
     }
     
     @RequestMapping(value = "modifyEluate/{id}", method = RequestMethod.POST)
-    public String modifyEluate(@Valid @ModelAttribute("eluate") EluateFormObject efo, BindingResult result) {
+    public String modifyEluate(@Valid @ModelAttribute("eluateForm") EluateFormObject efo, BindingResult result) {
         if (result.hasErrors()) {
             System.out.println(result);
             return "createEluate";

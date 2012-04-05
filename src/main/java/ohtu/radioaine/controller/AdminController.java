@@ -78,7 +78,7 @@ public class AdminController {
 
     @RequestMapping("storagesView")
     public String storageView(Model model) {
-        setStoragesInUse();
+//        setStoragesInUse();
         model.addAttribute("storages", storageService.list());
         return "storagesView";
     }

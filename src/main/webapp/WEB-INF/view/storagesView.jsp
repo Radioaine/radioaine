@@ -1,5 +1,4 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <%@include file="headeradmin.jsp" %>
 
@@ -44,7 +43,7 @@
     </table>
     <br />
     <form method="link" action="${pageContext.servletContext.contextPath}/addStorage">
-        <input type="submit" value="LisÃ¤Ã¤ varastopaikka">
+        <input type="submit" value="Lisää varastopaikka">
     </form>
 </div>
 <%@include file="footer.jsp" %>

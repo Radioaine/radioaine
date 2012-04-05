@@ -1,6 +1,5 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <script type="text/javascript" src="<c:url value="/css/script.js" />"></script>
 <%@include file="headeradmin.jsp" %>
 
@@ -36,11 +35,11 @@
             <td>${substance.supplier}</td>
         </tr>
         <tr>
-            <td>S√§ilytett√§v√§ kylm√§ss√§</td>
+            <td>S‰ilytett‰v‰ kylm‰ss‰</td>
             <td>
                 <c:choose>
                     <c:when test="${substance.needsColdStorage==true}">
-                        Kyll√§
+                        Kyll‰
                     </c:when>
                     <c:otherwise>
                         Ei 
@@ -49,11 +48,11 @@
             </td>
         </tr>
         <tr>
-            <td>H√§lytysraja 1</td>
+            <td>H‰lytysraja 1</td>
             <td>${substance.alertLimit1}</td>
         </tr>
         <tr>
-            <td>H√§lytysraja 2</td>
+            <td>H‰lytysraja 2</td>
             <td>${substance.alertLimit2}</td>
         </tr>
         <c:if test="${substance.type=='1'}">
@@ -74,12 +73,12 @@
         </form:select><br/>
         Valmistaja: <form:input path="manufacturer" type="text"/><form:errors path="manufacturer"/><br/>
         Toimittaja: <form:input path="supplier" type="text"/><form:errors path="supplier"/><br/>
-        S√§ilytett√§v√§ kylm√§ss√§: <form:select path="needsColdStorage">
-            <form:option value="1">Kyll√§</form:option>
+        S‰ilytett‰v‰ kylm‰ss‰: <form:select path="needsColdStorage">
+            <form:option value="1">Kyll‰</form:option>
             <form:option value="0">Ei</form:option>
         </form:select><br/>
-        H√§lytysraja 1: <form:input path="alertLimit1" type="number"/><form:errors path="alertLimit1"/><br/>
-        H√§lytysraja 2: <form:input path="alertLimit2" type="number"/><form:errors path="alertLimit2"/><br/>
+        H‰lytysraja 1: <form:input path="alertLimit1" type="number"/><form:errors path="alertLimit1"/><br/>
+        H‰lytysraja 2: <form:input path="alertLimit2" type="number"/><form:errors path="alertLimit2"/><br/>
         <c:if test="${substance.type=='1'}">
         Puoliintumisaika:<form:input path="halflife" type="number"/><form:errors path="halflife"/><br/> 
         </c:if>

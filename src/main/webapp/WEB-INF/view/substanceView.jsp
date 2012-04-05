@@ -1,5 +1,4 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <%@include file="headeradmin.jsp" %>
 
@@ -9,7 +8,7 @@
     <br/>
     
     <form method="link" action="${pageContext.servletContext.contextPath}/addSubstance">
-        <input type="submit" value="LisÃ¤Ã¤">
+        <input type="submit" value="Lisää">
     </form>
     
     <br/>
@@ -33,7 +32,7 @@
     <br/>
     
     <form method="link" action="${pageContext.servletContext.contextPath}/addSubstance">
-        <input type="submit" value="LisÃ¤Ã¤">
+        <input type="submit" value="Lisää">
     </form>
     
     <br/>
@@ -54,7 +53,7 @@
     <br/>
     
     <form method="link" action="${pageContext.servletContext.contextPath}/addSubstance">
-        <input type="submit" value="LisÃ¤Ã¤">
+        <input type="submit" value="Lisää">
     </form>
     
     <br/>

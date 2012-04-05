@@ -1,5 +1,4 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
 <%@include file="headeradmin.jsp" %>
@@ -14,8 +13,8 @@
                 <c:if test="${event.substanceName == substance.name}">        
                 <tr>
                     <td class="date">${event.arrivalDate}</td>
-                    <td class="batch">er√§numero ${event.batchNumber}</td>
-                    <td class="before">k√§yt. ennen ${event.expDate}</td>
+                    <td class="batch">er‰numero ${event.batchNumber}</td>
+                    <td class="before">k‰yt. ennen ${event.expDate}</td>
                     <td class="reportAmount">${event.amount} kpl</td>
                     <td>${event.signature}</td>
                 </tr>
@@ -30,8 +29,8 @@
                 <c:if test="${event.substanceName == substance.name}">        
                 <tr>
                     <td class="date">${event.arrivalDate}</td>
-                    <td class="batch">er√§numero ${event.batchNumber}</td>
-                    <td class="before">k√§yt. ennen ${event.expDate}</td>
+                    <td class="batch">er‰numero ${event.batchNumber}</td>
+                    <td class="before">k‰yt. ennen ${event.expDate}</td>
                     <td class="reportAmount">${event.amount} kpl</td>
                     <td>${event.signature}</td>
                 </tr>
@@ -40,8 +39,8 @@
          </c:forEach>
          <c:forEach var="radioMed" items="${radioMeds}">
             <tr>
-                <td>Radiol√§√§ke ${radioMed.id}</td>
-                <td>P√§iv√§ys ${radioMed.date}</td>    
+                <td>Radiol‰‰ke ${radioMed.id}</td>
+                <td>P‰iv‰ys ${radioMed.date}</td>    
             </tr>
          </c:forEach>
     </table>
@@ -49,7 +48,7 @@
             
     <div id="arrived">
 		<p>
-        <h2>Saapuneet radiol√§√§kkeet 1.1.2012-31.12.2012</h2>
+        <h2>Saapuneet radiol‰‰kkeet 1.1.2012-31.12.2012</h2>
 		</p>
 		<p>
         <table class="noborder">
@@ -58,22 +57,22 @@
             </tr>
             <tr>
                 <td class="date">1.2.2012</td>
-                <td class="batch">er√§ OIUHTTK</td>
-                <td class="before">k√§yt. ennen 30.4.2012</td>
+                <td class="batch">er‰ OIUHTTK</td>
+                <td class="before">k‰yt. ennen 30.4.2012</td>
                 <td class="reportAmount">3 kpl</td>
                 <td>MK</td>
             </tr>
             <tr>
                 <td>3.5.2012</td>
-                <td>er√§ OIUYYTK</td>
-                <td>k√§yt. ennen 5.7.2012</td>
+                <td>er‰ OIUYYTK</td>
+                <td>k‰yt. ennen 5.7.2012</td>
                 <td>6 kpl</td>
                 <td>RR</td>
             </tr>
             <tr>
                 <td>6.7.2012</td>
-                <td>er√§ AOTHTTK</td>
-                <td>k√§yt. ennen 15.8.2012</td>
+                <td>er‰ AOTHTTK</td>
+                <td>k‰yt. ennen 15.8.2012</td>
                 <td>1 kpl</td>
                 <td>TL</td>
             </tr>
@@ -85,22 +84,22 @@
             </tr>
             <tr>
                 <td class="date">5.3.2012</td>
-                <td class="batch">er√§ 13541254</td>
-                <td class="before">k√§yt. ennen 28.4.2012</td>
+                <td class="batch">er‰ 13541254</td>
+                <td class="before">k‰yt. ennen 28.4.2012</td>
                 <td class="reportAmount">2 kpl</td>
                 <td>NN</td>
             </tr>
             <tr>
                 <td>3.5.2012</td>
-                <td>er√§ 6758654</td>
-                <td>k√§yt. ennen 5.7.2012</td>
+                <td>er‰ 6758654</td>
+                <td>k‰yt. ennen 5.7.2012</td>
                 <td>3 kpl</td>
                 <td>MM</td>
             </tr>
             <tr>
                 <td>6.7.2012</td>
-                <td>er√§ 4136584</td>
-                <td>k√§yt. ennen 15.8.2012</td>
+                <td>er‰ 4136584</td>
+                <td>k‰yt. ennen 15.8.2012</td>
                 <td>4 kpl</td>
                 <td>KK</td>
             </tr>
@@ -111,7 +110,7 @@
 		
 		<div id="removed">
 		<p>
-			<h2>Poistuneet radiol√§√§kkeet 1.1.2012-31.12.2012</h2>
+			<h2>Poistuneet radiol‰‰kkeet 1.1.2012-31.12.2012</h2>
 		</p>
 
 		<p>
@@ -150,7 +149,7 @@
 		
 		<div id="RadioMedQuantity">
 		<p>
-			<h2>K√§ytt√∂kuntoon saatetut radiol√§kkeet / lkm 1.1.2012-31.12.2012</h2>
+			<h2>K‰yttˆkuntoon saatetut radiol‰kkeet / lkm 1.1.2012-31.12.2012</h2>
 		</p>
 
 		<p>
@@ -175,7 +174,7 @@
 		<div id="RadioMedDetails">
 		
 		<p>
-			<h2>K√§ytt√∂kuntoon saatetut radiol√§√§kkeet 1.1.2012-31.12.2012</h2>
+			<h2>K‰yttˆkuntoon saatetut radiol‰‰kkeet 1.1.2012-31.12.2012</h2>
 		</p>
 
 		<h4>3.1.2012</h4>
@@ -184,15 +183,15 @@
             <tr>
                 <td class="time">7.38</td>
                 <td class="reportName">Teknetiumeluaatti</td>
-                <td class="batch">er√§ 6758654</td>
-                <td class="before">k√§yt. ennen 3.3.2012</td>
+                <td class="batch">er‰ 6758654</td>
+                <td class="before">k‰yt. ennen 3.3.2012</td>
                 <td></td>
             </tr>
             <tr>
                 <td></td>
                 <td>NaCl 100 ml</td>
-                <td>er√§ OIUHTTK</td>
-                <td>k√§yt. ennen 5.7.2012</td>
+                <td>er‰ OIUHTTK</td>
+                <td>k‰yt. ennen 5.7.2012</td>
                 <td>5 ml</td>
             </tr>
             <tr>
@@ -211,7 +210,7 @@
             </tr>
             <tr>
                 <td></td>
-                <td>K√§ytett√§v√§ ennen</td>
+                <td>K‰ytett‰v‰ ennen</td>
                 <td>klo 12.38</td>
                 <td></td>
                 <td></td>
@@ -236,22 +235,22 @@
             <tr>
                 <td class="time">7.45</td>
                 <td class="reportName">Myoview</td>
-                <td class="batch">er√§ 15611654</td>
-                <td class="before">k√§yt. ennen 5.4.2012</td>
+                <td class="batch">er‰ 15611654</td>
+                <td class="before">k‰yt. ennen 5.4.2012</td>
                 <td></td>
             </tr>
             <tr>
                 <td></td>
                 <td>Myoview</td>
-                <td>er√§ 15611654</td>
-                <td>k√§yt. ennen 5.4.2012</td>
+                <td>er‰ 15611654</td>
+                <td>k‰yt. ennen 5.4.2012</td>
                 <td></td>
             </tr>
             <tr>
                 <td></td>
                 <td>NaCl 100 ml</td>
-                <td>er√§ OIUHTTK</td>
-                <td>k√§yt. ennen 5.7.2012</td>
+                <td>er‰ OIUHTTK</td>
+                <td>k‰yt. ennen 5.7.2012</td>
                 <td>10 ml</td>
             </tr>
             <tr>
@@ -270,7 +269,7 @@
             </tr>
             <tr>
                 <td></td>
-                <td>K√§ytett√§v√§ ennen</td>
+                <td>K‰ytett‰v‰ ennen</td>
                 <td>klo 12.45</td>
                 <td></td>
                 <td></td>

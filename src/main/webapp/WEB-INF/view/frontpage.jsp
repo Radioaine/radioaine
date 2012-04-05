@@ -1,5 +1,4 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <%@include file="headerfront.jsp" %>
 
@@ -13,7 +12,7 @@
             </td>
             <td>
                 <form method="link" action="${pageContext.servletContext.contextPath}/createRadioMedicine">
-                    <input type="submit" value="Luo radiol√§√§ke">
+                    <input type="submit" value="Luo radiol‰‰ke">
                 </form> 
             </td>
         </tr>
@@ -30,10 +29,10 @@
                 <th>Klo</th>
                 <th>Aine</th>
                 <th>Aktiivisuus</th>
-                <th>M√§√§r√§</th>
+                <th>M‰‰r‰</th>
                 <th>Sijainti</th>
-                <th>Tekij√§</th>
-                <th></th> <!--sarake lis√§ysnapille-->
+                <th>Tekij‰</th>
+                <th></th> <!--sarake lis‰ysnapille-->
             </tr>  
             <tr>
                 <td><fmt:formatDate value="${eluate.date}" pattern="HH:mm"/> </td>

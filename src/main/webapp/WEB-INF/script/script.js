@@ -54,6 +54,26 @@ function eluateAmounts(e){
     $("#selected").append(temp);
 }
 
+function generateDivs(name, value, type){
+    var temp = $('<div>').attr("id", "selection"+selectionCounter );
+    var newHTML = "";
+    if(type == "0"){
+        newHTML = "<button type=\"button\" onclick=\"removeSelection(event)\">Poista</button> &nbsp;"+name+"<input type=\"hidden\" name=\"generators\" value=\""+value+"\"\>";
+    }
+    else if(type == "1"){
+        newHTML = "<button type=\"button\" onclick=\"removeSelection(event)\">Poista</button> &nbsp;"+name+"<input type=\"hidden\" name=\"kits\" value=\""+value+"\"\>";
+    }
+    else if(type == "3"){
+        newHTML = "<button type=\"button\" onclick=\"removeSelection(event)\">Poista</button> &nbsp;"+name+"<input type=\"hidden\" name=\"eluates\" value=\""+value+"\"\>";
+    }
+    else{     
+        newHTML = "<button type=\"button\" onclick=\"removeSelection(event)\">Poista</button> &nbsp;"+name+"<input type=\"hidden\" name=\"others\" value=\""+value+"\"\>";
+    }
+    temp.html(newHTML);
+    selectionCounter++;
+    $("#selected").append(temp);
+}
+
 function removeSelection(e){
     console.log(e.target.parentNode);
     $(e.target.parentNode).remove();

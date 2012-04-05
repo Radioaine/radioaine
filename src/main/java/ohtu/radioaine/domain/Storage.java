@@ -14,7 +14,7 @@ import javax.persistence.*;
 @Entity
 public class Storage {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(nullable = false)
     private int id;
     @Column

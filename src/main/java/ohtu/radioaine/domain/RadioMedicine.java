@@ -19,7 +19,7 @@ import javax.persistence.*;
 public class RadioMedicine implements Serializable{
 
     @Id
-    @GeneratedValue(strategy = GenerationType.TABLE)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(nullable = false)
     private int id;
     @Column

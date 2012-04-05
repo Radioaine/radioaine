@@ -14,7 +14,7 @@ import javax.persistence.*;
 public class Batch implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(nullable = false)
     private int id;
     @Column(nullable = false)

@@ -1,5 +1,4 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <%@include file="headerstorage.jsp" %>
 
@@ -8,8 +7,8 @@
     <h1>Nanocollioidi</h1>
     <table id="listaus">
         <tr>
-            <th>Er√§numero</th>
-            <th>M√§√§r√§</th>
+            <th>Er‰numero</th>
+            <th>M‰‰r‰</th>
             <th>Tilavuus</th>
             <th>Vahvuus</th>
             <th>Vanhenee</th>
@@ -24,7 +23,7 @@
             <td>20</td>
             <td>23</td>
             <td>12.2.2012</td>
-            <td>Suomen l√§√§kefirma</td>
+            <td>Suomen l‰‰kefirma</td>
             <td>Tukkuliike Tuohi</td>
             <td>ok</td>
             <td> </td>
@@ -36,7 +35,7 @@
             <td>20</td>
             <td>23</td>
             <td>12.2.2012</td>
-            <td>Suomen l√§√§kefirma</td>
+            <td>Suomen l‰‰kefirma</td>
             <td>Tukkuliike Tuohi</td>
             <td>ok</td>
             <td> </td>
@@ -48,13 +47,13 @@
             <td>20</td>
             <td>23</td>
             <td>12.2.2012</td>
-            <td>Suomen l√§√§kefirma</td>
+            <td>Suomen l‰‰kefirma</td>
             <td>Tukkuliike Tuohi</td>
             <td>ok</td>
             <td> </td>
         </tr>
     </table>
     <br>
-    <button type="button">K√§yt√§ valmistukseen</button>
+    <button type="button">K‰yt‰ valmistukseen</button>
 </div>
 <%@include file="footer.jsp" %>

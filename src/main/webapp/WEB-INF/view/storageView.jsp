@@ -1,11 +1,10 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <%@include file="headerstorage.jsp" %>
 
 <div id="contents">
     <form method="link" action="addBatch">
-        <input type="submit" value="Lis√§√§ l√§hetys">
+        <input type="submit" value="Lis‰‰ l‰hetys">
     </form>
     <br/>
     <h2>Kitit</h2>
@@ -18,7 +17,7 @@
         <tr>
             <th class="amount">Lkm</th>
             <th class="substance">Tuotenimi</th>
-            <th class="oldest">K√§ytett√§v√§ ennen</th>
+            <th class="oldest">K‰ytett‰v‰ ennen</th>
             <th class="warnigs">Varoitukset</th>
         </tr>
 
@@ -45,7 +44,7 @@
         <tr>
             <th class="amount">Lkm</th>
             <th class="substance">Tuotenimi</th>
-            <th class="oldest">K√§ytett√§v√§ ennen</th>
+            <th class="oldest">K‰ytett‰v‰ ennen</th>
             <th class="warnigs">Varoitukset</th>
         </tr>
 
@@ -72,7 +71,7 @@
         <tr>
             <th class="amount">Lkm</th>
             <th class="substance">Tuotenimi</th>
-            <th class="oldest">K√§ytett√§v√§ ennen</th>
+            <th class="oldest">K‰ytett‰v‰ ennen</th>
             <th class="warnigs">Varoitukset</th>
         </tr>
 

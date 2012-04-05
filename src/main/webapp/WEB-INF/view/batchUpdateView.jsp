@@ -1,7 +1,7 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+
 <%@include file="headerstorage.jsp" %>
 <script type="text/javascript" src="<c:url value="/script/ui.datepicker-fi.js" />"></script>
 <script>
@@ -17,7 +17,7 @@
 </script>
 
 <div id="contents">
-    <h1>Er√§ ${batch.batchNumber}</h1>
+    <h1>Er‰ ${batch.batchNumber}</h1>
     <p><b>Vanhat tiedot</b></p>
     <table id="reunaton">
 
@@ -26,7 +26,7 @@
             <td>${batch.substance.name}</a></td>
         </tr>
         <tr>
-            <td>J√§ljell√§</td>
+            <td>J‰ljell‰</td>
             <td>${batch.amount}kpl</td>
         </tr>
         <tr>
@@ -61,13 +61,13 @@
                         Ok
                     </c:when>
                     <c:when test="${batch.qualityCheck==2}">
-                        Hyl√§tty
+                        Hyl‰tty
                     </c:when>
                     <c:otherwise>
                         <form style="background-color: yellow" action="${pageContext.servletContext.contextPath}/doCheck/${batch.id}+${batch.substance.id}" method="POST">
                             <select name="qualityCheck">
-                                <option value="1">Hyv√§ksytty</option>
-                                <option value="2">Hyl√§tty</option>
+                                <option value="1">Hyv‰ksytty</option>
+                                <option value="2">Hyl‰tty</option>
                             </select>
                             <input type="submit" value="Kirjaa tulos">
                         </form>
@@ -96,11 +96,11 @@
         Aine: <form:select path="substance">
                     <form:options items="${substances}" itemValue="id" itemLabel="name"/>
               </form:select><br/>
-        Er√§numero: <form:input path="batchNumber" type="text" /><form:errors path="batchNumber"/><br/>
-        <!--M√§√§r√§: <form:input path="amount" type="number"/><form:errors path="amount"/><br/>-->
+        Er‰numero: <form:input path="batchNumber" type="text" /><form:errors path="batchNumber"/><br/>
+        <!--M‰‰r‰: <form:input path="amount" type="number"/><form:errors path="amount"/><br/>-->
         Pakkauskoko: <form:input path="substanceVolume" type="number"/><form:errors path="substanceVolume"/><br/>
-        Saapumisp√§iv√§: <form:input path="arrivalDate" type="text" id="arrivalDate" value="${arrive}"/><form:errors path="arrivalDate"/><br/>
-        Vanhenemisp√§iv√§: <form:input path="expDate" type="text" id="expDate" value="${expire}"/><form:errors path="expDate"/><br/>
+        Saapumisp‰iv‰: <form:input path="arrivalDate" type="text" id="arrivalDate" value="${arrive}"/><form:errors path="arrivalDate"/><br/>
+        Vanhenemisp‰iv‰: <form:input path="expDate" type="text" id="expDate" value="${expire}"/><form:errors path="expDate"/><br/>
         <div id="varastot">
             <c:forEach var="location" items="${batch.storageLocations}" varStatus="status">
                 <c:choose>
@@ -116,7 +116,7 @@
                 </c:choose>
             </c:forEach>
         </div>
-        <button type="button" onClick="addStorage(${batch.currentStorageLocationsCount},${batch.storageLocationsCount}, ${storageNames})">Lis√§√§ varastopaikka</button><br />
+        <button type="button" onClick="addStorage(${batch.currentStorageLocationsCount},${batch.storageLocationsCount}, ${storageNames})">Lis‰‰ varastopaikka</button><br />
         Huomioita: <br /><form:textarea path="note" type="text"/><form:errors path="note"/><br/>
         Nimikirjaimet: <form:input path="signature" type="text" id="signature" size="6"/><form:errors path="signature"/><br />
         <input type="submit" value="Tallenna muutokset">

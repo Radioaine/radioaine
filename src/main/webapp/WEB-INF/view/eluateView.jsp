@@ -1,7 +1,6 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <%@include file="headerstorage.jsp" %>
 
@@ -44,13 +43,13 @@
             <td>${eluate.note}</td>
         </tr>
         <tr>
-            <td>Tekij√§</td>
+            <td>Tekij‰</td>
             <td>${eluate.signature}</td>
         </tr>
 
     </table>
     <form action="${pageContext.servletContext.contextPath}/modifyEluate/${eluate.id}" method="GET">  
-            <input type="submit" value="Muokkaa er√§n tietoja" />
+            <input type="submit" value="Muokkaa er‰n tietoja" />
     </form>
 </div>
 

@@ -34,7 +34,7 @@ public class JPARadioMedDBDao implements RadioMedDBDao {
     }
 
     @Override
-    public RadioMedicine read(int id) {
+    public RadioMedicine read(Long id) {
         return entityManager.find(RadioMedicine.class, id);
     }
 

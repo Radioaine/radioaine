@@ -16,17 +16,19 @@ public class Storage {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(nullable = false)
-    private int id;
+    private Long id;
     @Column
     private String name;
     @Column
     private boolean hidden;
+    @Column
+    private boolean inUse;
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
     
@@ -45,4 +47,13 @@ public class Storage {
     public void setHidden(boolean hidden) {
         this.hidden = hidden;
     }
+
+    public boolean isInUse() {
+        return inUse;
+    }
+
+    public void setInUse(boolean inUse) {
+        this.inUse = inUse;
+    }
+    
 }

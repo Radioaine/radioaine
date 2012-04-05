@@ -80,17 +80,23 @@
             <td>Kommentit</td>
             <td>${batch.note}</td>
         </tr>
-    </table><br />
+    </table>
     <form action="${pageContext.servletContext.contextPath}/removeFromBatch/${batch.id}" method="POST">
-        <c:forEach var="location" varStatus="i" items="${batch.storageLocations}">
-            <c:choose>
-                <c:when test="${batch.storageLocations[i.index][1] > 0}">
-                    ${storages[(batch.storageLocations[i.index][0]-1)].name}<input type="number" name="amounts" /><br />
-                </c:when>
-            </c:choose>
-        </c:forEach>
-        Poiston syy: <input type="text" name="reason" /><br />
-        Nimikirjaimet: <input type="text" name="remover" /><br />
+        <table>
+            <tr><td></td><td>Poistettava määrä</td></tr>
+            <c:forEach var="location" varStatus="i" items="${batch.storageLocations}">
+                <c:choose>
+                    <c:when test="${batch.storageLocations[i.index][1] > 0}">
+                        <tr>
+                            <td>${storages[(batch.storageLocations[i.index][0]-1)].name}</td>
+                            <td><input value="0" required pattern="[0-9]{1,3}" type="number" name="amounts" /></td><br />
+                        </tr>
+                    </c:when>
+                </c:choose>
+            </c:forEach>
+            <tr><td>Poiston syy:</td><td><input required type="text" name="reason" /></td></tr>
+            <tr><td>Nimikirjaimet:</td><td><input required type="text" name="remover" /></td></tr>
+        </table>
         <input type="submit" value="Poista" />
     </form>
 </div>

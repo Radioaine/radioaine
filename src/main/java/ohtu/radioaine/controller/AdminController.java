@@ -61,39 +61,39 @@ public class AdminController {
     }
 
     @RequestMapping(value = "addStorage", method = RequestMethod.POST)
-    public String addStorage(@Valid @ModelAttribute("storage") StorageFormObject sfo, BindingResult result) {
-        if (result.hasErrors()) {
-            return "addStoragesView";
-        }
+    public String addStorage(@RequestParam String name) {
         List<Storage> storageList = storageService.list();
         for(Storage storage : storageList)  {
             if(storage.isHidden() == true)  {
                 storage.setHidden(false);
-                storage.setName(sfo.getName());
+                storage.setName(name);
+                storage.setInUse(false);
                 storageService.createOrUpdate(storage);
                 return "redirect:/storagesView";
             }
         }
-        storageService.createOrUpdate(createStorage(sfo));
+        storageService.createOrUpdate(createStorage(name));
         return "redirect:/storagesView";
     }
 
     @RequestMapping("storagesView")
     public String storageView(Model model) {
+        setStoragesInUse();
         model.addAttribute("storages", storageService.list());
         return "storagesView";
     }
 
-    private Storage createStorage(StorageFormObject sfo) {
+    private Storage createStorage(String name) {
         Storage storage = new Storage();
-        storage.setName(sfo.getName());
+        storage.setName(name);
         storage.setHidden(false);
+        storage.setInUse(false);
 
         return storage;
     }
     
     @RequestMapping(value = "updateStorageName/{id}", method = RequestMethod.POST)
-    public String updateStorageName(@RequestParam String name, @PathVariable Integer id) {
+    public String updateStorageName(@RequestParam String name, @PathVariable Long id) {
         Storage temp = storageService.read(id);
         temp.setName(name);
         storageService.createOrUpdate(temp);
@@ -102,28 +102,39 @@ public class AdminController {
     }
     
     @RequestMapping(value = "removeStorageName/{id}", method = RequestMethod.POST)
-    public String removeStorageName(@PathVariable Integer id) {
+    public String removeStorageName(@PathVariable Long id, Model model) {
         List<Batch> batchList = batchService.list();
         List<Eluate> eluateList = eluateService.list();
         List<RadioMedicine> radioMedicineList = radioMedService.list();
+        Storage temp = storageService.read(id);
         
         //removes the storage only if it is not used in any batches, eluates or radiomedicines
         for(Batch batch : batchList)    {
-            int[][] locations = batch.getStorageLocations();
+            Long[][] locations = batch.getStorageLocations();
             for(int i=0; i < locations.length; i++) {
-                if(locations[i][0] == id)
+                if(locations[i][0] == id)   {
+                    temp.setInUse(true);
+                    storageService.createOrUpdate(temp);
                     return "redirect:/storagesView";
+                }
             }
         }
         for(Eluate eluate : eluateList)    {
-            if(eluate.getStorageLocation() == id)
+            if(eluate.getStorageLocation() == id)   {
+                temp.setInUse(true);
+                storageService.createOrUpdate(temp);
                 return "redirect:/storagesView";
+            }
         }
         for(RadioMedicine radioMedicine : radioMedicineList)    {
-            if(radioMedicine.getStorageLocation() == id)
+            if(radioMedicine.getStorageLocation() == id)    {
+                temp.setInUse(true);
+                storageService.createOrUpdate(temp);
                 return "redirect:/storagesView";
+            }
         }
-        Storage temp = storageService.read(id);
+        temp.setName("^hidden^");
+        temp.setInUse(false);
         temp.setHidden(true);
         storageService.createOrUpdate(temp);
         
@@ -132,7 +143,7 @@ public class AdminController {
 
     @RequestMapping(value = "addStatusComment/{sid}+{cid}")
     public String addStatusComment(@RequestParam String comment,
-            @PathVariable Integer sid,
+            @PathVariable Long sid,
             @PathVariable Integer cid) {
         Substance temp = (Substance) substanceService.read(sid);
         String[] comments = temp.getStatusMessages();
@@ -140,5 +151,46 @@ public class AdminController {
         temp.setStatusMessages(comments);
         substanceService.createOrUpdate(temp);
         return "redirect:/admin";
+    }
+    
+    public void setStoragesInUse() {
+        List<Batch> batchList = batchService.list();
+        List<Eluate> eluateList = eluateService.list();
+        List<RadioMedicine> radioMedicineList = radioMedService.list();
+        List<Storage> storageList = storageService.list();
+        
+        for(Storage storage : storageList)  {
+            storage.setInUse(false);
+            storageService.createOrUpdate(storage);
+        }
+        
+        for(Batch batch : batchList)    {
+            Long[][] locations = batch.getStorageLocations();
+            for(int i=0; i < locations.length; i++) {
+                if(locations[i][0] > 0 && !storageService.read(locations[i][0]).isInUse()) {
+                    Storage temp = storageService.read(locations[i][0]);
+                    temp.setInUse(true);
+                    storageService.createOrUpdate(temp);
+                }
+            }
+        }
+        for(Eluate eluate : eluateList)    {
+            if(eluate.getStorageLocation() >= 0)   {
+                if(!storageService.read(eluate.getStorageLocation()).isInUse())  {
+                    Storage temp = storageService.read(eluate.getStorageLocation());
+                    temp.setInUse(true);
+                    storageService.createOrUpdate(temp);
+                }
+            }
+        }
+        for(RadioMedicine radioMedicine : radioMedicineList)    {
+            if(radioMedicine.getStorageLocation() >= 0)   {
+                if(!storageService.read(radioMedicine.getStorageLocation()).isInUse())  {
+                    Storage temp = storageService.read(radioMedicine.getStorageLocation());
+                    temp.setInUse(true);
+                    storageService.createOrUpdate(temp);
+                }
+            }
+        }
     }
 }

@@ -37,13 +37,13 @@ public class SimpleEventService implements EventService {
 
     @Override
     @Transactional
-    public Event read(int id) {
+    public Event read(Long id) {
         return storageDao.read(id);
     }
 
     @Override
     @Transactional
-    public void delete(int id) {
+    public void delete(Long id) {
         Event e = storageDao.read(id);
         if (e != null) {
             storageDao.delete(e);

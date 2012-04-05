@@ -26,7 +26,7 @@ public class SubstanceController {
     private EventService eventService;
     
     @RequestMapping(value = "substance/{id}", method = RequestMethod.GET)
-    public String getSubstanceById(@PathVariable Integer id, Model model) {
+    public String getSubstanceById(@PathVariable Long id, Model model) {
         Substance substance = (Substance) substanceService.read(id);
         model.addAttribute("substance", substance);
         model.addAttribute("substanceBatches", batchService.listSubstanceBatches(id));
@@ -67,7 +67,7 @@ public class SubstanceController {
     public String updateSubstance(@Valid @ModelAttribute("substance") SubstanceFormObject sfm,
             BindingResult result,
             Model model,
-            @PathVariable Integer id) {
+            @PathVariable Long id) {
         Substance temp = (Substance) substanceService.read(id);
         Substance substance = new Substance();
         substance.setId(temp.getId());
@@ -85,7 +85,7 @@ public class SubstanceController {
     }
 
     @RequestMapping(value = "updateSubstance/{id}", method = RequestMethod.GET)
-    public String updateSubstanceView(Model model, @PathVariable Integer id) {
+    public String updateSubstanceView(Model model, @PathVariable Long id) {
         System.out.println(id);
         model.addAttribute("substance", substanceService.read(id));
         return "substanceUpdateView";

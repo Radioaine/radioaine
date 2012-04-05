@@ -1,5 +1,7 @@
 package ohtu.radioaine.controller;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 import ohtu.radioaine.domain.Batch;
 import ohtu.radioaine.domain.Event;
@@ -73,27 +75,29 @@ public class TestDBController {
         {"äsd123445EE", "8", "30", "0", "Jeejeee paljon huomautettavaa", "12.4.2012 08:35"},
         // {"hgfj799AADD22", "3", "10", "1", "puolet rikki", "13.2.2012 10:35"},
         {"FSHAAD175", "3", "10", "2", "1 lainassa", "13.6.2013 11:55"}};
-    
     private String[] storages = {"Alakerran kaappi", "Yläkerran kaappi", "Varastokaappi", "Hoitajien kaappi"};
 
     @RequestMapping("generateTestDB")
     public String createDB() {
+        createStorages();
         createSubstances();
         createBatches();
-        createStorages();
+
         return "redirect:/storage";
     }
-    
-    private void createStorages()   {
+
+    private void createStorages() {
         for (int i = 0; i < storages.length; i++) {
             Storage storage = new Storage();
             storage.setName(storages[i]);
+            storage.setHidden(false);
+            storage.setInUse(false);
             storageService.createOrUpdate(storage);
 //            Event event = EventHandler.newStorageEvent(storage, "test db");
 //            eventService.createOrUpdate(event);
         }
     }
-    
+
     private void createSubstances() {
         for (int i = 0; i < substances.length; i++) {
             Substance substance = new Substance();
@@ -129,9 +133,12 @@ public class TestDBController {
                 batch.setBatchNumber(batches[randomNumber][0]);
 
                 batch.setAmount(Integer.parseInt(batches[randomNumber][1]));
-                int[][] storageLocations = new int[10][2];
-                storageLocations[0][0] = 1;
-                storageLocations[0][1] = Integer.parseInt(batches[randomNumber][1]);
+                Long[][] storageLocations = new Long[10][2];
+                storageLocations[0][0] = (long) 1;
+                storageLocations[0][1] = Long.parseLong(batches[randomNumber][1]);
+                Storage storage = storageService.read((long) 1);
+                storage.setInUse(true);
+                storageService.createOrUpdate(storage);
                 batch.setStorageLocations(storageLocations);
                 batch.setArrivalDate(Time.parseTimeStamp(batches[randomNumber][5]));
                 batch.setExpDate(Time.parseTimeStamp("10.2.2012 00:00"));
@@ -139,8 +146,11 @@ public class TestDBController {
                 batch.setQualityCheck(Integer.parseInt(batches[randomNumber][3]));
                 batch.setNote(batches[randomNumber][4]);
 
-                Substance substance = (Substance) substanceService.read(i + 1);
-                if(substance.getOldestDate().compareTo(batch.getExpDate()) > 0){
+                List<Substance> substanceList = substanceList = substanceService.list();
+                int randomSubstanceNumber = generator.nextInt(substanceList.size());
+                Substance substance = substanceList.get(randomSubstanceNumber);
+                System.out.println("Substancelistan koko: " + substanceList.size());
+                if (substance.getOldestDate().compareTo(batch.getExpDate()) > 0) {
                     substance.setOldestDate(batch.getExpDate());
                     substance.setWarningDate(Time.parseWarningDate(batch.getExpDate()));
                 }

@@ -27,7 +27,7 @@
                 <tr>
                     <td class="maara">${substance.totalAmount}</td>
                     <td><a href="substance/${substance.id}">${substance.name}</a></td>
-                    <td>${substance.oldestDate}</td>
+                    <td><fmt:formatDate pattern="dd.MM.yyyy" value="${substance.oldestDate}"/></td>
                     <td></td>
                 </tr>
             </c:if>
@@ -54,7 +54,7 @@
                 <tr>                  
                     <td class="maara">${substance.totalAmount}</td>
                     <td><a href="substance/${substance.id}">${substance.name}</a></td>
-                    <td>${substance.oldestDate}</td>
+                    <td><fmt:formatDate pattern="dd.MM.yyyy" value="${substance.oldestDate}"/></td>
                     <td></td>
                 </tr>
             </c:if>
@@ -81,7 +81,7 @@
                 <tr>
                     <td class="maara">${substance.totalAmount}</td>
                     <td><a href="substance/${substance.id}">${substance.name}</a></td>
-                    <td>${substance.oldestDate}</td>
+                    <td><fmt:formatDate pattern="dd.MM.yyyy" value="${substance.oldestDate}"/></td>
                     <td></td>
                 </tr>
             </c:if>

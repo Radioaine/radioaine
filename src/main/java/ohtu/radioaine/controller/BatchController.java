@@ -46,7 +46,7 @@ public class BatchController {
     private StorageService storageService;
 
     @RequestMapping(value = "batch/{id}", method = RequestMethod.GET)
-    public String getBatchById(@PathVariable Integer id, Model model) {
+    public String getBatchById(@PathVariable Long id, Model model) {
         model.addAttribute("batch", batchService.read(id));
         model.addAttribute("storages", storageService.list());
         return "batchView";
@@ -54,8 +54,8 @@ public class BatchController {
     
 
     @RequestMapping(value = "doCheck/{id}+{sid}", method = RequestMethod.POST)
-    public String qualityCheck(@PathVariable Integer id,
-            @PathVariable Integer sid,
+    public String qualityCheck(@PathVariable Long id,
+            @PathVariable Long sid,
             @RequestParam String sig,
             @RequestParam Integer qualityCheck) {
         if (sig.length() < 2) {
@@ -90,7 +90,10 @@ public class BatchController {
         
         String names = "'"; 
         for(int i = 0; i < storageService.storageNamesList().size(); i++)   {
-            names += storageService.storageNamesList().get(i) + "^separate^";
+            if(!storageService.list().get(i).isHidden())
+                names += storageService.storageNamesList().get(i) + "^separate^";
+            else
+                names += "^hidden^^separate^";
         }
         names += "'";
         model.addAttribute("storageNames", names);
@@ -99,41 +102,39 @@ public class BatchController {
     }
     
     @RequestMapping(value = "removeFromBatch/{id}", method = RequestMethod.GET)
-    public String removeFromBatchView(@PathVariable Integer id, Model model) {
+    public String removeFromBatchView(@PathVariable Long id, Model model) {
         model.addAttribute("batch", batchService.read(id));
         model.addAttribute("storages", storageService.list());
         return "removeFromBatchView";
     }
     
     @RequestMapping(value = "removeFromBatch/{id}", method = RequestMethod.POST)
-    public String removeFromBatch(@PathVariable Integer id, @RequestParam Integer[] amounts, @RequestParam String remover, @RequestParam String reason) {
-        if(!remover.isEmpty() && !reason.isEmpty())    { 
-            System.out.println(amounts[0]);
-            Batch temp = batchService.read(id);
-            int[][] locs = temp.getStorageLocations();
-            int tempTotalAmount = 0;
-            for(int i=0; i<amounts.length;++i){
-                if(amounts[i] != null && amounts[i] > 0){
-                    System.out.println(locs[i][1]);
-                    locs[i][1] -= amounts[i];
-                    System.out.println(locs[i][1]);
-                }
-                tempTotalAmount = locs[i][1];
+    public String removeFromBatch(@PathVariable Long id, @RequestParam Integer[] amounts, @RequestParam String remover, @RequestParam String reason) {
+        Batch temp = batchService.read(id);
+        Long[][] locs = temp.getStorageLocations();
+        int tempTotalAmount = 0;
+        for(int i=0; i<amounts.length;++i){
+            if(amounts[i] != null && amounts[i] > 0 && locs[i][1] >= amounts[i])    {
+                System.out.println(locs[i][1]);
+                locs[i][1] -= amounts[i];
+                System.out.println(locs[i][1]);
             }
-            temp.setAmount(tempTotalAmount);
-            temp.setStorageLocations(locs);
-            batchService.createOrUpdate(temp);
-            Event event = EventHandler.removeFromBatchEvent(temp, remover, reason);
-            eventService.createOrUpdate(event);
-            
+            tempTotalAmount += locs[i][1];
         }
+        temp.setAmount(tempTotalAmount);
+        temp.setStorageLocations(locs);
+        batchService.createOrUpdate(temp);
+        Event event = EventHandler.removeFromBatchEvent(temp, reason, remover);
+        eventService.createOrUpdate(event);
+            
         return "redirect:/batch/" + id;
     }
     
     @RequestMapping(value = "batch", method = RequestMethod.POST)
     public String addBatch(@Valid @ModelAttribute("batch") BatchFormObject bfo, BindingResult result) {
         if (result.hasErrors()) {
-            return "addBatchView";
+            System.out.println(result);
+            return "redirect:/addBatch";
         }
         Batch batch = createBatch(bfo);
         Batch temp = batchService.read(batch.getBatchNumber(), bfo.getSubstance());
@@ -148,7 +149,7 @@ public class BatchController {
     }
 
     @RequestMapping(value = "updateBatch/{id}")
-    public String batchUpdateRequest(Model model, @PathVariable Integer id) {
+    public String batchUpdateRequest(Model model, @PathVariable Long id) {
         model.addAttribute("substances", substanceService.list());
         model.addAttribute("batch", batchService.read(id));
         model.addAttribute("storages", storageService.list());
@@ -165,7 +166,7 @@ public class BatchController {
     public String batchUpdate(@Valid @ModelAttribute("batch") BatchFormObject bfm,
             BindingResult result,
             Model model,
-            @PathVariable Integer id) {
+            @PathVariable Long id) {
 
         
         //Checks if the new total amount differs from the old total amount and if it does, the update fails
@@ -185,7 +186,7 @@ public class BatchController {
         return "redirect:/batch/" + id;
     }
 
-    private Batch updateBatch(Integer id, BatchFormObject bfo) {
+    private Batch updateBatch(Long id, BatchFormObject bfo) {
         Batch batch = batchService.read(id);
         Substance substance = batch.getSubstance();
         batch.setStorageLocations(bfo.getStorageLocations());
@@ -239,7 +240,7 @@ public class BatchController {
     }
 
     @RequestMapping(value = "batchDelete/{id}", method = RequestMethod.POST)
-    public String deleteBatch(@RequestParam String name, @RequestParam Integer amount, @PathVariable Integer id) {
+    public String deleteBatch(@RequestParam String name, @RequestParam Integer amount, @PathVariable Long id) {
         Batch batch = batchService.read(id);
         Substance substance = batch.getSubstance();
         int total = batch.getAmount() - amount;
@@ -280,7 +281,7 @@ public class BatchController {
         return batch;
     }
 
-    private Batch addToBatch(int id, BatchFormObject bfm) {
+    private Batch addToBatch(Long id, BatchFormObject bfm) {
         Batch batch = batchService.read(id);
         batch.setAmount(batch.getAmount() + bfm.getAmount());
         batch.setNote(batch.getNote() + "\n" + bfm.getNote());

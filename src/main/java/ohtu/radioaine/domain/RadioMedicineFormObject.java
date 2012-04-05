@@ -19,34 +19,34 @@ public class RadioMedicineFormObject {
     @NotNull(message = "Nimi ei saa olla tyhjä")
     private String signature;
     private String note;
-    private int storageLocation;
+    private Long storageLocation;
     private String name;
     private String preparer;
-    private int[] eluates = new int[5];
-    private int[] others = new int[5];
-    private int[] kits = new int[5];
+    private Long[] eluates = new Long[5];
+    private Long[] others = new Long[5];
+    private Long[] kits = new Long[5];
 
-    public int[] getEluates() {
+    public Long[] getEluates() {
         return eluates;
     }
 
-    public void setEluates(int[] eluates) {
+    public void setEluates(Long[] eluates) {
         this.eluates = eluates;
     }
 
-    public int[] getKits() {
+    public Long[] getKits() {
         return kits;
     }
 
-    public void setKits(int[] kits) {
+    public void setKits(Long[] kits) {
         this.kits = kits;
     }
 
-    public int[] getOthers() {
+    public Long[] getOthers() {
         return others;
     }
 
-    public void setOthers(int[] others) {
+    public void setOthers(Long[] others) {
         this.others = others;
     }
 
@@ -66,11 +66,11 @@ public class RadioMedicineFormObject {
         this.signature = signature;
     }
 
-    public int getStorageLocation() {
+    public Long getStorageLocation() {
         return storageLocation;
     }
 
-    public void setStorageLocation(int storageLocation) {
+    public void setStorageLocation(Long storageLocation) {
         this.storageLocation = storageLocation;
     }
 

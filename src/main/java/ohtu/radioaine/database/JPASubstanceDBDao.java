@@ -24,7 +24,7 @@ public class JPASubstanceDBDao implements SubstanceDBDao {
     }
 
     @Override
-    public Substance read(int id) {
+    public Substance read(Long id) {
         return entityManager.find(Substance.class, id);
     }
 

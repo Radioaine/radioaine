@@ -4,9 +4,6 @@
 <%@include file="headeradmin.jsp" %>
 
 <div id="contents">
-    <form method="link" action="${pageContext.servletContext.contextPath}/addStorage">
-        <input type="submit" value="Lisää varastopaikka">
-    </form>
     <h1>Varastopaikat</h1>
     
     <table class="noborder">
@@ -19,7 +16,7 @@
                         <form action="${pageContext.servletContext.contextPath}/updateStorageName/${i.index+1}" method="POST">
                                 <td>
                                     <div id="name${i.index+1}">${storage.name}</div>
-                                    <input name="name" id="inp${i.index+1}" style="display: none;"></input>
+                                    <input required name="name" id="inp${i.index+1}" style="display: none;"></input>
                                 </td>
                                 <td id="editButton${i.index+1}">
                                     <div id="edit${i.index+1}">
@@ -34,14 +31,20 @@
                                     <button type="button" onClick="parent.location = '/radioaine/storagesView'">Peruuta</button>
                                 </td>
                         </form>
-                        <form action="${pageContext.servletContext.contextPath}/removeStorageName/${i.index+1}" method="POST">
-                            <td>
-                                <button id="remove${i.index+1}" type="submit">Poista</button>
-                            </td>
-                        </form>
+                        <c:if test="${storage.inUse == false}">
+                            <form action="${pageContext.servletContext.contextPath}/removeStorageName/${i.index+1}" method="POST">
+                                <td>
+                                    <button id="remove${i.index+1}" type="submit">Poista</button>
+                                </td>
+                            </form>
+                        </c:if>
                     </tr>
                 </c:if>
             </c:forEach>
     </table>
+    <br />
+    <form method="link" action="${pageContext.servletContext.contextPath}/addStorage">
+        <input type="submit" value="Lisää varastopaikka">
+    </form>
 </div>
 <%@include file="footer.jsp" %>

@@ -14,9 +14,9 @@ public interface BatchDBDao extends DAO<Batch> {
     public List<Batch> list();
     public List<Batch> list(Timestamp start, Timestamp end);
 
-    public List<Batch> listSubstanceBatches(int id);
+    public List<Batch> listSubstanceBatches(Long id);
 
-    public List<Batch> getBatchesByType(int type);
+    public List<Batch> getBatchesByType(Long type);
 
-    public Batch read(String batchNumber, int substance);
+    public Batch read(String batchNumber, Long substance);
 }

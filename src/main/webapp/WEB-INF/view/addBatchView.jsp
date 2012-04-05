@@ -51,7 +51,9 @@
                     <div id="varastot">
                         <form:select  path="storageLocations[0][0]">
                             <c:forEach var="storage" items="${storages}" varStatus="i">
-                                <form:option value="${i.index+1}">${storage.name}</form:option>
+                                <c:if test="${storage.hidden == false}">
+                                    <form:option value="${i.index+1}">${storage.name}</form:option>
+                                </c:if>
                             </c:forEach>
                         </form:select> <form:input class="temp" onchange="countAmount()" id="storageAmount" path="storageLocations[0][1]" type="number" size="3"/> kpl<br/> 
                     </div>

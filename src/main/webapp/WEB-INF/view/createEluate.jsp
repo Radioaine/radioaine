@@ -62,7 +62,7 @@
             </tr>
             <tr>
                 <td>Aktiivisuus</td>
-                <td><input pattern="\d+(\.\d)?" name="strength" type="text" size="5"/>
+                <td><input required="required" pattern="\d+(\.\d)?" name="strength" type="text" size="5"/>
 
                     <form:select path="unit">
                         <option value="0">GBq</option>
@@ -73,7 +73,7 @@
             </tr>
             <tr>
                 <td>Tilavuus</td>
-                <td><form:select path="volume" type="text" class="am">
+                <td><form:select required="required" path="volume" type="text" class="am">
                         <form:option value="5"/>
                         <form:option value="10"/>
                         <form:option value="11"/>

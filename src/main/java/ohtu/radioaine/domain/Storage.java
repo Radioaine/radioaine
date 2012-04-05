@@ -14,9 +14,9 @@ import javax.persistence.*;
 @Entity
 public class Storage {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(nullable = false)
-    private int id;
+    private Long id;
     @Column
     private String name;
     @Column
@@ -24,11 +24,11 @@ public class Storage {
     @Column
     private boolean inUse;
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
     

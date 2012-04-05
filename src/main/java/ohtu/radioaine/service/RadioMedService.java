@@ -15,8 +15,8 @@ import ohtu.radioaine.domain.RadioMedicine;
 public interface RadioMedService {
     public RadioMedicine createOrUpdate(RadioMedicine radioMedicine);
     public List<RadioMedicine> list();
-    public RadioMedicine read(int id);
-    public void delete(int id);
+    public RadioMedicine read(Long id);
+    public void delete(Long id);
 
     public List<RadioMedicine> list(Timestamp startDate, Timestamp endDate);
 }

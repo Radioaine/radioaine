@@ -78,7 +78,7 @@ public class AdminController {
 
     @RequestMapping("storagesView")
     public String storageView(Model model) {
-        setStoragesInUse();
+//        setStoragesInUse();
         model.addAttribute("storages", storageService.list());
         return "storagesView";
     }
@@ -93,7 +93,7 @@ public class AdminController {
     }
     
     @RequestMapping(value = "updateStorageName/{id}", method = RequestMethod.POST)
-    public String updateStorageName(@RequestParam String name, @PathVariable Integer id) {
+    public String updateStorageName(@RequestParam String name, @PathVariable Long id) {
         Storage temp = storageService.read(id);
         temp.setName(name);
         storageService.createOrUpdate(temp);
@@ -102,7 +102,7 @@ public class AdminController {
     }
     
     @RequestMapping(value = "removeStorageName/{id}", method = RequestMethod.POST)
-    public String removeStorageName(@PathVariable Integer id, Model model) {
+    public String removeStorageName(@PathVariable Long id, Model model) {
         List<Batch> batchList = batchService.list();
         List<Eluate> eluateList = eluateService.list();
         List<RadioMedicine> radioMedicineList = radioMedService.list();
@@ -110,7 +110,7 @@ public class AdminController {
         
         //removes the storage only if it is not used in any batches, eluates or radiomedicines
         for(Batch batch : batchList)    {
-            int[][] locations = batch.getStorageLocations();
+            Long[][] locations = batch.getStorageLocations();
             for(int i=0; i < locations.length; i++) {
                 if(locations[i][0] == id)   {
                     temp.setInUse(true);
@@ -143,7 +143,7 @@ public class AdminController {
 
     @RequestMapping(value = "addStatusComment/{sid}+{cid}")
     public String addStatusComment(@RequestParam String comment,
-            @PathVariable Integer sid,
+            @PathVariable Long sid,
             @PathVariable Integer cid) {
         Substance temp = (Substance) substanceService.read(sid);
         String[] comments = temp.getStatusMessages();
@@ -165,7 +165,7 @@ public class AdminController {
         }
         
         for(Batch batch : batchList)    {
-            int[][] locations = batch.getStorageLocations();
+            Long[][] locations = batch.getStorageLocations();
             for(int i=0; i < locations.length; i++) {
                 if(locations[i][0] > 0 && !storageService.read(locations[i][0]).isInUse()) {
                     Storage temp = storageService.read(locations[i][0]);

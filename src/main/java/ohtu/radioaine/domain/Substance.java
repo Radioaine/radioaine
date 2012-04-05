@@ -14,9 +14,9 @@ import javax.persistence.*;
 public class Substance implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(nullable = false)
-    private int id;
+    private Long id;
     @Column(nullable = false)
     private String name;
     @Column(nullable = false)
@@ -119,11 +119,11 @@ public class Substance implements Serializable {
         this.ordered = ordered;
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
     
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
     

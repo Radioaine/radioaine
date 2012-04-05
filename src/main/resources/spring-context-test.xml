@@ -20,7 +20,7 @@
     <!-- DispatcherServletin (front-controllerin) konfiguraatio, jolla määritellään pyynnön kulku. -->
  
     <!-- Sovelluksemme lähdekooditiedostot sijaitsevat pakkauksessa ohtu tai sen alipakkauksissa-->
-    <context:component-scan base-package="ohtu" />
+    <context:component-scan base-package="ohtu.radioaine" />
 
     <!-- Käytetään Spring MVC:tä annotaatioiden avulla -->
     <mvc:annotation-driven /> 

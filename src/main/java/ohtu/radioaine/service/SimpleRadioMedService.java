@@ -36,13 +36,13 @@ public class SimpleRadioMedService implements RadioMedService {
 
     @Override
     @Transactional
-    public RadioMedicine read(int id) {
+    public RadioMedicine read(Long id) {
         return storageDao.read(id);
     }
 
     @Override
     @Transactional
-    public void delete(int id) {
+    public void delete(Long id) {
         RadioMedicine e = storageDao.read(id);
         if (e != null) {
             storageDao.delete(e);

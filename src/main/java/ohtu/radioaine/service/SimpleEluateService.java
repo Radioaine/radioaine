@@ -36,13 +36,13 @@ public class SimpleEluateService implements EluateService {
 
     @Override
     @Transactional
-    public Eluate read(int id) {
+    public Eluate read(Long id) {
         return storageDao.read(id);
     }
 
     @Override
     @Transactional
-    public void delete(int id) {
+    public void delete(Long id) {
         Eluate e = storageDao.read(id);
         if (e != null) {
             storageDao.delete(e);

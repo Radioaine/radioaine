@@ -14,9 +14,9 @@ import javax.persistence.*;
 public class Eluate implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.TABLE)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(nullable = false)
-    private int id;
+    private Long id;
     @Column
     private double strength;
     @Column
@@ -30,7 +30,7 @@ public class Eluate implements Serializable {
     @Column
     private String note;
     @Column
-    private int storageLocation;
+    private Long storageLocation;
     @OneToMany
     @JoinColumn(name = "ELUATE_GENERATORS")
     private List<Batch> generators;
@@ -65,11 +65,11 @@ public class Eluate implements Serializable {
         this.signature = signature;
     }
 
-    public int getStorageLocation() {
+    public Long getStorageLocation() {
         return storageLocation;
     }
 
-    public void setStorageLocation(int storageLocation) {
+    public void setStorageLocation(Long storageLocation) {
         this.storageLocation = storageLocation;
     }
 
@@ -113,11 +113,11 @@ public class Eluate implements Serializable {
         this.note = note;
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

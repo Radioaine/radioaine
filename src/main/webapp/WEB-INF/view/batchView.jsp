@@ -1,12 +1,11 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <%@include file="headerstorage.jsp" %>
 
 <div id="contents">
-    <h1>Er√§ ${batch.batchNumber}</h1>
+    <h1>Er‰ ${batch.batchNumber}</h1>
 
     <table id="reunaton">
 
@@ -15,7 +14,7 @@
             <td>${batch.substance.name}</a></td>
         </tr>
         <tr>
-            <td>J√§ljell√§</td>
+            <td>J‰ljell‰</td>
             <td>${batch.amount}kpl</td>
         </tr>
         <tr>
@@ -47,16 +46,16 @@
             <td id="qualityCheck">
                 <c:choose>
                     <c:when test="${batch.qualityCheck==1}">
-                        Hyv√§ksytty
+                        Hyv‰ksytty
                     </c:when>
                     <c:when test="${batch.qualityCheck==2}">
-                        <p style="background-color: red">Hyl√§tty</p>
+                        <p style="background-color: red">Hyl‰tty</p>
                     </c:when>
                     <c:otherwise>
                         <form style="background-color: yellow" action="${pageContext.servletContext.contextPath}/doCheck/${batch.id}+0" method="POST">
                             <select name="qualityCheck">
-                                <option value="1">Hyv√§ksytty</option>
-                                <option value="2">Hyl√§tty</option>
+                                <option value="1">Hyv‰ksytty</option>
+                                <option value="2">Hyl‰tty</option>
                             </select>
                             <input type="text" name="sig" size="3" />
                             <input type="submit" value="Kirjaa tulos" />
@@ -88,18 +87,18 @@
         <tr>
             <th> </th>
             <th>Tapahtuma</th>
-            <th>Tekij√§</th>
+            <th>Tekij‰</th>
             <th>Tietoja</th>
         </tr>
         <tr>
             <td>v</td>
-            <td>Siirretty J√§√§kaappiin 1 2kpl</td>
+            <td>Siirretty J‰‰kaappiin 1 2kpl</td>
             <td> </td>
             <td> </td>
         <tr>
         <tr>
             <td>v</td>
-            <td>Siirretty J√§√§kaappiin J√§√§kaappi 2 kpl</td>
+            <td>Siirretty J‰‰kaappiin J‰‰kaappi 2 kpl</td>
             <td> </td>
             <td> </td>
         <tr>
@@ -119,11 +118,11 @@
     <br />
     <div id="batchButtons">
         <form action="${pageContext.servletContext.contextPath}/updateBatch/${batch.id}" method="POST">  
-            <input type="submit" value="Muokkaa er√§n tietoja" />
+            <input type="submit" value="Muokkaa er‰n tietoja" />
         </form>
 
         <form action="${pageContext.servletContext.contextPath}/removeFromBatch/${batch.id}">  
-            <input type="submit" value="Poista er√§st√§" />
+            <input type="submit" value="Poista er‰st‰" />
         </form>      
     </div>
 </div>

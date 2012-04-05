@@ -149,6 +149,14 @@ td.center {
     width: 300px;
 }
 
+.substanceFirst {
+    width: 250px;
+}
+
+.substanceSecond {
+    width: 280px;
+}
+
 tr.blue td {
     background-color: #BAC7FF;
 }

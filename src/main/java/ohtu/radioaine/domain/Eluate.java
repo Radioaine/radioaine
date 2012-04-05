@@ -155,7 +155,14 @@ public class Eluate implements Serializable {
 
     @Override
     public String toString() {
-        return "Eluate{" + "id=" + id + ", strength=" + strength + ", unit=" + unit + ", volume=" + volume + ", date=" + date + ", signature=" + signature + ", note=" + note + ", storageLocation=" + storageLocation + ", generators=" + generators + ", others=" + others + '}';
+        String batchIDs = "";
+        for(Batch gen : generators){
+            batchIDs += ";"+gen.getId();
+        }
+        for(Batch oth : others){
+            batchIDs += ";"+oth.getId();
+        }
+        return "Eluate{" + "id=" + id + ", strength=" + strength + ", unit=" + unit + ", volume=" + volume + ", date=" + date + ", signature=" + signature + ", note=" + note + ", storageLocation=" + storageLocation + ", batches=" + batchIDs + '}';
     }
     
 }

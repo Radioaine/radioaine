@@ -1,7 +1,6 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <%@include file="headerfront.jsp" %>
 <script>
@@ -19,7 +18,7 @@
 </script>
 
 <div id="contents">
-    <h2>Uusi radiol√§√§ke</h2>
+    <h2>Uusi radiol‰‰ke</h2>
     <br/>
     <form:form commandName="radioMedicine" action="createRadioMedicine" method="POST">
         <!--<table style="float: right;">
@@ -35,7 +34,7 @@
                 <td>
                     <select multiple="multiple" class="list" >
                         <c:forEach var="eluate" items="${eluates}">
-                            <option id="3" onclick="eluateAmounts(event)" value="${eluate.id}">Klo <fmt:formatDate value="${eluate.date}" pattern="hh.mm"/>, TODO Eluaatin nimi, Aktiivisuus ${eluate.strength}, Sijainti TODO${eluate.storageLocation}, Tekij√§ ${eluate.signature}</option>
+                            <option id="3" onclick="eluateAmounts(event)" value="${eluate.id}">Klo <fmt:formatDate value="${eluate.date}" pattern="hh.mm"/>, TODO Eluaatin nimi, Aktiivisuus ${eluate.strength}, Sijainti TODO${eluate.storageLocation}, Tekij‰ ${eluate.signature}</option>
                         </c:forEach>
                     </select>
                 </td>
@@ -44,8 +43,8 @@
                 <td>Kitti</td>
                 <td><select multiple="multiple" class="list">
                         <c:forEach var="kit" items="${kits}">
-                            <option id="1" onclick="eluateAmounts(event)" value="${kit.id}">${kit.substance.name}, Er√§ 
-                                ${kit.batchNumber}, K√§yt. ennen <fmt:formatDate value="${kit.expDate}" pattern="dd.MM.yyyy"/>, TODO Sijainti</option>
+                            <option id="1" onclick="eluateAmounts(event)" value="${kit.id}">${kit.substance.name}, Er‰ 
+                                ${kit.batchNumber}, K‰yt. ennen <fmt:formatDate value="${kit.expDate}" pattern="dd.MM.yyyy"/>, TODO Sijainti</option>
                         </c:forEach>
                     </select>
                 </td>
@@ -54,8 +53,8 @@
                 <td>Muu</td>
                 <td><select multiple="multiple" class="list" >
                         <c:forEach var="other" items="${others}">
-                            <option id="2" onclick="eluateAmounts(event)" value="${other.id}">${other.substance.name}, Er√§
-                                ${other.batchNumber}, K√§yt. ennen <fmt:formatDate value="${other.expDate}" pattern="dd.MM.yyyy"/>, TODO Sijainti</option>
+                            <option id="2" onclick="eluateAmounts(event)" value="${other.id}">${other.substance.name}, Er‰
+                                ${other.batchNumber}, K‰yt. ennen <fmt:formatDate value="${other.expDate}" pattern="dd.MM.yyyy"/>, TODO Sijainti</option>
                             </c:forEach>
                     </select>
                 <td>

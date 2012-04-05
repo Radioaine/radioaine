@@ -1,15 +1,12 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <%@include file="headeradmin.jsp" %>
 
-<!--KESKEN!-->
-
-<!--T√§h√§n pit√§√§ jotenkin tuoda tieto siit√§, mink√§ tyyppisen aineen lis√§ys on valittu-->
+<!--T‰h‰n pit‰‰ jotenkin tuoda tieto siit‰, mink‰ tyyppisen aineen lis‰ys on valittu-->
 
 <div id="contents">
-    <h2>Lis√§√§ <c:choose>
+    <h2>Lis‰‰ <c:choose>
                     <c:when test="${substance.type=='0'}">
                         kitti
                     </c:when>
@@ -26,7 +23,7 @@
         
         <table class="noborder">
             <tr>
-                <td>Tuotenimi</td>
+                <td class="substanceFirst">Tuotenimi</td>
                 <td><form:input path="name" type="text" class="substance"/><form:errors path="name"/></td>
             </tr>
             <tr>
@@ -41,9 +38,9 @@
                         <option value="2">Muu</option>
                     </select></td>
             </tr>-->
-            <c:if test="${substance.type=='1'}"> <!--T√§m√§ tarvitaan vain, jos tyyppi on generaattori-->
+            <c:if test="${substance.type=='1'}"> <!--T‰m‰ tarvitaan vain, jos tyyppi on generaattori-->
                 <tr>
-                    <td>Valmistettava eluaatti</td> <!--T√§m√§ vain jos tyyppi on generaattori-->
+                    <td>Valmistettava eluaatti</td>
                     <td><input id="genericName" name="genericName" type="text" value="TODO" class="substance"/></td>
                 </tr>
             </c:if>
@@ -63,24 +60,24 @@
                 <td>Vahvuus</td>
                 <td><input path="strength" type="text" value="TODO" class="substance"/></td>
             </tr>
-            <c:if test="${substance.type=='1'}"><!--T√§m√§ tarvitaan vain, jos tyyppi on generaattori-->
+            <c:if test="${substance.type=='1'}"><!--T‰m‰ tarvitaan vain, jos tyyppi on generaattori-->
                 <tr>
                     <td>Puoliintumisaika</td>
                     <td><form:input path="halflife" type="text" size="2"/><form:errors path="halflife"/> tuntia</td>
                 </tr>
             </c:if>
             <!--<tr>
-                <td>S√§ilytett√§v√§ kylm√§ss√§</td>
+                <td>S‰ilytett‰v‰ kylm‰ss‰</td>
                 <td><select path="needsColdStorage" class="substance">
-                        <option value="1" selected="selected">Kyll√§</option>
+                        <option value="1" selected="selected">Kyll‰</option>
                         <option value="0">Ei</option>
                     </select></td>
             </tr>
             <tr>
-                <td>K√§ytt√∂tapa</td>
+                <td>K‰yttˆtapa</td>
                 <td><select id="usage" name="usage" class="substance">
                         <option value="0" selected="selected">Kerralla</option>
-                        <option value="1">Saman p√§iv√§n aikana</option>
+                        <option value="1">Saman p‰iv‰n aikana</option>
                         <option value="2">Poistettava erikseen</option>
                     </select></td>
             </tr>-->
@@ -93,16 +90,16 @@
             </tr>
             <tr>
                 <td>Huomautus vanhenemisesta</td>
-                <td><form:input path="alertLimit1" type="number"/><form:errors path="alertLimit1"/> p√§iv√§√§ ennen viimeist√§ k√§ytt√∂p√§iv√§√§</td>
+                <td><form:input path="alertLimit1" type="number"/><form:errors path="alertLimit1"/> p‰iv‰‰ ennen viimeist‰ k‰yttˆp‰iv‰‰</td>
             </tr>
             <tr>
-                <td>Huomautus m√§√§r√§st√§, kun</td>
-                <td><form:input path="alertLimit2" type="number"/><form:errors path="alertLimit2"/> yksikk√∂√§ j√§ljell√§</td>
+                <td>Huomautus m‰‰r‰st‰, kun</td>
+                <td><form:input path="alertLimit2" type="number"/><form:errors path="alertLimit2"/> yksikkˆ‰ j‰ljell‰</td>
             </tr>
         </table>
         
             <br />
-        <input type="submit" value="Lis√§√§">&nbsp; &nbsp;
+        <input type="submit" value="Lis‰‰">&nbsp; &nbsp;
         <input type="button" value="Peruuta" onClick="parent.location = '${pageContext.servletContext.contextPath}/substanceView'" />
 
     </form:form>  

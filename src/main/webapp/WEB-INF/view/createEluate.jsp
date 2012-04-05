@@ -1,7 +1,6 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <%@include file="headerfront.jsp" %>
 <script type="text/javascript" src="<c:url value="/script/ui.datepicker-fi.js" />"></script>
@@ -22,8 +21,8 @@
                 <td class="name">Generaattori</td>
                 <td><select multiple="multiple" class="list">
                         <c:forEach var="generator" items="${generators}">
-                            <option id="0" onclick="eluateAmounts(event)"  value="${generator.id}">${generator.substance.name}, Er√§ 
-                                ${generator.batchNumber}, K√§yt. ennen <fmt:formatDate value="${generator.expDate}" pattern="dd.MM.yyyy"/>, TODO Sijainti</option>
+                            <option id="0" onclick="eluateAmounts(event)"  value="${generator.id}">${generator.substance.name}, Er‰ 
+                                ${generator.batchNumber}, K‰yt. ennen <fmt:formatDate value="${generator.expDate}" pattern="dd.MM.yyyy"/>, TODO Sijainti</option>
                         </c:forEach>
                             
                     </select>
@@ -98,7 +97,7 @@
             </tr>
             <tr>
 
-                <td>Nimikirjaimet:</td>
+                <td>Nimikirjaimet</td>
                 <td><input required name="signature" type="text" id="signature" size="6"/></td>
 
             </tr>

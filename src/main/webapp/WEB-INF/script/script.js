@@ -10,7 +10,8 @@ function addStorage(usedStorageLocationsCount, storageLocationsCount, names){
     
     var newHTML = "<select name=\"storageLocations["+(storageCounter-1)+"][0]\">";
     for(var i = 0; i < (p.length-1); i++)  {
-        newHTML += "<option value=\""+(i+1)+"\">"+ p[i] +"</option>";
+        if(p[i] != "^hidden^")
+            newHTML += "<option value=\""+(i+1)+"\">"+ p[i] +"</option>";
     }
     newHTML += "</select> <input class=\"temp\" onchange=\"countAmount()\" value=\"0\" id=\"storageAmount\" type=\"number\" size=\"3\" name=\"storageLocations["+(storageCounter-1)+"][1] \"> kpl &nbsp; <button type=\"button\" onClick=\"removeStorage("+storageCounter+")\">Poista</button>";
     var temp = $('<div>').attr("id", "varasto"+storageCounter );

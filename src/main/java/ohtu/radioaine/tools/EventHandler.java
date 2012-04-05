@@ -5,6 +5,7 @@
 package ohtu.radioaine.tools;
 
 import ohtu.radioaine.domain.Batch;
+import ohtu.radioaine.domain.Eluate;
 import ohtu.radioaine.domain.Event;
 import ohtu.radioaine.domain.Substance;
 import ohtu.radioaine.service.EventService;
@@ -69,5 +70,19 @@ public class EventHandler {
         event.setSignature(sig);
         event.setInfo("type=newSubstance "+substance.toString());
         return event;
-    }  
+    }
+    
+    public static Event newEluateEvent(Eluate eluate, String sig){
+        Event event = new Event();
+        event.setSignature(sig);
+        event.setInfo("type=newEluate "+eluate.toString());
+        return event;
+    }
+    
+    public static Event updateEluateEvent(Eluate eluate, String sig){
+        Event event = new Event();
+        event.setSignature(sig);
+        event.setInfo("type=updateEluate "+eluate.toString());
+        return event;
+    }
 }

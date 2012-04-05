@@ -99,9 +99,7 @@
                 <td>Varastopaikka</td>
                 <td><form:select  path="storageLocation">
                         <c:forEach var="storage" items="${storages}" varStatus="i">
-                            <c:if test="${storage.hidden == false}">
-                                <form:option value="${i.index+1}">${storage.name}</form:option>
-                            </c:if>
+                            <form:option value="${i.index+1}">${storage.name}</form:option>
                         </c:forEach>
                     </form:select></td>
             </tr>
@@ -116,8 +114,8 @@
         </table>
         <br/>
         
-        <input type="submit" value="Tallenna">&nbsp; &nbsp;
-        <input type="button" value="Peruuta" onClick="parent.location = '${pageContext.servletContext.contextPath}/frontpage'" />
+        <td><input type="submit" value="Tallenna"></td>&nbsp; &nbsp;
+        <td><input type="button" value="Peruuta" onClick="parent.location = '${pageContext.servletContext.contextPath}/frontpage'" /></td>
         
     </form:form>
 </div>

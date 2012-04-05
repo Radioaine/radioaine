@@ -3,11 +3,9 @@ package ohtu.radioaine.controller;
 import java.util.ArrayList;
 import java.util.List;
 import javax.validation.Valid;
-import ohtu.radioaine.domain.Batch;
-import ohtu.radioaine.domain.Eluate;
-import ohtu.radioaine.domain.EluateFormObject;
-import ohtu.radioaine.domain.Substance;
+import ohtu.radioaine.domain.*;
 import ohtu.radioaine.service.*;
+import ohtu.radioaine.tools.EventHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -72,6 +70,8 @@ public class EluateController {
             return "createEluate";
         }
         Eluate newEluate = eluateService.createOrUpdate(createEluate(efo));
+        Event event = EventHandler.newEluateEvent(newEluate, efo.getSignature());
+        eventService.createOrUpdate(event);
         return "redirect:/frontpage";
     }
     
@@ -93,7 +93,7 @@ public class EluateController {
             System.out.println(result);
             return "createEluate";
         }
-        updateEluate(id, efo);
+        updateEluate(id, efo);       
         return "redirect:/frontpage";
     }
 
@@ -151,7 +151,6 @@ public class EluateController {
         eluate.setUnit(efo.getUnit());
         eluate.setVolume(efo.getVolume());
         eluate.setTimestamp(Time.parseTimeStamp(efo.getDate() + " " + efo.getHours() + ":" + efo.getMinutes()));
-        eluate.setSignature(efo.getSignature());
         eluate.setNote(efo.getNote());
         eluate.setStorageLocation(efo.getStorageLocation());
 
@@ -170,5 +169,7 @@ public class EluateController {
         eluate.setGenerators(generators);
         eluate.setOthers(others);
         eluateService.createOrUpdate(eluate);
+        Event event = EventHandler.updateEluateEvent(eluate, efo.getSignature());
+        eventService.createOrUpdate(event);
     }
 }

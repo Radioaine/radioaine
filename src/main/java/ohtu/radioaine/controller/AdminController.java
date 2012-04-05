@@ -133,6 +133,7 @@ public class AdminController {
                 return "redirect:/storagesView";
             }
         }
+        temp.setName("^hidden^");
         temp.setInUse(false);
         temp.setHidden(true);
         storageService.createOrUpdate(temp);

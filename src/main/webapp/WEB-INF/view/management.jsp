@@ -4,8 +4,8 @@
 <%@include file="headeradmin.jsp" %>
 <div id="contents">
     
-    <a href="<c:out value="${pageContext.servletContext.contextPath}" />/addSubstance">Lisää uusi lääkeaine</a><br />
-    <a href="<c:out value="${pageContext.servletContext.contextPath}" />/addStorageLocation">Lisää uusi varastopaikka</a><br />
+    <a href="<c:out value="${pageContext.servletContext.contextPath}" />/substanceView">Hallitse lääkeaineita</a><br />
+    <a href="<c:out value="${pageContext.servletContext.contextPath}" />/storagesView">Hallitse varastopaikkoja</a><br />
     
 </div>
 <%@include file="footer.jsp" %>

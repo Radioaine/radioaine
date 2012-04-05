@@ -17,7 +17,14 @@
 
 <div id="contents">
     <h2>Eluuatin muokkaus</h2>
-
+    <c:forEach var="gene" items="${eluate.generators}">
+               ${gene.substance.name}, ${gene.batchNumber}
+    </c:forEach>
+    <br />
+    <br />
+    <c:forEach var="oth" items="${eluate.others}">
+               ${oth}
+    </c:forEach>
     <form:form commandName="eluateForm" action="modifyEluate/${eluate.id}" method="POST">
         <table style="float: right;">
             <th>Valitut</th>

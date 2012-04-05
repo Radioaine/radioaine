@@ -31,7 +31,7 @@ public class SimpleSubstanceService implements SubstanceService<Substance> {
 
     @Override
     @Transactional
-    public void delete(int esineId) {
+    public void delete(Long esineId) {
         Substance e = storageDao.read(esineId);
         if (e != null) {
             storageDao.delete(e);
@@ -40,7 +40,7 @@ public class SimpleSubstanceService implements SubstanceService<Substance> {
     
     @Override
     @Transactional(readOnly = true)
-    public Substance read(int id) {
+    public Substance read(Long id) {
         return storageDao.read(id);
     }
     

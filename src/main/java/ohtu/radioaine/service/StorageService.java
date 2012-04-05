@@ -17,9 +17,9 @@ public interface StorageService {
 
     public List<Storage> list();
 
-    public Storage read(int id);
+    public Storage read(Long id);
 
-    public void delete(int id);
+    public void delete(Long id);
     
     public List<String> storageNamesList();
 

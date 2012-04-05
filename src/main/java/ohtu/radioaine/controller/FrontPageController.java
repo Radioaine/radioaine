@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class FrontPageController {
 
-    int GENERATOR = 1;
+    long GENERATOR = 1;
     @Autowired
     private EluateService eluateService;
     @Autowired

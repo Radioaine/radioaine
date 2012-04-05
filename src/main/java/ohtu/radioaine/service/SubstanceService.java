@@ -4,8 +4,8 @@ import java.util.List;
 
 public interface SubstanceService<Substance> {
     public Substance createOrUpdate(Substance esine);
-    public Substance read(int id);
+    public Substance read(Long id);
     public List<Substance> list();
-    public void delete(int esineId);
+    public void delete(Long esineId);
     public List<Substance> listSpecificType(String type);
 }

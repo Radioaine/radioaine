@@ -14,9 +14,9 @@ import javax.persistence.*;
 public class Batch implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(nullable = false)
-    private int id;
+    private Long id;
     @Column(nullable = false)
     private String batchNumber;
     private int amount;
@@ -35,7 +35,7 @@ public class Batch implements Serializable {
     private String supplier;
     private String note;
     private int storageLocationsCount = 100;
-    private int[][] storageLocations = new int[storageLocationsCount][2];
+    private Long[][] storageLocations = new Long[storageLocationsCount][2];
     private int status;
     
 //    @ManyToOne
@@ -73,11 +73,11 @@ public class Batch implements Serializable {
         this.signature = signature;
     }
 
-    public int[][] getStorageLocations() {
+    public Long[][] getStorageLocations() {
         return storageLocations;
     }
 
-    public void setStorageLocations(int[][] storageLocations) {
+    public void setStorageLocations(Long[][] storageLocations) {
         this.storageLocations = storageLocations;
     }
 
@@ -133,11 +133,11 @@ public class Batch implements Serializable {
         return batchNumber;
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

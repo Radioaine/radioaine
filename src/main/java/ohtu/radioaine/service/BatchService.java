@@ -16,13 +16,13 @@ public interface BatchService {
     public List<Batch> list();
     public List<Batch> list(Timestamp start, Timestamp end);
 
-    public Batch read(int id);
+    public Batch read(Long id);
 
-    public void delete(int id);
+    public void delete(Long id);
 
-    public List<Batch> listSubstanceBatches(int id);
+    public List<Batch> listSubstanceBatches(Long id);
 
-    public Batch read(String batchNumber, int substance);
+    public Batch read(String batchNumber, Long substance);
 
-    public List<Batch> getBatchesByType(int type);
+    public List<Batch> getBatchesByType(Long type);
 }

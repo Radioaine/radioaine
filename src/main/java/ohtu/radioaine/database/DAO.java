@@ -10,7 +10,7 @@ public interface DAO<T> {
 
     public T createOrUpdate(T instance);
 
-    public T read(int id);
+    public T read(Long id);
 
     public void delete(T instance);
 

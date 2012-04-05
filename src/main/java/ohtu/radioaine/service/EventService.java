@@ -19,7 +19,7 @@ public interface EventService {
     public List<Event> list(String name);
     public List<Event>listArrived(Timestamp start, Timestamp end);
     public List<Event> listRemoved(Timestamp startDate, Timestamp endDate);
-    public Event read(int id);
-    public void delete(int eventId);
+    public Event read(Long id);
+    public void delete(Long eventId);
     
 }

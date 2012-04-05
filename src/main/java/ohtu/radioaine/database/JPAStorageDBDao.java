@@ -26,7 +26,7 @@ public class JPAStorageDBDao implements StorageDBDao    {
     }
 
     @Override
-    public Storage read(int id) {
+    public Storage read(Long id) {
         return entityManager.find(Storage.class, id);
     }
 

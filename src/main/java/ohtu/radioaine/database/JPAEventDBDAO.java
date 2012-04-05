@@ -41,7 +41,7 @@ public class JPAEventDBDAO implements EventDBDao {
     }
 
     @Override
-    public Event read(int id) {
+    public Event read(Long id) {
         return entityManager.find(Event.class, id);
     }
 

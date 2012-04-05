@@ -46,7 +46,7 @@ public class BatchController {
     private StorageService storageService;
 
     @RequestMapping(value = "batch/{id}", method = RequestMethod.GET)
-    public String getBatchById(@PathVariable Integer id, Model model) {
+    public String getBatchById(@PathVariable Long id, Model model) {
         model.addAttribute("batch", batchService.read(id));
         model.addAttribute("storages", storageService.list());
         return "batchView";
@@ -54,8 +54,8 @@ public class BatchController {
     
 
     @RequestMapping(value = "doCheck/{id}+{sid}", method = RequestMethod.POST)
-    public String qualityCheck(@PathVariable Integer id,
-            @PathVariable Integer sid,
+    public String qualityCheck(@PathVariable Long id,
+            @PathVariable Long sid,
             @RequestParam String sig,
             @RequestParam Integer qualityCheck) {
         if (sig.length() < 2) {
@@ -102,16 +102,16 @@ public class BatchController {
     }
     
     @RequestMapping(value = "removeFromBatch/{id}", method = RequestMethod.GET)
-    public String removeFromBatchView(@PathVariable Integer id, Model model) {
+    public String removeFromBatchView(@PathVariable Long id, Model model) {
         model.addAttribute("batch", batchService.read(id));
         model.addAttribute("storages", storageService.list());
         return "removeFromBatchView";
     }
     
     @RequestMapping(value = "removeFromBatch/{id}", method = RequestMethod.POST)
-    public String removeFromBatch(@PathVariable Integer id, @RequestParam Integer[] amounts, @RequestParam String remover, @RequestParam String reason) {
+    public String removeFromBatch(@PathVariable Long id, @RequestParam Integer[] amounts, @RequestParam String remover, @RequestParam String reason) {
         Batch temp = batchService.read(id);
-        int[][] locs = temp.getStorageLocations();
+        Long[][] locs = temp.getStorageLocations();
         int tempTotalAmount = 0;
         for(int i=0; i<amounts.length;++i){
             if(amounts[i] != null && amounts[i] > 0 && locs[i][1] >= amounts[i])    {
@@ -149,7 +149,7 @@ public class BatchController {
     }
 
     @RequestMapping(value = "updateBatch/{id}")
-    public String batchUpdateRequest(Model model, @PathVariable Integer id) {
+    public String batchUpdateRequest(Model model, @PathVariable Long id) {
         model.addAttribute("substances", substanceService.list());
         model.addAttribute("batch", batchService.read(id));
         model.addAttribute("storages", storageService.list());
@@ -166,7 +166,7 @@ public class BatchController {
     public String batchUpdate(@Valid @ModelAttribute("batch") BatchFormObject bfm,
             BindingResult result,
             Model model,
-            @PathVariable Integer id) {
+            @PathVariable Long id) {
 
         
         //Checks if the new total amount differs from the old total amount and if it does, the update fails
@@ -186,7 +186,7 @@ public class BatchController {
         return "redirect:/batch/" + id;
     }
 
-    private Batch updateBatch(Integer id, BatchFormObject bfo) {
+    private Batch updateBatch(Long id, BatchFormObject bfo) {
         Batch batch = batchService.read(id);
         Substance substance = batch.getSubstance();
         batch.setStorageLocations(bfo.getStorageLocations());
@@ -240,7 +240,7 @@ public class BatchController {
     }
 
     @RequestMapping(value = "batchDelete/{id}", method = RequestMethod.POST)
-    public String deleteBatch(@RequestParam String name, @RequestParam Integer amount, @PathVariable Integer id) {
+    public String deleteBatch(@RequestParam String name, @RequestParam Integer amount, @PathVariable Long id) {
         Batch batch = batchService.read(id);
         Substance substance = batch.getSubstance();
         int total = batch.getAmount() - amount;
@@ -281,7 +281,7 @@ public class BatchController {
         return batch;
     }
 
-    private Batch addToBatch(int id, BatchFormObject bfm) {
+    private Batch addToBatch(Long id, BatchFormObject bfm) {
         Batch batch = batchService.read(id);
         batch.setAmount(batch.getAmount() + bfm.getAmount());
         batch.setNote(batch.getNote() + "\n" + bfm.getNote());

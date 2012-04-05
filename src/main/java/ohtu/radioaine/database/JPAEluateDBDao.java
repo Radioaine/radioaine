@@ -27,7 +27,7 @@ public class JPAEluateDBDao implements EluateDBDao {
     }
 
     @Override
-    public Eluate read(int id) {
+    public Eluate read(Long id) {
         return entityManager.find(Eluate.class, id);
     }
 

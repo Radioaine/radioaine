@@ -90,7 +90,10 @@ public class BatchController {
         
         String names = "'"; 
         for(int i = 0; i < storageService.storageNamesList().size(); i++)   {
-            names += storageService.storageNamesList().get(i) + "^separate^";
+            if(!storageService.list().get(i).isHidden())
+                names += storageService.storageNamesList().get(i) + "^separate^";
+            else
+                names += "^hidden^^separate^";
         }
         names += "'";
         model.addAttribute("storageNames", names);

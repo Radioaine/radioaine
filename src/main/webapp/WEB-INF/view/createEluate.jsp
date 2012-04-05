@@ -49,17 +49,17 @@
             </tr>
             <tr>
                 <td>Eluointiaika:</td>
-                <td><form:input path="hours" type="text" id="hours" value="${hours}" size="2"/><form:errors path="hours"/>:<form:input
-                        path="minutes" type="text" id="minutes" size="2" value="${minutes}"/><form:errors path="minutes"/>
-                    <form:input path="date" type="text" id="eluatingtime" value="${date}"/><form:errors path="date"/></td>
+                <td><input required name="hours" type="text" id="hours" value="${hours}" size="2"/>:<input
+                        required name="minutes" type="text" id="minutes" size="2" value="${minutes}"/>
+                    <input required name="date" type="text" id="eluatingtime" value="${date}"/></td>
             </tr>
             <tr>
                 <td>Aktiivisuus:</td>
-                <td><form:input path="strength" type="text"/><form:errors path="strength"/>
+                <td><input pattern="\d+(\.\d)?" name="strength" type="text"/>
                     <form:select path="unit">
-                <option value="0">GBq</option>
-                <option value="1">MBq</option>
-            </form:select>
+                        <option value="0">GBq</option>
+                        <option value="1">MBq</option>
+                    </form:select>
 
             </td>
             </tr>
@@ -86,7 +86,7 @@
             </tr>
             <tr>
                 <td>Nimikirjaimet:</td>
-                <td><form:input path="signature" type="text" id="signature"/><form:errors path="signature"/></td>
+                <td><input required name="signature" type="text" id="signature"/></td>
             </tr>
             <tr>
                 <td><input type="submit" value="Tallenna"></td>

@@ -130,7 +130,8 @@ public class BatchController {
     @RequestMapping(value = "batch", method = RequestMethod.POST)
     public String addBatch(@Valid @ModelAttribute("batch") BatchFormObject bfo, BindingResult result) {
         if (result.hasErrors()) {
-            return "addBatchView";
+            System.out.println(result);
+            return "redirect:/addBatch";
         }
         Batch batch = createBatch(bfo);
         Batch temp = batchService.read(batch.getBatchNumber(), bfo.getSubstance());

@@ -97,7 +97,7 @@
             </tr>
             <tr>
 
-                <td>Nimikirjaimet:</td>
+                <td>Nimikirjaimet</td>
                 <td><input required name="signature" type="text" id="signature" size="6"/></td>
 
             </tr>

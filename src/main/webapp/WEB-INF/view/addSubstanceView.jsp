@@ -23,7 +23,7 @@
         
         <table class="noborder">
             <tr>
-                <td>Tuotenimi</td>
+                <td class="substanceFirst">Tuotenimi</td>
                 <td><form:input path="name" type="text" class="substance"/><form:errors path="name"/></td>
             </tr>
             <tr>

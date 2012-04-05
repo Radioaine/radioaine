@@ -10,10 +10,6 @@
     <h2>Kitit</h2>
     <br/>
     <table class="listing">
-        <col width="200px"/>
-        <col width="100px"/>
-        <col width="100px"/>
-        <col width="100px"/>
         <tr>
             <th class="amount">Lkm</th>
             <th class="substance">Tuotenimi</th>
@@ -24,7 +20,7 @@
         <c:forEach var="substance" items="${substances}">
             <c:if test="${substance.type == '0'}">
                 <tr>
-                    <td class="maara">${substance.totalAmount}</td>
+                    <td>${substance.totalAmount}</td>
                     <td><a href="substance/${substance.id}">${substance.name}</a></td>
                     <td><fmt:formatDate pattern="dd.MM.yyyy" value="${substance.oldestDate}"/></td>
                     <td></td>
@@ -36,11 +32,8 @@
     <br/>
 
     <h2>Generaattorit</h2>
+    <br/>
     <table class="listing">
-        <col width="200px"/>
-        <col width="100px"/>
-        <col width="100px"/>
-        <col width="100px"/>
         <tr>
             <th class="amount">Lkm</th>
             <th class="substance">Tuotenimi</th>
@@ -51,7 +44,7 @@
         <c:forEach var="substance" items="${substances}">
             <c:if test="${substance.type == '1'}">
                 <tr>                  
-                    <td class="maara">${substance.totalAmount}</td>
+                    <td>${substance.totalAmount}</td>
                     <td><a href="substance/${substance.id}">${substance.name}</a></td>
                     <td><fmt:formatDate pattern="dd.MM.yyyy" value="${substance.oldestDate}"/></td>
                     <td></td>
@@ -64,10 +57,6 @@
     <h2>Muut</h2>   
     <br/>
     <table class="listing">
-        <col width="200px"/>
-        <col width="100px"/>
-        <col width="100px"/>
-        <col width="100px"/>
         <tr>
             <th class="amount">Lkm</th>
             <th class="substance">Tuotenimi</th>
@@ -78,7 +67,7 @@
         <c:forEach var="substance" items="${substances}">
             <c:if test="${substance.type == '2'}">
                 <tr>
-                    <td class="maara">${substance.totalAmount}</td>
+                    <td>${substance.totalAmount}</td>
                     <td><a href="substance/${substance.id}">${substance.name}</a></td>
                     <td><fmt:formatDate pattern="dd.MM.yyyy" value="${substance.oldestDate}"/></td>
                     <td></td>

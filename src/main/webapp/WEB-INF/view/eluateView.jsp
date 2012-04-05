@@ -2,21 +2,26 @@
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
-<%@include file="headerstorage.jsp" %>
+<%@include file="headerfront.jsp" %>
 
 <div id="contents">
-    <h1>Eluaatti</h1>
-    <c:forEach var="generator" items="${eluate.generators}">
-        <b>${generator.substance.name}</b><br>
-    </c:forEach>
-
-    <c:forEach var="other" items="${eluate.others}">
-        <b>${other.substance.name}</b><br>
-    </c:forEach>
-
-    <br>
-    <table>
-
+    <h2>Eluaatin tiedot</h2>
+    
+    <table class="noborder">
+        <tr>
+            <td class="name">Käytetyt aineet</td>
+            <td>
+                <br/>
+                <c:forEach var="generator" items="${eluate.generators}">
+                    ${generator.substance.name}<br>
+                </c:forEach>
+                    
+                <c:forEach var="other" items="${eluate.others}">
+                    ${other.substance.name}<br>
+                </c:forEach>
+                <br/>
+            </td>
+        </tr>
         <tr>
             <td>Aktiivisuus</td>
             <td>${eluate.strength}
@@ -36,7 +41,7 @@
         </tr>
         <tr>
             <td>Luotu</td>
-            <td><fmt:formatDate value="${eluate.date}" pattern="dd.MM.yyyy HH:mm"/></td>
+            <td><fmt:formatDate value="${eluate.date}" pattern="HH:mm / dd.MM.yyyy"/></td>
         </tr>
         <tr>
             <td>Kommentit</td>
@@ -48,8 +53,10 @@
         </tr>
 
     </table>
+    <br />
     <form action="${pageContext.servletContext.contextPath}/modifyEluate/${eluate.id}" method="GET">  
-            <input type="submit" value="Muokkaa erän tietoja" />
+            <input type="submit" value="Muokkaa" />&nbsp; &nbsp;
+            <input type="button" value="Peruuta" onClick="parent.location = '${pageContext.servletContext.contextPath}/frontpage'" />
     </form>
 </div>
 

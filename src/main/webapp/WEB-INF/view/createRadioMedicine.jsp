@@ -65,7 +65,7 @@
             </tr>
             <tr>
                 <td>Valitut</td>
-                <td style="font-size: 90%;" id="selected"></td>
+                <td class="infotext" id="selected"></td>
             </tr>
             <tr>
                 <td>&nbsp; </td>
@@ -73,7 +73,7 @@
             </tr>
             <tr>
                 <td></td>
-                <td style="font-size: 90%;">Klo<span id="pvm">Pvm</span></td>
+                <td  class="infotext">Klo<span id="pvm">Pvm</span></td>
             </tr>
             <tr>
                 <td>Luontiaika</td>

@@ -24,7 +24,6 @@
                             <option id="0" onclick="eluateAmounts(event)"  value="${generator.id}">${generator.substance.name}, Erä 
                                 ${generator.batchNumber}, Käyt. ennen <fmt:formatDate value="${generator.expDate}" pattern="dd.MM.yyyy"/>, TODO Sijainti</option>
                         </c:forEach>
-                            
                     </select>
                 </td>
             </tr>
@@ -44,7 +43,7 @@
             </tr>
             <tr>
                 <td>Valitut</td>
-                <td style="font-size: 90%;" id="selected"></td>
+                <td class="infotext" id="selected"></td>
             </tr>
             <tr>
                 <td>&nbsp; </td>
@@ -52,7 +51,7 @@
             </tr>
             <tr>
                 <td></td>
-                <td style="font-size: 90%;">Klo<span id="pvm">Pvm</span></td>
+                <td  class="infotext"">Klo<span id="pvm">Pvm</span></td>
             </tr>
             <tr>
 

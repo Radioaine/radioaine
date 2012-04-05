@@ -17,13 +17,13 @@
         <tr>
             <td>Tyyppi</td>
             <td>
-                <!--<form:select path="type">
+                <form:select path="type">
                     <form:option value="0">Kitti</form:option>
                     <form:option value="1">Generaattori</form:option>
                     <form:option value="2">Muu</form:option>
-                </form:select>-->
+                </form:select>
             </td>
-            <td style="font-size: 90%;"><c:choose>
+            <td class="infotext"><c:choose>
                     <c:when test="${substance.type=='0'}">
                         Kitti
                     </c:when>
@@ -39,7 +39,7 @@
         <tr>
             <td class="substanceFirst">Tuotenimi</td>
             <td class="substanceSecond"><form:input path="name" type="text" class="substance"/><form:errors path="name"/></td>
-            <td style="font-size: 90%;">${substance.name}</td>
+            <td class="infotext">${substance.name}</td>
         </tr>
         <tr>
             <td>Geneerinen nimi</td>
@@ -50,35 +50,35 @@
             <tr>
                 <td>Valmistettava eluaatti</td>
                 <td><input id="genericName" name="genericName" type="text" value="TODO" class="substance"/></td>
-                <td style="font-size: 90%;">TODO</td>
+                <td class="infotext">TODO</td>
             </tr>
         </c:if>
         <tr>
             <td>Valmistaja</td>
             <td><form:input path="manufacturer" type="text" class="substance"/><form:errors path="manufacturer"/></td>
-            <td style="font-size: 90%;">${substance.manufacturer}</td>
+            <td class="infotext">${substance.manufacturer}</td>
         </tr>
         <tr>
             <td>Tukkuliike</td>
             <td><form:input path="supplier" type="text" class="substance"/><form:errors path="supplier"/></td>
-            <td style="font-size: 90%;">${substance.supplier}</td>
+            <td class="infotext">${substance.supplier}</td>
         </tr>
         <tr>
 
             <td>Tilavuus</td>
             <td><input path="size" type="text" value="TODO" class="substance"/></td>
-            <td style="font-size: 90%;">TODO</td>
+            <td class="infotext">TODO</td>
         </tr>
         <tr>
             <td>Vahvuus</td>
             <td><input path="strength" type="text" value="TODO" class="substance"/></td>
-            <td style="font-size: 90%;">TODO</td>
+            <td class="infotext">TODO</td>
         </tr>
         <c:if test="${substance.type=='1'}"><!--Tämä tarvitaan vain, jos tyyppi on generaattori-->
             <tr>
                 <td>Puoliintumisaika</td>
-                <td><form:input path="halflife" type="number"/><form:errors path="halflife"/> tuntia</td>
-                <td style="font-size: 90%;">${substance.halflife} tuntia</td>
+                <td><form:input path="halflife" type="number"/><form:errors path="halflife"/></td>
+                <td class="infotext">${substance.halflife} tuntia</td>
             </tr>   
         </c:if>
         <tr>
@@ -88,7 +88,7 @@
                     <option value="0">Ei huomauteta puuttumisesta</option>
                 </select>
             </td>
-            <td style="font-size: 90%;">TODO</td>
+            <td class="infotext">TODO</td>
         </tr>
         <tr>
             <td>Huomautus vanhenemisesta</td>
@@ -98,7 +98,7 @@
         <tr>
             <td>Huomautus määrästä, kun</td>
             <td><form:input path="alertLimit2" type="number"/><form:errors path="alertLimit2"/></td>
-            <td style="font-size: 90%;">${substance.alertLimit2} yksikköä jäljellä</td>
+            <td class="infotext">${substance.alertLimit2} yksikköä jäljellä</td>
         </tr>
     </table>
 

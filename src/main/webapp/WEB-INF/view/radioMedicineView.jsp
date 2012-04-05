@@ -2,29 +2,33 @@
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
-<%@include file="headerstorage.jsp" %>
+<%@include file="headerfront.jsp" %>
 
 <div id="contents">
-    <h1>Radiol‰‰ke ${radioMedicine.id}</h1>
-    <c:forEach var="eluate" items="${radioMedicine.eluates}">
-        <b>Eluaatti ${eluate.id}</b><br>
-    </c:forEach>
+    <h2>Radiol‰‰kkeen tiedot</h2>
 
-    <c:forEach var="kit" items="${radioMedicine.kits}">
-        <b>${kit.substance.name}</b><br>
-    </c:forEach>
-
-    <c:forEach var="other" items="${radioMedicine.others}">
-        <b>${other.substance.name}</b><br>
-    </c:forEach>
-
-
-    <br>
-    <table>
-
+    <table class="noborder">
         <tr>
-            <td>Aktiivisuus</td>
-            <td>${radioMedicine.strength}</a></td>
+            <td>K‰ytetyt aineet</td>
+            <td>
+                <br/>
+                <c:forEach var="eluate" items="${radioMedicine.eluates}">
+                    Eluaatti ${eluate.id} TODO t‰lle k‰ytetyn generaattorin eluaatin nimi<br/>
+                </c:forEach>
+
+                <c:forEach var="kit" items="${radioMedicine.kits}">
+                    ${kit.substance.name}<br/>
+                </c:forEach>
+
+                <c:forEach var="other" items="${radioMedicine.others}">
+                    ${other.substance.name}<br/>
+                </c:forEach>
+                <br/>
+            </td>
+        </tr>
+        <tr>
+            <td class="name">Aktiivisuus</td>
+            <td>${radioMedicine.strength}</td>
         </tr>
         <tr>
             <td>Tilavuus</td>
@@ -45,7 +49,7 @@
         </tr>
         <tr>
             <td>Luotu</td>
-            <td><fmt:formatDate value="${radioMedicine.date}" pattern="dd.MM.yyyy HH:mm"/></td>
+            <td><fmt:formatDate value="${radioMedicine.date}" pattern="HH:mm / dd.MM.yyyy"/></td>
         </tr>
         <tr>
             <td>Kommentit</td>

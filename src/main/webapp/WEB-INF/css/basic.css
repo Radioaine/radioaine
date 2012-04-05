@@ -89,6 +89,10 @@ td.center {
     width: 45px;
 }
 
+.infotext {
+     font-size: 90%;
+}
+
 .elbutton {
     width: 125px;
 }

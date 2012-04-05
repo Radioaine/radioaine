@@ -1,10 +1,9 @@
-
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <artifactId>radioaine</artifactId>
     <packaging>war</packaging>
-    <version>1</version>
+    <version>1.0-SNAPSHOT</version>
 
     <name>radioaine</name>
     <url>http://maven.apache.org</url>
@@ -15,6 +14,7 @@
         <eclipselink-jpa-version>2.0.0</eclipselink-jpa-version>
         <hsqldb-version>1.8.0.10</hsqldb-version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <netbeans.hint.deploy.server>gfv3ee6</netbeans.hint.deploy.server>
     </properties>
 
     <dependencies>
@@ -90,6 +90,12 @@
         </dependency> 
         
         <!-- db -->
+         <!--mysql-->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>5.1.18</version>
+        </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-orm</artifactId>
@@ -106,14 +112,7 @@
             <artifactId>javax.persistence</artifactId>
             <version>${eclipselink-jpa-version}</version>
         </dependency>
-        
-        <!--mysql-->
-        <dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
-            <version>5.1.18</version>
-        </dependency>
-        
+               
             
         <dependency>
             <groupId>org.hsqldb</groupId>
@@ -156,9 +155,16 @@
             <scope>runtime</scope>
         </dependency>
         <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>4.10</version>
+          <groupId>org.springframework</groupId>
+          <artifactId>spring-test</artifactId>
+          <version>3.1.0.RELEASE</version>
+          <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>junit</groupId>  
+            <artifactId>junit</artifactId>  
+            <version>4.8.1</version>  
             <scope>test</scope>
         </dependency>
     </dependencies>

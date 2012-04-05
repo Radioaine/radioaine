@@ -49,8 +49,6 @@ public class HistoryController {
         
         Timestamp startDate = Time.parseTimeStamp(start+" 00:00");
         Timestamp endDate = Time.parseTimeStamp(end+" 00:00");
-        System.out.println(startDate);
-        System.out.println(endDate);
         for(String str : reports){
             if(str.equals("arrived")){
                 model.addAttribute("arrived", eventService.listArrived(startDate, endDate));
@@ -65,6 +63,8 @@ public class HistoryController {
             counter++;
         }
         model.addAttribute("substances", substanceService.list());
+        model.addAttribute("startDate", startDate);
+        model.addAttribute("endDate", endDate);
         
         return "raportView";
     }

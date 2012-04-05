@@ -33,13 +33,13 @@ public class SimpleBatchService implements BatchService {
 
     @Override
     @Transactional(readOnly = true)
-    public Batch read(int id) {
+    public Batch read(Long id) {
         return storageDao.read(id);
     }
 
     @Override
     @Transactional
-    public void delete(int batchId) {
+    public void delete(Long batchId) {
         Batch e = storageDao.read(batchId);
         if (e != null) {
             storageDao.delete(e);
@@ -48,18 +48,18 @@ public class SimpleBatchService implements BatchService {
 
     @Override
     @Transactional(readOnly = true)
-    public List<Batch> listSubstanceBatches(int id) {
+    public List<Batch> listSubstanceBatches(Long id) {
         return storageDao.listSubstanceBatches(id);
     }
 
     @Override
     @Transactional
-    public Batch read(String batchNumber, int substance) {
+    public Batch read(String batchNumber, Long substance) {
         return storageDao.read(batchNumber, substance);
     }
 
     @Override
-    public List<Batch> getBatchesByType(int type) {
+    public List<Batch> getBatchesByType(Long type) {
         return storageDao.getBatchesByType(type);
     }
 

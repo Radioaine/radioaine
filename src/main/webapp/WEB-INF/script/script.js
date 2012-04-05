@@ -22,16 +22,13 @@ function addStorage(usedStorageLocationsCount, storageLocationsCount, names){
 
 //Ongelma jossa jos lisää vaikka kome ja poistaa keskimmäisen niin numerointi menee sekaisin;
 function removeStorage(number){
-    var storage = document.getElementById("varastot");
-    var remove = document.getElementById("varasto"+number);
     storageCounter--;
-    storage.removeChild(remove);
+    $("#varasto"+number).remove();
     countAmount();
 }
 
 function qualityResults(){
-    var holder = document.getElementById("qualityCheck");
-    holder.innerHTML = "<form action=\"doCheck\"><select name=\"qualityCheck\"><option value=\"1\">Hyväksytty</option><option value=\"2\">Hylätty</option></select>"
+    $("#qualityCheck").html("<form action=\"doCheck\"><select name=\"qualityCheck\"><option value=\"1\">Hyväksytty</option><option value=\"2\">Hylätty</option></select>");
 }
 
 function eluateAmounts(e){

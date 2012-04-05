@@ -26,7 +26,7 @@ public class JPABatchDBDao implements BatchDBDao {
     }
 
     @Override
-    public Batch read(int id) {
+    public Batch read(Long id) {
         return entityManager.find(Batch.class, id);
     }
 
@@ -47,13 +47,13 @@ public class JPABatchDBDao implements BatchDBDao {
     }
 
     @Override
-    public List<Batch> listSubstanceBatches(int id) {
+    public List<Batch> listSubstanceBatches(Long id) {
         Query q = entityManager.createQuery("SELECT b FROM Batch b WHERE b.substance.id=" + id);
         return q.getResultList();
     }
 
     @Override
-    public Batch read(String batchNumber, int substance) {
+    public Batch read(String batchNumber, Long substance) {
         try {
             Query q = entityManager.createQuery("SELECT b FROM Batch b WHERE b.batchNumber='" + batchNumber + "' AND b.substance.id=" + substance);
             return (Batch) q.getSingleResult();
@@ -63,7 +63,7 @@ public class JPABatchDBDao implements BatchDBDao {
     }
 
     @Override
-    public List<Batch> getBatchesByType(int type) {
+    public List<Batch> getBatchesByType(Long type) {
         try {
             Query q = entityManager.createQuery("SELECT b FROM Batch b WHERE b.amount > 0 AND b.substance.type=" + type + "ORDER BY b.substance.name, b.expDate");
             return q.getResultList();

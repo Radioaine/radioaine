@@ -34,12 +34,12 @@ public class EluateController {
     private SubstanceService substanceService;
     @Autowired
     private StorageService storageService;
-    int GENERATOR = 1;
-    int KIT = 0;
-    int OTHER = 2;
+    long GENERATOR = 1;
+    long KIT = 0;
+    long OTHER = 2;
 
     @RequestMapping(value = "eluate/{id}", method = RequestMethod.GET)
-    public String getEluateById(@PathVariable Integer id, Model model) {
+    public String getEluateById(@PathVariable Long id, Model model) {
         model.addAttribute("eluate", eluateService.read(id));
         return "eluateView";
     }
@@ -76,7 +76,7 @@ public class EluateController {
     }
     
     @RequestMapping(value = "modifyEluate/{id}", method = RequestMethod.GET)
-    public String modifyEluate(Model model, @PathVariable Integer id) {
+    public String modifyEluate(Model model, @PathVariable Long id) {
        model.addAttribute("eluateForm", new EluateFormObject());
        model.addAttribute("generators", batchService.getBatchesByType(GENERATOR));
        model.addAttribute("others", batchService.getBatchesByType(OTHER));
@@ -88,7 +88,7 @@ public class EluateController {
     @RequestMapping(value = "modifyEluate/{id}", method = RequestMethod.POST)
     public String modifyEluate(@Valid @ModelAttribute("eluateForm") EluateFormObject efo, 
     BindingResult result,
-    @PathVariable Integer id) {
+    @PathVariable Long id) {
         if (result.hasErrors()) {
             System.out.println(result);
             return "createEluate";
@@ -109,13 +109,13 @@ public class EluateController {
         eluate.setStorageLocation(efo.getStorageLocation());
 
         List<Batch> generators = new ArrayList<Batch>();
-        int[] generatorsTable = efo.getGenerators();
+        Long[] generatorsTable = efo.getGenerators();
         for (int i = 0; i < generatorsTable.length; ++i) {
             generators.add(batchService.read(generatorsTable[i]));
         }
 
         List<Batch> others = new ArrayList<Batch>();
-        int[] othersTable = efo.getOthers();
+        Long[] othersTable = efo.getOthers();
         for (int i = 0; i < othersTable.length; ++i) {
             others.add(batchService.read(othersTable[i]));
         }
@@ -144,7 +144,7 @@ public class EluateController {
         }
     }
 
-    private void updateEluate(Integer id, EluateFormObject efo) {
+    private void updateEluate(Long id, EluateFormObject efo) {
         Eluate eluate = eluateService.read(id);
         if(efo.getStrength().equals("")){ eluate.setStrength(0.0); }
         else{ eluate.setStrength(Double.parseDouble(efo.getStrength())); }
@@ -155,13 +155,13 @@ public class EluateController {
         eluate.setStorageLocation(efo.getStorageLocation());
 
         List<Batch> generators = new ArrayList<Batch>();
-        int[] generatorsTable = efo.getGenerators();
+        Long[] generatorsTable = efo.getGenerators();
         for (int i = 0; i < generatorsTable.length; ++i) {
             generators.add(batchService.read(generatorsTable[i]));
         }
 
         List<Batch> others = new ArrayList<Batch>();
-        int[] othersTable = efo.getOthers();
+        Long[] othersTable = efo.getOthers();
         for (int i = 0; i < othersTable.length; ++i) {
             others.add(batchService.read(othersTable[i]));
         }

@@ -34,13 +34,13 @@ public class SimpleStorageService implements StorageService {
 
     @Override
     @Transactional(readOnly = true)
-    public Storage read(int id) {
+    public Storage read(Long id) {
         return storageDao.read(id);
     }
 
     @Override
     @Transactional
-    public void delete(int storageId) {
+    public void delete(Long storageId) {
         Storage e = storageDao.read(storageId);
         if (e != null) {
             storageDao.delete(e);

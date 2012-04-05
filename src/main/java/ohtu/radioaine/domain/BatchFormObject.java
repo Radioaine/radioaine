@@ -16,7 +16,7 @@ public class BatchFormObject {
     @NotNull(message = "Eränumero ei saa olla tyhjä")
     private String batchNumber;
     @NotNull(message = "Aine ei saa olla tyhjä")
-    private int substance;
+    private Long substance;
     @NotNull(message = "Määrä ei saa olla tyhjä")
     private int amount;
     @NotNull(message = "Tilavuus ei saa olla tyhjä")
@@ -27,15 +27,15 @@ public class BatchFormObject {
     private String expDate;
     private String note;
     private int storageLocationsCount = 10;
-    private int[][] storageLocations = new int[storageLocationsCount][2];
+    private Long[][] storageLocations = new Long[storageLocationsCount][2];
     @NotNull(message = "Nimi ei saa olla tyhjä")
     private String signature;
 
-    public int[][] getStorageLocations() {
+    public Long[][] getStorageLocations() {
         return storageLocations;
     }
 
-    public void setStorageLocations(int[][] storageLocations) {
+    public void setStorageLocations(Long[][] storageLocations) {
         this.storageLocations = storageLocations;
     }
     
@@ -103,11 +103,11 @@ public class BatchFormObject {
         this.note = note;
     }
 
-    public int getSubstance() {
+    public Long getSubstance() {
         return substance;
     }
 
-    public void setSubstance(int substance) {
+    public void setSubstance(Long substance) {
         this.substance = substance;
     }
 }

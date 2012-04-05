@@ -14,6 +14,6 @@ import ohtu.radioaine.domain.Eluate;
 public interface EluateService {
     public Eluate createOrUpdate(Eluate eluate);
     public List<Eluate> list();
-    public Eluate read(int id);
-    public void delete(int id);
+    public Eluate read(Long id);
+    public void delete(Long id);
 }

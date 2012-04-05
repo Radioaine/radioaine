@@ -18,32 +18,32 @@ public class EluateFormObject {
     private String signature;
     private String note;
     private int unit;
-    private int storageLocation;
-    private int[] generators = new int[5];
-    private int[] others = new int[5];
-    private int[] kits = new int[5];
+    private Long storageLocation;
+    private Long[] generators = new Long[5];
+    private Long[] others = new Long[5];
+    private Long[] kits = new Long[5];
 
-    public int[] getKits() {
+    public Long[] getKits() {
         return kits;
     }
 
-    public void setKits(int[] kits) {
+    public void setKits(Long[] kits) {
         this.kits = kits;
     }
 
-    public int[] getGenerators() {
+    public Long[] getGenerators() {
         return generators;
     }
 
-    public void setGenerators(int[] generators) {
+    public void setGenerators(Long[] generators) {
         this.generators = generators;
     }
 
-    public int[] getOthers() {
+    public Long[] getOthers() {
         return others;
     }
 
-    public void setOthers(int[] other) {
+    public void setOthers(Long[] other) {
         this.others = other;
     }
 
@@ -63,11 +63,11 @@ public class EluateFormObject {
         this.signature = signature;
     }
 
-    public int getStorageLocation() {
+    public Long getStorageLocation() {
         return storageLocation;
     }
 
-    public void setStorageLocation(int storageLocation) {
+    public void setStorageLocation(Long storageLocation) {
         this.storageLocation = storageLocation;
     }
 

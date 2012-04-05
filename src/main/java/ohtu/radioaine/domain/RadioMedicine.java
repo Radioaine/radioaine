@@ -19,9 +19,9 @@ import javax.persistence.*;
 public class RadioMedicine implements Serializable{
 
     @Id
-    @GeneratedValue(strategy = GenerationType.TABLE)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(nullable = false)
-    private int id;
+    private Long id;
     @Column
     private double strength;
     @Column
@@ -33,7 +33,7 @@ public class RadioMedicine implements Serializable{
     @Column
     private String note;
     @Column
-    private int storageLocation;
+    private Long storageLocation;
     private String name;
     @Column
     private String preparer;
@@ -97,11 +97,11 @@ public class RadioMedicine implements Serializable{
         this.date = timestamp;
     }
 
-    public int getStorageLocation() {
+    public Long getStorageLocation() {
         return storageLocation;
     }
 
-    public void setStorageLocation(int storageLocation) {
+    public void setStorageLocation(Long storageLocation) {
         this.storageLocation = storageLocation;
     }
 
@@ -121,11 +121,11 @@ public class RadioMedicine implements Serializable{
         this.date = timestamp;
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

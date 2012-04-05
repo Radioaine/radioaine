@@ -18,9 +18,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 @Controller
 public class RadioMedicineController {
 
-    int GENERATOR = 1;
-    int KIT = 0;
-    int OTHER = 2;
+    long GENERATOR = 1;
+    long KIT = 0;
+    long OTHER = 2;
     @Autowired
     private BatchService batchService;
     @Autowired
@@ -55,7 +55,7 @@ public class RadioMedicineController {
     }
 
     @RequestMapping("RadioMedicine/{id}")
-    public String radioMedicineView(Model model, @PathVariable Integer id) {
+    public String radioMedicineView(Model model, @PathVariable Long id) {
         model.addAttribute("radioMedicine", radioMedService.read(id));
         return "radioMedicineView";
     }
@@ -72,21 +72,21 @@ public class RadioMedicineController {
         radioMedicine.setStorageLocation(rmfo.getStorageLocation());
         radioMedicine.setTimestamp(Time.parseTimeStamp(rmfo.getDate() + " " + rmfo.getHours() + ":" + rmfo.getMinutes()));
         List<Eluate> eluates = new ArrayList<Eluate>();
-        int[] eluatesTable = rmfo.getEluates();
+        Long[] eluatesTable = rmfo.getEluates();
         for (int i = 0; i < eluatesTable.length; ++i) {
 
             eluates.add(eluateService.read(eluatesTable[i]));
         }
 
         List<Batch> kits = new ArrayList<Batch>();
-        int[] kitsTable = rmfo.getKits();
+        Long[] kitsTable = rmfo.getKits();
         for (int i = 0; i < kitsTable.length; ++i) {
 
             kits.add(batchService.read(kitsTable[i]));
         }
 
         List<Batch> others = new ArrayList<Batch>();
-        int[] othersTable = rmfo.getOthers();
+        Long[] othersTable = rmfo.getOthers();
         for (int i = 0; i < othersTable.length; ++i) {
 
             others.add(batchService.read(othersTable[i]));

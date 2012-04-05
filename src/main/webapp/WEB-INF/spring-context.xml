@@ -1,3 +1,4 @@
+
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -17,12 +18,12 @@
         http://www.springframework.org/schema/jdbc 
            http://www.springframework.org/schema/jdbc/spring-jdbc-3.0.xsd">
 
-    <!-- DispatcherServletin (front-controllerin) konfiguraatio, jolla määritellään pyynnön kulku. -->
+    <!-- DispatcherServletin (front-controllerin) konfiguraatio, jolla mÃ¤Ã¤ritellÃ¤Ã¤n pyynnÃ¶n kulku. -->
  
-    <!-- Sovelluksemme lähdekooditiedostot sijaitsevat pakkauksessa ohtu tai sen alipakkauksissa-->
+    <!-- Sovelluksemme lÃ¤hdekooditiedostot sijaitsevat pakkauksessa ohtu tai sen alipakkauksissa-->
     <context:component-scan base-package="ohtu" />
 
-    <!-- Käytetään Spring MVC:tä annotaatioiden avulla -->
+    <!-- KÃ¤ytetÃ¤Ã¤n Spring MVC:tÃ¤ annotaatioiden avulla -->
     <mvc:annotation-driven /> 
     
     <mvc:resources mapping="/css/**" location="WEB-INF/css/*" />
@@ -31,26 +32,15 @@
     <!-- Mahdollistetaan konfigurointi annotaatioilla -->
     <context:annotation-config />
     
-    <!-- Käytetään muistiin ladattavaa tietokantaa -->
+    <!-- KÃ¤ytetÃ¤Ã¤n muistiin ladattavaa tietokantaa -->
+    <jdbc:embedded-database id="dataSource" type="HSQL"/>
+
+    <!-- KÃ¤ytetÃ¤Ã¤n EclipseLinkkiÃ¤ JPA-toteutuksena, mÃ¤Ã¤ritellÃ¤Ã¤n myÃ¶s persistence.xml-tiedoston sijainti -->
     <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
         <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
         <property name="url" value="jdbc:mysql://users.cs.helsinki.fi:40001/radioaine"/>
         <property name="username" value="u"/>
         <property name="password" value="u"/>
-    </bean>
-
-    <!-- Käytetään EclipseLinkkiä JPA-toteutuksena, määritellään myös persistence.xml-tiedoston sijainti -->
-    <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
-        <!-- älä muuta persistence.xml -tiedoston sijaintia  -->
-        <property name="persistenceXmlLocation" value="classpath:persistence.xml" />
-        <property name="persistenceUnitName" value="radioaine" /> 
-        <property name="dataSource" ref="dataSource"/>
-        <property name="jpaVendorAdapter">
-            <bean class="org.springframework.orm.jpa.vendor.EclipseLinkJpaVendorAdapter" />
-        </property>
-        <property name="loadTimeWeaver"> 
-            <bean class="org.springframework.instrument.classloading.InstrumentationLoadTimeWeaver" /> 
-        </property>
     </bean>
     
     <!-- Hallinnoidaan transaktioita automaattisesti -->
@@ -60,11 +50,11 @@
     
     <tx:annotation-driven transaction-manager="transactionManager" />
     
-    <!-- Käytetään geneerisiä poikkeuksia -->
+    <!-- KÃ¤ytetÃ¤Ã¤n geneerisiÃ¤ poikkeuksia -->
     <bean class="org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor"/>
     <bean class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor"/>
     
-    <!-- Ohjataan näkymät JSP-sivuille -->
+    <!-- Ohjataan nÃ¤kymÃ¤t JSP-sivuille -->
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="prefix" value="/WEB-INF/view/" />
         <property name="suffix" value=".jsp" />

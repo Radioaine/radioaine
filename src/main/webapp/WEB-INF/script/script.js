@@ -83,7 +83,6 @@ function countAmount(){
 function editStorageName(id)  {
     document.getElementById("edit"+id).style.cssText = "display: none;";
     document.getElementById("name"+id).style.cssText = "display: none;";
-    document.getElementById("remove"+id).style.cssText = "display: none;";
     document.getElementById("save"+id).style.cssText = "display: inline;";
     document.getElementById("cancel"+id).style.cssText = "display: inline;";
     document.getElementById("inp"+id).style.cssText = "display: inline;";

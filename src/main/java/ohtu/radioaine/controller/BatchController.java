@@ -88,9 +88,9 @@ public class BatchController {
         model.addAttribute("substances", substanceService.list());
         model.addAttribute("storages", storageService.list());
         
-        String names = "'"; 
+        String names = "'";
         for(int i = 0; i < storageService.storageNamesList().size(); i++)   {
-            if(!storageService.list().get(i).isHidden())
+            if(!storageService.list().get(i).isHidden())  
                 names += storageService.storageNamesList().get(i) + "^separate^";
             else
                 names += "^hidden^^separate^";
@@ -173,7 +173,9 @@ public class BatchController {
         Batch temp = batchService.read(id);
         int newTotalAmount = 0;
         for (int i = 0; i < bfm.getStorageLocations().length; i++) {
-            newTotalAmount += bfm.getStorageLocations()[i][1];
+            System.out.println("storagelocationi on : " + bfm.getStorageLocations().length);
+            if(bfm.getStorageLocations()[i][1] != null)
+                newTotalAmount += bfm.getStorageLocations()[i][1];
         }
         
         if (result.hasErrors() || temp.getAmount() != newTotalAmount) {
@@ -195,11 +197,12 @@ public class BatchController {
         batch.setNote(bfo.getNote());
         batch.setArrivalDate(Time.parseDate(bfo.getArrivalDate()));
         batch.setExpDate(Time.parseDate(bfo.getExpDate()));
-        int temp = 0;
+        long temp = 0;
         for (int i = 0; i < bfo.getStorageLocations().length; i++) {
-            temp += bfo.getStorageLocations()[i][1];
+            if(bfo.getStorageLocations()[i][1] != null)
+                temp += bfo.getStorageLocations()[i][1];
         }
-        bfo.setAmount(temp);
+        bfo.setAmount((int)temp);
         //Checks if batch substance has been changed
         if (batch.getSubstance().getId() != bfo.getSubstance()) {
             int oldAmount = batch.getAmount();
@@ -259,12 +262,13 @@ public class BatchController {
         batch.setNote(bfo.getNote());
         batch.setArrivalDate(Time.parseDate(bfo.getArrivalDate()));
         batch.setExpDate((Time.parseDate(bfo.getExpDate())));
-        int temp = 0;
+        long temp = 0;
         for (int i = 0; i < bfo.getStorageLocations().length; i++) {
-            temp += bfo.getStorageLocations()[i][1];
+            if(bfo.getStorageLocations()[i][1] != null)
+                temp += bfo.getStorageLocations()[i][1];
         }
 
-        bfo.setAmount(temp);
+        bfo.setAmount((int)temp);
         batch.setAmount(bfo.getAmount());
         batch.setSubstanceVolume(bfo.getSubstanceVolume());
         batch.setStorageLocations(bfo.getStorageLocations());

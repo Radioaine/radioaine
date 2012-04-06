@@ -65,12 +65,12 @@
             </td>
         </tr>
 
-        <c:forEach var="location" varStatus="i" items="${batch.storageLocations}">
+        <c:forEach var="storage" varStatus="i" items="${batch.storageLocations}">
             <c:choose>
                 <c:when test="${batch.storageLocations[i.index][1] > 0}">
                     <tr>
-                        <td>${storages[(batch.storageLocations[i.index][0]-1)].name}</td>
-                        <td>${location[1]} kpl</td>
+                        <td>${storages[(storage[0])-1].name}</td>
+                        <td>${storage[1]} kpl</td>
                     </tr>  
                 </c:when>
             </c:choose>

@@ -2,7 +2,6 @@ package ohtu.radioaine.domain;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
-import java.util.List;
 import javax.persistence.*;
 
 /**
@@ -193,7 +192,7 @@ public class Batch implements Serializable {
     public int getCurrentStorageLocationsCount() {
         int temp = 0;
         for (int i = 0; i < storageLocations.length; i++) {
-            if (storageLocations[i][1] > 0) {
+            if (/*storageLocations[i][1] > 0 || */storageLocations[i][1] != null) {
                 temp++;
             }
         }

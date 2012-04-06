@@ -7,7 +7,6 @@ function addStorage(usedStorageLocationsCount, storageLocationsCount, names){
     if(usedStorageLocationsCount > 0 && usedStorageLocationsCount >= storageCounter)
         storageCounter = usedStorageLocationsCount + 1;
  
-    
     var newHTML = "<select name=\"storageLocations["+(storageCounter-1)+"][0]\">";
     for(var i = 0; i < (p.length-1); i++)  {
         if(p[i] != "^hidden^")

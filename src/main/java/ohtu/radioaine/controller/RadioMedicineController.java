@@ -43,6 +43,31 @@ public class RadioMedicineController {
 
         return "createRadioMedicine";
     }
+    
+    @RequestMapping(value = "modifyRadioMed/{id}", method = RequestMethod.GET)
+    public String updateRadioMedView(Model model, @PathVariable Long id) {
+        model.addAttribute("radioMedicineForm", new RadioMedicineFormObject());
+        model.addAttribute("radioMedicine", radioMedService.read(id));
+        model.addAttribute("generators", batchService.getBatchesByType(GENERATOR));
+        model.addAttribute("kits", batchService.getBatchesByType(KIT));
+        model.addAttribute("others", batchService.getBatchesByType(OTHER));
+        model.addAttribute("eluates", eluateService.list());
+        model.addAttribute("storages", storageService.list());
+
+        return "radioMedUpdateView";
+    }
+    
+    @RequestMapping(value = "modifyRadioMed/{id}", method = RequestMethod.POST)
+    public String modifyRadioMed(@Valid @ModelAttribute("radioMedicine") RadioMedicineFormObject rmfo,
+    @PathVariable Long id,
+    BindingResult result) {
+        if (result.hasErrors()) {
+            System.out.println(result);
+            return "radioMedUpdateView";
+        }
+        updateRadioMed(id, rmfo);
+        return "redirect:/RadioMedicine/"+id;
+    }
 
     @RequestMapping(value = "createRadioMedicine", method = RequestMethod.POST)
     public String newRadioMedicine(@Valid @ModelAttribute("radioMedicine") RadioMedicineFormObject rmfo, BindingResult result) {
@@ -67,29 +92,28 @@ public class RadioMedicineController {
         radioMedicine.setSignature(rmfo.getSignature());
         radioMedicine.setVolume(rmfo.getVolume());
         radioMedicine.setDate(Time.parseDate(rmfo.getDate()));
-        radioMedicine.setStrength(Double.parseDouble(rmfo.getStrength()));
+        if(rmfo.getStrength().equals("")){ radioMedicine.setStrength(0.0); }
+        else{ radioMedicine.setStrength(Double.parseDouble(rmfo.getStrength())); }
         radioMedicine.setUnit(rmfo.getUnit());
         radioMedicine.setStorageLocation(rmfo.getStorageLocation());
         radioMedicine.setTimestamp(Time.parseTimeStamp(rmfo.getDate() + " " + rmfo.getHours() + ":" + rmfo.getMinutes()));
         List<Eluate> eluates = new ArrayList<Eluate>();
         Long[] eluatesTable = rmfo.getEluates();
         for (int i = 0; i < eluatesTable.length; ++i) {
-
-            eluates.add(eluateService.read(eluatesTable[i]));
+            if(eluatesTable[i] != null){eluates.add(eluateService.read(eluatesTable[i]));}
         }
 
         List<Batch> kits = new ArrayList<Batch>();
         Long[] kitsTable = rmfo.getKits();
         for (int i = 0; i < kitsTable.length; ++i) {
+            if(kitsTable[i] != null){kits.add(batchService.read(kitsTable[i]));}
 
-            kits.add(batchService.read(kitsTable[i]));
         }
 
         List<Batch> others = new ArrayList<Batch>();
         Long[] othersTable = rmfo.getOthers();
         for (int i = 0; i < othersTable.length; ++i) {
-
-            others.add(batchService.read(othersTable[i]));
+            if(othersTable[i] != null){others.add(batchService.read(othersTable[i]));}
         }
 
         radioMedicine.setEluates(eluates);
@@ -97,5 +121,40 @@ public class RadioMedicineController {
         radioMedicine.setKits(kits);
 
         return radioMedicine;
+    }
+
+    private void updateRadioMed(Long id, RadioMedicineFormObject rmfo) {
+        RadioMedicine radioMedicine = radioMedService.read(id);
+         
+        radioMedicine.setNote(rmfo.getNote());
+        radioMedicine.setVolume(rmfo.getVolume());
+        radioMedicine.setDate(Time.parseDate(rmfo.getDate()));
+        radioMedicine.setStrength(Double.parseDouble(rmfo.getStrength()));
+        radioMedicine.setUnit(rmfo.getUnit());
+        radioMedicine.setStorageLocation(rmfo.getStorageLocation());
+        radioMedicine.setTimestamp(Time.parseTimeStamp(rmfo.getDate() + " " + rmfo.getHours() + ":" + rmfo.getMinutes()));
+        List<Eluate> eluates = new ArrayList<Eluate>();
+        Long[] eluatesTable = rmfo.getEluates();
+        for (int i = 0; i < eluatesTable.length; ++i) {
+            if(eluatesTable[i] != null){eluates.add(eluateService.read(eluatesTable[i]));}
+        }
+
+        List<Batch> kits = new ArrayList<Batch>();
+        Long[] kitsTable = rmfo.getKits();
+        for (int i = 0; i < kitsTable.length; ++i) {
+            if(kitsTable[i] != null){kits.add(batchService.read(kitsTable[i]));}
+
+        }
+
+        List<Batch> others = new ArrayList<Batch>();
+        Long[] othersTable = rmfo.getOthers();
+        for (int i = 0; i < othersTable.length; ++i) {
+            if(othersTable[i] != null){others.add(batchService.read(othersTable[i]));}
+        }
+
+        radioMedicine.setEluates(eluates);
+        radioMedicine.setOthers(others);
+        radioMedicine.setKits(kits);
+        radioMedService.createOrUpdate(radioMedicine);
     }
 }

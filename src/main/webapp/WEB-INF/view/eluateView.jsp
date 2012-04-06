@@ -11,15 +11,14 @@
         <tr>
             <td class="name">Käytetyt aineet</td>
             <td>
-                <br/>
+                <br />
                 <c:forEach var="generator" items="${eluate.generators}">
-                    ${generator.substance.name}<br>
+                    <a href="${pageContext.servletContext.contextPath}/substance/${generator.substance.id}">${generator.substance.name}</a><br />
                 </c:forEach>
                     
                 <c:forEach var="other" items="${eluate.others}">
-                    ${other.substance.name}<br>
+                    <a href="${pageContext.servletContext.contextPath}/substance/${other.substance.id}">${other.substance.name}</a><br />
                 </c:forEach>
-                <br/>
             </td>
         </tr>
         <tr>
@@ -56,7 +55,6 @@
     <br />
     <form action="${pageContext.servletContext.contextPath}/modifyEluate/${eluate.id}" method="GET">  
             <input type="submit" value="Muokkaa" />&nbsp; &nbsp;
-            <input type="button" value="Peruuta" onClick="parent.location = '${pageContext.servletContext.contextPath}/frontpage'" />
     </form>
 </div>
 

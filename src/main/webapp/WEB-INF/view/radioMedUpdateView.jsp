@@ -18,9 +18,9 @@
 </script>
 
 <div id="contents">
-    <h2>Uusi radiol‰‰ke</h2>
+    <h2>Radiol‰‰kkeen ${radioMedicine.id} muokkaus</h2>
     <br/>
-    <form:form commandName="radioMedicine" action="createRadioMedicine" method="POST">
+    <form:form commandName="radioMedicineForm" action="${pageContext.servletContext.contextPath}/modifyRadioMed/${radioMedicine.id}" method="POST">
         <!--<table style="float: right;">
             <th>Valitut</th>
             <tr>
@@ -65,8 +65,19 @@
             </tr>
             <tr>
                 <td>Valitut</td>
-                <td style="font-size: 90%;" id="selected"></td>
+                <td style="font-size: 90%;" class="infotext" id="selected">
+                    <c:forEach var="eluate" items="${radioMedicine.eluates}">
+                        <script> generateDivs("${eluate.id}", ${eluate.id}, 3);</script>
+                    </c:forEach>
+                    <c:forEach var="kit" items="${radioMedicine.kits}">
+                        <script> generateDivs("${kit.substance.name}", ${kit.id}, 1);</script>
+                    </c:forEach>
+                    <c:forEach var="oth" items="${radioMedicine.others}">
+                        <script> generateDivs("${oth.substance.name}", ${oth.id}, 4);</script>
+                    </c:forEach>
+            </td>
             </tr>
+            
             <tr>
                 <td>&nbsp; </td>
                 <td> </td>
@@ -113,7 +124,7 @@
         </table>
         <br/>
         
-        <td><input type="submit" value="Tallenna"></td>&nbsp; &nbsp;
+        <td><input type="submit" value="Tallenna muutokset"></td>&nbsp; &nbsp;
         <td><input type="button" value="Peruuta" onClick="parent.location = '${pageContext.servletContext.contextPath}/frontpage'" /></td>
         
     </form:form>

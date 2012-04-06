@@ -15,7 +15,7 @@
 
 
 <div id="contents">
-    <h2>Eluuatin muokkaus</h2>
+    <h2>Eluuatin ${eluate.id} muokkaus</h2>
     <br/>   
     <form:form commandName="eluateForm" action="${pageContext.servletContext.contextPath}/modifyEluate/${eluate.id}" method="POST">
         

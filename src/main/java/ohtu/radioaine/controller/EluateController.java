@@ -111,38 +111,19 @@ public class EluateController {
         List<Batch> generators = new ArrayList<Batch>();
         Long[] generatorsTable = efo.getGenerators();
         for (int i = 0; i < generatorsTable.length; ++i) {
-            generators.add(batchService.read(generatorsTable[i]));
+            if(generatorsTable[i] != null){generators.add(batchService.read(generatorsTable[i]));}
         }
 
         List<Batch> others = new ArrayList<Batch>();
         Long[] othersTable = efo.getOthers();
         for (int i = 0; i < othersTable.length; ++i) {
-            others.add(batchService.read(othersTable[i]));
+            if(othersTable[i] != null){others.add(batchService.read(othersTable[i]));}
         }
-//        updateAmounts(generators, others);
         eluate.setGenerators(generators);
         eluate.setOthers(others);
         return eluate;
     }
 
-    private void updateAmounts(List<Batch> generators, List<Batch> others) {
-        for (Batch gen : generators) {
-            Batch batch = batchService.read(gen.getId());
-            Substance substance = (Substance) substanceService.read(batch.getSubstance().getId());
-            batch.useOne();
-            substance.useOne();
-            batchService.createOrUpdate(batch);
-            substanceService.createOrUpdate(substance);
-        }
-        for (Batch other : others) {
-            Batch batch = batchService.read(other.getId());
-            Substance substance = (Substance) substanceService.read(batch.getSubstance().getId());
-            batch.useOne();
-            substance.useOne();
-            batchService.createOrUpdate(batch);
-            substanceService.createOrUpdate(substance);
-        }
-    }
 
     private void updateEluate(Long id, EluateFormObject efo) {
         Eluate eluate = eluateService.read(id);
@@ -157,13 +138,13 @@ public class EluateController {
         List<Batch> generators = new ArrayList<Batch>();
         Long[] generatorsTable = efo.getGenerators();
         for (int i = 0; i < generatorsTable.length; ++i) {
-            generators.add(batchService.read(generatorsTable[i]));
+            if(generatorsTable[i] != null){generators.add(batchService.read(generatorsTable[i]));}
         }
 
         List<Batch> others = new ArrayList<Batch>();
         Long[] othersTable = efo.getOthers();
         for (int i = 0; i < othersTable.length; ++i) {
-            others.add(batchService.read(othersTable[i]));
+            if(othersTable[i] != null){others.add(batchService.read(othersTable[i]));}
         }
 //        updateAmounts(generators, others);
         eluate.setGenerators(generators);

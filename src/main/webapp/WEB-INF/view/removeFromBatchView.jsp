@@ -91,6 +91,9 @@
                             <td><input value="0" required pattern="[0-9]{1,3}" type="number" name="amounts" /></td><br />
                         </tr>
                     </c:when>
+                    <c:otherwise>
+                        <input style="display: none;" value="0" required pattern="[0-9]{1,3}" type="number" name="amounts" />
+                    </c:otherwise>
                 </c:choose>
             </c:forEach>
             <tr><td>Poiston syy:</td><td><input required type="text" name="reason" /></td></tr>

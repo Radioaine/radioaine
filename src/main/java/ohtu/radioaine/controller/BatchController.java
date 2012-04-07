@@ -114,12 +114,15 @@ public class BatchController {
         Long[][] locs = temp.getStorageLocations();
         int tempTotalAmount = 0;
         for(int i=0; i<amounts.length;++i){
-            if(amounts[i] != null && amounts[i] > 0 && locs[i][1] >= amounts[i])    {
-                System.out.println(locs[i][1]);
-                locs[i][1] -= amounts[i];
-                System.out.println(locs[i][1]);
+            if(amounts[i] != null && locs[i][1] != null)    {
+                if(amounts[i] > 0 && locs[i][1] >= amounts[i])   {
+                    System.out.println(locs[i][1]);
+                    locs[i][1] -= amounts[i];
+                    System.out.println(locs[i][1]);
+                }
             }
-            tempTotalAmount += locs[i][1];
+            if(locs[i][1] != null)
+                tempTotalAmount += locs[i][1];
         }
         temp.setAmount(tempTotalAmount);
         temp.setStorageLocations(locs);

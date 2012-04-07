@@ -96,11 +96,11 @@
         Aine: <form:select path="substance">
                     <form:options items="${substances}" itemValue="id" itemLabel="name"/>
               </form:select><br/>
-        Er‰numero: <form:input path="batchNumber" type="text" /><form:errors path="batchNumber"/><br/>
+        Er‰numero: <form:input required="required" path="batchNumber" type="text" /><form:errors path="batchNumber"/><br/>
         <!--M‰‰r‰: <form:input path="amount" type="number"/><form:errors path="amount"/><br/>-->
         Pakkauskoko: <form:input path="substanceVolume" type="number"/><form:errors path="substanceVolume"/><br/>
-        Saapumisp‰iv‰: <form:input path="arrivalDate" type="text" id="arrivalDate" value="${arrive}"/><form:errors path="arrivalDate"/><br/>
-        Vanhenemisp‰iv‰: <form:input path="expDate" type="text" id="expDate" value="${expire}"/><form:errors path="expDate"/><br/>
+        Saapumisp‰iv‰: <form:input required="required" path="arrivalDate" type="text" id="arrivalDate" value="${arrive}"/><form:errors path="arrivalDate"/><br/>
+        Vanhenemisp‰iv‰: <form:input required="required" path="expDate" type="text" id="expDate" value="${expire}"/><form:errors path="expDate"/><br/>
         Laadunvarmistus: <form:select path="qualityCheck">
                             <form:option  value="1" label="Hyv‰ksytty"/>
                             <form:option  value="2" label="Hyl‰tty"/>
@@ -122,7 +122,7 @@
         </div>
         <button type="button" onClick="addStorage(${batch.currentStorageLocationsCount},${batch.storageLocationsCount}, ${storageNames})">Lis‰‰ varastopaikka</button><br />
         Huomioita: <br /><form:textarea path="note" type="text"/><form:errors path="note"/><br/>
-        Nimikirjaimet: <form:input path="signature" type="text" id="signature" size="6"/><form:errors path="signature"/><br />
+        Nimikirjaimet: <form:input required="required" path="signature" type="text" id="signature" size="6"/><form:errors path="signature"/><br />
         <input type="submit" value="Tallenna muutokset">
         <input type="button" value="Peruuta" onClick="parent.location = '${pageContext.servletContext.contextPath}/batch/${batch.id}'" />
     </form:form>

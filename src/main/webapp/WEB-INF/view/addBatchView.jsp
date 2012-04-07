@@ -33,16 +33,16 @@
             </tr>
             <tr>
                 <td>Eränumero</td>
-                <td><form:input path="batchNumber" type="text"/><form:errors path="batchNumber"/></td>
+                <td><form:input required="required" path="batchNumber" type="text"/><form:errors path="batchNumber"/></td>
             </tr>
             <tr>
                 <td>Saapumispäivä</td>
-                <td><form:input path="arrivalDate" type="text" value="${date}" id="arrivalDate"/><form:errors path="arrivalDate"/></td>
+                <td><form:input required="required" path="arrivalDate" type="text" value="${date}" id="arrivalDate"/><form:errors path="arrivalDate"/></td>
                 <td></td>
             </tr>
             <tr>
                 <td>Vanhenemispäivä</td>
-                <td><form:input path="expDate" type="text" id="expDate"/><form:errors path="expDate"/></td>
+                <td><form:input required="required" path="expDate" type="text" id="expDate"/><form:errors path="expDate"/></td>
                 <td></td>
             </tr>
             <tr>
@@ -55,7 +55,7 @@
                                     <form:option value="${i.index+1}">${storage.name}</form:option>
                                 </c:if>
                             </c:forEach>
-                        </form:select> <form:input class="temp" onchange="countAmount()" id="storageAmount" path="storageLocations[0][1]" type="number" size="3"/> kpl<br/> 
+                        </form:select> <form:input required="required" class="temp" onchange="countAmount()" id="storageAmount" path="storageLocations[0][1]" type="number" size="3"/> kpl<br/> 
                     </div>
                 </td>
                 <td valign="bottom"><button type="button" onClick="addStorage(1, ${batch.storageLocationsCount}, ${storageNames})">Lisää varastopaikka</button></td>
@@ -78,7 +78,7 @@
         <table class="noborder">
             <tr>
                 <td class="name">Nimikirjaimet</td>
-                <td><form:input path="signature" type="text" id="signature" size="6"/><form:errors path="signature"/></td>
+                <td><form:input required="required" path="signature" type="text" id="signature" size="6"/><form:errors path="signature"/></td>
                 <td></td>
             </tr>
         </table>

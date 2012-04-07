@@ -288,11 +288,13 @@ public class BatchController {
         return batch;
     }
 
-    private Batch addToBatch(Long id, BatchFormObject bfm) {
+    private Batch addToBatch(Long id, BatchFormObject bfo) {
         Batch batch = batchService.read(id);
-        batch.setAmount(batch.getAmount() + bfm.getAmount());
-        batch.setNote(batch.getNote() + "\n" + bfm.getNote());
-        Event event = EventHandler.addToBatchEvent(batch, bfm.getSignature());
+        batch.setAmount(batch.getAmount() + bfo.getAmount());
+        Long [][]newStorages = combineStorages(batch.getStorageLocations(), bfo.getStorageLocations()); 
+        batch.setStorageLocations(newStorages);
+        batch.setNote(batch.getNote() + "\n" + bfo.getNote());
+        Event event = EventHandler.addToBatchEvent(batch, bfo.getSignature());
         eventService.createOrUpdate(event);
         return batchService.createOrUpdate(batch);
 
@@ -314,5 +316,22 @@ public class BatchController {
         
         temp.setQualityStatus(status);
         substanceService.createOrUpdate(temp);
+    }
+
+    private Long[][] combineStorages(Long[][] storageTemp, Long[][] addStorage) {   
+        for(int i = 0; i < addStorage.length; ++i){
+            for(int j = 0; i < storageTemp.length; ++j){
+                if( storageTemp[j][0] != null && storageTemp[j][0].equals(addStorage[i][0]) ){
+                    storageTemp[j][1] += addStorage[i][1];
+                    break;
+                }
+                else if(storageTemp[j][1] == null){ 
+                    storageTemp[j] = addStorage[i];
+                    break;
+                }
+            }
+            
+        }
+        return storageTemp;
     }
 }

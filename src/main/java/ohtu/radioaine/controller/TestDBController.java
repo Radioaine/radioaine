@@ -133,7 +133,7 @@ public class TestDBController {
                 batch.setBatchNumber(batches[randomNumber][0]);
 
                 batch.setAmount(Integer.parseInt(batches[randomNumber][1]));
-                Long[][] storageLocations = new Long[10][2];
+                Long[][] storageLocations = new Long[100][2];
                 storageLocations[0][0] = (long) 1;
                 storageLocations[0][1] = Long.parseLong(batches[randomNumber][1]);
                 Storage storage = storageService.read((long) 1);

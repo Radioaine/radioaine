@@ -30,6 +30,15 @@ public class BatchFormObject {
     private Long[][] storageLocations = new Long[storageLocationsCount][2];
     @NotNull(message = "Nimi ei saa olla tyhjä")
     private String signature;
+    private int qualityCheck;
+
+    public int getQualityCheck() {
+        return qualityCheck;
+    }
+
+    public void setQualityCheck(int qualityCheck) {
+        this.qualityCheck = qualityCheck;
+    }
 
     public Long[][] getStorageLocations() {
         return storageLocations;

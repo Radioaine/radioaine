@@ -58,7 +58,7 @@
             <td>
                 <c:choose>
                     <c:when test="${batch.qualityCheck==1}">
-                        Ok
+                        Hyväksytty
                     </c:when>
                     <c:when test="${batch.qualityCheck==2}">
                         Hylätty
@@ -101,6 +101,10 @@
         Pakkauskoko: <form:input path="substanceVolume" type="number"/><form:errors path="substanceVolume"/><br/>
         Saapumispäivä: <form:input path="arrivalDate" type="text" id="arrivalDate" value="${arrive}"/><form:errors path="arrivalDate"/><br/>
         Vanhenemispäivä: <form:input path="expDate" type="text" id="expDate" value="${expire}"/><form:errors path="expDate"/><br/>
+        Laadunvarmistus: <form:select path="qualityCheck">
+                            <form:option  value="1" label="Hyväksytty"/>
+                            <form:option  value="2" label="Hylätty"/>
+                          </form:select><form:errors path="qualityCheck"/><br/>
         <div id="varastot">
             <c:forEach var="location" items="${batch.storageLocations}" varStatus="status">
                 <c:choose>

@@ -197,6 +197,7 @@ public class BatchController {
         batch.setStorageLocations(bfo.getStorageLocations());
         batch.setSubstanceVolume(bfo.getSubstanceVolume());
         batch.setBatchNumber(bfo.getBatchNumber());
+        batch.setQualityCheck(bfo.getQualityCheck());
         batch.setNote(bfo.getNote());
         batch.setArrivalDate(Time.parseDate(bfo.getArrivalDate()));
         batch.setExpDate(Time.parseDate(bfo.getExpDate()));

@@ -69,7 +69,7 @@
             <c:choose>
                 <c:when test="${batch.storageLocations[i.index][1] > 0}">
                     <tr>
-                        <td>${storages[(storage[0])-1].name} ${storages[(storage[0])-1].id}</td>
+                        <td>${storages[(storage[0])-1].name}</td>
                         <td>${storage[1]} kpl</td>
                     </tr>  
                 </c:when>

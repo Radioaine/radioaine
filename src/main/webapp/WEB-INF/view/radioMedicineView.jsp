@@ -61,6 +61,7 @@
         </tr>
 
     </table>
+    <br/>
     <form action="${pageContext.servletContext.contextPath}/modifyRadioMed/${radioMedicine.id}" method="GET">  
             <input type="submit" value="Muokkaa" />&nbsp; &nbsp;
     </form>

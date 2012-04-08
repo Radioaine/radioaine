@@ -13,11 +13,13 @@
             <td>
                 <br />
                 <c:forEach var="generator" items="${eluate.generators}">
-                    <a href="${pageContext.servletContext.contextPath}/substance/${generator.substance.id}">${generator.substance.name}</a><br />
+                    <a href="${pageContext.servletContext.contextPath}/substance/${generator.substance.id}">${generator.substance.name}</a>, 
+                    <a href="${pageContext.servletContext.contextPath}/batch/${generator.id}">Erä ${generator.batchNumber}</a><br />
                 </c:forEach>
                     
                 <c:forEach var="other" items="${eluate.others}">
-                    <a href="${pageContext.servletContext.contextPath}/substance/${other.substance.id}">${other.substance.name}</a><br />
+                    <a href="${pageContext.servletContext.contextPath}/substance/${other.substance.id}">${other.substance.name}</a>, 
+                    <a href="${pageContext.servletContext.contextPath}/batch/${other.id}">Erä ${other.batchNumber}</a><br />
                 </c:forEach>
             </td>
         </tr>
@@ -54,7 +56,7 @@
     </table>
     <br />
     <form action="${pageContext.servletContext.contextPath}/modifyEluate/${eluate.id}" method="GET">  
-            <input type="submit" value="Muokkaa" />&nbsp; &nbsp;
+            <input type="submit" value="Muokkaa" />
     </form>
 </div>
 

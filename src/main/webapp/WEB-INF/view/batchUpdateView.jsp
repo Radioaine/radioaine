@@ -17,44 +17,63 @@
 </script>
 
 <div id="contents">
-    <h1>Er‰ ${batch.batchNumber}</h1>
-    <p><b>Vanhat tiedot</b></p>
-    <table id="reunaton">
-
+    <h2>${batch.substance.name} / er‰ ${batch.batchNumber}</h2>
+    <br/>
+    
+    <form:form commandName="batch" action="${pageContext.servletContext.contextPath}/updateBatch/${batch.id}" method="POST">
+    <table class="noborder">
         <tr>
-            <td>Aine</td>
-            <td>${batch.substance.name}</a></td>
+            <th></th>
+            <th>P‰ivitetty</th>
+            <th>Aiempi</th>
         </tr>
+        
         <tr>
-            <td>J‰ljell‰</td>
-            <td>${batch.amount}kpl</td>
+            <td>Tuotenimi</td>
+            <td><form:select path="substance">
+                    <form:options items="${substances}" itemValue="id" itemLabel="name"/>
+                </form:select>
+            </td>
+            <td>${batch.substance.name}</td>
         </tr>
+        
         <tr>
-            <td>Pakkauskoko</td>
-            <td>${batch.substanceVolume}ml</td>
+            <td>Er‰numero</td>
+            <td><form:input required="required" path="batchNumber" type="text" /><form:errors path="batchNumber"/></td>
+            <td>${batch.batchNumber}</td>
         </tr>
+        
         <tr>
-            <td>Vahvuus</td>
-            <td>${batch.strength}</td>
-        </tr>
-        <tr>
-            <td>Saapunut</td>
-            <td><fmt:formatDate value="${batch.arrivalDate}" pattern="dd.MM.yyyy" var="arrive"/>${arrive}</td>
-        </tr>
-        <tr>
-            <td>Vanhenee</td>
+            <td class="name">K‰ytett‰v‰ ennen</td>
+            <td><form:input required="required" path="expDate" type="text" id="expDate" value="${expire}"/><form:errors path="expDate"/></td>
             <td><fmt:formatDate value="${batch.expDate}" pattern="dd.MM.yyyy" var="expire"/>${expire}</td>
+        </tr> 
+        
+        <tr class="red">
+            <td>Saapumisp‰iv‰</td>
+            <td><form:input path="arrivalDate" type="text" id="arrivalDate" value="${arrive}"/><form:errors path="arrivalDate"/></td>
+            <td>TODO Tallennus ei onnistu, jos t‰m‰ kentt‰ puuttuu. T‰m‰ pit‰isi kuitenkin poistaa!</td>
         </tr>
-        <tr>
-            <td>Valmistaja</td>
-            <td>${batch.manufacturer}</td>
-        </tr>
-        <tr>
-            <td>Tukkuliike</td>
-            <td>${batch.supplier}</td>
-        </tr>
-        <tr>
+        
+        <c:choose>
+            <c:when test="${batch.qualityCheck==1}">
+                <tr>
+            </c:when>
+            <c:when test="${batch.qualityCheck==2}">
+                <tr class="red">
+            </c:when>
+            <c:otherwise>
+                <tr class="yellow">
+            </c:otherwise>
+        </c:choose>
             <td>Laadunvarmistus</td>
+            <td><form:select path="qualityCheck">
+                    <form:option  value="0" label="Suorittamatta"/>
+                    <form:option  value="1" label="Hyv‰ksytty"/>
+                    <form:option  value="2" label="Hyl‰tty"/>
+                </form:select>
+                <form:errors path="qualityCheck"/>
+            </td>
             <td>
                 <c:choose>
                     <c:when test="${batch.qualityCheck==1}">
@@ -75,57 +94,70 @@
                 </c:choose>
             </td>
         </tr>
-        <c:forEach var="location" varStatus="i" items="${batch.storageLocations}">
-            <c:choose>
-                <c:when test="${batch.storageLocations[i.index][1] > 0}">
-                    <tr>
-                        <td>${storages[(batch.storageLocations[i.index][0]-1)].name}</td>     
-                        <td>${location[1]} kpl</td>
-                    </tr>
-                </c:when>
-            </c:choose>
-        </c:forEach>
+        
         <tr>
             <td>Kommentit</td>
+            <td><form:textarea path="note" type="text"/><form:errors path="note"/></td>
             <td>${batch.note}</td>
         </tr>
-
+        
+        <tr>
+            <td>Varastossa</td>
+            <td>
+                <c:forEach var="location" varStatus="i" items="${batch.storageLocations}">
+                    <c:choose>
+                        <c:when test="${batch.storageLocations[i.index][1] > 0}">
+                            ${storages[(batch.storageLocations[i.index][0]-1)].name} ${location[1]} kpl<br/>
+                        </c:when>
+                    </c:choose>
+                </c:forEach>
+            </td>
+            <td>${batch.amount}kpl</td>
+        </tr>
+        
+        <tr>
+            <td>Sijainnit</td>
+            <td>
+                <div id="varastot">
+                    <c:forEach var="location" items="${batch.storageLocations}" varStatus="status">
+                        <c:choose>
+                            <c:when test="${batch.storageLocations[status.index][1] > 0}">
+                                <form:select path="storageLocations[${status.index}][0]"> 
+                                    <c:forEach var="storage" items="${storages}" varStatus="i">
+                                        <c:if test="${storage.hidden == false}">
+                                            <form:option value="${i.index+1}">${storage.name}</form:option>
+                                        </c:if>
+                                    </c:forEach>
+                                </form:select> <form:input path="storageLocations[${status.index}][1]" type="number"/> kappaletta<br/>
+                            </c:when>
+                        </c:choose>
+                    </c:forEach>
+                </div>
+            </td>
+            <td valign="bottom">
+                <button type="button" onClick="addStorage(${batch.currentStorageLocationsCount},${batch.storageLocationsCount}, ${storageNames})">Lis‰‰ varastopaikka</button>
+            </td>
+        </tr>
+        <tr>
+            <td span="3">&nbsp;</td>
+        </tr>
+        <tr>
+            <td>Nimikirjaimet</td>
+            <td>
+                <form:input required="required" path="signature" type="text" id="signature" size="6"/><form:errors path="signature"/><br />
+            </td>
+        </tr>
     </table>
-    <br>
-    <form:form commandName="batch" action="${pageContext.servletContext.contextPath}/updateBatch/${batch.id}" method="POST">
-        Aine: <form:select path="substance">
-                    <form:options items="${substances}" itemValue="id" itemLabel="name"/>
-              </form:select><br/>
-        Er‰numero: <form:input required="required" path="batchNumber" type="text" /><form:errors path="batchNumber"/><br/>
-        <!--M‰‰r‰: <form:input path="amount" type="number"/><form:errors path="amount"/><br/>-->
-        Pakkauskoko: <form:input path="substanceVolume" type="number"/><form:errors path="substanceVolume"/><br/>
-        Saapumisp‰iv‰: <form:input required="required" path="arrivalDate" type="text" id="arrivalDate" value="${arrive}"/><form:errors path="arrivalDate"/><br/>
-        Vanhenemisp‰iv‰: <form:input required="required" path="expDate" type="text" id="expDate" value="${expire}"/><form:errors path="expDate"/><br/>
-        Laadunvarmistus: <form:select path="qualityCheck">
-                            <form:option  value="1" label="Hyv‰ksytty"/>
-                            <form:option  value="2" label="Hyl‰tty"/>
-                          </form:select><form:errors path="qualityCheck"/><br/>
-        <div id="varastot">
-            <c:forEach var="location" items="${batch.storageLocations}" varStatus="status">
-                <c:choose>
-                    <c:when test="${batch.storageLocations[status.index][1] > 0}">
-                        <form:select path="storageLocations[${status.index}][0]"> 
-                            <c:forEach var="storage" items="${storages}" varStatus="i">
-                                <c:if test="${storage.hidden == false}">
-                                    <form:option value="${i.index+1}">${storage.name}</form:option>
-                                </c:if>
-                            </c:forEach>
-                        </form:select> <form:input path="storageLocations[${status.index}][1]" type="number"/> kappaletta<br/>
-                    </c:when>
-                </c:choose>
-            </c:forEach>
-        </div>
-        <button type="button" onClick="addStorage(${batch.currentStorageLocationsCount},${batch.storageLocationsCount}, ${storageNames})">Lis‰‰ varastopaikka</button><br />
-        Huomioita: <br /><form:textarea path="note" type="text"/><form:errors path="note"/><br/>
-        Nimikirjaimet: <form:input required="required" path="signature" type="text" id="signature" size="6"/><form:errors path="signature"/><br />
-        <input type="submit" value="Tallenna muutokset">
-        <input type="button" value="Peruuta" onClick="parent.location = '${pageContext.servletContext.contextPath}/batch/${batch.id}'" />
+    <br/>
+    <input type="submit" value="Tallenna"> &nbsp; &nbsp;<input type="button" value="Peruuta" onClick="parent.location = '${pageContext.servletContext.contextPath}/batch/${batch.id}'" />
+                            
     </form:form>
+    
+
+        
+        
+        
+   
 </div>
 
 <%@include file="footer.jsp" %>

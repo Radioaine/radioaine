@@ -83,13 +83,7 @@
                         Hyl‰tty
                     </c:when>
                     <c:otherwise>
-                        <form style="background-color: yellow" action="${pageContext.servletContext.contextPath}/doCheck/${batch.id}+${batch.substance.id}" method="POST">
-                            <select name="qualityCheck">
-                                <option value="1">Hyv‰ksytty</option>
-                                <option value="2">Hyl‰tty</option>
-                            </select>
-                            <input type="submit" value="Kirjaa tulos">
-                        </form>
+                        Suorittamatta
                     </c:otherwise>
                 </c:choose>
             </td>
@@ -103,16 +97,8 @@
         
         <tr>
             <td>Varastossa</td>
-            <td>
-                <c:forEach var="location" varStatus="i" items="${batch.storageLocations}">
-                    <c:choose>
-                        <c:when test="${batch.storageLocations[i.index][1] > 0}">
-                            ${storages[(batch.storageLocations[i.index][0]-1)].name} ${location[1]} kpl<br/>
-                        </c:when>
-                    </c:choose>
-                </c:forEach>
-            </td>
-            <td>${batch.amount}kpl</td>
+            <td>${batch.amount} kpl</td>
+            <td>${batch.amount} kpl</td>
         </tr>
         
         <tr>
@@ -133,14 +119,24 @@
                         </c:choose>
                     </c:forEach>
                 </div>
-            </td>
-            <td valign="bottom">
                 <button type="button" onClick="addStorage(${batch.currentStorageLocationsCount},${batch.storageLocationsCount}, ${storageNames})">Lis‰‰ varastopaikka</button>
             </td>
+            <td valign="top">
+                <c:forEach var="location" varStatus="i" items="${batch.storageLocations}">
+                    <c:choose>
+                        <c:when test="${batch.storageLocations[i.index][1] > 0}">
+                            ${storages[(batch.storageLocations[i.index][0]-1)].name} ${location[1]} kpl<br/>
+                        </c:when>
+                    </c:choose>
+                </c:forEach>
+                
+            </td>
         </tr>
+        
         <tr>
             <td colspan="3">&nbsp;</td>
         </tr>
+        
         <tr>
             <td>Nimikirjaimet</td>
             <td>

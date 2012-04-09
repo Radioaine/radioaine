@@ -76,7 +76,7 @@
     <div id="batchButtons">
         <table class="noborder">
             <tr>
-                <td>
+                <td class="editButton">
                     <form action="${pageContext.servletContext.contextPath}/updateBatch/${batch.id}" method="POST">  
                         <input type="submit" value="Muokkaa" />
                     </form>

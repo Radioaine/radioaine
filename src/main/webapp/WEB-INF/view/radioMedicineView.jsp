@@ -65,9 +65,19 @@
 
     </table>
     <br/>
-    <form action="${pageContext.servletContext.contextPath}/modifyRadioMed/${radioMedicine.id}" method="GET">  
-            <input type="submit" value="Muokkaa" />
-    </form>
+    <table class="noborder">
+        <tr>
+            <td class="editButton">
+                <form action="${pageContext.servletContext.contextPath}/modifyRadioMed/${radioMedicine.id}" method="GET">  
+                    <input type="submit" value="Muokkaa" />
+                </form>
+            </td>
+            <td>
+                <input type="button" value="Palaa" onClick="parent.location = '${pageContext.servletContext.contextPath}/frontpage'" />
+            </td>
+        </tr>
+    </table>
+
 </div>
 
 

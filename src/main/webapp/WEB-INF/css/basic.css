@@ -15,9 +15,43 @@ body, div, td, th, h2, h3, h4 { /* redundant rules for bad browsers  */
 }  
 .clearhack { display: inline; } /*Clears Box Model Hack in IE5*/
 
-th {
-    text-align: left;
+table {border-collapse: collapse;}
+
+th {text-align: left;}
+
+td {border: 1px solid #333;}
+
+select {background-color: #FFF;}
+
+
+.activity {width: 100px;}
+
+select.am {width: 65px;}
+
+.amount {width: 50px;}
+
+select.batch {width: 350px;}
+
+.batch {width: 130px;}
+
+.batchnumber {width: 100px;}
+
+.before {width: 180px;}
+
+td.center {
+    text-align: center;
+    width: 45px;
 }
+
+.comm {width: 300px;}
+
+.date {width: 90px;}
+
+.editButton {width: 90px;}
+
+.elbutton {width: 135px;}
+
+table.eluate {background-color: #FFF;}
 
 .eluateButton {
     height: 30px; 
@@ -25,39 +59,9 @@ th {
     font-weight: bold;
 }
 
-.radioMedicineButton {
-    height: 30px; 
-    width: 140px;
-    font-weight: bold;
-}
+.infotext {font-size: 90%;}
 
-select {
-    background-color: #FFF;
-}
-
-select.substance {
-    width: 250px;
-}
-
-select.batch {
-    width: 350px;
-}
-
-select.list {
-    width: 600px;
-}
-
-select.am {
-    width: 65px;
-}
-
-table {
-    border-collapse: collapse;
-}
-
-table.noborder td {
-    border: none;
-}
+select.list {width: 600px;}
 
 table.listing {
     border: 0px;
@@ -70,124 +74,71 @@ table.listing td {
     padding: 5px;
 }
 
-table.listing th {
-    padding: 3px;
-}
+table.listing th {padding: 3px;}
 
-td {
-    border: 1px solid #333;
-    
-}
+.location {width: 170px;}
 
-table.eluate {
-    background-color: #FFF;
-}
-
-td.noborder, th.noborder {
-    border: none;
-}
-
-td.name {
+.name {
     width: 140px;
     border: none;
 }
 
-th.amount {
-    width: 45px;
+table.noborder td {border: none;}
+
+td.noborder, th.noborder {border: none;}
+
+.oldest{width: 150px;}
+
+.quality {width: 270px;}
+
+.radioMedicineButton {
+    height: 30px; 
+    width: 140px;
+    font-weight: bold;
 }
 
-td.center {
-    text-align: center;
-    width: 45px;
+.reportAmount {width: 50px;}
+
+.reportName {width: 150px;}
+
+.reportReason {width: 170px;}
+
+.short {width: 70px;}
+
+.shortButton {width: 70px;}
+
+.signature {width: 60px;}
+
+.substance {width: 260px;}
+
+select.substance {width: 250px;}
+
+.substanceFirst {width: 250px;}
+
+.substanceSecond {width: 280px;}
+
+.substanceHeader {
+    font-weight: bold;
+    font-size: 120%;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    padding-right: 10 px;
 }
 
-.infotext {
-     font-size: 90%;
-}
+.time {width: 60px;}
 
-.elbutton {
-    width: 125px;
-}
+.warnigs {width: 200px;}
 
-.date {
-	width: 90px;
-}
+.wide {width: 500px;}
 
-.time {
-	width: 60px;
-}
 
-.batch {
-	width: 130px;
-}
+tr.blue td {background-color: #BAC7FF;}
 
-.before {
-	width: 180px;
-}
+tr.yellow td {background-color: #FFF7A0;}
 
-.reportAmount {
-	width: 50px;
-}
+tr.red td {background-color: #FFA1A1;}
 
-.reportName {
-	width: 150px;
-}
-
-.reportReason {
-	width: 170px;
-}
-
-.oldest{
-    width: 150px;
-}
-
-.substance {
-    width: 260px;
-}
-
-.warnigs {
-    width: 200px;
-}
-
-.wide {
-    width: 500px;
-}
-
-.batchnumber {
-    width: 100px;
-}
-
-.quality {
-    width: 270px;
-}
-
-.comm {
-    width: 300px;
-}
-
-.substanceFirst {
-    width: 250px;
-}
-
-.substanceSecond {
-    width: 280px;
-}
-
-tr.blue td {
-    background-color: #BAC7FF;
-}
-
-tr.yellow td {
-    background-color: #FFF7A0;
-}
-
-tr.red td {
-    background-color: #FFA1A1;
-}
-
-tr.orange td {
-    background-color: #FFAA5F
-}
+tr.orange td {background-color: #FFAA5F}
 
 body {
     background: #E6FCE7;
@@ -224,6 +175,11 @@ h2 {
     padding-bottom: 2px;
     border-bottom: 1px solid #CCC;
     margin: 0;
+}
+
+h3 {
+    font-size: 120%;
+    margin-bottom: -20px;
 }
 
 p.note {

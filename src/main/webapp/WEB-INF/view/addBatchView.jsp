@@ -63,7 +63,7 @@
                 <td id="t">0</td>
             </tr>
             <tr>
-                <td>Huomautuksia</td>
+                <td>Kommentteja</td>
                 <td><form:textarea path="note" type="text" /><form:errors path="note"/></td>
             </tr>
         </table>

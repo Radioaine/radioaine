@@ -26,7 +26,8 @@
         <table class="listing">
             <tr>
                 <th class="time">Klo</th>
-                <th colspan="2">Aine</th>
+                <th class="time">Aine</th>
+                <th class="substance"></th>
                 <th class="activity">Aktiivisuus</th>
                 <th class="amount">M‰‰r‰</th>
                 <th class="location">Sijainti</th>
@@ -63,8 +64,8 @@
                 <c:if test="${radioMed.eluates[0].id == eluate.id}">
                     <tr>
                         <td class="noborder" style="background-color:#FDFDF0"></td>
-                        <td class="time"><fmt:formatDate value="${radioMed.date}" pattern="HH:mm"/></td>
-                        <td class="substance"><c:forEach var="kit" items="${radioMed.kits}">
+                        <td><fmt:formatDate value="${radioMed.date}" pattern="HH:mm"/></td>
+                        <td><c:forEach var="kit" items="${radioMed.kits}">
                                 <a href="RadioMedicine/${radioMed.id}">${kit.substance.name}</a><br>
                             </c:forEach></td>
                         <td>${radioMed.strength}

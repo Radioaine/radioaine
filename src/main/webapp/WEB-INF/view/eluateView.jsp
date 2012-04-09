@@ -5,7 +5,7 @@
 <%@include file="headerfront.jsp" %>
 
 <div id="contents">
-    <h2>Eluaatin tiedot</h2>
+    <h2>Eluaatin ${eluate.id} tiedot</h2>
     
     <table class="noborder">
         <tr>
@@ -39,6 +39,10 @@
         <tr>
             <td>Tilavuus</td>
             <td>${eluate.volume} ml</td>
+        </tr>
+        <tr>
+            <td>Varastopaikka</td>
+            <td>${eluate.storageLocation} TODO varastopaikan nimi</td>
         </tr>
         <tr>
             <td>Luotu</td>

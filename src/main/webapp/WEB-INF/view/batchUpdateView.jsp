@@ -139,7 +139,7 @@
             </td>
         </tr>
         <tr>
-            <td span="3">&nbsp;</td>
+            <td colspan="3">&nbsp;</td>
         </tr>
         <tr>
             <td>Nimikirjaimet</td>

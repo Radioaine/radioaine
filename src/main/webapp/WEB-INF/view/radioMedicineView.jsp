@@ -5,7 +5,7 @@
 <%@include file="headerfront.jsp" %>
 
 <div id="contents">
-    <h2>Radiol‰‰kkeen tiedot</h2>
+    <h2>Radiol‰‰kkeen ${radioMedicine.id} tiedot</h2>
 
     <table class="noborder">
         <tr>
@@ -13,29 +13,24 @@
             <td>
                 <br/>
                 <c:forEach var="eluate" items="${radioMedicine.eluates}">
-                    Eluaatti ${eluate.id} TODO t‰lle k‰ytetyn generaattorin eluaatin nimi<br/>
+                    <a href="${pageContext.servletContext.contextPath}/eluate/${eluate.id}">Eluaatti ${eluate.id} TODO T‰h‰n eluaattiin k‰ytetyn (yhden) generaattorin eluaatin nimi</a><br/>
                 </c:forEach>
 
                 <c:forEach var="kit" items="${radioMedicine.kits}">
-                    ${kit.substance.name}<br/>
+                    <a href="${pageContext.servletContext.contextPath}/substance/${kit.substance.id}">${kit.substance.name}</a>, 
+                    <a href="${pageContext.servletContext.contextPath}/batch/${kit.id}">Er‰ ${kit.batchNumber}</a><br/>
                 </c:forEach>
 
                 <c:forEach var="other" items="${radioMedicine.others}">
-                    ${other.substance.name}<br/>
+                    <a href="${pageContext.servletContext.contextPath}/substance/${other.substance.id}">${other.substance.name}</a>, 
+                    <a href="${pageContext.servletContext.contextPath}/batch/${other.id}">Er‰ ${other.batchNumber}</a><br/>
                 </c:forEach>
+                    
                 <br/>
             </td>
         </tr>
         <tr>
             <td class="name">Aktiivisuus</td>
-            <td>${radioMedicine.strength}</td>
-        </tr>
-        <tr>
-            <td>Tilavuus</td>
-            <td>${radioMedicine.volume} ml</td>
-        </tr>
-        <tr>
-            <td>Vahvuus</td>
             <td>${radioMedicine.strength}
                 <c:choose>
                     <c:when test="${radioMedicine.unit == 0}">
@@ -46,6 +41,14 @@
                     </c:otherwise>
                 </c:choose>
             </td>
+        </tr>
+        <tr>
+            <td>Tilavuus</td>
+            <td>${radioMedicine.volume} ml</td>
+        </tr>
+        <tr>
+            <td>Varastopaikka</td>
+            <td>${radioMedicine.storageLocation} TODO varastopaikan nimi</td>
         </tr>
         <tr>
             <td>Luotu</td>
@@ -63,7 +66,7 @@
     </table>
     <br/>
     <form action="${pageContext.servletContext.contextPath}/modifyRadioMed/${radioMedicine.id}" method="GET">  
-            <input type="submit" value="Muokkaa" />&nbsp; &nbsp;
+            <input type="submit" value="Muokkaa" />
     </form>
 </div>
 

@@ -19,6 +19,18 @@ th {
     text-align: left;
 }
 
+.eluateButton {
+    height: 30px; 
+    width: 110px;
+    font-weight: bold;
+}
+
+.radioMedicineButton {
+    height: 30px; 
+    width: 140px;
+    font-weight: bold;
+}
+
 select {
     background-color: #FFF;
 }

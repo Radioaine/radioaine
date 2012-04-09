@@ -96,8 +96,8 @@
                 </td>
             </tr>
             <tr>
-                <td>Huomautuksia</td>
-                <td><form:textarea path="note" type="text"/><form:errors path="note"/></td>
+                <td>Kommentit</td>
+                <td><form:input path="note" type="text" value="${eluate.note}"/><form:errors path="note"/></td>
             </tr>
             <tr>
                 <td>Nimikirjaimet</td>

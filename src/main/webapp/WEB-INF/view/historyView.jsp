@@ -36,6 +36,7 @@
         <input type="checkbox" name="reports" value="removed" /> Poistuneet radiolääkkeet <br />
         <input type="checkbox" name="reports" value="RadioMedQuantity" /> Käyttökuntoon saatetut radiolääkkeet / lkm <br />
         <input type="checkbox" name="reports" value="RadioMedDetails" /> Käyttökuntoon saatetut radiolääkkeet / tarkat tiedot <br />
+        <br/>
         <input type="submit" value="Luo raportti">
     </form>
     </p>

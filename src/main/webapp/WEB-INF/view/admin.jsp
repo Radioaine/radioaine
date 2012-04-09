@@ -5,6 +5,7 @@
 
 <div id="contents">
     
+    <h2>Varoitukset</h2>
     </br>
     <table class="listing">
 

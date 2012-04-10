@@ -1,6 +1,5 @@
 package ohtu.radioaine.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import ohtu.radioaine.domain.Batch;
@@ -78,7 +77,7 @@ public class TestDBController {
     private String[] storages = {"Alakerran kaappi", "Yläkerran kaappi", "Varastokaappi", "Hoitajien kaappi"};
 
     @RequestMapping("generateTestDB")
-    public String createDB() {
+    public String createDBCTRL() {
         createStorages();
         createSubstances();
         createBatches();

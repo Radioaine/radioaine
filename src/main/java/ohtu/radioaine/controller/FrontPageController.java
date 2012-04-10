@@ -29,12 +29,12 @@ public class FrontPageController {
     private StorageService storageService;
 
     @RequestMapping("*")
-    public String list() {
+    public String redirectToFrontpageCTRL() {
         return "redirect:/frontpage";
     }
 
     @RequestMapping(value = "frontpage", method = RequestMethod.GET)
-    public String frontPage(Model model) {
+    public String frontPageCTRL(Model model) {
         model.addAttribute("eluates", eluateService.list());
         model.addAttribute("radioMeds", radioMedService.list());
         model.addAttribute("generators", batchService.getBatchesByType(GENERATOR));

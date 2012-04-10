@@ -3,9 +3,7 @@
 <%@include file="headerfront.jsp" %>
 
 <div id="contents">
-    <h2>Valmisteet &nbsp;${date}</h2>
 
-    <br>
     <table class="noborder">
         <tr>
             <td class="elbutton">
@@ -21,6 +19,8 @@
         </tr>
     </table>
     <br>
+    <h2>Valmisteet &nbsp;${date}</h2>
+
 
     <c:forEach var="eluate" items="${eluates}">
         <table class="listing">

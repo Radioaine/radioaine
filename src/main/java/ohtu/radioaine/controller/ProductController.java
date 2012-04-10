@@ -18,19 +18,19 @@ public class ProductController {
     private BatchService esinePalvelu;
 
     @RequestMapping(value = "product", method = RequestMethod.GET)
-    public String productView() {
+    public String productViewCTRL() {
         return "productView";
     }
     
     // This is how you use parameters in request
     @RequestMapping(value = "product/{productId}", method = RequestMethod.GET)
-    public String showProductById(@PathVariable Integer productId) {
+    public String showProductByIdCTRL(@PathVariable Integer productId) {
         // getProduct(productId);
         return "productView";
     }
     
     @RequestMapping(value = "product/{id}", method = RequestMethod.POST)
-    public String addProduct() {
+    public String addProductCTRL() {
         //create product
         //add product to database
         return "productView";

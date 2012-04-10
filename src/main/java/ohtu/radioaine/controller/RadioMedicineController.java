@@ -33,7 +33,7 @@ public class RadioMedicineController {
     private StorageService storageService;
 
     @RequestMapping(value = "createRadioMedicine", method = RequestMethod.GET)
-    public String createRadioMedicineView(Model model) {
+    public String createRadioMedicineViewCTRL(Model model) {
         model.addAttribute("radioMedicine", new RadioMedicineFormObject());
         model.addAttribute("generators", batchService.getBatchesByType(GENERATOR));
         model.addAttribute("kits", batchService.getBatchesByType(KIT));
@@ -43,9 +43,9 @@ public class RadioMedicineController {
 
         return "createRadioMedicine";
     }
-    
+
     @RequestMapping(value = "modifyRadioMed/{id}", method = RequestMethod.GET)
-    public String updateRadioMedView(Model model, @PathVariable Long id) {
+    public String updateRadioMedViewCTRL(Model model, @PathVariable Long id) {
         model.addAttribute("radioMedicineForm", new RadioMedicineFormObject());
         model.addAttribute("radioMedicine", radioMedService.read(id));
         model.addAttribute("generators", batchService.getBatchesByType(GENERATOR));
@@ -56,23 +56,64 @@ public class RadioMedicineController {
 
         return "radioMedUpdateView";
     }
-    
+
     @RequestMapping(value = "modifyRadioMed/{id}", method = RequestMethod.POST)
-    public String modifyRadioMed(@Valid @ModelAttribute("radioMedicine") RadioMedicineFormObject rmfo,
-    @PathVariable Long id,
-    BindingResult result) {
+    public String modifyRadioMedCTRL(@Valid @ModelAttribute("radioMedicine") RadioMedicineFormObject rmfo,
+            @PathVariable Long id,
+            BindingResult result) {
         if (result.hasErrors()) {
             System.out.println(result);
             return "radioMedUpdateView";
         }
         updateRadioMed(id, rmfo);
-        return "redirect:/RadioMedicine/"+id;
+        return "redirect:/RadioMedicine/" + id;
+    }
+
+    private void updateRadioMed(Long id, RadioMedicineFormObject rmfo) {
+        RadioMedicine radioMedicine = radioMedService.read(id);
+
+        radioMedicine.setNote(rmfo.getNote());
+        radioMedicine.setVolume(rmfo.getVolume());
+        radioMedicine.setDate(Time.parseDate(rmfo.getDate()));
+        radioMedicine.setStrength(Double.parseDouble(rmfo.getStrength()));
+        radioMedicine.setUnit(rmfo.getUnit());
+        radioMedicine.setStorageLocation(rmfo.getStorageLocation());
+        radioMedicine.setTimestamp(Time.parseTimeStamp(rmfo.getDate() + " " + rmfo.getHours() + ":" + rmfo.getMinutes()));
+        List<Eluate> eluates = new ArrayList<Eluate>();
+        Long[] eluatesTable = rmfo.getEluates();
+        for (int i = 0; i < eluatesTable.length; ++i) {
+            if (eluatesTable[i] != null) {
+                eluates.add(eluateService.read(eluatesTable[i]));
+            }
+        }
+
+        List<Batch> kits = new ArrayList<Batch>();
+        Long[] kitsTable = rmfo.getKits();
+        for (int i = 0; i < kitsTable.length; ++i) {
+            if (kitsTable[i] != null) {
+                kits.add(batchService.read(kitsTable[i]));
+            }
+
+        }
+
+        List<Batch> others = new ArrayList<Batch>();
+        Long[] othersTable = rmfo.getOthers();
+        for (int i = 0; i < othersTable.length; ++i) {
+            if (othersTable[i] != null) {
+                others.add(batchService.read(othersTable[i]));
+            }
+        }
+
+        radioMedicine.setEluates(eluates);
+        radioMedicine.setOthers(others);
+        radioMedicine.setKits(kits);
+        radioMedService.createOrUpdate(radioMedicine);
     }
 
     @RequestMapping(value = "createRadioMedicine", method = RequestMethod.POST)
-    public String newRadioMedicine(@Valid @ModelAttribute("radioMedicine") RadioMedicineFormObject rmfo, BindingResult result) {
+    public String newRadioMedicineCTRL(@Valid @ModelAttribute("radioMedicine") RadioMedicineFormObject rmfo, BindingResult result) {
         if (result.hasErrors()) {
-            System.out.println(result);
+//            System.out.println(result);
             return "createRadioMedicine";
         }
         RadioMedicine newRadioMedicine = radioMedService.createOrUpdate(createRD(rmfo));
@@ -80,7 +121,7 @@ public class RadioMedicineController {
     }
 
     @RequestMapping("RadioMedicine/{id}")
-    public String radioMedicineView(Model model, @PathVariable Long id) {
+    public String radioMedicineViewCTRL(Model model, @PathVariable Long id) {
         model.addAttribute("radioMedicine", radioMedService.read(id));
         return "radioMedicineView";
     }
@@ -92,28 +133,37 @@ public class RadioMedicineController {
         radioMedicine.setSignature(rmfo.getSignature());
         radioMedicine.setVolume(rmfo.getVolume());
         radioMedicine.setDate(Time.parseDate(rmfo.getDate()));
-        if(rmfo.getStrength().equals("")){ radioMedicine.setStrength(0.0); }
-        else{ radioMedicine.setStrength(Double.parseDouble(rmfo.getStrength())); }
+        if (rmfo.getStrength().equals("")) {
+            radioMedicine.setStrength(0.0);
+        } else {
+            radioMedicine.setStrength(Double.parseDouble(rmfo.getStrength()));
+        }
         radioMedicine.setUnit(rmfo.getUnit());
         radioMedicine.setStorageLocation(rmfo.getStorageLocation());
         radioMedicine.setTimestamp(Time.parseTimeStamp(rmfo.getDate() + " " + rmfo.getHours() + ":" + rmfo.getMinutes()));
         List<Eluate> eluates = new ArrayList<Eluate>();
         Long[] eluatesTable = rmfo.getEluates();
         for (int i = 0; i < eluatesTable.length; ++i) {
-            if(eluatesTable[i] != null){eluates.add(eluateService.read(eluatesTable[i]));}
+            if (eluatesTable[i] != null) {
+                eluates.add(eluateService.read(eluatesTable[i]));
+            }
         }
 
         List<Batch> kits = new ArrayList<Batch>();
         Long[] kitsTable = rmfo.getKits();
         for (int i = 0; i < kitsTable.length; ++i) {
-            if(kitsTable[i] != null){kits.add(batchService.read(kitsTable[i]));}
+            if (kitsTable[i] != null) {
+                kits.add(batchService.read(kitsTable[i]));
+            }
 
         }
 
         List<Batch> others = new ArrayList<Batch>();
         Long[] othersTable = rmfo.getOthers();
         for (int i = 0; i < othersTable.length; ++i) {
-            if(othersTable[i] != null){others.add(batchService.read(othersTable[i]));}
+            if (othersTable[i] != null) {
+                others.add(batchService.read(othersTable[i]));
+            }
         }
 
         radioMedicine.setEluates(eluates);
@@ -121,40 +171,5 @@ public class RadioMedicineController {
         radioMedicine.setKits(kits);
 
         return radioMedicine;
-    }
-
-    private void updateRadioMed(Long id, RadioMedicineFormObject rmfo) {
-        RadioMedicine radioMedicine = radioMedService.read(id);
-         
-        radioMedicine.setNote(rmfo.getNote());
-        radioMedicine.setVolume(rmfo.getVolume());
-        radioMedicine.setDate(Time.parseDate(rmfo.getDate()));
-        radioMedicine.setStrength(Double.parseDouble(rmfo.getStrength()));
-        radioMedicine.setUnit(rmfo.getUnit());
-        radioMedicine.setStorageLocation(rmfo.getStorageLocation());
-        radioMedicine.setTimestamp(Time.parseTimeStamp(rmfo.getDate() + " " + rmfo.getHours() + ":" + rmfo.getMinutes()));
-        List<Eluate> eluates = new ArrayList<Eluate>();
-        Long[] eluatesTable = rmfo.getEluates();
-        for (int i = 0; i < eluatesTable.length; ++i) {
-            if(eluatesTable[i] != null){eluates.add(eluateService.read(eluatesTable[i]));}
-        }
-
-        List<Batch> kits = new ArrayList<Batch>();
-        Long[] kitsTable = rmfo.getKits();
-        for (int i = 0; i < kitsTable.length; ++i) {
-            if(kitsTable[i] != null){kits.add(batchService.read(kitsTable[i]));}
-
-        }
-
-        List<Batch> others = new ArrayList<Batch>();
-        Long[] othersTable = rmfo.getOthers();
-        for (int i = 0; i < othersTable.length; ++i) {
-            if(othersTable[i] != null){others.add(batchService.read(othersTable[i]));}
-        }
-
-        radioMedicine.setEluates(eluates);
-        radioMedicine.setOthers(others);
-        radioMedicine.setKits(kits);
-        radioMedService.createOrUpdate(radioMedicine);
     }
 }

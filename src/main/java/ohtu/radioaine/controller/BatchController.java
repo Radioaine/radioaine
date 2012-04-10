@@ -46,14 +46,14 @@ public class BatchController {
     private StorageService storageService;
 
     @RequestMapping(value = "batch/{id}", method = RequestMethod.GET)
-    public String getBatchById(@PathVariable Long id, Model model) {
+    public String getBatchByIdCTRL(@PathVariable Long id, Model model) {
         model.addAttribute("batch", batchService.read(id));
         model.addAttribute("storages", storageService.list());
         return "batchView";
     }
 
     @RequestMapping(value = "doCheck/{id}+{sid}", method = RequestMethod.POST)
-    public String qualityCheck(@PathVariable Long id,
+    public String qualityCheckCTRL(@PathVariable Long id,
             @PathVariable Long sid,
             @RequestParam String sig,
             @RequestParam Integer qualityCheckStatus) {
@@ -80,13 +80,13 @@ public class BatchController {
     }
 
     @RequestMapping(value = "batch", method = RequestMethod.GET)
-    public String batchList(Model model) {
+    public String batchListCTRL(Model model) {
         model.addAttribute("batches", batchService.list());
         return "batchView";
     }
 
     @RequestMapping(value = "addBatch", method = RequestMethod.GET)
-    public String addbatchView(Model model) {
+    public String addbatchViewCTRL(Model model) {
         model.addAttribute("batch", new BatchFormObject());
         model.addAttribute("substances", substanceService.list());
         model.addAttribute("storages", storageService.list());
@@ -108,14 +108,14 @@ public class BatchController {
     }
 
     @RequestMapping(value = "removeFromBatch/{id}", method = RequestMethod.GET)
-    public String removeFromBatchView(@PathVariable Long id, Model model) {
+    public String removeFromBatchViewCTRL(@PathVariable Long id, Model model) {
         model.addAttribute("batch", batchService.read(id));
         model.addAttribute("storages", storageService.list());
         return "removeFromBatchView";
     }
 
     @RequestMapping(value = "removeFromBatch/{id}", method = RequestMethod.POST)
-    public String removeFromBatch(@PathVariable Long id, @RequestParam Integer[] amounts, @RequestParam String remover, @RequestParam String reason) {
+    public String removeFromBatchCTRL(@PathVariable Long id, @RequestParam Integer[] amounts, @RequestParam String remover, @RequestParam String reason) {
         removeItemsFromBatch(id, amounts, reason, remover);
         return "redirect:/batch/" + id;
     }
@@ -144,7 +144,7 @@ public class BatchController {
     }
 
     @RequestMapping(value = "batch", method = RequestMethod.POST)
-    public String addBatch(@Valid @ModelAttribute("batch") BatchFormObject bfo, BindingResult result) {
+    public String addBatchCTRL(@Valid @ModelAttribute("batch") BatchFormObject bfo, BindingResult result) {
         if (result.hasErrors()) {
             System.out.println(result);
             return "redirect:/addBatch";
@@ -167,7 +167,7 @@ public class BatchController {
     }
 
     @RequestMapping(value = "updateBatch/{id}")
-    public String batchUpdateRequest(Model model, @PathVariable Long id) {
+    public String batchUpdateRequestCTRL(Model model, @PathVariable Long id) {
         model.addAttribute("substances", substanceService.list());
         model.addAttribute("batch", batchService.read(id));
         model.addAttribute("storages", storageService.list());
@@ -185,7 +185,7 @@ public class BatchController {
     }
 
     @RequestMapping(value = "updateBatch/{id}", method = RequestMethod.POST)
-    public String batchUpdate(@Valid @ModelAttribute("batch") BatchFormObject bfm,
+    public String batchUpdateCTRL(@Valid @ModelAttribute("batch") BatchFormObject bfm,
             BindingResult result,
             Model model,
             @PathVariable Long id) {
@@ -273,7 +273,12 @@ public class BatchController {
     }
 
     @RequestMapping(value = "batchDelete/{id}", method = RequestMethod.POST)
-    public String deleteBatch(@RequestParam String name, @RequestParam Integer amount, @PathVariable Long id) {
+    public String deleteBatchCTRL(@RequestParam String name, @RequestParam Integer amount, @PathVariable Long id) {
+        deleteBatchFromDatabase(id, amount, name);
+        return "redirect:/batch/" + id;
+    }
+
+    private void deleteBatchFromDatabase(Long id, Integer amount, String name) {
         Batch batch = batchService.read(id);
         Substance substance = batch.getSubstance();
         int total = batch.getAmount() - amount;
@@ -283,7 +288,6 @@ public class BatchController {
             batch.setAmount(total);
             batchService.createOrUpdate(batch);
         }
-        return "redirect:/batch/" + id;
     }
 
     private Batch createBatch(BatchFormObject bfo) {

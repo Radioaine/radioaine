@@ -29,19 +29,19 @@ public class HistoryController {
     private RadioMedService radioMedService;
     
     @RequestMapping("historyView")
-    public String history(Model model) {
+    public String historyCTRL(Model model) {
         model.addAttribute("events", eventService.list());
         return "historyView";
     }
     
     @RequestMapping("seekModify")
-    public String modified(Model model) {
+    public String modifiedCTRL(Model model) {
         model.addAttribute("modified", eventService.list("type=modify"));
         return "historyView";
     }
     
     @RequestMapping("seek")
-    public String seekByName(@RequestParam String[] reports, 
+    public String seekByNameCTRL(@RequestParam String[] reports, 
     Model model,
     @RequestParam String start,
     @RequestParam String end) {

@@ -26,7 +26,7 @@ public class SubstanceController {
     private EventService eventService;
     
     @RequestMapping(value = "substance/{id}", method = RequestMethod.GET)
-    public String getSubstanceById(@PathVariable Long id, Model model) {
+    public String getSubstanceByIdCTRL(@PathVariable Long id, Model model) {
         Substance substance = (Substance) substanceService.read(id);
         model.addAttribute("substance", substance);
         model.addAttribute("substanceBatches", batchService.listSubstanceBatches(id));
@@ -35,7 +35,7 @@ public class SubstanceController {
     }
 
     @RequestMapping(value = "substance", method = RequestMethod.POST)
-    public String addSubstance(@Valid @ModelAttribute("substance") SubstanceFormObject sfo, BindingResult result) {
+    public String addSubstanceCTRL(@Valid @ModelAttribute("substance") SubstanceFormObject sfo, BindingResult result) {
         if (result.hasErrors()) {
             return "addSubstanceView";
         }
@@ -58,19 +58,24 @@ public class SubstanceController {
     }
 
     @RequestMapping(value = "substance", method = RequestMethod.GET)
-    public String listaa(Model model) {
+    public String listaaCTRL(Model model) {
         model.addAttribute("substances", substanceService.list());
         return "substanceViewTest";
     }
 
     @RequestMapping(value = "updateSubstance/{id}", method = RequestMethod.POST)
-    public String updateSubstance(@Valid @ModelAttribute("substance") SubstanceFormObject sfm,
+    public String updateSubstanceCTRL(@Valid @ModelAttribute("substance") SubstanceFormObject sfm,
             BindingResult result,
             Model model,
             @PathVariable Long id) {
-        Substance temp = (Substance) substanceService.read(id);
+        updateSubstance(id, sfm);
+        return "redirect:/updateSubstance/" + id;
+    }
+
+    private void updateSubstance(Long id, SubstanceFormObject sfm) {
+        Substance substanceToUpdate = (Substance) substanceService.read(id);
         Substance substance = new Substance();
-        substance.setId(temp.getId());
+        substance.setId(substanceToUpdate.getId());
         substance.setName(sfm.getName());
         substance.setType(sfm.getType());
         substance.setAlertLimit1(sfm.getAlertLimit1());
@@ -80,19 +85,17 @@ public class SubstanceController {
         substance.setSupplier(sfm.getSupplier());
         substance.setHalflife(sfm.getHalflife());
         substanceService.createOrUpdate(substance);
-
-        return "redirect:/updateSubstance/" + id;
     }
 
     @RequestMapping(value = "updateSubstance/{id}", method = RequestMethod.GET)
-    public String updateSubstanceView(Model model, @PathVariable Long id) {
+    public String updateSubstanceViewCTRL(Model model, @PathVariable Long id) {
         System.out.println(id);
         model.addAttribute("substance", substanceService.read(id));
         return "substanceUpdateView";
     }
 
     @RequestMapping(value = "addSubstance", method = RequestMethod.GET)
-    public String addSubstanceView(Model model) {
+    public String addSubstanceViewCTRL(Model model) {
         model.addAttribute("substance", new SubstanceFormObject());
         return "addSubstanceView";
     }

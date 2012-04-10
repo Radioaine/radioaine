@@ -35,31 +35,31 @@ public class AdminController {
     private RadioMedService radioMedService;
 
     @RequestMapping("admin")
-    public String adminView(Model model) {
+    public String adminViewCTRL(Model model) {
         model.addAttribute("substances", substanceService.list());
         model.addAttribute("warning", Time.getWarningDate());
         return "admin";
     }
 
     @RequestMapping("management")
-    public String managementView(Model model) {
+    public String managementViewCTRL(Model model) {
         return "management";
     }
 
     @RequestMapping("substanceView")
-    public String substancesUpdate(Model model) {
+    public String substancesUpdateCTRL(Model model) {
         model.addAttribute("substances", substanceService.list());
         return "substanceView";
     }
 
     @RequestMapping(value = "addStorage", method = RequestMethod.GET)
-    public String addStorageView(Model model) {
+    public String addStorageViewCTRL(Model model) {
         model.addAttribute("storage", new StorageFormObject());
         return "addStorageView";
     }
 
     @RequestMapping(value = "addStorage", method = RequestMethod.POST)
-    public String addStorage(@RequestParam String name) {
+    public String addStorageCTRL(@RequestParam String name) {
         addNewStorage(name);
         return "redirect:/storagesView";
     }
@@ -88,7 +88,7 @@ public class AdminController {
     }
 
     @RequestMapping("storagesView")
-    public String storageView(Model model) {
+    public String storageViewCTRL(Model model) {
         setStoragesInUse();
         model.addAttribute("storages", storageService.list());
         return "storagesView";
@@ -139,7 +139,7 @@ public class AdminController {
     }
 
     @RequestMapping(value = "updateStorageName/{id}", method = RequestMethod.POST)
-    public String updateStorageName(@RequestParam String name, @PathVariable Long id) {
+    public String updateStorageNameCTRL(@RequestParam String name, @PathVariable Long id) {
         Storage temp = storageService.read(id);
         temp.setName(name);
         storageService.createOrUpdate(temp);
@@ -148,7 +148,7 @@ public class AdminController {
     }
 
     @RequestMapping(value = "removeStorageName/{id}", method = RequestMethod.POST)
-    public String removeStorageName(@PathVariable Long id, Model model) {
+    public String removeStorageNameCTRL(@PathVariable Long id, Model model) {
         removeStorageLocation(id);
         return "redirect:/storagesView";
     }
@@ -191,7 +191,7 @@ public class AdminController {
     }
 
     @RequestMapping(value = "addStatusComment/{sid}+{cid}")
-    public String addStatusComment(@RequestParam String comment,
+    public String addStatusCommentCTRL(@RequestParam String comment,
             @PathVariable Long sid,
             @PathVariable Integer cid) {
         Substance temp = (Substance) substanceService.read(sid);

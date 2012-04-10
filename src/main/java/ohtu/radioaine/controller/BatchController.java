@@ -56,23 +56,27 @@ public class BatchController {
     public String qualityCheck(@PathVariable Long id,
             @PathVariable Long sid,
             @RequestParam String sig,
-            @RequestParam Integer qualityCheck) {
+            @RequestParam Integer qualityCheckStatus) {
         if (sig.length() < 2) {
             if (sid <= 0) {
                 return "redirect:/batch/" + id;
             }
             return "redirect:/substance/" + sid;
         }
+        setQualityCheck(id, qualityCheckStatus, sig);
+        if (sid <= 0) {
+            return "redirect:/batch/" + id;
+        }
+        return "redirect:/substance/" + sid;
+    }
+
+    private void setQualityCheck(Long id, Integer qualityCheck, String sig) {
         Batch batch = batchService.read(id);
         batch.setQualityCheck(qualityCheck);
         batchService.createOrUpdate(batch);
         updateSubstance(batch.getSubstance());
         Event event = EventHandler.qualityCheckEvent(batch, sig);
         eventService.createOrUpdate(event);
-        if (sid <= 0) {
-            return "redirect:/batch/" + id;
-        }
-        return "redirect:/substance/" + sid;
     }
 
     @RequestMapping(value = "batch", method = RequestMethod.GET)
@@ -145,6 +149,11 @@ public class BatchController {
             System.out.println(result);
             return "redirect:/addBatch";
         }
+        Batch batch = addBatchToDatabase(bfo);
+        return "redirect:/batch/" + batch.getId();
+    }
+
+    private Batch addBatchToDatabase(BatchFormObject bfo) {
         Batch batch = createBatch(bfo);
         Batch temp = batchService.read(batch.getBatchNumber(), bfo.getSubstance());
         if (temp == null) {
@@ -154,7 +163,7 @@ public class BatchController {
         } else {
             batch = addToBatch(temp.getId(), bfo);
         }
-        return "redirect:/batch/" + batch.getId();
+        return batch;
     }
 
     @RequestMapping(value = "updateBatch/{id}")
@@ -162,13 +171,17 @@ public class BatchController {
         model.addAttribute("substances", substanceService.list());
         model.addAttribute("batch", batchService.read(id));
         model.addAttribute("storages", storageService.list());
+        setStorageNames(model);
+        return "batchUpdateView";
+    }
+
+    private void setStorageNames(Model model) {
         String names = "'";
         for (int i = 0; i < storageService.storageNamesList().size(); i++) {
             names += storageService.storageNamesList().get(i) + "^separate^";
         }
         names += "'";
         model.addAttribute("storageNames", names);
-        return "batchUpdateView";
     }
 
     @RequestMapping(value = "updateBatch/{id}", method = RequestMethod.POST)
@@ -176,10 +189,9 @@ public class BatchController {
             BindingResult result,
             Model model,
             @PathVariable Long id) {
-        int newTotalAmount = count(bfm);
+        int newTotalAmount = countAmount(bfm);
         Batch batchToUpdate = batchService.read(id);
         if (totalAmountDiffers(result, batchToUpdate, newTotalAmount)) {
-
 //            System.out.println(result);
             return "redirect:/updateBatch/" + id;
         }
@@ -192,7 +204,7 @@ public class BatchController {
         return result.hasErrors() || temp.getAmount() != newTotalAmount;
     }
 
-    private int count(BatchFormObject bfm) {
+    private int countAmount(BatchFormObject bfm) {
         //Checks if the new total amount differs from the old total amount and if it does, the update fails
         int newTotalAmount = 0;
         for (int i = 0; i < bfm.getStorageLocations().length; i++) {

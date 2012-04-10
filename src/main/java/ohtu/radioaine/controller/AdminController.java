@@ -5,7 +5,6 @@
 package ohtu.radioaine.controller;
 
 import java.util.List;
-import javax.validation.Valid;
 import ohtu.radioaine.domain.*;
 import ohtu.radioaine.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +12,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import ohtu.radioaine.tools.Time;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 /**
@@ -62,6 +60,11 @@ public class AdminController {
 
     @RequestMapping(value = "addStorage", method = RequestMethod.POST)
     public String addStorage(@RequestParam String name) {
+        addNewStorage(name);
+        return "redirect:/storagesView";
+    }
+
+    private boolean addNewStorage(String name) {
         List<Storage> storageList = storageService.list();
         for (Storage storage : storageList) {
             if (storage.isHidden() == true) {
@@ -69,18 +72,11 @@ public class AdminController {
                 storage.setName(name);
                 storage.setInUse(false);
                 storageService.createOrUpdate(storage);
-                return "redirect:/storagesView";
+                return true;
             }
         }
         storageService.createOrUpdate(createStorage(name));
-        return "redirect:/storagesView";
-    }
-
-    @RequestMapping("storagesView")
-    public String storageView(Model model) {
-//        setStoragesInUse();
-        model.addAttribute("storages", storageService.list());
-        return "storagesView";
+        return false;
     }
 
     private Storage createStorage(String name) {
@@ -88,8 +84,14 @@ public class AdminController {
         storage.setName(name);
         storage.setHidden(false);
         storage.setInUse(false);
-
         return storage;
+    }
+
+    @RequestMapping("storagesView")
+    public String storageView(Model model) {
+        setStoragesInUse();
+        model.addAttribute("storages", storageService.list());
+        return "storagesView";
     }
 
     @RequestMapping(value = "updateStorageName/{id}", method = RequestMethod.POST)
@@ -97,50 +99,51 @@ public class AdminController {
         Storage temp = storageService.read(id);
         temp.setName(name);
         storageService.createOrUpdate(temp);
-        System.out.println("uusi nimi on: " + storageService.read(id).getName());
+//        System.out.println("uusi nimi on: " + storageService.read(id).getName());
         return "redirect:/storagesView";
     }
 
     @RequestMapping(value = "removeStorageName/{id}", method = RequestMethod.POST)
     public String removeStorageName(@PathVariable Long id, Model model) {
+        removeStorageLocation(id);
+        return "redirect:/storagesView";
+    }
+
+    private boolean removeStorageLocation(Long id) {
         List<Batch> batchList = batchService.list();
         List<Eluate> eluateList = eluateService.list();
         List<RadioMedicine> radioMedicineList = radioMedService.list();
-        Storage storage = storageService.read(id);
-        if(storage == null) {
-            System.out.println("STORAGE ON NULL");
-        }
+        Storage temp = storageService.read(id);
         //removes the storage only if it is not used in any batches, eluates or radiomedicines
         for (Batch batch : batchList) {
             Long[][] locations = batch.getStorageLocations();
             for (int i = 0; i < locations.length; i++) {
                 if (locations[i][0] == id) {
-                    storage.setInUse(true);
-                    storageService.createOrUpdate(storage);
-                    return "redirect:/storagesView";
+                    temp.setInUse(true);
+                    storageService.createOrUpdate(temp);
+                    return true;
                 }
             }
         }
         for (Eluate eluate : eluateList) {
             if (eluate.getStorageLocation() == id) {
-                storage.setInUse(true);
-                storageService.createOrUpdate(storage);
-                return "redirect:/storagesView";
+                temp.setInUse(true);
+                storageService.createOrUpdate(temp);
+                return true;
             }
         }
         for (RadioMedicine radioMedicine : radioMedicineList) {
             if (radioMedicine.getStorageLocation() == id) {
-                storage.setInUse(true);
-                storageService.createOrUpdate(storage);
-                return "redirect:/storagesView";
+                temp.setInUse(true);
+                storageService.createOrUpdate(temp);
+                return true;
             }
         }
-        storage.setName("^hidden^");
-        storage.setInUse(false);
-        storage.setHidden(true);
-        storageService.createOrUpdate(storage);
-
-        return "redirect:/storagesView";
+        temp.setName("^hidden^");
+        temp.setInUse(false);
+        temp.setHidden(true);
+        storageService.createOrUpdate(temp);
+        return false;
     }
 
     @RequestMapping(value = "addStatusComment/{sid}+{cid}")
@@ -169,6 +172,9 @@ public class AdminController {
         for (Batch batch : batchList) {
             Long[][] locations = batch.getStorageLocations();
             for (int i = 0; i < locations.length; i++) {
+                if (locations[i][0] == null) {
+                    locations[i][0] = (long) 0;
+                }
                 if (locations[i][0] > 0 && !storageService.read(locations[i][0]).isInUse()) {
                     Storage temp = storageService.read(locations[i][0]);
                     temp.setInUse(true);

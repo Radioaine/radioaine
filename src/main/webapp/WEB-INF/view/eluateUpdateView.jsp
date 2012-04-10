@@ -86,17 +86,18 @@
             </tr>
             <tr>
                 <td>Varastopaikka</td>
-                <td><form:select  path="storageLocation">
+                <td><form:select path="storageLocation">
                         <c:forEach var="storage" items="${storages}" varStatus="i">
                             <c:if test="${storage.hidden == false}">
-                                <form:option value="${i.index+1}">${storage.name}</form:option>
+                                <form:option value="${storage.id}">${storage.name}</form:option>
                             </c:if>
                         </c:forEach>
-                    </form:select></td>
+                    </form:select>
+                </td>
             </tr>
             <tr>
-                <td>Huomautuksia</td>
-                <td><form:textarea path="note" type="text"/><form:errors path="note"/></td>
+                <td>Kommentit</td>
+                <td><form:input path="note" type="text" value="${eluate.note}"/><form:errors path="note"/></td>
             </tr>
             <tr>
                 <td>Nimikirjaimet</td>

@@ -51,7 +51,6 @@ public class BatchController {
         model.addAttribute("storages", storageService.list());
         return "batchView";
     }
-    
 
     @RequestMapping(value = "doCheck/{id}+{sid}", method = RequestMethod.POST)
     public String qualityCheck(@PathVariable Long id,
@@ -87,52 +86,59 @@ public class BatchController {
         model.addAttribute("batch", new BatchFormObject());
         model.addAttribute("substances", substanceService.list());
         model.addAttribute("storages", storageService.list());
-        
+        addNames(model);
+        return "addBatchView";
+    }
+
+    private void addNames(Model model) {
         String names = "'";
-        for(int i = 0; i < storageService.storageNamesList().size(); i++)   {
-            if(!storageService.list().get(i).isHidden())  
+        for (int i = 0; i < storageService.storageNamesList().size(); i++) {
+            if (!storageService.list().get(i).isHidden()) {
                 names += storageService.storageNamesList().get(i) + "^separate^";
-            else
+            } else {
                 names += "^hidden^^separate^";
+            }
         }
         names += "'";
         model.addAttribute("storageNames", names);
-        
-        return "addBatchView";
     }
-    
+
     @RequestMapping(value = "removeFromBatch/{id}", method = RequestMethod.GET)
     public String removeFromBatchView(@PathVariable Long id, Model model) {
         model.addAttribute("batch", batchService.read(id));
         model.addAttribute("storages", storageService.list());
         return "removeFromBatchView";
     }
-    
+
     @RequestMapping(value = "removeFromBatch/{id}", method = RequestMethod.POST)
     public String removeFromBatch(@PathVariable Long id, @RequestParam Integer[] amounts, @RequestParam String remover, @RequestParam String reason) {
+        removeItemsFromBatch(id, amounts, reason, remover);
+        return "redirect:/batch/" + id;
+    }
+
+    private void removeItemsFromBatch(Long id, Integer[] amounts, String reason, String remover) {
         Batch temp = batchService.read(id);
         Long[][] locs = temp.getStorageLocations();
         int tempTotalAmount = 0;
-        for(int i=0; i<amounts.length;++i){
-            if(amounts[i] != null && locs[i][1] != null)    {
-                if(amounts[i] > 0 && locs[i][1] >= amounts[i])   {
+        for (int i = 0; i < amounts.length; ++i) {
+            if (amounts[i] != null && locs[i][1] != null) {
+                if (amounts[i] > 0 && locs[i][1] >= amounts[i]) {
                     System.out.println(locs[i][1]);
                     locs[i][1] -= amounts[i];
                     System.out.println(locs[i][1]);
                 }
             }
-            if(locs[i][1] != null)
+            if (locs[i][1] != null) {
                 tempTotalAmount += locs[i][1];
+            }
         }
         temp.setAmount(tempTotalAmount);
         temp.setStorageLocations(locs);
         batchService.createOrUpdate(temp);
         Event event = EventHandler.removeFromBatchEvent(temp, reason, remover);
         eventService.createOrUpdate(event);
-            
-        return "redirect:/batch/" + id;
     }
-    
+
     @RequestMapping(value = "batch", method = RequestMethod.POST)
     public String addBatch(@Valid @ModelAttribute("batch") BatchFormObject bfo, BindingResult result) {
         if (result.hasErrors()) {
@@ -156,8 +162,8 @@ public class BatchController {
         model.addAttribute("substances", substanceService.list());
         model.addAttribute("batch", batchService.read(id));
         model.addAttribute("storages", storageService.list());
-        String names = "'"; 
-        for(int i = 0; i < storageService.storageNamesList().size(); i++)   {
+        String names = "'";
+        for (int i = 0; i < storageService.storageNamesList().size(); i++) {
             names += storageService.storageNamesList().get(i) + "^separate^";
         }
         names += "'";
@@ -170,25 +176,32 @@ public class BatchController {
             BindingResult result,
             Model model,
             @PathVariable Long id) {
+        int newTotalAmount = count(bfm);
+        Batch batchToUpdate = batchService.read(id);
+        if (totalAmountDiffers(result, batchToUpdate, newTotalAmount)) {
 
-        
-        //Checks if the new total amount differs from the old total amount and if it does, the update fails
-        Batch temp = batchService.read(id);
-        int newTotalAmount = 0;
-        for (int i = 0; i < bfm.getStorageLocations().length; i++) {
-            System.out.println("storagelocationi on : " + bfm.getStorageLocations().length);
-            if(bfm.getStorageLocations()[i][1] != null)
-                newTotalAmount += bfm.getStorageLocations()[i][1];
-        }
-        
-        if (result.hasErrors() || temp.getAmount() != newTotalAmount) {
-
-            System.out.println(result);
+//            System.out.println(result);
             return "redirect:/updateBatch/" + id;
         }
         System.out.println("ZZZ3");
         updateBatch(id, bfm);
         return "redirect:/batch/" + id;
+    }
+
+    private boolean totalAmountDiffers(BindingResult result, Batch temp, int newTotalAmount) {
+        return result.hasErrors() || temp.getAmount() != newTotalAmount;
+    }
+
+    private int count(BatchFormObject bfm) {
+        //Checks if the new total amount differs from the old total amount and if it does, the update fails
+        int newTotalAmount = 0;
+        for (int i = 0; i < bfm.getStorageLocations().length; i++) {
+            System.out.println("storagelocationi on : " + bfm.getStorageLocations().length);
+            if (bfm.getStorageLocations()[i][1] != null) {
+                newTotalAmount += bfm.getStorageLocations()[i][1];
+            }
+        }
+        return newTotalAmount;
     }
 
     private Batch updateBatch(Long id, BatchFormObject bfo) {
@@ -197,15 +210,17 @@ public class BatchController {
         batch.setStorageLocations(bfo.getStorageLocations());
         batch.setSubstanceVolume(bfo.getSubstanceVolume());
         batch.setBatchNumber(bfo.getBatchNumber());
+        batch.setQualityCheck(bfo.getQualityCheck());
         batch.setNote(bfo.getNote());
         batch.setArrivalDate(Time.parseDate(bfo.getArrivalDate()));
         batch.setExpDate(Time.parseDate(bfo.getExpDate()));
         long temp = 0;
         for (int i = 0; i < bfo.getStorageLocations().length; i++) {
-            if(bfo.getStorageLocations()[i][1] != null)
+            if (bfo.getStorageLocations()[i][1] != null) {
                 temp += bfo.getStorageLocations()[i][1];
+            }
         }
-        bfo.setAmount((int)temp);
+        bfo.setAmount((int) temp);
         //Checks if batch substance has been changed
         if (batch.getSubstance().getId() != bfo.getSubstance()) {
             int oldAmount = batch.getAmount();
@@ -267,16 +282,17 @@ public class BatchController {
         batch.setExpDate((Time.parseDate(bfo.getExpDate())));
         long temp = 0;
         for (int i = 0; i < bfo.getStorageLocations().length; i++) {
-            if(bfo.getStorageLocations()[i][1] != null)
+            if (bfo.getStorageLocations()[i][1] != null) {
                 temp += bfo.getStorageLocations()[i][1];
+            }
         }
 
-        bfo.setAmount((int)temp);
+        bfo.setAmount((int) temp);
         batch.setAmount(bfo.getAmount());
         batch.setSubstanceVolume(bfo.getSubstanceVolume());
         batch.setStorageLocations(bfo.getStorageLocations());
         Substance substance = (Substance) substanceService.read(bfo.getSubstance());
-        if(batch.getExpDate().compareTo(substance.getOldestDate()) < 0){
+        if (batch.getExpDate().compareTo(substance.getOldestDate()) < 0) {
             substance.setOldestDate(batch.getExpDate());
             substance.setWarningDate(Time.parseWarningDate(batch.getExpDate()));
         }
@@ -288,11 +304,13 @@ public class BatchController {
         return batch;
     }
 
-    private Batch addToBatch(Long id, BatchFormObject bfm) {
+    private Batch addToBatch(Long id, BatchFormObject bfo) {
         Batch batch = batchService.read(id);
-        batch.setAmount(batch.getAmount() + bfm.getAmount());
-        batch.setNote(batch.getNote() + "\n" + bfm.getNote());
-        Event event = EventHandler.addToBatchEvent(batch, bfm.getSignature());
+        batch.setAmount(batch.getAmount() + bfo.getAmount());
+        Long[][] newStorages = combineStorages(batch.getStorageLocations(), bfo.getStorageLocations());
+        batch.setStorageLocations(newStorages);
+        batch.setNote(batch.getNote() + "\n" + bfo.getNote());
+        Event event = EventHandler.addToBatchEvent(batch, bfo.getSignature());
         eventService.createOrUpdate(event);
         return batchService.createOrUpdate(batch);
 
@@ -301,18 +319,33 @@ public class BatchController {
     private void updateSubstance(Substance substance) {
         Substance temp = (Substance) substanceService.read(substance.getId());
         int status = temp.getQualityStatus();
-        
+
         List<Batch> batches = batchService.listSubstanceBatches(temp.getId());
-        for(Batch batch : batches){
-            if(batch.getQualityCheck() == 2 && status == 0 ){ 
+        for (Batch batch : batches) {
+            if (batch.getQualityCheck() == 2 && status == 0) {
                 status = 2;
-            }
-            else if(batch.getQualityCheck() == 1 && (status == 0 | status == 2)){ 
+            } else if (batch.getQualityCheck() == 1 && (status == 0 | status == 2)) {
                 status = 1;
             }
         }
-        
+
         temp.setQualityStatus(status);
         substanceService.createOrUpdate(temp);
+    }
+
+    private Long[][] combineStorages(Long[][] storageTemp, Long[][] addStorage) {
+        for (int i = 0; i < addStorage.length; ++i) {
+            for (int j = 0; i < storageTemp.length; ++j) {
+                if (storageTemp[j][0] != null && storageTemp[j][0].equals(addStorage[i][0])) {
+                    storageTemp[j][1] += addStorage[i][1];
+                    break;
+                } else if (storageTemp[j][1] == null) {
+                    storageTemp[j] = addStorage[i];
+                    break;
+                }
+            }
+
+        }
+        return storageTemp;
     }
 }

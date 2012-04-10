@@ -94,7 +94,7 @@
             </tr>
             <tr>
                 <td>Aktiivisuus</td>
-                <td><form:input path="strength" type="text" size="5"/><form:errors path="strength"/>
+                <td><form:input path="strength" type="text" size="5" value="${radioMedicine.strength}"/><form:errors path="strength"/>
                     <form:select path="unit">
                     <option value="0">GBq</option>
                     <option value="1">MBq</option>
@@ -103,29 +103,31 @@
             </tr>
             <tr>
                 <td>Tilavuus</td>
-                <td><form:input path="volume" type="text" size="5"/><form:errors path="volume"/>ml</td>
+                <td><form:input path="volume" type="text" size="5" value="${radioMedicine.volume}" /><form:errors path="volume"/>ml</td>
             </tr>
             <tr>
                 <td>Varastopaikka</td>
-                <td><form:select  path="storageLocation">
+                <td><form:select path="storageLocation">
                         <c:forEach var="storage" items="${storages}" varStatus="i">
-                            <form:option value="${i.index+1}">${storage.name}</form:option>
+                            <c:if test="${storage.hidden == false}">
+                                <form:option value="${storage.id}">${storage.name}</form:option>
+                            </c:if>
                         </c:forEach>
                     </form:select></td>
             </tr>
             <tr>
-                <td>Huomautuksia</td>
-                <td><form:textarea path="note" type="text"/><form:errors path="note"/></td>
+                <td>Kommentit</td>
+                <td><form:input path="note" type="text" value="${radioMedicine.note}"/><form:errors path="note"/></td>
             </tr>
             <tr>
                 <td>Nimikirjaimet</td>
-                <td><form:input path="signature" type="text" id="signature" size="6"/><form:errors path="signature"/></td>
+                <td><form:input required="required" path="signature" type="text" id="signature" size="6"/><form:errors path="signature"/></td>
             </tr>
         </table>
         <br/>
         
         <td><input type="submit" value="Tallenna muutokset"></td>&nbsp; &nbsp;
-        <td><input type="button" value="Peruuta" onClick="parent.location = '${pageContext.servletContext.contextPath}/frontpage'" /></td>
+        <td><input type="button" value="Peruuta" onClick="parent.location = '${pageContext.servletContext.contextPath}/RadioMedicine/${radioMedicine.id}'" /></td>
         
     </form:form>
 </div>

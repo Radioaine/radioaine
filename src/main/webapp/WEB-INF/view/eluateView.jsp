@@ -5,7 +5,7 @@
 <%@include file="headerfront.jsp" %>
 
 <div id="contents">
-    <h2>Eluaatin tiedot</h2>
+    <h2>Eluaatin ${eluate.id} tiedot</h2>
     
     <table class="noborder">
         <tr>
@@ -13,11 +13,13 @@
             <td>
                 <br />
                 <c:forEach var="generator" items="${eluate.generators}">
-                    <a href="${pageContext.servletContext.contextPath}/substance/${generator.substance.id}">${generator.substance.name}</a><br />
+                    <a href="${pageContext.servletContext.contextPath}/substance/${generator.substance.id}">${generator.substance.name}</a>, 
+                    <a href="${pageContext.servletContext.contextPath}/batch/${generator.id}">Erä ${generator.batchNumber}</a><br />
                 </c:forEach>
                     
                 <c:forEach var="other" items="${eluate.others}">
-                    <a href="${pageContext.servletContext.contextPath}/substance/${other.substance.id}">${other.substance.name}</a><br />
+                    <a href="${pageContext.servletContext.contextPath}/substance/${other.substance.id}">${other.substance.name}</a>, 
+                    <a href="${pageContext.servletContext.contextPath}/batch/${other.id}">Erä ${other.batchNumber}</a><br />
                 </c:forEach>
             </td>
         </tr>
@@ -39,6 +41,10 @@
             <td>${eluate.volume} ml</td>
         </tr>
         <tr>
+            <td>Varastopaikka</td>
+            <td>${eluate.storageLocation} TODO varastopaikan nimi</td>
+        </tr>
+        <tr>
             <td>Luotu</td>
             <td><fmt:formatDate value="${eluate.date}" pattern="HH:mm / dd.MM.yyyy"/></td>
         </tr>
@@ -53,9 +59,20 @@
 
     </table>
     <br />
-    <form action="${pageContext.servletContext.contextPath}/modifyEluate/${eluate.id}" method="GET">  
-            <input type="submit" value="Muokkaa" />&nbsp; &nbsp;
-    </form>
+    
+    <table class="noborder">
+        <tr>
+            <td class="editButton">
+                <form action="${pageContext.servletContext.contextPath}/modifyEluate/${eluate.id}" method="GET">  
+                    <input type="submit" value="Muokkaa" />
+                </form>
+            </td>
+            <td>
+                <input type="button" value="Palaa" onClick="parent.location = '${pageContext.servletContext.contextPath}/frontpage'" />
+            </td>
+        </tr>
+    </table>
+            
 </div>
 
 

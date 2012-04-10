@@ -4,18 +4,28 @@
 <%@include file="headeradmin.jsp" %>
 
 <div id="contents">
-    <h2>Lis‰‰ varasto</h2>
+    <h2>Lis‰‰ varastopaikka</h2>
+    <br/>
     
     <form action="addStorage" method="POST">
         <table class="noborder">
             <tr>
-                <td>Nimi:</td>
+                <td class="short">Nimi</td>
                 <td><input required name="name" type="text"/></td>
             </tr>
+        </table>
+        <br/>
+        <table class="noborder">
             <tr>
-                <td><input type="submit" value="Lis‰‰"></td>
+                <td class="shortButton">
+                    <input type="submit" value="Lis‰‰">
+                </td>
+                <td>
+                    <input type="button" value="Palaa" onClick="parent.location = '${pageContext.servletContext.contextPath}/storagesView'" />
+                </td>
             </tr>
         </table>
+        
     </form>  
 </div>
 

@@ -63,8 +63,8 @@ public class AdminController {
     @RequestMapping(value = "addStorage", method = RequestMethod.POST)
     public String addStorage(@RequestParam String name) {
         List<Storage> storageList = storageService.list();
-        for(Storage storage : storageList)  {
-            if(storage.isHidden() == true)  {
+        for (Storage storage : storageList) {
+            if (storage.isHidden() == true) {
                 storage.setHidden(false);
                 storage.setName(name);
                 storage.setInUse(false);
@@ -91,7 +91,7 @@ public class AdminController {
 
         return storage;
     }
-    
+
     @RequestMapping(value = "updateStorageName/{id}", method = RequestMethod.POST)
     public String updateStorageName(@RequestParam String name, @PathVariable Long id) {
         Storage temp = storageService.read(id);
@@ -100,44 +100,46 @@ public class AdminController {
         System.out.println("uusi nimi on: " + storageService.read(id).getName());
         return "redirect:/storagesView";
     }
-    
+
     @RequestMapping(value = "removeStorageName/{id}", method = RequestMethod.POST)
     public String removeStorageName(@PathVariable Long id, Model model) {
         List<Batch> batchList = batchService.list();
         List<Eluate> eluateList = eluateService.list();
         List<RadioMedicine> radioMedicineList = radioMedService.list();
-        Storage temp = storageService.read(id);
-        
+        Storage storage = storageService.read(id);
+        if(storage == null) {
+            System.out.println("STORAGE ON NULL");
+        }
         //removes the storage only if it is not used in any batches, eluates or radiomedicines
-        for(Batch batch : batchList)    {
+        for (Batch batch : batchList) {
             Long[][] locations = batch.getStorageLocations();
-            for(int i=0; i < locations.length; i++) {
-                if(locations[i][0] == id)   {
-                    temp.setInUse(true);
-                    storageService.createOrUpdate(temp);
+            for (int i = 0; i < locations.length; i++) {
+                if (locations[i][0] == id) {
+                    storage.setInUse(true);
+                    storageService.createOrUpdate(storage);
                     return "redirect:/storagesView";
                 }
             }
         }
-        for(Eluate eluate : eluateList)    {
-            if(eluate.getStorageLocation() == id)   {
-                temp.setInUse(true);
-                storageService.createOrUpdate(temp);
+        for (Eluate eluate : eluateList) {
+            if (eluate.getStorageLocation() == id) {
+                storage.setInUse(true);
+                storageService.createOrUpdate(storage);
                 return "redirect:/storagesView";
             }
         }
-        for(RadioMedicine radioMedicine : radioMedicineList)    {
-            if(radioMedicine.getStorageLocation() == id)    {
-                temp.setInUse(true);
-                storageService.createOrUpdate(temp);
+        for (RadioMedicine radioMedicine : radioMedicineList) {
+            if (radioMedicine.getStorageLocation() == id) {
+                storage.setInUse(true);
+                storageService.createOrUpdate(storage);
                 return "redirect:/storagesView";
             }
         }
-        temp.setName("^hidden^");
-        temp.setInUse(false);
-        temp.setHidden(true);
-        storageService.createOrUpdate(temp);
-        
+        storage.setName("^hidden^");
+        storage.setInUse(false);
+        storage.setHidden(true);
+        storageService.createOrUpdate(storage);
+
         return "redirect:/storagesView";
     }
 
@@ -152,40 +154,40 @@ public class AdminController {
         substanceService.createOrUpdate(temp);
         return "redirect:/admin";
     }
-    
+
     public void setStoragesInUse() {
         List<Batch> batchList = batchService.list();
         List<Eluate> eluateList = eluateService.list();
         List<RadioMedicine> radioMedicineList = radioMedService.list();
         List<Storage> storageList = storageService.list();
-        
-        for(Storage storage : storageList)  {
+
+        for (Storage storage : storageList) {
             storage.setInUse(false);
             storageService.createOrUpdate(storage);
         }
-        
-        for(Batch batch : batchList)    {
+
+        for (Batch batch : batchList) {
             Long[][] locations = batch.getStorageLocations();
-            for(int i=0; i < locations.length; i++) {
-                if(locations[i][0] > 0 && !storageService.read(locations[i][0]).isInUse()) {
+            for (int i = 0; i < locations.length; i++) {
+                if (locations[i][0] > 0 && !storageService.read(locations[i][0]).isInUse()) {
                     Storage temp = storageService.read(locations[i][0]);
                     temp.setInUse(true);
                     storageService.createOrUpdate(temp);
                 }
             }
         }
-        for(Eluate eluate : eluateList)    {
-            if(eluate.getStorageLocation() >= 0)   {
-                if(!storageService.read(eluate.getStorageLocation()).isInUse())  {
+        for (Eluate eluate : eluateList) {
+            if (eluate.getStorageLocation() >= 0) {
+                if (!storageService.read(eluate.getStorageLocation()).isInUse()) {
                     Storage temp = storageService.read(eluate.getStorageLocation());
                     temp.setInUse(true);
                     storageService.createOrUpdate(temp);
                 }
             }
         }
-        for(RadioMedicine radioMedicine : radioMedicineList)    {
-            if(radioMedicine.getStorageLocation() >= 0)   {
-                if(!storageService.read(radioMedicine.getStorageLocation()).isInUse())  {
+        for (RadioMedicine radioMedicine : radioMedicineList) {
+            if (radioMedicine.getStorageLocation() >= 0) {
+                if (!storageService.read(radioMedicine.getStorageLocation()).isInUse()) {
                     Storage temp = storageService.read(radioMedicine.getStorageLocation());
                     temp.setInUse(true);
                     storageService.createOrUpdate(temp);

@@ -83,6 +83,17 @@ table.listing th {padding: 3px;}
     border: none;
 }
 
+.raport{ margin: 50px; }
+
+.raport td { 
+    border: none; 
+    
+}
+.raport th{ 
+     
+    padding: 20px;  
+}
+
 table.noborder td {border: none;}
 
 td.noborder, th.noborder {border: none;}

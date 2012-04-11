@@ -153,4 +153,8 @@ public class RadioMedicine implements Serializable{
         this.unit = unit;
     }
     
+    public String getName(){
+        return kits.get(0).getSubstance().getName();
+    }
+    
 }

@@ -47,47 +47,49 @@
             </tr>
 
             <c:forEach var="batch" items="${substanceBatches}">
-            <c:choose>
-                <c:when test="${batch.qualityCheck==1}"> <!--TODO: Tähän myös vanhentunut-->
-                    <tr id="${batch.id}">
-                </c:when>
-                <c:when test="${batch.qualityCheck==2}">
-                    <tr id="${batch.id}" class="red">
-                <!--TODO: Tähän vanhenemishälytysrajan alittanut sinisellä:
-                /c:when>
-                c:when (hälytysraja on alitettu)>
-                    <tr id="{batch.id}" class="blue">
-                -->
-                </c:when>
-                <c:otherwise>
-                    <tr id="${batch.id}" class="yellow">
-                </c:otherwise>
-            </c:choose>
-                    <td class="center">${batch.amount}</td>
-                    <td><a href="<c:out value="${pageContext.servletContext.contextPath}" />/batch/${batch.id}">${batch.batchNumber}</a></td>
-                    <td><fmt:formatDate pattern="dd.MM.yyyy" value="${batch.expDate}"/></td>
-                    <td id="qualityCheck">
-                        <c:choose>
-                            <c:when test="${batch.qualityCheck==1}">
-                                Hyväksytty
-                            </c:when>
-                            <c:when test="${batch.qualityCheck==2}">
-                                Hylätty
-                            </c:when>
-                            <c:otherwise>
-                                <form action="${pageContext.servletContext.contextPath}/doCheck/${batch.id}+${substance.id}" method="POST">
-                                    <select name="qualityCheck">
-                                        <option value="1">Hyväksytty</option>
-                                        <option value="2">Hylätty</option>
-                                    </select>
-                                    <input type="text" name="sig" size="3" />
-                                    <input type="submit" value="Kirjaa tulos" />
-                                </form>
-                            </c:otherwise>
-                        </c:choose>
-                    </td>
-                    <td>${batch.note}</td>
-            </tr>
+                <c:if test="${batch.amount!= 0}">
+                    <c:choose>
+                        <c:when test="${batch.qualityCheck==1}"> <!--TODO: Tähän myös vanhentunut-->
+                            <tr id="${batch.id}">
+                        </c:when>
+                        <c:when test="${batch.qualityCheck==2}">
+                            <tr id="${batch.id}" class="red">
+                        <!--TODO: Tähän vanhenemishälytysrajan alittanut sinisellä:
+                        /c:when>
+                        c:when (hälytysraja on alitettu)>
+                            <tr id="{batch.id}" class="blue">
+                        -->
+                        </c:when>
+                        <c:otherwise>
+                            <tr id="${batch.id}" class="yellow">
+                        </c:otherwise>
+                    </c:choose>
+                            <td class="center">${batch.amount}</td>
+                            <td><a href="<c:out value="${pageContext.servletContext.contextPath}" />/batch/${batch.id}">${batch.batchNumber}</a></td>
+                            <td><fmt:formatDate pattern="dd.MM.yyyy" value="${batch.expDate}"/></td>
+                            <td id="qualityCheck">
+                                <c:choose>
+                                    <c:when test="${batch.qualityCheck==1}">
+                                        Hyväksytty
+                                    </c:when>
+                                    <c:when test="${batch.qualityCheck==2}">
+                                        Hylätty
+                                    </c:when>
+                                    <c:otherwise>
+                                        <form action="${pageContext.servletContext.contextPath}/doCheck/${batch.id}+${substance.id}" method="POST">
+                                            <select name="qualityCheck">
+                                                <option value="1">Hyväksytty</option>
+                                                <option value="2">Hylätty</option>
+                                            </select>
+                                            <input type="text" name="sig" size="3" />
+                                            <input type="submit" value="Kirjaa tulos" />
+                                        </form>
+                                    </c:otherwise>
+                                </c:choose>
+                            </td>
+                            <td>${batch.note}</td>
+                    </tr>
+                </c:if>
             </c:forEach>
     </table>     
 

@@ -4,10 +4,7 @@
  */
 package ohtu.radioaine.tools;
 
-import ohtu.radioaine.domain.Batch;
-import ohtu.radioaine.domain.Eluate;
-import ohtu.radioaine.domain.Event;
-import ohtu.radioaine.domain.Substance;
+import ohtu.radioaine.domain.*;
 import ohtu.radioaine.service.EventService;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -51,10 +48,14 @@ public class EventHandler {
         return event;
     }
     
-    public static Event removeFromBatchEvent(Batch batch, String sig, String reason) {
+    public static Event removeFromBatchEvent(Batch batch, String sig, String reason, int amount) {
         Event event = new Event();
         event.setNote(reason);
         event.setSignature(sig);
+        event.setAmount(amount);
+        event.setBatchNumber(batch.getBatchNumber());
+        event.setExpDate(batch.getExpDate());
+        event.setSubstanceName(batch.getSubstance().getName());
         event.setInfo("type=removed "+batch.toString());
         return event;
     }
@@ -83,6 +84,13 @@ public class EventHandler {
         Event event = new Event();
         event.setSignature(sig);
         event.setInfo("type=updateEluate "+eluate.toString());
+        return event;
+    }
+    public static Event newRadioMedEvent(RadioMedicine radioMed, String sig){
+        Event event = new Event();
+        event.setSignature(sig);
+        event.setSubstanceName(radioMed.getName());
+        event.setInfo("type=newRadioMed "+radioMed.toString());
         return event;
     }
 }

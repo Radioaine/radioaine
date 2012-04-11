@@ -122,11 +122,14 @@ public class BatchController {
 
     private void removeItemsFromBatch(Long id, Integer[] amounts, String reason, String remover) {
         Batch temp = batchService.read(id);
+        Substance substance = (Substance)substanceService.read(temp.getSubstance().getId());
         Long[][] locs = temp.getStorageLocations();
         int tempTotalAmount = 0;
+        int totalRemoved = 0;
         for (int i = 0; i < amounts.length; ++i) {
             if (amounts[i] != null && locs[i][1] != null) {
                 if (amounts[i] > 0 && locs[i][1] >= amounts[i]) {
+                    totalRemoved += amounts[i];
                     System.out.println(locs[i][1]);
                     locs[i][1] -= amounts[i];
                     System.out.println(locs[i][1]);
@@ -138,8 +141,10 @@ public class BatchController {
         }
         temp.setAmount(tempTotalAmount);
         temp.setStorageLocations(locs);
+        substance.setTotalAmount(substance.getTotalAmount() - totalRemoved);
         batchService.createOrUpdate(temp);
-        Event event = EventHandler.removeFromBatchEvent(temp, reason, remover);
+        substanceService.createOrUpdate(substance);
+        Event event = EventHandler.removeFromBatchEvent(temp, reason, remover, totalRemoved);
         eventService.createOrUpdate(event);
     }
 

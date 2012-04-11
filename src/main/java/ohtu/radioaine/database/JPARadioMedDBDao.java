@@ -50,7 +50,7 @@ public class JPARadioMedDBDao implements RadioMedDBDao {
 
     @Override
     public List<RadioMedicine> list(Timestamp startDate, Timestamp endDate) {
-        Query q = entityManager.createQuery("SELECT e FROM RadioMedicine e WHERE e.date between '"+startDate+"' AND '"+endDate+"'");
+        Query q = entityManager.createQuery("SELECT e FROM RadioMedicine e WHERE e.date between '"+startDate+"' AND '"+endDate+"' ORDER BY e.date ASC");
         return q.getResultList();
     }
     

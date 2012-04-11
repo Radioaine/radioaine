@@ -83,6 +83,8 @@ table.listing th {padding: 3px;}
     border: none;
 }
 
+.new {width: 320px;}
+
 table.noborder td {border: none;}
 
 td.noborder, th.noborder {border: none;}

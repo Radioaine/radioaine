@@ -18,9 +18,9 @@
             </td>
         </tr>
     </table>
-    <br>
+    <br/>
     <h2>Valmisteet &nbsp;${date}</h2>
-
+    <br/>
 
     <c:forEach var="eluate" items="${eluates}">
         <table class="listing">

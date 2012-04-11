@@ -4,50 +4,58 @@
 <%@include file="headeradmin.jsp" %>
 
 <div id="contents">
-    <table class="noborder" style="margin: 30px;">
+    
+    <table class="noborder">
         <h2>Saapuneet radiolääkkeet <fmt:formatDate pattern="dd.MM.yyyy" value="${startDate}"/>  - <fmt:formatDate pattern="dd.MM.yyyy" value="${endDate}"/></h2>
+        <br/>
         <c:forEach var="substance" items="${substances}" varStatus="i">   
                 <tr id="substance${i.index}" style="display: none;">
-                        <th style="padding: 20px;">${substance.name}</th>
+                        <th colspan="5">${substance.name}</th>
                 </tr>
                 <c:forEach var="event" items="${arrived}">
                     <c:if test="${event.substanceName == substance.name}">
                         <script>$("#substance${i.index}").css("display","inline");</script>
                     <tr>
-                        <td class="date" style="padding-left: 40px;"><fmt:formatDate pattern="dd.MM.yyyy" value="${event.arrivalDate}"/></td>
-                        <td>erä ${event.batchNumber}</td>
-                        <td>käyt. ennen <fmt:formatDate pattern="dd.MM.yyyy" value="${event.expDate}"/></td>
-                        <td>${event.amount} kpl</td>
+                        <td class="date"><fmt:formatDate pattern="dd.MM.yyyy" value="${event.arrivalDate}"/></td>
+                        <td class="batch">erä ${event.batchNumber}</td>
+                        <td class="before">käyt. ennen <fmt:formatDate pattern="dd.MM.yyyy" value="${event.expDate}"/></td>
+                        <td class="reportAmount">${event.amount} kpl</td>
                         <td>${event.signature}</td>
                     </tr>
+                    <tr><td colspan="5">&nbsp;</td></tr>
                     </c:if>
                 </c:forEach>
          </c:forEach>
     </table>
-    <table class="noborder" style="margin: 30px;" >
+        
+    <table class="noborder" >
         <h2>Poistuneet radiolääkkeet <fmt:formatDate pattern="dd.MM.yyyy" value="${startDate}"/>  - <fmt:formatDate pattern="dd.MM.yyyy" value="${endDate}"/></h2>
+        <br/>
         <c:forEach var="substance" items="${substances}" varStatus="j">   
                 <tr id="removed${j.index}" style="display: none;">
-                        <th style="padding: 20px;">${substance.name}</th>
+                    <th colspan="4">${substance.name}</th>
                 </tr>
                 <c:forEach var="event" items="${removed}">
                     <c:if test="${event.substanceName == substance.name}">
                         <script>$("#removed${j.index}").css("display","inline");</script>
                     <tr>
-                        <td class="date" style="padding-left: 40px;"><fmt:formatDate pattern="dd.MM.yyyy" value="${event.timestamp}"/></td>
-                        <td class="batch">erä ${event.batchNumber}</td>
+                        <td class="date"><fmt:formatDate pattern="dd.MM.yyyy" value="${event.timestamp}"/></td>
+                        <!--<td class="batch">erä ${event.batchNumber}</td>-->
                         <td class="reportAmount">${event.amount} kpl</td>
-                        <td>${event.signature}</td>
+                        <td class="reportReason">${event.signature}</td>
+                        <td>TODO nimikirjaimet</td>
                     </tr>
+                    <tr><td colspan="4">&nbsp;</td></tr>
                     </c:if>
                 </c:forEach>
          </c:forEach>
     </table>
+        
     <table class="noborder">
         <h2>Käyttökuntoon saatetut radiolääkkeet / lkm <fmt:formatDate pattern="dd.MM.yyyy" value="${startDate}"/>  - <fmt:formatDate pattern="dd.MM.yyyy" value="${endDate}"/></h2>
         <c:forEach var="substance" items="${substances}" varStatus="k">
             <tr id="radio${k.index}" style="display: none;">
-                        <th>${substance.name}</th>
+                        <th class="reportName">${substance.name}</th>
                         <c:set var="count" value="0"/>
             
             <c:forEach var="radioMed" items="${radioMeds}">
@@ -56,10 +64,11 @@
                     <c:set var="count" value="${count + 1}"/>
                 </c:if>    
             </c:forEach>
-                    <td  style="padding: 10px;">${count} kappaletta</td>
+                    <td>${count} kappaletta</td>
              </tr>
          </c:forEach>
     </table>
+        
     <table class="noborder">
         <h2>Käyttökuntoon saatetut radiolääkkeet <fmt:formatDate pattern="dd.MM.yyyy" value="${startDate}"/>  - <fmt:formatDate pattern="dd.MM.yyyy" value="${endDate}"/></h2>  
             <c:forEach var="radioMed" items="${radioMeds}">

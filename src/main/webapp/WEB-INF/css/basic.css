@@ -28,7 +28,7 @@ select {background-color: #FFF;}
 
 select.am {width: 65px;}
 
-.amount {width: 50px;}
+.amount {width: 60px;}
 
 select.batch {width: 350px;}
 
@@ -83,17 +83,6 @@ table.listing th {padding: 3px;}
     border: none;
 }
 
-.raport{ margin: 50px; }
-
-.raport td { 
-    border: none; 
-    
-}
-.raport th{ 
-     
-    padding: 20px;  
-}
-
 table.noborder td {border: none;}
 
 td.noborder, th.noborder {border: none;}
@@ -107,6 +96,12 @@ td.noborder, th.noborder {border: none;}
     width: 140px;
     font-weight: bold;
 }
+
+.raport{ margin: 50px; }
+
+.raport td {border: none;}
+
+.raport th{padding: 20px;}
 
 .reportAmount {width: 50px;}
 

@@ -37,11 +37,11 @@
             </tr>
             <tr>
                 <td>Saapumispäivä</td>
-                <td><form:input required="required" path="arrivalDate" type="text" value="${date}" id="arrivalDate"/><form:errors path="arrivalDate"/></td>
+                <td><form:input required="required" pattern="^(0[1-9]|[1-2][0-9]|3[0-1])\.(0[1-9]|1[0-2])\.[0-9]{4}$" path="arrivalDate" type="text" value="${date}" id="arrivalDate"/><form:errors path="arrivalDate"/></td>
             </tr>
             <tr>
                 <td>Vanhenemispäivä</td>
-                <td><form:input required="required" path="expDate" type="text" id="expDate"/><form:errors path="expDate"/></td>
+                <td><form:input required="required" pattern="^(0[1-9]|[1-2][0-9]|3[0-1])\.(0[1-9]|1[0-2])\.[0-9]{4}$" placeholder="Muodossa pp.kk.vvvv" path="expDate" type="text" id="expDate"/><form:errors path="expDate"/></td>
             </tr>
             <tr>
                 <td>Sijainti</td>

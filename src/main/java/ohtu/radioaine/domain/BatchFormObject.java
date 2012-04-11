@@ -31,6 +31,15 @@ public class BatchFormObject {
     @NotNull(message = "Nimi ei saa olla tyhjä")
     private String signature;
     private int qualityCheck;
+    private double activity;
+
+    public double getActivity() {
+        return activity;
+    }
+
+    public void setActivity(double activity) {
+        this.activity = activity;
+    }
 
     public int getQualityCheck() {
         return qualityCheck;

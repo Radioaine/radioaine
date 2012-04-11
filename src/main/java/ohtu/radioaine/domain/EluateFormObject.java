@@ -7,7 +7,7 @@ public class EluateFormObject {
     @NotNull(message = "Aktiivisuus ei saa olla tyhjä")
     private String strength;
     @NotNull(message = "Tilavuus ei saa olla tyhjä")
-    private int volume;
+    private String volume;
     @NotNull(message = "Päivämäärä ei saa olla tyhjä")
     private String date;
     @NotNull(message = "Tuntikenttä ei saa olla tyhjä")
@@ -103,12 +103,12 @@ public class EluateFormObject {
         this.minutes = minutes;
     }
 
-    public int getVolume() {
+    public String getVolume() {
         return volume;
     }
 
-    public void setVolume(int volume) {
-        this.volume = volume;
+    public void setVolume(String volume) {
+        this.volume = volume.replaceAll(",", ".");
     }
 
     /**

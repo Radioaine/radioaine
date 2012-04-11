@@ -48,10 +48,10 @@
                 <td>Valitut</td>
                 <td class="infotext" id="selected">
                     <c:forEach var="gene" items="${eluate.generators}">
-                        <script> generateDivs("${gene.substance.name}", ${gene.id}, 0);</script>
+                        <script> generateDivs("${gene.substance.name}, Erä ${gene.batchNumber}, Käyt. ennen <fmt:formatDate value="${gene.expDate}" pattern="dd.MM.yyyy"/>, TODO Sijainti", ${gene.id}, 0);</script>
                     </c:forEach>
                     <c:forEach var="oth" items="${eluate.others}">
-                        <script> generateDivs("${oth.substance.name}", ${oth.id}, 4);</script>
+                        <script> generateDivs("${oth.substance.name}, Erä ${oth.batchNumber}, Käyt. ennen <fmt:formatDate value="${oth.expDate}" pattern="dd.MM.yyyy"/>, TODO Sijainti", ${oth.id}, 4);</script>
                     </c:forEach>
                 </td>
             </tr>
@@ -71,7 +71,7 @@
             </tr>
             <tr>
                 <td>Aktiivisuus</td>
-                <td><input pattern="\d+(\.\d)?" value="${eluate.strength}" name="strength" type="text" size="5"/>
+                <td><input pattern="^[0-9]{1,4}([,.][0-9]{1,4})?$" value="${eluate.strength}" name="strength" type="text" size="5"/>
                     <form:select path="unit">
                         <option value="0">GBq</option>
                         <option value="1">MBq</option>
@@ -81,7 +81,7 @@
             </tr>
             <tr>
                 <td>Tilavuus</td>
-                <td><input type="text" name="volume" value="${eluate.volume}" size="5"/> ml
+                <td><input type="text" pattern="^[0-9]{1,4}([,.][0-9]{1,4})?$" name="volume" value="${eluate.volume}" size="5"/> ml
                 </td>
             </tr>
             <tr>

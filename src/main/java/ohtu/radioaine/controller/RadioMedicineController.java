@@ -73,7 +73,7 @@ public class RadioMedicineController {
         RadioMedicine radioMedicine = radioMedService.read(id);
 
         radioMedicine.setNote(rmfo.getNote());
-        radioMedicine.setVolume(rmfo.getVolume());
+        radioMedicine.setVolume(Double.parseDouble(rmfo.getVolume()));
         radioMedicine.setDate(Time.parseDate(rmfo.getDate()));
         radioMedicine.setStrength(Double.parseDouble(rmfo.getStrength()));
         radioMedicine.setUnit(rmfo.getUnit());
@@ -131,7 +131,7 @@ public class RadioMedicineController {
 
         radioMedicine.setNote(rmfo.getNote());
         radioMedicine.setSignature(rmfo.getSignature());
-        radioMedicine.setVolume(rmfo.getVolume());
+        radioMedicine.setVolume(Double.parseDouble(rmfo.getVolume()));
         radioMedicine.setDate(Time.parseDate(rmfo.getDate()));
         if (rmfo.getStrength().equals("")) {
             radioMedicine.setStrength(0.0);

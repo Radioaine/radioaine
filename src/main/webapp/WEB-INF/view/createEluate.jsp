@@ -62,7 +62,7 @@
             </tr>
             <tr>
                 <td>Aktiivisuus</td>
-                <td><input required="required" pattern="\d+(\.\d)?" name="strength" type="text" size="5"/>
+                <td><input pattern="^[0-9]{1,4}([,.][0-9]{1,4})?$" name="strength" type="text" size="5"/>
 
                     <form:select path="unit">
                         <option value="0">GBq</option>

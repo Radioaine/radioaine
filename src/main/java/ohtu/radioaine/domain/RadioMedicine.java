@@ -22,22 +22,14 @@ public class RadioMedicine implements Serializable{
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(nullable = false)
     private Long id;
-    @Column
     private double strength;
-    @Column
-    private int volume;
-    @Column
+    private double volume;
     private Timestamp date;
-    @Column
     private String signature;
-    @Column
     private String note;
-    @Column
     private Long storageLocation;
     private String name;
-    @Column
     private String preparer;
-    @Column
     private int unit;
     @OneToMany
     @JoinColumn(name = "RADIOMEDICINE_ELUATES")
@@ -129,11 +121,11 @@ public class RadioMedicine implements Serializable{
         this.id = id;
     }
 
-    public int getVolume() {
+    public double getVolume() {
         return volume;
     }
 
-    public void setVolume(int volume) {
+    public void setVolume(double volume) {
         this.volume = volume;
     }
     

@@ -87,7 +87,7 @@ public class EluateController {
             eluate.setStrength(Double.parseDouble(efo.getStrength()));
         }
         eluate.setUnit(efo.getUnit());
-        eluate.setVolume(efo.getVolume());
+        eluate.setVolume(Double.parseDouble(efo.getVolume()));
         eluate.setTimestamp(Time.parseTimeStamp(efo.getDate() + " " + efo.getHours() + ":" + efo.getMinutes()));
         eluate.setSignature(efo.getSignature());
         eluate.setNote(efo.getNote());
@@ -145,7 +145,7 @@ public class EluateController {
             eluate.setStrength(Double.parseDouble(efo.getStrength()));
         }
         eluate.setUnit(efo.getUnit());
-        eluate.setVolume(efo.getVolume());
+        eluate.setVolume(Double.parseDouble(efo.getVolume()));
         eluate.setTimestamp(Time.parseTimeStamp(efo.getDate() + " " + efo.getHours() + ":" + efo.getMinutes()));
         eluate.setNote(efo.getNote());
         eluate.setStorageLocation(efo.getStorageLocation());

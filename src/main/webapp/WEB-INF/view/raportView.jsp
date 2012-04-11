@@ -65,15 +65,15 @@
             <c:forEach var="radioMed" items="${radioMeds}">
                 <tr>
                     <td><fmt:formatDate pattern="HH.mm dd.MM.yyyy" value="${radioMed.date}"/> </td>
-                    <td>${radioMed.eluates.get(0).generators.get(0).substance.name} </td>
-                    <td>erä ${radioMed.eluates.get(0).generators.get(0).batchNumber} </td>
-                    <td>käyt. ennen <fmt:formatDate pattern="dd.MM.yyyy" value="${radioMed.eluates.get(0).generators.get(0).expDate}"/> </td>
+                    <td class="reportName">${radioMed.eluates.get(0).generators.get(0).substance.name} </td>
+                    <td class="batch">erä ${radioMed.eluates.get(0).generators.get(0).batchNumber} </td>
+                    <td class="before">käyt. ennen <fmt:formatDate pattern="dd.MM.yyyy" value="${radioMed.eluates.get(0).generators.get(0).expDate}"/> </td>
                 </tr><br />
                 <tr>
                 <c:forEach var="kit" items="${radioMed.kits}">
                     <td>${kit.substance.name}</td>
-                    <td>erä ${kit.batchNumber}</td>
-                    <td>käyt. ennen <fmt:formatDate pattern="dd.MM.yyyy" value="${kit.expDate}"/> </td>
+                    <td class="batch">erä ${kit.batchNumber}</td>
+                    <td class="before">käyt. ennen <fmt:formatDate pattern="dd.MM.yyyy" value="${kit.expDate}"/> </td>
                 </c:forEach>
                 </tr><br />
             </c:forEach>

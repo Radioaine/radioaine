@@ -83,7 +83,7 @@
             </tr>
             <tr>
                 <td>Aktiivisuus</td>
-                <td><form:input path="strength" type="text" size="5"/><form:errors path="strength"/>
+                <td><form:input path="strength" pattern="^[0-9]{1,4}([,.][0-9]{1,4})?$" type="text" size="5"/><form:errors path="strength"/>
                     <form:select path="unit">
                     <option value="0">GBq</option>
                     <option value="1">MBq</option>

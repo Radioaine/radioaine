@@ -34,7 +34,7 @@
                 <td>
                     <select multiple="multiple" class="list" >
                         <c:forEach var="eluate" items="${eluates}">
-                            <option id="3" onclick="eluateAmounts(event)" value="${eluate.id}">Klo <fmt:formatDate value="${eluate.date}" pattern="hh.mm"/>, TODO Eluaatin nimi, Aktiivisuus ${eluate.strength}, Sijainti TODO${eluate.storageLocation}, Tekijä ${eluate.signature}</option>
+                            <option id="3" onclick="eluateAmounts(event)" value="${eluate.id}">Klo <fmt:formatDate value="${eluate.date}" pattern="hh.mm"/>, ${eluate.getName()}, Aktiivisuus ${eluate.strength}, Sijainti TODO${eluate.storageLocation}, Tekijä ${eluate.signature}</option>
                         </c:forEach>
                     </select>
                 </td>
@@ -67,13 +67,13 @@
                 <td>Valitut</td>
                 <td style="font-size: 90%;" class="infotext" id="selected">
                     <c:forEach var="eluate" items="${radioMedicine.eluates}">
-                        <script> generateDivs("${eluate.id}", ${eluate.id}, 3);</script>
+                        <script> generateDivs("Klo <fmt:formatDate value="${eluate.date}" pattern="hh.mm"/> ${eluate.getName()} erä ${eluate.generators.get(0).batchNumber} Aktiivisuus ${eluate.strength}, Sijainti TODO${eluate.storageLocation}, Tekijä ${eluate.signature} ", ${eluate.id}, 3);</script>
                     </c:forEach>
                     <c:forEach var="kit" items="${radioMedicine.kits}">
-                        <script> generateDivs("${kit.substance.name}", ${kit.id}, 1);</script>
+                        <script> generateDivs("${kit.substance.name}, Erä ${kit.batchNumber}, Käyt. ennen <fmt:formatDate value="${kit.expDate}" pattern="dd.MM.yyyy"/>, TODO Sijainti", ${kit.id}, 1);</script>
                     </c:forEach>
                     <c:forEach var="oth" items="${radioMedicine.others}">
-                        <script> generateDivs("${oth.substance.name}", ${oth.id}, 4);</script>
+                        <script> generateDivs("${oth.substance.name}, Erä ${oth.batchNumber}, Käyt. ennen <fmt:formatDate value="${oth.expDate}" pattern="dd.MM.yyyy"/>, TODO Sijainti", ${oth.id}, 4);</script>
                     </c:forEach>
             </td>
             </tr>
@@ -103,7 +103,7 @@
             </tr>
             <tr>
                 <td>Tilavuus</td>
-                <td><form:input path="volume" type="text" size="5" value="${radioMedicine.volume}" /><form:errors path="volume"/>ml</td>
+                <td><form:input path="volume" pattern="^[0-9]{1,4}([,.][0-9]{1,4})?$" type="text" size="5" value="${radioMedicine.volume}" /><form:errors path="volume"/>ml</td>
             </tr>
             <tr>
                 <td>Varastopaikka</td>

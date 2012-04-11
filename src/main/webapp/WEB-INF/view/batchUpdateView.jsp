@@ -42,14 +42,14 @@
             <td><form:input required="required" path="batchNumber" type="text" /><form:errors path="batchNumber"/></td>
             <td>${batch.batchNumber}</td>
         </tr>
-        
+        <fmt:formatDate value="${batch.expDate}" pattern="dd.MM.yyyy" var="expire"/>
         <tr>
             <td class="name">Käytettävä ennen</td>
-            <td><form:input required="required" path="expDate" type="text" id="expDate" value="${expire}"/><form:errors path="expDate"/></td>
-            <td><fmt:formatDate value="${batch.expDate}" pattern="dd.MM.yyyy" var="expire"/>${expire}</td>
+            <td><form:input required="required" pattern="^(0[1-9]|[1-2][0-9]|3[0-1])\.(0[1-9]|1[0-2])\.[0-9]{4}$" placeholder="Muodossa pp.kk.vvvv" path="expDate" type="text" id="expDate" value="${expire}"/><form:errors path="expDate"/></td>
+            <td>${expire}</td>
         </tr> 
         
-        <tr class="red">
+        <tr class="red" style="display: none;">
             <td>Saapumispäivä</td>
             <td><form:input path="arrivalDate" type="text" id="arrivalDate" value="${arrive}"/><form:errors path="arrivalDate"/></td>
             <td>TODO Tallennus ei onnistu, jos tämä kenttä puuttuu. Tämä pitäisi kuitenkin poistaa!</td>

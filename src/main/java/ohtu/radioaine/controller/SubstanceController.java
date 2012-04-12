@@ -95,6 +95,7 @@ public class SubstanceController {
         return "redirect:/updateSubstance/" + id;
     }
 
+
     private void updateSubstance(Long id, SubstanceFormObject sfo) {
         Substance substanceToUpdate = (Substance) substanceService.read(id);
         substanceToUpdate.setType(sfo.getType());

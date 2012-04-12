@@ -110,7 +110,7 @@
             </tr>
             <tr>
                 <td>Luontiaika</td>
-                <fmt:formatDate value="${radioMedicine.date}" pattern="hh" var="radiohours"/>
+                <fmt:formatDate value="${radioMedicine.date}" pattern="HH" var="radiohours"/>
                 <fmt:formatDate value="${radioMedicine.date}" pattern="mm" var="radiominutes"/>
                 <fmt:formatDate value="${radioMedicine.date}" pattern="dd.MM.yyyy" var="radiodate"/>
                 <td><input required name="hours" type="text" id="hours" size="2" value="${radiohours}"/>:<input required

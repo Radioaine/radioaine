@@ -24,7 +24,7 @@ public class SubstanceController {
     private BatchService batchService;
     @Autowired
     private EventService eventService;
-    
+
     @RequestMapping(value = "substance/{id}", method = RequestMethod.GET)
     public String getSubstanceByIdCTRL(@PathVariable Long id, Model model) {
         Substance substance = (Substance) substanceService.read(id);
@@ -34,25 +34,48 @@ public class SubstanceController {
         return "substanceBatches";
     }
 
-    @RequestMapping(value = "substance", method = RequestMethod.POST)
-    public String addSubstanceCTRL(@Valid @ModelAttribute("substance") SubstanceFormObject sfo, BindingResult result) {
-        if (result.hasErrors()) {
+    @RequestMapping(value = "addSubstance/{id}", method = RequestMethod.GET)
+    public String addSubstanceViewCTRL(Model model, @PathVariable int id) {
+        SubstanceFormObject sfo = new SubstanceFormObject();
+        if (id < 0 || id > 2) {
+            return "substanceView";
+        }
+        sfo.setType(id);
+        model.addAttribute("substance", sfo);
+        return "addSubstanceView";
+    }
+
+    @RequestMapping(value = "substance/{id}", method = RequestMethod.POST)
+    public String addSubstanceCTRL(@Valid @ModelAttribute("substance") SubstanceFormObject sfo, BindingResult result, @PathVariable int id) {
+        if (result.hasErrors() || (id < 0 || id > 2)) {
             return "addSubstanceView";
         }
+        sfo.setType(id);
+        System.out.println("TYYPPI: " + sfo.getType());
+
         substanceService.createOrUpdate(createSubstance(sfo));
-        return "redirect:/substanceList";
+        return "redirect:/substanceView";
     }
 
     private Substance createSubstance(SubstanceFormObject sfo) {
+        System.out.println("LAATU: " + sfo.getQualityControl());
         Substance substance = new Substance();
         substance.setType(sfo.getType());
         substance.setName(sfo.getName());
+        substance.setHalflife(sfo.getHalflife());
+        substance.setGenericName(sfo.getGenericName());
         substance.setManufacturer(sfo.getManufacturer());
         substance.setSupplier(sfo.getSupplier());
         substance.setAlertLimit1(sfo.getAlertLimit1());
         substance.setAlertLimit2(sfo.getAlertLimit2());
+        substance.setVolume(sfo.getVolume());
         substance.setTotalAmount(0);
-        substance.setHalflife(sfo.getHalflife());
+        substance.setQualityControl(sfo.getQualityControl());
+        substance.setStrength(sfo.getStrength());
+        if (sfo.getType() == 1) {
+            substance.setHalflife(sfo.getHalflife());
+            substance.setEluateName(sfo.getEluateName());
+        }
 
         return substance;
     }
@@ -72,16 +95,26 @@ public class SubstanceController {
         return "redirect:/updateSubstance/" + id;
     }
 
-    private void updateSubstance(Long id, SubstanceFormObject sfm) {
-        Substance substance = (Substance) substanceService.read(id);
-        substance.setName(sfm.getName());
-        substance.setType(sfm.getType());
-        substance.setAlertLimit1(sfm.getAlertLimit1());
-        substance.setAlertLimit2(sfm.getAlertLimit2());
-        substance.setManufacturer(sfm.getManufacturer());
-        substance.setSupplier(sfm.getSupplier());
-        substance.setHalflife(sfm.getHalflife());
-        substanceService.createOrUpdate(substance);
+
+    private void updateSubstance(Long id, SubstanceFormObject sfo) {
+        Substance substanceToUpdate = (Substance) substanceService.read(id);
+        substanceToUpdate.setType(sfo.getType());
+        substanceToUpdate.setName(sfo.getName());
+        substanceToUpdate.setHalflife(sfo.getHalflife());
+        substanceToUpdate.setGenericName(sfo.getGenericName());
+        substanceToUpdate.setManufacturer(sfo.getManufacturer());
+        substanceToUpdate.setSupplier(sfo.getSupplier());
+        substanceToUpdate.setAlertLimit1(sfo.getAlertLimit1());
+        substanceToUpdate.setAlertLimit2(sfo.getAlertLimit2());
+        substanceToUpdate.setVolume(sfo.getVolume());
+        substanceToUpdate.setTotalAmount(0);
+        substanceToUpdate.setQualityControl(sfo.getQualityControl());
+        substanceToUpdate.setStrength(sfo.getStrength());
+        if (sfo.getType() == 1) {
+            substanceToUpdate.setHalflife(sfo.getHalflife());
+            substanceToUpdate.setEluateName(sfo.getEluateName());
+        }
+        substanceService.createOrUpdate(substanceToUpdate);
     }
 
     @RequestMapping(value = "updateSubstance/{id}", method = RequestMethod.GET)
@@ -90,12 +123,4 @@ public class SubstanceController {
         model.addAttribute("substance", substanceService.read(id));
         return "substanceUpdateView";
     }
-
-    @RequestMapping(value = "addSubstance", method = RequestMethod.GET)
-    public String addSubstanceViewCTRL(Model model) {
-        model.addAttribute("substance", new SubstanceFormObject());
-        return "addSubstanceView";
-    }
-    
-    
 }

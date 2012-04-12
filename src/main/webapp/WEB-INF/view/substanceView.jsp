@@ -11,7 +11,7 @@
         <tr>
             <td class="substanceHeader">Kitit &nbsp; &nbsp;</td>
             <td>
-                <form method="link" action="${pageContext.servletContext.contextPath}/addSubstance">
+                <form method="link" action="${pageContext.servletContext.contextPath}/addSubstance/0">
                     <input type="submit" value="Lisää">
                 </form>
             </td>
@@ -37,7 +37,7 @@
         <tr>
             <td class="substanceHeader">Generaattorit &nbsp; &nbsp;</td>
             <td>
-                <form method="link" action="${pageContext.servletContext.contextPath}/addSubstance">
+                <form method="link" action="${pageContext.servletContext.contextPath}/addSubstance/1">
                     <input type="submit" value="Lisää">
                 </form>
             </td>
@@ -61,7 +61,7 @@
         <tr>
             <td class="substanceHeader">Muut &nbsp; &nbsp;</td>
             <td>
-                <form method="link" action="${pageContext.servletContext.contextPath}/addSubstance">
+                <form method="link" action="${pageContext.servletContext.contextPath}/addSubstance/2">
                     <input type="submit" value="Lisää">
                 </form>
             </td>

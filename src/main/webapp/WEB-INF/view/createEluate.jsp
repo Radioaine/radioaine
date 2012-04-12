@@ -73,7 +73,7 @@
             </tr>
             <tr>
                 <td>Tilavuus</td>
-                <td><form:select required="required" path="volume" type="text" class="am">
+                <td><form:select path="volume" type="text" class="am">
                         <form:option value="5"/>
                         <form:option value="10"/>
                         <form:option value="11"/>

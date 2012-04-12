@@ -73,14 +73,11 @@ public class SubstanceController {
     }
 
     private void updateSubstance(Long id, SubstanceFormObject sfm) {
-        Substance substanceToUpdate = (Substance) substanceService.read(id);
-        Substance substance = new Substance();
-        substance.setId(substanceToUpdate.getId());
+        Substance substance = (Substance) substanceService.read(id);
         substance.setName(sfm.getName());
         substance.setType(sfm.getType());
         substance.setAlertLimit1(sfm.getAlertLimit1());
         substance.setAlertLimit2(sfm.getAlertLimit2());
-        substance.setNeedsColdStorage(sfm.getNeedsColdStorage());
         substance.setManufacturer(sfm.getManufacturer());
         substance.setSupplier(sfm.getSupplier());
         substance.setHalflife(sfm.getHalflife());

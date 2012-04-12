@@ -14,10 +14,15 @@ public class SubstanceFormObject {
 
     @NotNull(message = "Nimi ei saa olla tyhjä")
     private String name;
+    private String genericName;
+    private String eluateName;
     private int type;
     private int halflife;
     private int alertLimit1;
     private int alertLimit2;
+    private int volume;
+    private int strength;
+    private int qualityControl;
     private boolean needsColdStorage;
     private String manufacturer;
     private String supplier;
@@ -93,5 +98,45 @@ public class SubstanceFormObject {
 
     public void setHalflife(int halflife) {
         this.halflife = halflife;
+    }
+
+    public String getEluateName() {
+        return eluateName;
+    }
+
+    public void setEluateName(String eluateName) {
+        this.eluateName = eluateName;
+    }
+
+    public String getGenericName() {
+        return genericName;
+    }
+
+    public void setGenericName(String genericName) {
+        this.genericName = genericName;
+    }
+
+    public int getVolume() {
+        return volume;
+    }
+
+    public void setVolume(int volume) {
+        this.volume = volume;
+    }
+
+    public int getStrength() {
+        return strength;
+    }
+
+    public void setStrength(int strength) {
+        this.strength = strength;
+    }
+
+    public int getQualityControl() {
+        return qualityControl;
+    }
+
+    public void setQualityControl(int qualityControl) {
+        this.qualityControl = qualityControl;
     }
 }

@@ -7,20 +7,20 @@
 
 <div id="contents">
     <h2>Lisää <c:choose>
-                    <c:when test="${substance.type=='0'}">
-                        kitti
-                    </c:when>
-                    <c:when test="${substance.type=='1'}">
-                        generaattori
-                    </c:when>
-                    <c:otherwise>
-                        muu
-                    </c:otherwise>
-                </c:choose></h2>
+            <c:when test="${substance.type=='0'}">
+                kitti
+            </c:when>
+            <c:when test="${substance.type=='1'}">
+                generaattori
+            </c:when>
+            <c:otherwise>
+                muu
+            </c:otherwise>
+        </c:choose></h2>
     <br />
 
-    <form:form commandName="substance" action="substance" method="POST">
-        
+    <form:form commandName="substance" action="${pageContext.servletContext.contextPath}/substance/${substance.type}" method="POST">
+
         <table class="noborder">
             <tr>
                 <td class="substanceFirst">Tuotenimi</td>
@@ -28,20 +28,13 @@
             </tr>
             <tr>
                 <td>Geneerinen nimi</td>
-                <td><input path="genericName" type="text" value="TODO" class="substance"/></td>
+                <td><form:input path="genericName" type="text" class="substance"/><form:errors path="genericName"/></td>
             </tr>
-            <!--<tr>
-                <td>Tyyppi</td>
-                <td><select path="type" class="substance">
-                        <option value="0">Kitti</option>
-                        <option value="1">Generaattori</option>
-                        <option value="2">Muu</option>
-                    </select></td>
-            </tr>-->
+
             <c:if test="${substance.type=='1'}"> <!--Tämä tarvitaan vain, jos tyyppi on generaattori-->
                 <tr>
                     <td>Valmistettava eluaatti</td>
-                    <td><input id="genericName" name="genericName" type="text" value="TODO" class="substance"/></td>
+                    <td><form:input path="eluateName" name="genericName" type="text" class="substance"/><form:errors path="eluateName"/></td>
                 </tr>
             </c:if>
             <tr>
@@ -54,11 +47,11 @@
             </tr>
             <tr>
                 <td>Tilavuus</td>
-                <td><input path="size" type="text" value="TODO" class="substance"/></td>
+                <td><form:input path="volume" type="text" class="substance"/><form:errors path="volume"/></td>
             </tr>
             <tr>
                 <td>Vahvuus</td>
-                <td><input path="strength" type="text" value="TODO" class="substance"/></td>
+                <td><form:input path="strength" type="text" class="substance"/><form:errors path="strength"/></td>
             </tr>
             <c:if test="${substance.type=='1'}"><!--Tämä tarvitaan vain, jos tyyppi on generaattori-->
                 <tr>
@@ -83,10 +76,12 @@
             </tr>-->
             <tr>
                 <td>Laadunvarmistus</td>
-                <td><select id="qualityControl" name="qualityControl" class="substance">
-                        <option value="1" selected="selected">Huomautetaan puuttumisesta</option>
-                        <option value="0">Ei huomauteta puuttumisesta</option>
-                    </select></td>
+                <td><form:select path="qualityControl" name="qualityControl" class="substance">
+                        <form:option value="1" selected="selected" label="Huomautetaan puuttumisesta"></form:option>
+                        <form:option value="0" label="Ei huomauteta puuttumisesta"></form:option>
+                    </form:select>
+
+                </td>
             </tr>
             <tr>
                 <td>Huomautus vanhenemisesta</td>
@@ -97,8 +92,8 @@
                 <td><form:input path="alertLimit2" type="number"/><form:errors path="alertLimit2"/> yksikköä jäljellä</td>
             </tr>
         </table>
-        
-            <br />
+
+        <br />
         <input type="submit" value="Lisää">&nbsp; &nbsp;
         <input type="button" value="Peruuta" onClick="parent.location = '${pageContext.servletContext.contextPath}/substanceView'" />
 

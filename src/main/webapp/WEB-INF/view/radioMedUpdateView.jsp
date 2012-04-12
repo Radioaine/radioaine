@@ -88,9 +88,12 @@
             </tr>
             <tr>
                 <td>Luontiaika</td>
-                <td><input required name="hours" type="text" id="hours" size="2" value="${hours}"/>:<input required
-                        name="minutes" type="text" id="minutes" size="2" value="${minutes}"/>
-                    <input required name="date" type="text" id="creationtime" value="${date}"/></td>
+                <fmt:formatDate value="${radioMedicine.date}" pattern="hh" var="radiohours"/>
+                <fmt:formatDate value="${radioMedicine.date}" pattern="mm" var="radiominutes"/>
+                <fmt:formatDate value="${radioMedicine.date}" pattern="dd.MM.yyyy" var="radiodate"/>
+                <td><input required name="hours" type="text" id="hours" size="2" value="${radiohours}"/>:<input required
+                        name="minutes" type="text" id="minutes" size="2" value="${radiominutes}"/>
+                    <input required name="date" type="text" id="creationtime" value="${radiodate}"/></td>
             </tr>
             <tr>
                 <td>Aktiivisuus</td>

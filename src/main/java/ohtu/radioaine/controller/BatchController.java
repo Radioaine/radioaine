@@ -176,7 +176,9 @@ public class BatchController {
     @RequestMapping(value = "updateBatch/{id}")
     public String batchUpdateRequestCTRL(Model model, @PathVariable Long id) {
         model.addAttribute("substances", substanceService.list());
-        model.addAttribute("batch", batchService.read(id));
+        Batch temp = batchService.read(id);
+        temp.setSignature("");
+        model.addAttribute("batch", temp);
         model.addAttribute("storages", storageService.list());
         setStorageNames(model);
         return "batchUpdateView";

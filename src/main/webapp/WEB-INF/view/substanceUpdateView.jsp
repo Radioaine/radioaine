@@ -87,11 +87,11 @@
                         <c:choose>
                             <c:when test="${substance.qualityControl=='1'}"> 
                                 <form:option value="1" selected="selected">Huomautetaan puuttumisesta</form:option>
-                                <form:option value="0">Ei huomauteta puuttumisesta</form:option>
+                                <form:option value="2">Ei huomauteta puuttumisesta</form:option>
                             </c:when>
-                            <c:when test="${substance.qualityControl=='0'}"> 
+                            <c:when test="${substance.qualityControl=='2'}"> 
                                 <form:option value="1">Huomautetaan puuttumisesta</form:option>
-                                <form:option value="0" selected="selected">Ei huomauteta puuttumisesta</form:option>
+                                <form:option value="2" selected="selected">Ei huomauteta puuttumisesta</form:option>
                             </c:when>
                         </c:choose>
                     </form:select>
@@ -100,7 +100,7 @@
                     <c:when test="${substance.qualityControl=='1'}"> 
                         <td class="infotext">Huomautetaan puuttumisesta</td>
                     </c:when>
-                    <c:when test="${substance.qualityControl=='0'}"> 
+                    <c:when test="${substance.qualityControl=='2'}"> 
                         <td class="infotext">Ei huomauteta puuttumisesta</td>
                     </c:when>
                 </c:choose>

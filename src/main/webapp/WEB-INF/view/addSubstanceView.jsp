@@ -77,8 +77,8 @@
             <tr>
                 <td>Laadunvarmistus</td>
                 <td><form:select path="qualityControl" name="qualityControl" class="substance">
-                        <form:option value="1" selected="selected" label="Huomautetaan puuttumisesta"></form:option>
-                        <form:option value="0" label="Ei huomauteta puuttumisesta"></form:option>
+                        <form:option value="1" label="Huomautetaan puuttumisesta" selected="selected"></form:option>
+                        <form:option value="2" label="Ei huomauteta puuttumisesta"></form:option>
                     </form:select>
 
                 </td>

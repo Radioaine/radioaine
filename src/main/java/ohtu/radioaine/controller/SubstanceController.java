@@ -51,15 +51,11 @@ public class SubstanceController {
             return "addSubstanceView";
         }
         sfo.setType(id);
-        System.out.println("TYYPPI: " + sfo.getType());
-
-        substanceService.createOrUpdate(createSubstance(sfo));
+        createSubstance(sfo, new Substance());
         return "redirect:/substanceView";
     }
 
-    private Substance createSubstance(SubstanceFormObject sfo) {
-        System.out.println("LAATU: " + sfo.getQualityControl());
-        Substance substance = new Substance();
+    private void createSubstance(SubstanceFormObject sfo, Substance substance) {
         substance.setType(sfo.getType());
         substance.setName(sfo.getName());
         substance.setHalflife(sfo.getHalflife());
@@ -76,8 +72,7 @@ public class SubstanceController {
             substance.setHalflife(sfo.getHalflife());
             substance.setEluateName(sfo.getEluateName());
         }
-
-        return substance;
+        substanceService.createOrUpdate(substance);
     }
 
     @RequestMapping(value = "substance", method = RequestMethod.GET)
@@ -87,34 +82,35 @@ public class SubstanceController {
     }
 
     @RequestMapping(value = "updateSubstance/{id}", method = RequestMethod.POST)
-    public String updateSubstanceCTRL(@Valid @ModelAttribute("substance") SubstanceFormObject sfm,
+    public String updateSubstanceCTRL(@Valid @ModelAttribute("substance") SubstanceFormObject sfo,
             BindingResult result,
             Model model,
             @PathVariable Long id) {
-        updateSubstance(id, sfm);
+        createSubstance(sfo, (Substance) substanceService.read(id));
+//        updateSubstance(id, sfm);
         return "redirect:/updateSubstance/" + id;
     }
 
-    private void updateSubstance(Long id, SubstanceFormObject sfo) {
-        Substance substanceToUpdate = (Substance) substanceService.read(id);
-        substanceToUpdate.setType(sfo.getType());
-        substanceToUpdate.setName(sfo.getName());
-        substanceToUpdate.setHalflife(sfo.getHalflife());
-        substanceToUpdate.setGenericName(sfo.getGenericName());
-        substanceToUpdate.setManufacturer(sfo.getManufacturer());
-        substanceToUpdate.setSupplier(sfo.getSupplier());
-        substanceToUpdate.setAlertLimit1(sfo.getAlertLimit1());
-        substanceToUpdate.setAlertLimit2(sfo.getAlertLimit2());
-        substanceToUpdate.setVolume(sfo.getVolume());
-        substanceToUpdate.setTotalAmount(0);
-        substanceToUpdate.setQualityControl(sfo.getQualityControl());
-        substanceToUpdate.setStrength(sfo.getStrength());
-        if (sfo.getType() == 1) {
-            substanceToUpdate.setHalflife(sfo.getHalflife());
-            substanceToUpdate.setEluateName(sfo.getEluateName());
-        }
-        substanceService.createOrUpdate(substanceToUpdate);
-    }
+//    private void updateSubstance(Long id, SubstanceFormObject sfo) {
+//        Substance substanceToUpdate = (Substance) substanceService.read(id);
+//        substanceToUpdate.setType(sfo.getType());
+//        substanceToUpdate.setName(sfo.getName());
+//        substanceToUpdate.setHalflife(sfo.getHalflife());
+//        substanceToUpdate.setGenericName(sfo.getGenericName());
+//        substanceToUpdate.setManufacturer(sfo.getManufacturer());
+//        substanceToUpdate.setSupplier(sfo.getSupplier());
+//        substanceToUpdate.setAlertLimit1(sfo.getAlertLimit1());
+//        substanceToUpdate.setAlertLimit2(sfo.getAlertLimit2());
+//        substanceToUpdate.setVolume(sfo.getVolume());
+//        substanceToUpdate.setTotalAmount(0);
+//        substanceToUpdate.setQualityControl(sfo.getQualityControl());
+//        substanceToUpdate.setStrength(sfo.getStrength());
+//        if (sfo.getType() == 1) {
+//            substanceToUpdate.setHalflife(sfo.getHalflife());
+//            substanceToUpdate.setEluateName(sfo.getEluateName());
+//        }
+//        substanceService.createOrUpdate(substanceToUpdate);
+//    }
 
     @RequestMapping(value = "updateSubstance/{id}", method = RequestMethod.GET)
     public String updateSubstanceViewCTRL(Model model, @PathVariable Long id) {

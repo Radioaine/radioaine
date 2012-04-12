@@ -133,7 +133,9 @@ select.substance {width: 250px;}
     padding-right: 10 px;
 }
 
-.time {width: 160px;}
+.time {width: 60px;}
+
+.timestamp {width: 160px;}
 
 .warnigs {width: 200px;}
 

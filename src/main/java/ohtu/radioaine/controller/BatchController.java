@@ -144,7 +144,7 @@ public class BatchController {
         substance.setTotalAmount(substance.getTotalAmount() - totalRemoved);
         batchService.createOrUpdate(temp);
         substanceService.createOrUpdate(substance);
-        Event event = EventHandler.removeFromBatchEvent(temp, reason, remover, totalRemoved);
+        Event event = EventHandler.removeFromBatchEvent(temp, remover, reason, totalRemoved);
         eventService.createOrUpdate(event);
     }
 

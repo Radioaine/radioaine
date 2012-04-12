@@ -34,7 +34,7 @@
                 <td>
                     <select multiple="multiple" class="list" >
                         <c:forEach var="eluate" items="${eluates}">
-                            <option id="3" onclick="eluateAmounts(event)" value="${eluate.id}">Klo <fmt:formatDate value="${eluate.date}" pattern="hh.mm"/>, ${eluate.getName()}, Aktiivisuus ${eluate.strength}, Sijainti TODO${eluate.storageLocation}, Tekijä ${eluate.signature}</option>
+                            <option id="3" onclick="eluateAmounts(event)" value="${eluate.id}">Klo <fmt:formatDate value="${eluate.date}" pattern="hh.mm"/>, ${eluate.getName()}, Aktiivisuus ${eluate.strength}, Sijainti TODO${eluate.storageLocation}, Tekij? ${eluate.signature}</option>
                         </c:forEach>
                     </select>
                 </td>

@@ -32,7 +32,7 @@ select.am {width: 65px;}
 
 select.batch {width: 350px;}
 
-.batch {width: 130px;}
+.batch {width: 150px;}
 
 .batchnumber {width: 100px;}
 
@@ -45,7 +45,7 @@ td.center {
 
 .comm {width: 300px;}
 
-.date {width: 90px;}
+.date {width: 95px;}
 
 .editButton {width: 90px;}
 
@@ -107,7 +107,7 @@ td.noborder, th.noborder {border: none;}
 
 .reportAmount {width: 50px;}
 
-.reportName {width: 150px;}
+.reportName {width: 245px;}
 
 .reportReason {width: 170px;}
 
@@ -133,7 +133,7 @@ select.substance {width: 250px;}
     padding-right: 10 px;
 }
 
-.time {width: 60px;}
+.time {width: 160px;}
 
 .warnigs {width: 200px;}
 

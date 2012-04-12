@@ -83,12 +83,14 @@ public class EventHandler {
     public static Event updateEluateEvent(Eluate eluate, String sig){
         Event event = new Event();
         event.setSignature(sig);
+        event.setNote(String.valueOf(eluate.getId()));
         event.setInfo("type=updateEluate "+eluate.toString());
         return event;
     }
     public static Event newRadioMedEvent(RadioMedicine radioMed, String sig){
         Event event = new Event();
         event.setSignature(sig);
+        event.setNote(String.valueOf(radioMed.getId()));
         event.setSubstanceName(radioMed.getName());
         event.setInfo("type=newRadioMed "+radioMed.toString());
         return event;

@@ -116,6 +116,7 @@ public class BatchController {
 
     @RequestMapping(value = "removeFromBatch/{id}", method = RequestMethod.POST)
     public String removeFromBatchCTRL(@PathVariable Long id, @RequestParam Integer[] amounts, @RequestParam String remover, @RequestParam String reason) {
+        System.out.println("JUTTUU "+amounts[0]);
         removeItemsFromBatch(id, amounts, reason, remover);
         return "redirect:/batch/" + id;
     }
@@ -128,11 +129,12 @@ public class BatchController {
         int totalRemoved = 0;
         for (int i = 0; i < amounts.length; ++i) {
             if (amounts[i] != null && locs[i][1] != null) {
+                System.out.println("TÄÄL");
                 if (amounts[i] > 0 && locs[i][1] >= amounts[i]) {
                     totalRemoved += amounts[i];
-                    System.out.println(locs[i][1]);
+                    System.out.println("Tuut "+locs[i][1]);
                     locs[i][1] -= amounts[i];
-                    System.out.println(locs[i][1]);
+                    System.out.println("Tuut2 "+locs[i][1]);
                 }
             }
             if (locs[i][1] != null) {

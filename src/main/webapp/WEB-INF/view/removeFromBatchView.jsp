@@ -80,11 +80,11 @@
                     <c:when test="${batch.storageLocations[i.index][1] > 0}">
                         <tr>
                             <td>${storages[(batch.storageLocations[i.index][0]-1)].name}</td>
-                            <td><input value="0" required pattern="[0-9]{1,3}" type="number" name="amounts" /></td><br />
+                            <td><input required="required" pattern="[0-9]{1,3}" type="number" name="amounts" /></td><br />
                         </tr>
                     </c:when>
                     <c:otherwise>
-                        <input style="display: none;" value="0" required pattern="[0-9]{1,3}" type="number" name="amounts" />
+                        <input style="display: none;" value="0" required="required" pattern="[0-9]{1,3}" type="number" name="amounts" />
                     </c:otherwise>
                 </c:choose>
             </c:forEach>

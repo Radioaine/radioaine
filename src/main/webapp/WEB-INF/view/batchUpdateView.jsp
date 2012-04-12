@@ -31,7 +31,16 @@
         <tr>
             <td>Tuotenimi</td>
             <td><form:select path="substance">
-                    <form:options items="${substances}" itemValue="id" itemLabel="name"/>
+                    <c:forEach var="temp" items="${substances}">
+                        <c:choose>
+                            <c:when test="${temp.name == batch.substance.name}">
+                                <form:option value="${temp.id}" label="${temp.name}" selected="selected"></form:option>
+                            </c:when>
+                            <c:otherwise>
+                                <form:option value="${temp.id}" label="${temp.name}"></form:option>
+                            </c:otherwise>
+                        </c:choose>
+                    </c:forEach>
                 </form:select>
             </td>
             <td>${batch.substance.name}</td>

@@ -21,8 +21,20 @@
                 <td class="name">Generaattori</td>
                 <td><select multiple="multiple" class="list">
                         <c:forEach var="generator" items="${generators}">
-                            <option id="0" onclick="eluateAmounts(event)"  value="${generator.id}">${generator.substance.name}, Erä 
-                                ${generator.batchNumber}, Käyt. ennen <fmt:formatDate value="${generator.expDate}" pattern="dd.MM.yyyy"/>, TODO Sijainti</option>
+                            <c:forEach var="location" items="${generator.storageLocations}">
+                                <c:if test="${location[1] != null}">
+                                    <c:if test="${location[1] > 0}">
+                                        <option id="0" onclick="eluateAmounts(event)"  value="${generator.id}">${generator.substance.name}, Erä 
+                                            ${generator.batchNumber}, Käyt. ennen <fmt:formatDate value="${generator.expDate}" pattern="dd.MM.yyyy"/>, Sijainti: 
+                                            <c:forEach var="storage" items="${storages}">
+                                                <c:if test="${storage.id == location[0]}">
+                                                    ${storage.name}
+                                                </c:if>
+                                            </c:forEach>
+                                        </option>
+                                    </c:if>
+                                </c:if>
+                            </c:forEach>
                         </c:forEach>
                     </select>
                 </td>
@@ -31,9 +43,21 @@
                 <td>Eluointiliuos</td>
                 <td><select multiple="multiple" class="list">
                         <c:forEach var="other" items="${others}">
-                            <option id="2" onclick="eluateAmounts(event)" value="${other.id}">${other.substance.name},
-                                ${other.batchNumber}, <fmt:formatDate value="${other.expDate}" pattern="dd.MM.yyyy"/></option>
+                            <c:forEach var="location" items="${other.storageLocations}">
+                                <c:if test="${location[1] != null}">
+                                    <c:if test="${location[1] > 0}">
+                                        <option id="2" onclick="eluateAmounts(event)" value="${other.id}">${other.substance.name},
+                                            ${other.batchNumber}, <fmt:formatDate value="${other.expDate}" pattern="dd.MM.yyyy"/>, Sijainti: 
+                                            <c:forEach var="storage" items="${storages}">
+                                                <c:if test="${storage.id == location[0]}">
+                                                    ${storage.name}
+                                                </c:if>
+                                            </c:forEach>
+                                        </option>
+                                    </c:if>
+                                </c:if>
                             </c:forEach>
+                        </c:forEach>
                     </select>
                 <td>
             </tr>

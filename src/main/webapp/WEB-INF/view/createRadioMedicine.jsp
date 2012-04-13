@@ -34,7 +34,13 @@
                 <td>
                     <select multiple="multiple" class="list" >
                         <c:forEach var="eluate" items="${eluates}">
-                            <option id="3" onclick="eluateAmounts(event)" value="${eluate.id}">Klo <fmt:formatDate value="${eluate.date}" pattern="hh.mm"/>, ${eluate.getName()}, Aktiivisuus ${eluate.strength}, Sijainti TODO${eluate.storageLocation}, Tekij? ${eluate.signature}</option>
+                            <option id="3" onclick="eluateAmounts(event)" value="${eluate.id}">Klo <fmt:formatDate value="${eluate.date}" pattern="hh.mm"/>, ${eluate.getName()}, Aktiivisuus ${eluate.strength}, Sijainti: 
+                                <c:forEach var="storage" items="${storages}">
+                                    <c:if test="${storage.id == eluate.storageLocation}">
+                                        ${storage.name}
+                                    </c:if>
+                                </c:forEach>
+                            , Tekijä ${eluate.signature}</option>
                         </c:forEach>
                     </select>
                 </td>
@@ -43,19 +49,43 @@
                 <td>Kitti</td>
                 <td><select multiple="multiple" class="list">
                         <c:forEach var="kit" items="${kits}">
-                            <option id="1" onclick="eluateAmounts(event)" value="${kit.id}">${kit.substance.name}, Erä 
-                                ${kit.batchNumber}, Käyt. ennen <fmt:formatDate value="${kit.expDate}" pattern="dd.MM.yyyy"/>, TODO Sijainti</option>
+                            <c:forEach var="location" items="${kit.storageLocations}">
+                                <c:if test="${location[1] != null}">
+                                    <c:if test="${location[1] > 0}">
+                                        <option id="1" onclick="eluateAmounts(event)" value="${kit.id}">${kit.substance.name}, Erä 
+                                            ${kit.batchNumber}, Käyt. ennen <fmt:formatDate value="${kit.expDate}" pattern="dd.MM.yyyy"/>, Sijainti: 
+                                            <c:forEach var="storage" items="${storages}">
+                                                <c:if test="${storage.id == location[0]}">
+                                                    ${storage.name}
+                                                </c:if>
+                                            </c:forEach>
+                                        </option>
+                                    </c:if>
+                                </c:if>
+                            </c:forEach>
                         </c:forEach>
                     </select>
                 </td>
             </tr>
             <tr>
                 <td>Muu</td>
-                <td><select multiple="multiple" class="list" >
+                <td><select multiple="multiple" class="list">
                         <c:forEach var="other" items="${others}">
-                            <option id="2" onclick="eluateAmounts(event)" value="${other.id}">${other.substance.name}, Erä
-                                ${other.batchNumber}, Käyt. ennen <fmt:formatDate value="${other.expDate}" pattern="dd.MM.yyyy"/>, TODO Sijainti</option>
+                            <c:forEach var="location" items="${other.storageLocations}">
+                                <c:if test="${location[1] != null}">
+                                    <c:if test="${location[1] > 0}">
+                                        <option id="2" onclick="eluateAmounts(event)" value="${other.id}">${other.substance.name},
+                                            ${other.batchNumber}, <fmt:formatDate value="${other.expDate}" pattern="dd.MM.yyyy"/>, Sijainti: 
+                                            <c:forEach var="storage" items="${storages}">
+                                                <c:if test="${storage.id == location[0]}">
+                                                    ${storage.name}
+                                                </c:if>
+                                            </c:forEach>
+                                        </option>
+                                    </c:if>
+                                </c:if>
                             </c:forEach>
+                        </c:forEach>
                     </select>
                 <td>
             </tr>

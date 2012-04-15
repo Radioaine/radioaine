@@ -10,8 +10,8 @@ import java.sql.Timestamp;
  */
 public class Activity {
 
-    public double CurrentActivity(Timestamp t0, Timestamp t, int halflife, int strength){
-        int A0 = strength;              //eluate activity at time t0
+    public double CurrentActivity(Timestamp t0, Timestamp t, int halflife, double strength){
+        double A0 = strength;              //eluate activity at time t0
         long dT = ElapsedTime(t0,t);    //elapsed time since creation of eluate
         
         /*Calculate value of lambda*/            
@@ -25,7 +25,7 @@ public class Activity {
         return A;   //return current activity
     }
     
-    private double CalculateActivity(double A, int A0,double lambda, long dT){
+    private double CalculateActivity(double A, double A0,double lambda, long dT){
         A = A0*Math.exp((-lambda*dT));
         return A;
     }

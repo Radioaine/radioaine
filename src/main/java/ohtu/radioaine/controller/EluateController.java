@@ -41,6 +41,7 @@ public class EluateController {
     @RequestMapping(value = "eluate/{id}", method = RequestMethod.GET)
     public String getEluateByIdCTRL(@PathVariable Long id, Model model) {
         model.addAttribute("eluate", eluateService.read(id));
+        model.addAttribute("storages", storageService.list());
         return "eluateView";
     }
 

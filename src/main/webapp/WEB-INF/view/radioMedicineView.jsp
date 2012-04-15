@@ -48,7 +48,13 @@
         </tr>
         <tr>
             <td>Varastopaikka</td>
-            <td>${radioMedicine.storageLocation} TODO varastopaikan nimi</td>
+            <td>
+                <c:forEach var="storage" items="${storages}">
+                    <c:if test="${storage.id == radioMedicine.storageLocation}">
+                        ${storage.name}
+                    </c:if>
+                </c:forEach>
+            </td>
         </tr>
         <tr>
             <td>Luotu</td>

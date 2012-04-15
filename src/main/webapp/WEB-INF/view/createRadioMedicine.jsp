@@ -52,14 +52,13 @@
                             <c:forEach var="location" items="${kit.storageLocations}">
                                 <c:if test="${location[1] != null}">
                                     <c:if test="${location[1] > 0}">
-                                        <option id="1" onclick="eluateAmounts(event)" value="${kit.id}">${kit.substance.name}, Erä 
-                                            ${kit.batchNumber}, Käyt. ennen <fmt:formatDate value="${kit.expDate}" pattern="dd.MM.yyyy"/>, Sijainti: 
-                                            <c:forEach var="storage" items="${storages}">
-                                                <c:if test="${storage.id == location[0]}">
-                                                    ${storage.name}
-                                                </c:if>
-                                            </c:forEach>
-                                        </option>
+                                        <c:forEach var="storage" items="${storages}">
+                                            <c:if test="${storage.id == location[0]}">
+                                                <option id="1" onclick="eluateAmounts(event)" value="${kit.id}">${kit.substance.name}, Erä 
+                                                    ${kit.batchNumber}, Käyt. ennen <fmt:formatDate value="${kit.expDate}" pattern="dd.MM.yyyy"/>, Sijainti: ${storage.name}
+                                                </option>
+                                            </c:if>
+                                        </c:forEach>
                                     </c:if>
                                 </c:if>
                             </c:forEach>

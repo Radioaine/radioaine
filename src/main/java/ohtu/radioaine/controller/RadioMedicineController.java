@@ -123,6 +123,7 @@ public class RadioMedicineController {
     @RequestMapping("RadioMedicine/{id}")
     public String radioMedicineViewCTRL(Model model, @PathVariable Long id) {
         model.addAttribute("radioMedicine", radioMedService.read(id));
+        model.addAttribute("storages", storageService.list());
         return "radioMedicineView";
     }
 
@@ -158,6 +159,23 @@ public class RadioMedicineController {
         for (int i = 0; i < kitsTable.length; ++i) {
             if (kitsTable[i] != null) {
                 kits.add(batchService.read(kitsTable[i]));
+//                for(int j=0; j < batchService.read(kitsTable[i]).getStorageLocations().length; j++) {
+//                    if(batchService.read(kitsTable[i]).getStorageLocations()[j][0] != null)    {
+//                        if(batchService.read(kitsTable[i]).getStorageLocations()[j][0] == 1)    { //ykkösen tilalle tarttisi saada vähennettävän storagenId!!!!!!!!
+//                            Batch temp = batchService.read(kitsTable[i]);
+//                            Long[][] tempi = temp.getStorageLocations();
+//                            tempi[j][1] = tempi[j][1] - 1;
+//                            temp.setStorageLocations(tempi);
+//                            temp.setAmount(temp.getAmount() - 1);
+//                            batchService.createOrUpdate(temp);
+//                            Substance substanceTemp = temp.getSubstance();
+//                            substanceTemp.setTotalAmount(substanceTemp.getTotalAmount() - 1);
+//                            substanceService.createOrUpdate(substanceTemp);
+//                                    
+//                            
+//                        }
+//                    }
+//                }
             }
 
         }

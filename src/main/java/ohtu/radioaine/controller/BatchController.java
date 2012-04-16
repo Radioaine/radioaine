@@ -122,7 +122,7 @@ public class BatchController {
 
     private void removeItemsFromBatch(Long id, Integer[] amounts, String reason, String remover) {
         Batch temp = batchService.read(id);
-        Substance substance = (Substance)substanceService.read(temp.getSubstance().getId());
+        Substance substance = (Substance) substanceService.read(temp.getSubstance().getId());
         Long[][] locs = temp.getStorageLocations();
         int tempTotalAmount = 0;
         int totalRemoved = 0;
@@ -313,7 +313,7 @@ public class BatchController {
         batch.setSubstanceVolume(bfo.getSubstanceVolume());
         batch.setStorageLocations(bfo.getStorageLocations());
         Substance substance = (Substance) substanceService.read(bfo.getSubstance());
-        if (batch.getExpDate().compareTo(substance.getOldestDate()) < 0) {
+        if (substance.getOldestDate() == null || batch.getExpDate().compareTo(substance.getOldestDate()) < 0) {
             substance.setOldestDate(batch.getExpDate());
             substance.setWarningDate(Time.parseWarningDate(batch.getExpDate()));
         }

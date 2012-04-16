@@ -66,7 +66,7 @@ public class SubstanceController {
         substance.setAlertLimit2(sfo.getAlertLimit2());
         substance.setVolume(sfo.getVolume());
         substance.setQualityControl(sfo.getQualityControl());
-        substance.setStrength(sfo.getStrength());
+        substance.setStrength(Double.parseDouble(sfo.getStrength()));
         if (sfo.getType() == 1) {
             substance.setHalflife(sfo.getHalflife());
             substance.setEluateName(sfo.getEluateName());

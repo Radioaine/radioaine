@@ -37,7 +37,7 @@
             <tr>
                 <td><fmt:formatDate value="${eluate.date}" pattern="HH:mm"/> </td>
                 <td colspan="2"><c:forEach var="generator" items="${eluate.generators}">
-                        <a href="eluate/${eluate.id}"><b>${generator.substance.name}</b></a><br>
+                        <a href="eluate/${eluate.id}"><b>${generator.substance.eluateName}</b></a><br>
                     </c:forEach></td>
                 <td>${eluate.strength}
                     <c:choose>

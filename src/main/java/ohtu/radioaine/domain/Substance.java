@@ -27,7 +27,7 @@ public class Substance implements Serializable {
     private int alertLimit1;
     private int alertLimit2;
     private int volume;
-    private int strength;
+    private double strength;
     private boolean ordered;
     private boolean needsColdStorage;
     private String manufacturer;
@@ -213,11 +213,11 @@ public class Substance implements Serializable {
         this.volume = volume;
     }
 
-    public int getStrength() {
+    public double getStrength() {
         return strength;
     }
 
-    public void setStrength(int strength) {
+    public void setStrength(double strength) {
         this.strength = strength;
     }
 

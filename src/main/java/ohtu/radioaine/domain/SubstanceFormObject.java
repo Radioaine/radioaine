@@ -21,7 +21,7 @@ public class SubstanceFormObject {
     private int alertLimit1;
     private int alertLimit2;
     private int volume;
-    private int strength;
+    private String strength;
     private int qualityControl;
     private boolean needsColdStorage;
     private String manufacturer;
@@ -124,12 +124,12 @@ public class SubstanceFormObject {
         this.volume = volume;
     }
 
-    public int getStrength() {
+    public String getStrength() {
         return strength;
     }
 
-    public void setStrength(int strength) {
-        this.strength = strength;
+    public void setStrength(String strength) {
+        this.strength = strength.replaceAll(",", ".");
     }
 
     public int getQualityControl() {

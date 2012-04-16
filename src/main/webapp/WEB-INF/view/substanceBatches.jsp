@@ -14,7 +14,7 @@
 
             <tr>
                     <td class="name">Geneerinen nimi</td>
-                    <td>TODO</td>
+                    <td>${substance.genericName}</td>
             </tr>
             <tr>
                     <td>Valmistaja</td>
@@ -26,11 +26,11 @@
             </tr>
             <tr>
                     <td>Tilavuus</td>
-                    <td>TODO</td>
+                    <td>${substance.volume}</td>
             </tr>
             <tr>
                     <td>Vahvuus</td>
-                    <td>TODO</td>
+                    <td>${substance.strength}</td>
             </tr>		
     </table>
     

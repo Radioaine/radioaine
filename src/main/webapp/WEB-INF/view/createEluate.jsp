@@ -15,7 +15,7 @@
     <h2>Uusi eluaatti</h2>
     <br/>
     <form:form commandName="eluate" action="createEluate" method="POST">
-        
+
         <table class="noborder">
             <tr>
                 <td class="name">Generaattori</td>
@@ -23,7 +23,7 @@
                         <c:forEach var="generator" items="${generators}">
                             <option id="0" onclick="eluateAmounts(event)"  value="${generator.id}">${generator.substance.name}, Erä 
                                 ${generator.batchNumber}, Käyt. ennen <fmt:formatDate value="${generator.expDate}" pattern="dd.MM.yyyy"/>, TODO Sijainti</option>
-                        </c:forEach>
+                            </c:forEach>
                     </select>
                 </td>
             </tr>
@@ -65,9 +65,9 @@
                 <td><input pattern="^[0-9]{1,4}([,.][0-9]{1,4})?$" name="strength" type="text" size="5"/>
 
                     <form:select path="unit">
-                        <option value="0">GBq</option>
-                        <option value="1">MBq</option>
-                    </form:select>
+                <option value="0">GBq</option>
+                <option value="1">MBq</option>
+            </form:select>
 
             </td>
             </tr>
@@ -102,7 +102,7 @@
             </tr>
         </table>
         <br/>
-        
+
         <input type="submit" value="Tallenna">&nbsp; &nbsp;
         <input type="button" value="Peruuta" onClick="parent.location = '${pageContext.servletContext.contextPath}/frontpage'" />
 

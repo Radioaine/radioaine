@@ -6,17 +6,16 @@
 
 <div id="contents">
     <h2>${eluate.generators[0].substance.eluateName}</h2>
-    
+    <br>
     <table class="noborder">
         <tr>
             <td class="name">Käytetyt aineet</td>
             <td>
-                <br />
                 <c:forEach var="generator" items="${eluate.generators}">
                     <a href="${pageContext.servletContext.contextPath}/substance/${generator.substance.id}">${generator.substance.name}</a>, 
                     <a href="${pageContext.servletContext.contextPath}/batch/${generator.id}">Erä ${generator.batchNumber}</a><br />
                 </c:forEach>
-                    
+
                 <c:forEach var="other" items="${eluate.others}">
                     <a href="${pageContext.servletContext.contextPath}/substance/${other.substance.id}">${other.substance.name}</a>, 
                     <a href="${pageContext.servletContext.contextPath}/batch/${other.id}">Erä ${other.batchNumber}</a><br />
@@ -65,7 +64,7 @@
 
     </table>
     <br />
-    
+
     <table class="noborder">
         <tr>
             <td class="editButton">
@@ -83,7 +82,7 @@
             </td>
         </tr>
     </table>
-            
+
 </div>
 
 

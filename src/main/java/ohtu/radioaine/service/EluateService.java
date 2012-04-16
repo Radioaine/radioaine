@@ -4,6 +4,7 @@
  */
 package ohtu.radioaine.service;
 
+import java.sql.Timestamp;
 import java.util.List;
 import ohtu.radioaine.domain.Eluate;
 
@@ -16,4 +17,5 @@ public interface EluateService {
     public List<Eluate> list();
     public Eluate read(Long id);
     public void delete(Long id);
+    public List<Eluate> getAllByDate(Timestamp timestamp);
 }

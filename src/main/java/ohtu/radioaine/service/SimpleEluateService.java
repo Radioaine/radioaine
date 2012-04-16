@@ -4,8 +4,8 @@
  */
 package ohtu.radioaine.service;
 
+import java.sql.Timestamp;
 import java.util.List;
-import ohtu.radioaine.database.BatchDBDao;
 import ohtu.radioaine.database.EluateDBDao;
 import ohtu.radioaine.domain.Eluate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +32,12 @@ public class SimpleEluateService implements EluateService {
     @Transactional
     public List<Eluate> list() {
         return storageDao.list();
+    }
+
+    @Override
+    @Transactional
+    public List<Eluate> getAllByDate(Timestamp timestamp) {
+        return storageDao.getAllByDate(timestamp);
     }
 
     @Override

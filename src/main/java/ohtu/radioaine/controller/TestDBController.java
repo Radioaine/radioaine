@@ -108,7 +108,11 @@ public class TestDBController {
             substance.setManufacturer(substances[i][5]);
             substance.setSupplier(substances[i][6]);
             substance.setType(Integer.parseInt(substances[i][7]));
+            if (substance.getType() == 1) {
+                substance.setEluateName("eluaattinimi-" + substance.getName());
+            }
             substance.setOldestDate(Time.parseTimeStamp("13.6.2050 10:00"));
+            substance.setGenericName("geneerinen nimi");
             Random randomGenerator = new Random();
             int randomInt = randomGenerator.nextInt(3);
             substance.setQualityStatus(randomInt);

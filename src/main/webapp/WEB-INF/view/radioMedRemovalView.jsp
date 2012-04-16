@@ -71,24 +71,23 @@
 
     </table>
     <br/>
-    <table class="noborder">
-        <tr>
-            <td class="editButton">
-                <form action="${pageContext.servletContext.contextPath}/modifyRadioMed/${radioMedicine.id}" method="GET">  
-                    <input type="submit" value="Muokkaa" />
-                </form>
-            </td>
-            <td>
-                <input type="button" value="Palaa" onClick="parent.location = '${pageContext.servletContext.contextPath}/frontpage'" />
-            </td>
-            <td>
-                <form action="${pageContext.servletContext.contextPath}/removeRadioMedRequest/${radioMedicine.id}" method="GET">  
-                    <input type="submit" value="Poista" />
-                </form>
-            </td>
-        </tr>
-    </table>
-
+    <form action="${pageContext.servletContext.contextPath}/removeRadioMed/${radioMedicine.id}" method="POST">
+        <table class="noborder">
+       
+            <tr>
+                <td>Poiston syy</td>
+                <td><input required="required" type="text" name="reason" /></td>
+            </tr>    
+            <tr>
+                <td colspan="2">&nbsp;</td>
+            </tr>     
+            <tr>
+                <td>Nimikirjaimet</td>
+                <td><input required="required" type="text" size="6" name="remover" /></td>
+            </tr>
+        </table><br/>
+        <input type="submit" value="Poista" /> &nbsp; &nbsp;<input type="button" value="Peruuta" onClick="parent.location = '${pageContext.servletContext.contextPath}/RadioMedicine/${radioMedicine.id}'" />
+    </form>
 </div>
 
 

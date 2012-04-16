@@ -24,63 +24,57 @@
 
         <table class="noborder">
             <tr>
-                <td class="name">Eluaatti</td>
-                <td colspan="3">
-                    <select multiple="multiple" class="list" >
-                        <c:forEach var="eluate" items="${eluates}">
-                            <option id="3" onclick="eluateAmounts(event)" value="${eluate.id}">Klo <fmt:formatDate value="${eluate.date}" pattern="hh.mm"/>, ${eluate.getName()}, Aktiivisuus ${eluate.strength}, Sijainti TODO${eluate.storageLocation}, Tekijä ${eluate.signature}</option>
-                        </c:forEach>
-                    </select>
-                </td>
-                
-            </tr>
-            <tr>
-                <td>Kitti</td>
-                <td colspan="3"><select multiple="multiple" class="list">
-                        <c:forEach var="kit" items="${kits}">
-                            <option id="1" onclick="eluateAmounts(event)" value="${kit.id}">${kit.substance.name}, Erä 
-                                ${kit.batchNumber}, Käyt. ennen <fmt:formatDate value="${kit.expDate}" pattern="dd.MM.yyyy"/>, TODO Sijainti</option>
-                        </c:forEach>
-                    </select>
-                </td>
-            </tr>
-            <tr>
-                <td>Muu</td>
-                <td colspan="3"><select multiple="multiple" class="list" >
-                        <c:forEach var="other" items="${others}">
-                            <option id="2" onclick="eluateAmounts(event)" value="${other.id}">${other.substance.name}, Erä
-                                ${other.batchNumber}, Käyt. ennen <fmt:formatDate value="${other.expDate}" pattern="dd.MM.yyyy"/>, TODO Sijainti</option>
-                            </c:forEach>
-                    </select>
-                <td>
-            </tr>
-            <tr>
-                <td colspan="4">&nbsp; </td>
+                <td colspan="3">&nbsp; </td>
             </tr>
                         <tr>
-                <td rowspan="5" >Valitut</td>
-                <th>Aiempi</th>
+                <td rowspan="4" >Valitut</td>
             </tr>
             <tr>
                 <td class="infotext" colspan="3">
                     <c:forEach var="eluate" items="${radioMedicine.eluates}">
-                        Klo <fmt:formatDate value="${eluate.date}" pattern="hh.mm"/> ${eluate.getName()}, Erä ${eluate.generators.get(0).batchNumber}, Aktiivisuus ${eluate.strength}, Sijainti TODO${eluate.storageLocation}, Tekijä ${eluate.signature}<br/>
+                        Klo <fmt:formatDate value="${eluate.date}" pattern="hh.mm"/> ${eluate.getName()}, Erä ${eluate.generators.get(0).batchNumber}, Aktiivisuus ${eluate.strength}, Sijainti:
+                        <c:forEach var="storage" items="${storages}">
+                            <c:if test="${storage.id == eluate.storageLocation}">
+                                ${storage.name},
+                            </c:if>
+                        </c:forEach>Tekijä ${eluate.signature}<br/>
                     </c:forEach>
                     <c:forEach var="kit" items="${radioMedicine.kits}">
-                        ${kit.substance.name}, Erä ${kit.batchNumber}, Käyt. ennen <fmt:formatDate value="${kit.expDate}" pattern="dd.MM.yyyy"/>, TODO Sijainti<br/>
+                        ${kit.substance.name}, Erä ${kit.batchNumber}, Käyt. ennen <fmt:formatDate value="${kit.expDate}" pattern="dd.MM.yyyy"/>, Sijainti:
+                        <c:forEach var="location" items="${kit.storageLocations}">
+                            <c:if test="${location[1] != null}">
+                                <c:if test="${location[1] > 0}">
+                                    <c:forEach var="storage" items="${storages}">
+                                        <c:if test="${storage.id == location[0]}">
+                                            ${storage.name}
+                                        </c:if>
+                                    </c:forEach>
+                                </c:if>
+                            </c:if>
+                        </c:forEach>
+                        <br/>
                     </c:forEach>
                     <c:forEach var="oth" items="${radioMedicine.others}">
-                        ${oth.substance.name}, Erä ${oth.batchNumber}, Käyt. ennen <fmt:formatDate value="${oth.expDate}" pattern="dd.MM.yyyy"/>, TODO Sijainti<br/>
+                        ${oth.substance.name}, Erä ${oth.batchNumber}, Käyt. ennen <fmt:formatDate value="${oth.expDate}" pattern="dd.MM.yyyy"/>, Sijainti:
+                        <c:forEach var="location" items="${oth.storageLocations}">
+                            <c:if test="${location[1] != null}">
+                                <c:if test="${location[1] > 0}">
+                                    <c:forEach var="storage" items="${storages}">
+                                        <c:if test="${storage.id == location[0]}">
+                                            ${storage.name}
+                                        </c:if>
+                                    </c:forEach>
+                                </c:if>
+                            </c:if>
+                        </c:forEach>
+                        <br/>
                     </c:forEach>
                 </td>
             </tr>
             <tr>
                 <td colspan="3">&nbsp; </td>
             </tr>
-            <tr>
-                <th colspan="3">Päivitetty</th>
-            </tr>
-            <tr>
+            <tr style="display: none;">
                 <td class="infotext" id="selected" colspan="3">
                     <c:forEach var="eluate" items="${radioMedicine.eluates}">
                         <script> generateDivs("Klo <fmt:formatDate value="${eluate.date}" pattern="hh.mm"/> ${eluate.getName()}, Erä ${eluate.generators.get(0).batchNumber}, Aktiivisuus ${eluate.strength}, Sijainti TODO${eluate.storageLocation}, Tekijä ${eluate.signature} ", ${eluate.id}, 3);</script>
@@ -149,12 +143,25 @@
                 <td><form:select path="storageLocation">
                         <c:forEach var="storage" items="${storages}" varStatus="i">
                             <c:if test="${storage.hidden == false}">
-                                <form:option value="${storage.id}">${storage.name}</form:option>
+                                <c:choose>
+                                    <c:when test="${storage.id == radioMedicine.storageLocation}">
+                                        <form:option selected="selected" value="${storage.id}">${storage.name}</form:option>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <form:option value="${storage.id}">${storage.name}</form:option>
+                                    </c:otherwise>
+                                </c:choose>
                             </c:if>
                         </c:forEach>
                     </form:select>
                 </td>
-                <td class="infotext" colspan="2">${radioMedicine.storageLocation} TODO varastopaikan nimi</td>
+                <td class="infotext" colspan="2">
+                    <c:forEach var="storage" items="${storages}" varStatus="i">
+                        <c:if test="${storage.id == radioMedicine.storageLocation}">
+                            ${storage.name}
+                        </c:if>
+                    </c:forEach>
+                </td>
             </tr>
             <tr>
                 <td>Kommentit</td>

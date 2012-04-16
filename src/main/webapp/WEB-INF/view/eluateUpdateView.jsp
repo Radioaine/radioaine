@@ -18,52 +18,52 @@
     <h2>Eluuatin ${eluate.id} muokkaus</h2>
     <br/>   
     <form:form commandName="eluateForm" action="${pageContext.servletContext.contextPath}/modifyEluate/${eluate.id}" method="POST">
-        
         <table class="noborder">
             <tr>
-                <td class="name">Generaattori</td>
-                <td colspan="3"><select multiple="multiple" class="list">
-                        <c:forEach var="generator" items="${generators}">
-                            <option id="0" onclick="eluateAmounts(event)"  value="${generator.id}">${generator.substance.name}, Erä 
-                                ${generator.batchNumber}, Käyt. ennen <fmt:formatDate value="${generator.expDate}" pattern="dd.MM.yyyy"/>, TODO Sijainti</option>
-                        </c:forEach>
-                    </select>
-                </td>
+                <td colspan="3">&nbsp; </td>
             </tr>
             <tr>
-                <td>Eluointiliuos</td>
-                <td colspan="3"><select multiple="multiple" class="list" >
-                        <c:forEach var="other" items="${others}">
-                            <option id="2" onclick="eluateAmounts(event)" value="${other.id}">${other.substance.name}, Erä
-                                ${other.batchNumber}, Käyt. ennen <fmt:formatDate value="${other.expDate}" pattern="dd.MM.yyyy"/>, TODO Sijainti</option>
-                            </c:forEach>
-                    </select>
-                <td>
-            </tr>
-            <tr>
-                <td colspan="4">&nbsp; </td>
-            </tr>
-            <tr>
-                <td rowspan="5" >Valitut</td>
+                <td rowspan="4" >Valitut</td>
                 <th>Aiempi</th>
             </tr>
             <tr>
                 <td class="infotext" colspan="3">
                     <c:forEach var="gene" items="${eluate.generators}">
-                        ${gene.substance.name}, Erä ${gene.batchNumber}, Käyt. ennen <fmt:formatDate value="${gene.expDate}" pattern="dd.MM.yyyy"/>, TODO Sijainti<br/>
+                        ${gene.substance.name}, Erä ${gene.batchNumber}, Käyt. ennen <fmt:formatDate value="${gene.expDate}" pattern="dd.MM.yyyy"/>, Sijainti: 
+                        <c:forEach var="location" items="${gene.storageLocations}">
+                            <c:if test="${location[1] != null}">
+                                <c:if test="${location[1] > 0}">
+                                    <c:forEach var="storage" items="${storages}">
+                                        <c:if test="${storage.id == location[0]}">
+                                            ${storage.name}
+                                        </c:if>
+                                    </c:forEach>
+                                </c:if>
+                            </c:if>
+                        </c:forEach>
+                        <br/>
                     </c:forEach>
                     <c:forEach var="oth" items="${eluate.others}">
-                        ${oth.substance.name}, Erä ${oth.batchNumber}, Käyt. ennen <fmt:formatDate value="${oth.expDate}" pattern="dd.MM.yyyy"/>, TODO Sijainti<br/>
+                        ${oth.substance.name}, Erä ${oth.batchNumber}, Käyt. ennen <fmt:formatDate value="${oth.expDate}" pattern="dd.MM.yyyy"/>, Sijainti:
+                        <c:forEach var="location" items="${oth.storageLocations}">
+                            <c:if test="${location[1] != null}">
+                                <c:if test="${location[1] > 0}">
+                                    <c:forEach var="storage" items="${storages}">
+                                        <c:if test="${storage.id == location[0]}">
+                                            ${storage.name}
+                                        </c:if>
+                                    </c:forEach>
+                                </c:if>
+                            </c:if>
+                        </c:forEach>
+                        <br/>
                     </c:forEach>
                 </td>
             </tr>
             <tr>
                 <td colspan="3">&nbsp; </td>
             </tr>
-            <tr>
-                <th colspan="3">Päivitetty</th>
-            </tr>
-            <tr>
+            <tr style="display: none;">
                 <td class="infotext" id="selected" colspan="3">
                     <c:forEach var="gene" items="${eluate.generators}">
                         <script> generateDivs("${gene.substance.name}, Erä ${gene.batchNumber}, Käyt. ennen <fmt:formatDate value="${gene.expDate}" pattern="dd.MM.yyyy"/>, TODO Sijainti", ${gene.id}, 0);</script>
@@ -125,12 +125,25 @@
                 <td><form:select path="storageLocation">
                         <c:forEach var="storage" items="${storages}" varStatus="i">
                             <c:if test="${storage.hidden == false}">
-                                <form:option value="${storage.id}">${storage.name}</form:option>
+                                <c:choose>
+                                    <c:when test="${storage.id == eluate.storageLocation}">
+                                        <form:option selected="selected" value="${storage.id}">${storage.name}</form:option>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <form:option value="${storage.id}">${storage.name}</form:option>
+                                    </c:otherwise>
+                                </c:choose>
                             </c:if>
                         </c:forEach>
                     </form:select>
                 </td>
-                <td class="infotext" colspan="2">${eluate.storageLocation} TODO varastopaikan nimi</td>
+                <td class="infotext" colspan="2">
+                    <c:forEach var="storage" items="${storages}" varStatus="i">
+                        <c:if test="${storage.id == eluate.storageLocation}">
+                            ${storage.name}
+                        </c:if>
+                    </c:forEach>
+                </td>
             </tr>
             <tr>
                 <td>Kommentit</td>

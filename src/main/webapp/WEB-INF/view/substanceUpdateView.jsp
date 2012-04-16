@@ -107,13 +107,13 @@
                 </c:choose>
             <tr>
                 <td>Huomautus vanhenemisesta</td>
-                <td><form:input path="alertLimit1" type="number"/><form:errors path="alertLimit1"/></td>
-                <td style="font-size: 90%;">${substance.alertLimit1} päivää ennen viimeistä käyttöpäivää</td>
+                <td><form:input path="warningBeforeDays" type="number"/><form:errors path="warningBeforeDays"/></td>
+                <td style="font-size: 90%;">${substance.warningBeforeDays} päivää ennen viimeistä käyttöpäivää</td>
             </tr>
             <tr>
                 <td>Huomautus määrästä, kun</td>
-                <td><form:input path="alertLimit2" type="number"/><form:errors path="alertLimit2"/></td>
-                <td class="infotext">${substance.alertLimit2} yksikköä jäljellä</td>
+                <td><form:input path="warningBeforeAmount" type="number"/><form:errors path="warningBeforeAmount"/></td>
+                <td class="infotext">${substance.warningBeforeAmount} yksikköä jäljellä</td>
             </tr>
         </table>
 

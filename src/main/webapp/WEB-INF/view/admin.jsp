@@ -18,7 +18,7 @@
         </tr>
 
         <c:forEach var="substance" items="${substances}">
-            <c:if test="${substance.warningDate < wDate}">
+            <c:if test="${substance.warningDate < compareDate}">
                 <c:choose>
                     <c:when test="${substance.oldestDate < compareDate}">
                         <tr class="red">

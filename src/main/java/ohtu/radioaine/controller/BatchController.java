@@ -205,7 +205,6 @@ public class BatchController {
         //Checks if the new total amount differs from the old total amount and if it does, the update fails
         int newTotalAmount = 0;
         for (int i = 0; i < bfm.getStorageLocations().length; i++) {
-            System.out.println("storagelocationi on : " + bfm.getStorageLocations().length);
             if (bfm.getStorageLocations()[i][1] != null) {
                 newTotalAmount += bfm.getStorageLocations()[i][1];
             }
@@ -254,10 +253,7 @@ public class BatchController {
     private int amountChange(Batch batch, BatchFormObject bfm) {
         int tempAmount;
         for (int i = 0; i < bfm.getStorageLocations().length; i++) {
-            System.out.println("kaapissa " + i + " " + bfm.getStorageLocations()[i][1] + " kpl");
         }
-        System.out.println("bfm.getAmount() : " + bfm.getAmount());
-        System.out.println("batch.getAmount() : " + batch.getAmount());
         if (batch.getAmount() > bfm.getAmount()) {
             tempAmount = -(batch.getAmount() - bfm.getAmount());
         } else if (batch.getAmount() < bfm.getAmount()) {
@@ -265,7 +261,6 @@ public class BatchController {
         } else {
             tempAmount = 0;
         }
-        System.out.println("Palautuva tempAmount : " + tempAmount);
         return tempAmount;
     }
 
@@ -307,7 +302,7 @@ public class BatchController {
         Substance substance = (Substance) substanceService.read(bfo.getSubstance());
         if (substance.getOldestDate() == null || batch.getExpDate().compareTo(substance.getOldestDate()) < 0) {
             substance.setOldestDate(batch.getExpDate());
-            substance.setWarningDate(Time.parseWarningDate(batch.getExpDate()));
+            substance.setWarningDate(Time.parseWarningDate(batch.getExpDate(), substance.getWarningBeforeDays()));
         }
         substance.setTotalAmount(substance.getTotalAmount() + bfo.getAmount());
         substanceService.createOrUpdate(substance);

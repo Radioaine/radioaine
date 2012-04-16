@@ -155,7 +155,7 @@ public class TestDBController {
                 System.out.println("Substancelistan koko: " + substanceList.size());
                 if (substance.getOldestDate().compareTo(batch.getExpDate()) > 0) {
                     substance.setOldestDate(batch.getExpDate());
-                    substance.setWarningDate(Time.parseWarningDate(batch.getExpDate()));
+                    substance.setWarningDate(Time.parseWarningDate(batch.getExpDate(), substance.getWarningBeforeDays()));
                 }
                 substance.setTotalAmount(substance.getTotalAmount() + batch.getAmount());
                 substanceService.createOrUpdate(substance);

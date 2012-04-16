@@ -37,7 +37,7 @@ public class AdminController {
     @RequestMapping("admin")
     public String adminViewCTRL(Model model) {
         model.addAttribute("substances", substanceService.list());
-        model.addAttribute("warning", Time.getWarningDate());
+        model.addAttribute("warning", Time.getWarningDate(5));
         return "admin";
     }
 

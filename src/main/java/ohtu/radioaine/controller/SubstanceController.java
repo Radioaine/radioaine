@@ -62,8 +62,8 @@ public class SubstanceController {
         substance.setGenericName(sfo.getGenericName());
         substance.setManufacturer(sfo.getManufacturer());
         substance.setSupplier(sfo.getSupplier());
-        substance.setAlertLimit1(sfo.getAlertLimit1());
-        substance.setAlertLimit2(sfo.getAlertLimit2());
+        substance.setWarningBeforeDays(sfo.getWarningBeforeDays());
+        substance.setWarningBeforeAmount(sfo.getWarningBeforeAmount());
         substance.setVolume(sfo.getVolume());
         substance.setQualityControl(sfo.getQualityControl());
         substance.setStrength(Double.parseDouble(sfo.getStrength()));

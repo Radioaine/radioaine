@@ -101,8 +101,8 @@ public class TestDBController {
         for (int i = 0; i < substances.length; i++) {
             Substance substance = new Substance();
             substance.setName(substances[i][0]);
-            substance.setAlertLimit1(Integer.parseInt(substances[i][1]));
-            substance.setAlertLimit2(Integer.parseInt(substances[i][2]));
+            substance.setWarningBeforeDays(Integer.parseInt(substances[i][1]));
+            substance.setWarningBeforeAmount(Integer.parseInt(substances[i][2]));
             substance.setHasBeenOrdered(Boolean.parseBoolean(substances[i][3]));
             substance.setNeedsColdStorage(Boolean.parseBoolean(substances[i][4]));
             substance.setManufacturer(substances[i][5]);

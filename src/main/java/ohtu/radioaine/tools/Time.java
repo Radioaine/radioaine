@@ -50,10 +50,10 @@ public class Time {
         return temp;
     }
 
-    public static Date getWarningDate() {
+    public static Date getWarningDate(int days) {
         GregorianCalendar cal = new GregorianCalendar();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-        cal.add(GregorianCalendar.DAY_OF_MONTH, -6);   
+        cal.add(GregorianCalendar.DAY_OF_MONTH, -days);   
         return cal.getTime();
     }
 }

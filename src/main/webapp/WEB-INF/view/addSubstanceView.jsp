@@ -85,11 +85,11 @@
             </tr>
             <tr>
                 <td>Huomautus vanhenemisesta</td>
-                <td><form:input path="alertLimit1" type="number"/><form:errors path="alertLimit1"/> päivää ennen viimeistä käyttöpäivää</td>
+                <td><form:input path="warningBeforeDays" type="number"/><form:errors path="alertLimit1"/> päivää ennen viimeistä käyttöpäivää</td>
             </tr>
             <tr>
                 <td>Huomautus määrästä, kun</td>
-                <td><form:input path="alertLimit2" type="number"/><form:errors path="alertLimit2"/> yksikköä jäljellä</td>
+                <td><form:input path="warningBeforeAmount" type="number"/><form:errors path="alertLimit2"/> yksikköä jäljellä</td>
             </tr>
         </table>
 

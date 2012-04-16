@@ -18,8 +18,8 @@ public class SubstanceFormObject {
     private String eluateName;
     private int type;
     private int halflife;
-    private int alertLimit1;
-    private int alertLimit2;
+    private int warningBeforeDays;
+    private int warningBeforeAmount;
     private int volume;
     private String strength;
     private int qualityControl;
@@ -44,20 +44,20 @@ public class SubstanceFormObject {
         this.type = type;
     }
 
-    public int getAlertLimit1() {
-        return alertLimit1;
+    public int getWarningBeforeAmount() {
+        return warningBeforeAmount;
     }
 
-    public void setAlertLimit1(int alertLimit1) {
-        this.alertLimit1 = alertLimit1;
+    public void setWarningBeforeAmount(int warningBeforeAmount) {
+        this.warningBeforeAmount = warningBeforeAmount;
     }
 
-    public int getAlertLimit2() {
-        return alertLimit2;
+    public int getWarningBeforeDays() {
+        return warningBeforeDays;
     }
 
-    public void setAlertLimit2(int alertLimit2) {
-        this.alertLimit2 = alertLimit2;
+    public void setWarningBeforeDays(int warningBeforeDays) {
+        this.warningBeforeDays = warningBeforeDays;
     }
 
     public String getManufacturer() {

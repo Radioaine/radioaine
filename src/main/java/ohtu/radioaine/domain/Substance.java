@@ -24,8 +24,8 @@ public class Substance implements Serializable {
     @Column(nullable = false)
     private int type;
     private int halflife;
-    private int alertLimit1;
-    private int alertLimit2;
+    private int warningBeforeDays;
+    private int warningBeforeAmount;
     private int volume;
     private double strength;
     private boolean ordered;
@@ -132,21 +132,22 @@ public class Substance implements Serializable {
         this.id = id;
     }
 
-    public int getAlertLimit1() {
-        return alertLimit1;
+    public int getWarningBeforeAmount() {
+        return warningBeforeAmount;
     }
 
-    public void setAlertLimit1(int alertLimit1) {
-        this.alertLimit1 = alertLimit1;
+    public void setWarningBeforeAmount(int warningBeforeAmount) {
+        this.warningBeforeAmount = warningBeforeAmount;
     }
 
-    public int getAlertLimit2() {
-        return alertLimit2;
+    public int getWarningBeforeDays() {
+        return warningBeforeDays;
     }
 
-    public void setAlertLimit2(int alertLimit2) {
-        this.alertLimit2 = alertLimit2;
+    public void setWarningBeforeDays(int warningBeforeDays) {
+        this.warningBeforeDays = warningBeforeDays;
     }
+
 
     public boolean hasBeenOrdered() {
         return ordered;
@@ -170,11 +171,6 @@ public class Substance implements Serializable {
 
     public void setNeedsColdStorage(boolean needsColdStorage) {
         this.needsColdStorage = needsColdStorage;
-    }
-
-    @Override
-    public String toString() {
-        return "Substance{" + "id=" + id + ", name=" + name + ", type=" + type + ", halflife=" + halflife + ", alertLimit1=" + alertLimit1 + ", alertLimit2=" + alertLimit2 + ", ordered=" + ordered + ", needsColdStorage=" + needsColdStorage + ", manufacturer=" + manufacturer + ", supplier=" + supplier + ", totalAmount=" + totalAmount + ", oldestDate=" + oldestDate + ", warningDate=" + warningDate + ", signature=" + signature + ", statusMessages=" + statusMessages + ", qualityStatus=" + qualityStatus + '}';
     }
 
     public void useOne() {

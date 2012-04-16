@@ -56,28 +56,20 @@ public class BatchController {
     public String qualityCheckCTRL(@PathVariable Long id,
             @PathVariable Long sid,
             @RequestParam String sig,
-            @RequestParam Integer qualityCheckStatus) {
+            @RequestParam Integer qualityCheck) {
         if (sig.length() < 2) {
             if (sid <= 0) {
                 return "redirect:/batch/" + id;
             }
             return "redirect:/substance/" + sid;
         }
-        setQualityCheck(id, qualityCheckStatus, sig);
+        setQualityCheck(id, qualityCheck, sig);
         if (sid <= 0) {
             return "redirect:/batch/" + id;
         }
         return "redirect:/substance/" + sid;
     }
 
-    private void setQualityCheck(Long id, Integer qualityCheck, String sig) {
-        Batch batch = batchService.read(id);
-        batch.setQualityCheck(qualityCheck);
-        batchService.createOrUpdate(batch);
-        updateSubstance(batch.getSubstance());
-        Event event = EventHandler.qualityCheckEvent(batch, sig);
-        eventService.createOrUpdate(event);
-    }
 
     @RequestMapping(value = "batch", method = RequestMethod.GET)
     public String batchListCTRL(Model model) {
@@ -336,7 +328,16 @@ public class BatchController {
         return batchService.createOrUpdate(batch);
 
     }
-
+    
+    private void setQualityCheck(Long id, Integer qualityCheck, String sig) {
+        Batch batch = batchService.read(id);
+        batch.setQualityCheck(qualityCheck);
+        batchService.createOrUpdate(batch);
+        updateSubstance(batch.getSubstance());
+        Event event = EventHandler.qualityCheckEvent(batch, sig);
+        eventService.createOrUpdate(event);
+    }
+    
     private void updateSubstance(Substance substance) {
         Substance temp = (Substance) substanceService.read(substance.getId());
         int status = temp.getQualityStatus();

@@ -150,8 +150,6 @@ public class EluateController {
         eluateService.delete(id);
         return "redirect:/frontpage";
     }
-    
-    
 
     private void updateEluate(Long id, EluateFormObject efo) {
         Eluate eluate = eluateService.read(id);

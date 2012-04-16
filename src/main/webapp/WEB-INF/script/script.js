@@ -1,6 +1,7 @@
 var storageCounter = 2;
 var eluateCounter = 0;
 var selectionCounter = 0;
+var eluateKitCounter = 0;
 
 function addStorage(usedStorageLocationsCount, storageLocationsCount, names){
     var p = names.split("^separate^");
@@ -34,10 +35,10 @@ function eluateAmounts(e){
     var temp = $('<div>').attr("id", "selection"+selectionCounter );
     var newHTML = "";
     if(e.target.id == "0"){
-
         newHTML = "<button type=\"button\" onclick=\"removeSelection(event)\">Poista</button> &nbsp;"+e.target.innerHTML+"<input type=\"hidden\" name=\"generators\" value=\""+e.target.value+"\"\>";
     }
     else if(e.target.id == "1"){
+        document.getElementById("storage"+e.target.value).selected = true;
         newHTML = "<button type=\"button\" onclick=\"removeSelection(event)\">Poista</button> &nbsp;"+e.target.innerHTML+"<input type=\"hidden\" name=\"kits\" value=\""+e.target.value+"\"\>";
     }
     else if(e.target.id == "3"){
@@ -73,6 +74,9 @@ function generateDivs(name, value, type){
 
 function removeSelection(e){
     console.log(e.target.parentNode);
+    document.getElementById("storage"+e.target.parentNode.lastChild.value).selected = false;
+    console.log(e.target.parentNode.lastChild.value);
+    //document.getElementById("storage"+e.target.value).selected = false;
     $(e.target.parentNode).remove();
     selectionCounter--;
 }

@@ -65,7 +65,6 @@ public class SubstanceController {
         substance.setAlertLimit1(sfo.getAlertLimit1());
         substance.setAlertLimit2(sfo.getAlertLimit2());
         substance.setVolume(sfo.getVolume());
-        substance.setTotalAmount(0);
         substance.setQualityControl(sfo.getQualityControl());
         substance.setStrength(sfo.getStrength());
         if (sfo.getType() == 1) {

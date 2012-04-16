@@ -1,6 +1,6 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
 <%@include file="headerfront.jsp" %>
 <script type="text/javascript" src="<c:url value="/script/ui.datepicker-fi.js" />"></script>
@@ -21,9 +21,21 @@
                 <td class="name">Generaattori</td>
                 <td><select multiple="multiple" class="list">
                         <c:forEach var="generator" items="${generators}">
-                            <option id="0" onclick="eluateAmounts(event)"  value="${generator.id}">${generator.substance.name}, Erä 
-                                ${generator.batchNumber}, Käyt. ennen <fmt:formatDate value="${generator.expDate}" pattern="dd.MM.yyyy"/>, TODO Sijainti</option>
+                            <c:forEach var="location" items="${generator.storageLocations}">
+                                <c:if test="${location[1] != null}">
+                                    <c:if test="${location[1] > 0}">
+                                        <option id="0" onclick="eluateAmounts(event)"  value="${generator.id}">${generator.substance.name}, Erä 
+                                            ${generator.batchNumber}, Käyt. ennen <fmt:formatDate value="${generator.expDate}" pattern="dd.MM.yyyy"/>, Sijainti: 
+                                            <c:forEach var="storage" items="${storages}">
+                                                <c:if test="${storage.id == location[0]}">
+                                                    ${storage.name}
+                                                </c:if>
+                                            </c:forEach>
+                                        </option>
+                                    </c:if>
+                                </c:if>
                             </c:forEach>
+                        </c:forEach>
                     </select>
                 </td>
             </tr>
@@ -31,9 +43,21 @@
                 <td>Eluointiliuos</td>
                 <td><select multiple="multiple" class="list">
                         <c:forEach var="other" items="${others}">
-                            <option id="2" onclick="eluateAmounts(event)" value="${other.id}">${other.substance.name},
-                                ${other.batchNumber}, <fmt:formatDate value="${other.expDate}" pattern="dd.MM.yyyy"/></option>
+                            <c:forEach var="location" items="${other.storageLocations}">
+                                <c:if test="${location[1] != null}">
+                                    <c:if test="${location[1] > 0}">
+                                        <option id="2" onclick="eluateAmounts(event)" value="${other.id}">${other.substance.name},
+                                            ${other.batchNumber}, <fmt:formatDate value="${other.expDate}" pattern="dd.MM.yyyy"/>, Sijainti: 
+                                            <c:forEach var="storage" items="${storages}">
+                                                <c:if test="${storage.id == location[0]}">
+                                                    ${storage.name}
+                                                </c:if>
+                                            </c:forEach>
+                                        </option>
+                                    </c:if>
+                                </c:if>
                             </c:forEach>
+                        </c:forEach>
                     </select>
                 <td>
             </tr>
@@ -109,4 +133,4 @@
     </form:form>
 
 </div>
-<%@include file="footer.jsp" %>        
+<%@include file="footer.jsp" %>     

@@ -42,7 +42,13 @@
         </tr>
         <tr>
             <td>Varastopaikka</td>
-            <td>${eluate.storageLocation} TODO varastopaikan nimi</td>
+            <td>
+                <c:forEach var="storage" items="${storages}">
+                    <c:if test="${storage.id == eluate.storageLocation}">
+                        ${storage.name}
+                    </c:if>
+                </c:forEach>
+            </td>
         </tr>
         <tr>
             <td>Luotu</td>

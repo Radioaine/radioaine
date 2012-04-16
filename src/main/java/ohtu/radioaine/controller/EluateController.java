@@ -41,6 +41,7 @@ public class EluateController {
     @RequestMapping(value = "eluate/{id}", method = RequestMethod.GET)
     public String getEluateByIdCTRL(@PathVariable Long id, Model model) {
         model.addAttribute("eluate", eluateService.read(id));
+        model.addAttribute("storages", storageService.list());
         return "eluateView";
     }
 
@@ -145,7 +146,11 @@ public class EluateController {
             eluate.setStrength(Double.parseDouble(efo.getStrength()));
         }
         eluate.setUnit(efo.getUnit());
-        eluate.setVolume(Double.parseDouble(efo.getVolume()));
+        if (efo.getStrength().equals("")) {
+            eluate.setVolume(0.0);
+        } else {
+            eluate.setStrength(Double.parseDouble(efo.getVolume()));
+        }
         eluate.setTimestamp(Time.parseTimeStamp(efo.getDate() + " " + efo.getHours() + ":" + efo.getMinutes()));
         eluate.setNote(efo.getNote());
         eluate.setStorageLocation(efo.getStorageLocation());

@@ -22,7 +22,7 @@
         <table class="noborder">
             <tr>
                 <td class="name">Generaattori</td>
-                <td colspan="2"><select multiple="multiple" class="list">
+                <td colspan="3"><select multiple="multiple" class="list">
                         <c:forEach var="generator" items="${generators}">
                             <option id="0" onclick="eluateAmounts(event)"  value="${generator.id}">${generator.substance.name}, Erä 
                                 ${generator.batchNumber}, Käyt. ennen <fmt:formatDate value="${generator.expDate}" pattern="dd.MM.yyyy"/>, TODO Sijainti</option>
@@ -32,7 +32,7 @@
             </tr>
             <tr>
                 <td>Eluointiliuos</td>
-                <td colspan="2"><select multiple="multiple" class="list" >
+                <td colspan="3"><select multiple="multiple" class="list" >
                         <c:forEach var="other" items="${others}">
                             <option id="2" onclick="eluateAmounts(event)" value="${other.id}">${other.substance.name}, Erä
                                 ${other.batchNumber}, Käyt. ennen <fmt:formatDate value="${other.expDate}" pattern="dd.MM.yyyy"/>, TODO Sijainti</option>
@@ -41,24 +41,14 @@
                 <td>
             </tr>
             <tr>
-                <td colspan="3">&nbsp; </td>
+                <td colspan="4">&nbsp; </td>
             </tr>
             <tr>
-                <th></th>
-                <th class="new">Päivitetty</th>
-                <th class="new">Aiempi</th>
+                <td rowspan="5" >Valitut</td>
+                <th>Aiempi</th>
             </tr>
             <tr>
-                <td>Valitut</td>
-                <td class="infotext" id="selected">
-                    <c:forEach var="gene" items="${eluate.generators}">
-                        <script> generateDivs("${gene.substance.name}, Erä ${gene.batchNumber}, Käyt. ennen <fmt:formatDate value="${gene.expDate}" pattern="dd.MM.yyyy"/>, TODO Sijainti", ${gene.id}, 0);</script>
-                    </c:forEach>
-                    <c:forEach var="oth" items="${eluate.others}">
-                        <script> generateDivs("${oth.substance.name}, Erä ${oth.batchNumber}, Käyt. ennen <fmt:formatDate value="${oth.expDate}" pattern="dd.MM.yyyy"/>, TODO Sijainti", ${oth.id}, 4);</script>
-                    </c:forEach>
-                </td>
-                <td class="infotext" valign="top">
+                <td class="infotext" colspan="3">
                     <c:forEach var="gene" items="${eluate.generators}">
                         ${gene.substance.name}, Erä ${gene.batchNumber}, Käyt. ennen <fmt:formatDate value="${gene.expDate}" pattern="dd.MM.yyyy"/>, TODO Sijainti<br/>
                     </c:forEach>
@@ -71,9 +61,31 @@
                 <td colspan="3">&nbsp; </td>
             </tr>
             <tr>
+                <th colspan="3">Päivitetty</th>
+            </tr>
+            <tr>
+                <td class="infotext" id="selected" colspan="3">
+                    <c:forEach var="gene" items="${eluate.generators}">
+                        <script> generateDivs("${gene.substance.name}, Erä ${gene.batchNumber}, Käyt. ennen <fmt:formatDate value="${gene.expDate}" pattern="dd.MM.yyyy"/>, TODO Sijainti", ${gene.id}, 0);</script>
+                    </c:forEach>
+                    <c:forEach var="oth" items="${eluate.others}">
+                        <script> generateDivs("${oth.substance.name}, Erä ${oth.batchNumber}, Käyt. ennen <fmt:formatDate value="${oth.expDate}" pattern="dd.MM.yyyy"/>, TODO Sijainti", ${oth.id}, 4);</script>
+                    </c:forEach>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="4">&nbsp; </td>
+            </tr>
+            <tr>
+                <th></th>
+                <th class="new">Päivitetty</th>
+                <th class="new" colspan="2">Aiempi</th>
+            </tr>
+            <tr>
                 <td></td>
                 <td class="infotext">Klo<span id="pvm">Pvm</span></td>
                 <td class="infotext">Klo<span id="pvm"> &nbsp; &nbsp;Pvm</span></td>
+                <td></td>
             </tr>
             <tr>
                 <td>Eluointiaika</td>
@@ -82,6 +94,7 @@
                     <input required name="date" type="text" id="eluatingtime" value="${eluateDate}"/>
                 </td>
                 <td class="infotext">${eluateHours}:${eluateMinutes}<span id="pvm">${eluateDate}</span></td>
+                <td></td>
             </tr>
             <tr>
                 <td>Aktiivisuus</td>
@@ -91,7 +104,7 @@
                         <option value="1">MBq</option>
                     </form:select>
                 </td>
-                <td class="infotext">${eluate.strength}
+                <td class="infotext" colspan="2">${eluate.strength}
                     <c:choose>
                         <c:when test="${eluate.unit == 0}">
                             GBq
@@ -105,7 +118,7 @@
             <tr>
                 <td>Tilavuus</td>
                 <td><input type="text" pattern="^[0-9]{1,4}([,.][0-9]{1,4})?$" name="volume" value="${eluate.volume}" size="5"/> ml</td>
-                <td class="infotext">${eluate.volume} ml</td>
+                <td class="infotext" colspan="2">${eluate.volume} ml</td>
             </tr>
             <tr>
                 <td>Varastopaikka</td>
@@ -117,28 +130,25 @@
                         </c:forEach>
                     </form:select>
                 </td>
-                <td class="infotext">${eluate.storageLocation} TODO varastopaikan nimi</td>
+                <td class="infotext" colspan="2">${eluate.storageLocation} TODO varastopaikan nimi</td>
             </tr>
             <tr>
                 <td>Kommentit</td>
                 <td><form:input path="note" type="text" value="${eluate.note}"/><form:errors path="note"/></td>
-                <td class="infotext">${eluate.note}</td>
+                <td class="infotext" colspan="2">${eluate.note}</td>
+            </tr>
+            <tr>
+                <td colspan="4">&nbsp; </td>
             </tr>
             <tr>
                 <td>Nimikirjaimet</td>
-                <td colspan="2"><input required name="signature" type="text" id="signature" size="6"/></td>
+                <td colspan="3"><input required name="signature" type="text" id="signature" size="6"/></td>
             </tr>
          </table>
          <br/>
 
-                <input type="submit" value="Tallenna">&nbsp; &nbsp;
-                <input type="button" value="Peruuta" onClick="parent.location = '${pageContext.servletContext.contextPath}/eluate/${eluate.id}'" />
-                <br />
-                <br />
-
-                <input type="button" value="Poista eluaatti" onClick="parent.location = '${pageContext.servletContext.contextPath}/frontpage'" />TODO
-
-
+        <input type="submit" value="Tallenna">&nbsp; &nbsp;
+        <input type="button" value="Peruuta" onClick="parent.location = '${pageContext.servletContext.contextPath}/eluate/${eluate.id}'" />
 
     </form:form>
 

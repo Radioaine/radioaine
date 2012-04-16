@@ -25,9 +25,27 @@
                 <td class="name">Tuote</td>
                 <td>
                     <form:select path="substance">
-                        <c:forEach var="substance" items="${substances}">
-                            <form:option value="${substance.id}">${substance.name}</form:option>
-                        </c:forEach>
+                        <optgroup label="Kitit">
+                            <c:forEach var="substance" items="${substances}">
+                                <c:if test="${substance.type == '0'}">
+                                    <form:option value="${substance.id}">${substance.name}</form:option> 
+                                </c:if>
+                            </c:forEach>
+                        </optgroup>
+                        <optgroup label="Generaattorit">
+                            <c:forEach var="substance" items="${substances}">
+                                <c:if test="${substance.type == '1'}">
+                                    <form:option value="${substance.id}">${substance.name}</form:option> 
+                                </c:if>
+                            </c:forEach>
+                        </optgroup>
+                        <optgroup label="Muut">
+                            <c:forEach var="substance" items="${substances}">
+                                <c:if test="${substance.type == '2'}">
+                                    <form:option value="${substance.id}">${substance.name}</form:option> 
+                                </c:if>
+                            </c:forEach>
+                        </optgroup>
                     </form:select>                            
                 </td>
             </tr>

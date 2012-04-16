@@ -152,18 +152,6 @@ public class Eluate implements Serializable {
     public void setUnit(int unit) {
         this.unit = unit;
     }
-
-    @Override
-    public String toString() {
-        String batchIDs = "";
-        for(Batch gen : generators){
-            batchIDs += ";"+gen.getId();
-        }
-        for(Batch oth : others){
-            batchIDs += ";"+oth.getId();
-        }
-        return "Eluate{" + "id=" + id + ", strength=" + strength + ", unit=" + unit + ", volume=" + volume + ", date=" + date + ", signature=" + signature + ", note=" + note + ", storageLocation=" + storageLocation + ", batches=" + batchIDs + '}';
-    }
     
     public String getName(){
         return generators.get(0).getSubstance().getName();

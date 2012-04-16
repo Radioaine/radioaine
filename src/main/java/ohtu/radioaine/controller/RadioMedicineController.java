@@ -5,6 +5,7 @@ import java.util.List;
 import javax.validation.Valid;
 import ohtu.radioaine.domain.*;
 import ohtu.radioaine.service.*;
+import ohtu.radioaine.tools.EventHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,8 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMethod;
 import ohtu.radioaine.tools.Time;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 public class RadioMedicineController {
@@ -31,6 +31,8 @@ public class RadioMedicineController {
     private RadioMedService radioMedService;
     @Autowired
     private StorageService storageService;
+    @Autowired
+    private EventService eventService;
 
     @RequestMapping(value = "createRadioMedicine", method = RequestMethod.GET)
     public String createRadioMedicineViewCTRL(Model model) {
@@ -67,48 +69,7 @@ public class RadioMedicineController {
         }
         updateRadioMed(id, rmfo);
         return "redirect:/RadioMedicine/" + id;
-    }
-
-    private void updateRadioMed(Long id, RadioMedicineFormObject rmfo) {
-        RadioMedicine radioMedicine = radioMedService.read(id);
-
-        radioMedicine.setNote(rmfo.getNote());
-        radioMedicine.setVolume(Double.parseDouble(rmfo.getVolume()));
-        radioMedicine.setDate(Time.parseDate(rmfo.getDate()));
-        radioMedicine.setStrength(Double.parseDouble(rmfo.getStrength()));
-        radioMedicine.setUnit(rmfo.getUnit());
-        radioMedicine.setStorageLocation(rmfo.getStorageLocation());
-        radioMedicine.setTimestamp(Time.parseTimeStamp(rmfo.getDate() + " " + rmfo.getHours() + ":" + rmfo.getMinutes()));
-        List<Eluate> eluates = new ArrayList<Eluate>();
-        Long[] eluatesTable = rmfo.getEluates();
-        for (int i = 0; i < eluatesTable.length; ++i) {
-            if (eluatesTable[i] != null) {
-                eluates.add(eluateService.read(eluatesTable[i]));
-            }
-        }
-
-        List<Batch> kits = new ArrayList<Batch>();
-        Long[] kitsTable = rmfo.getKits();
-        for (int i = 0; i < kitsTable.length; ++i) {
-            if (kitsTable[i] != null) {
-                kits.add(batchService.read(kitsTable[i]));
-            }
-
-        }
-
-        List<Batch> others = new ArrayList<Batch>();
-        Long[] othersTable = rmfo.getOthers();
-        for (int i = 0; i < othersTable.length; ++i) {
-            if (othersTable[i] != null) {
-                others.add(batchService.read(othersTable[i]));
-            }
-        }
-
-        radioMedicine.setEluates(eluates);
-        radioMedicine.setOthers(others);
-        radioMedicine.setKits(kits);
-        radioMedService.createOrUpdate(radioMedicine);
-    }
+    } 
 
     @RequestMapping(value = "createRadioMedicine", method = RequestMethod.POST)
     public String newRadioMedicineCTRL(@Valid @ModelAttribute("radioMedicine") RadioMedicineFormObject rmfo, BindingResult result) {
@@ -125,6 +86,23 @@ public class RadioMedicineController {
         model.addAttribute("radioMedicine", radioMedService.read(id));
         model.addAttribute("storages", storageService.list());
         return "radioMedicineView";
+    }
+   
+    @RequestMapping("removeRadioMedRequest/{id}")
+    public String removalRqeust(Model model, @PathVariable Long id) {     
+        model.addAttribute("radioMedicine", radioMedService.read(id));
+        model.addAttribute("storages", storageService.list());
+        return "radioMedRemovalView";
+    }
+    
+    @RequestMapping(value = "removeRadioMed/{id}", method = RequestMethod.POST)
+    public String removeRadioMed(@RequestParam String reason,
+    @RequestParam String remover,
+    @PathVariable Long id) {     
+        Event event = EventHandler.removeRadioMedEvent(reason, remover, radioMedService.read(id));
+        eventService.createOrUpdate(event);
+        radioMedService.delete(id);
+        return "redirect:/frontpage";
     }
 
     private RadioMedicine createRD(RadioMedicineFormObject rmfo) {
@@ -194,4 +172,46 @@ public class RadioMedicineController {
 
         return radioMedicine;
     }
+    
+    private void updateRadioMed(Long id, RadioMedicineFormObject rmfo) {
+        RadioMedicine radioMedicine = radioMedService.read(id);
+
+        radioMedicine.setNote(rmfo.getNote());
+        radioMedicine.setVolume(Double.parseDouble(rmfo.getVolume()));
+        radioMedicine.setDate(Time.parseDate(rmfo.getDate()));
+        radioMedicine.setStrength(Double.parseDouble(rmfo.getStrength()));
+        radioMedicine.setUnit(rmfo.getUnit());
+        radioMedicine.setStorageLocation(rmfo.getStorageLocation());
+        radioMedicine.setTimestamp(Time.parseTimeStamp(rmfo.getDate() + " " + rmfo.getHours() + ":" + rmfo.getMinutes()));
+        List<Eluate> eluates = new ArrayList<Eluate>();
+        Long[] eluatesTable = rmfo.getEluates();
+        for (int i = 0; i < eluatesTable.length; ++i) {
+            if (eluatesTable[i] != null) {
+                eluates.add(eluateService.read(eluatesTable[i]));
+            }
+        }
+
+        List<Batch> kits = new ArrayList<Batch>();
+        Long[] kitsTable = rmfo.getKits();
+        for (int i = 0; i < kitsTable.length; ++i) {
+            if (kitsTable[i] != null) {
+                kits.add(batchService.read(kitsTable[i]));
+            }
+
+        }
+
+        List<Batch> others = new ArrayList<Batch>();
+        Long[] othersTable = rmfo.getOthers();
+        for (int i = 0; i < othersTable.length; ++i) {
+            if (othersTable[i] != null) {
+                others.add(batchService.read(othersTable[i]));
+            }
+        }
+
+        radioMedicine.setEluates(eluates);
+        radioMedicine.setOthers(others);
+        radioMedicine.setKits(kits);
+        radioMedService.createOrUpdate(radioMedicine);
+    }
 }
+

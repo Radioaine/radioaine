@@ -110,3 +110,25 @@ function editStorageName(id)  {
     else
         document.getElementById("inp"+id).value = "";
 }
+
+function confirmEluateRemoval(id){
+    console.log(id);
+    var proceed = confirm("Haluatko varmasti poistaa eluaatin?");
+    if( proceed == true ){
+        $("<form>").attr("action","removeEluate/"+id).submit();
+    }
+    else{
+        alert("Eluaattia ei poistettu.")
+    }
+}
+
+function confirmRadioMedRemoval(id){
+    console.log(id);
+    var proceed = confirm("Haluatko varmasti poistaa radiolääkkeen?");
+    if( proceed == true ){
+        $("<form>").attr("action","removeRadioMed/"+id).submit();
+    }
+    else{
+        alert("Radiolääkettä ei poistettu.")
+    }
+}

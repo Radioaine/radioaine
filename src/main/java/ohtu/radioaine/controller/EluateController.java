@@ -12,9 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import ohtu.radioaine.tools.Time;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * Controllers for eluate creation ja viewing
@@ -135,7 +133,24 @@ public class EluateController {
         updateEluate(id, efo);
         return "redirect:/frontpage";
     }
-
+    
+    @RequestMapping("removeEluateRequest/{id}")
+    public String removeEluate(Model model, @PathVariable Long id) {
+        model.addAttribute("eluate", eluateService.read(id));
+        model.addAttribute("storages", storageService.list());
+        return "eluateRemovalView";
+    }
+    
+    @RequestMapping(value = "removeEluate/{id}", method = RequestMethod.POST)
+    public String removeRadioMed(@RequestParam String reason,
+    @RequestParam String remover,
+    @PathVariable Long id) {     
+        Event event = EventHandler.removeEluateEvent(reason, remover, eluateService.read(id));
+        eventService.createOrUpdate(event);
+        eluateService.delete(id);
+        return "redirect:/frontpage";
+    }
+    
     
 
     private void updateEluate(Long id, EluateFormObject efo) {
@@ -171,6 +186,9 @@ public class EluateController {
             }
         }
 //        updateAmounts(generators, others);
+        eluate.setGenerators(null);
+        eluate.setOthers(null);
+        eluateService.createOrUpdate(eluate);
         eluate.setGenerators(generators);
         eluate.setOthers(others);
         eluateService.createOrUpdate(eluate);

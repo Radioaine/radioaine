@@ -5,10 +5,6 @@
 package ohtu.radioaine.tools;
 
 import ohtu.radioaine.domain.*;
-import ohtu.radioaine.service.EventService;
-import org.springframework.beans.factory.annotation.Autowired;
-
-
 
 /**
  *
@@ -93,6 +89,22 @@ public class EventHandler {
         event.setNote(String.valueOf(radioMed.getId()));
         event.setSubstanceName(radioMed.getName());
         event.setInfo("type=newRadioMed "+radioMed.toString());
+        return event;
+    }
+
+    public static Event removeRadioMedEvent(String reason, String remover, RadioMedicine radioMed) {
+        Event event = new Event();
+        event.setSignature(remover);
+        event.setNote(reason);
+        event.setInfo("type=radioMedRemoved "+radioMed.toString());
+        return event;
+    }
+
+    public static Event removeEluateEvent(String reason, String remover, Eluate eluate) {
+        Event event = new Event();
+        event.setSignature(remover);
+        event.setNote(reason);
+        event.setInfo("type=radioMedRemoved "+eluate.toString());
         return event;
     }
 }

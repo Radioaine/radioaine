@@ -136,3 +136,8 @@ function confirmRadioMedRemoval(id){
         alert("Radiolääkettä ei poistettu.")
     }
 }
+
+function customVolume(){
+   $("#vol").remove();
+   $("#volPlace").html("<input type=\"text\" name=\"volume\"/>");
+}

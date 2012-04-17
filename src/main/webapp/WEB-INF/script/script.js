@@ -31,7 +31,7 @@ function qualityResults(){
     $("#qualityCheck").html("<form action=\"doCheck\"><select name=\"qualityCheck\"><option value=\"1\">Hyväksytty</option><option value=\"2\">Hylätty</option></select>");
 }
 
-function eluateAmounts(e){
+function eluateAmounts(e, batchAmount){
     var temp = $('<div>').attr("id", "selection"+selectionCounter );
     var newHTML = "";
     if(e.target.id == "0"){
@@ -39,7 +39,10 @@ function eluateAmounts(e){
     }
     else if(e.target.id == "1"){
         document.getElementById("storage"+e.target.value).selected = true;
-        newHTML = "<button type=\"button\" onclick=\"removeSelection(event)\">Poista</button> &nbsp;"+e.target.innerHTML+"<input type=\"hidden\" name=\"kits\" value=\""+e.target.value+"\"\>";
+        if(!countCheck(batchAmount, e.target.value)){
+            return;
+        }
+        newHTML = "<button type=\"button\" onclick=\"removeSelection(event)\">Poista</button> &nbsp;"+e.target.innerHTML+"<input class=\"kitCount\" type=\"hidden\" name=\"kits\" value=\""+e.target.value+"\"\>";
     }
     else if(e.target.id == "3"){
         newHTML = "<button type=\"button\" onclick=\"removeSelection(event)\">Poista</button> &nbsp;"+e.target.innerHTML+"<input type=\"hidden\" name=\"eluates\" value=\""+e.target.value+"\"\>";
@@ -50,6 +53,15 @@ function eluateAmounts(e){
     temp.html(newHTML);
     selectionCounter++;
     $("#selected").append(temp);
+}
+
+function countCheck(amount, id){
+    var kitsSelected = $("input[value^="+id+"]");
+    if(kitsSelected.length < amount) return true;
+    else{
+        alert("Varastossa on vain "+amount)
+        return false;
+    } 
 }
 
 function generateDivs(name, value, type){
@@ -139,5 +151,5 @@ function confirmRadioMedRemoval(id){
 
 function customVolume(){
    $("#vol").remove();
-   $("#volPlace").html("<input type=\"text\" name=\"volume\"/>");
+   $("#volPlace").html("<input type=\"number\" name=\"volume\"/> ml");
 }

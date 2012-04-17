@@ -100,7 +100,7 @@
                         <option value="5">5</option>
                         <option value="10">10</option>
                         <option value="11">11</option>
-                    </select> &nbsp;ml
+                    </select> ml <button type="button" onclick="customVolume()">Syötä tilavuus</button>
                 </td>
             </tr>
             <tr>

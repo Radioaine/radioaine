@@ -52,11 +52,26 @@
                             <c:forEach var="location" items="${kit.storageLocations}">
                                 <c:if test="${location[1] != null}">
                                     <c:if test="${location[1] > 0}">
-                                        <c:forEach var="storage" items="${storages}">
+                                        <c:forEach var="storage" items="${storages}" varStatus="i">
                                             <c:if test="${storage.id == location[0]}">
-                                                <option id="1" onclick="eluateAmounts(event)" value="${kit.id}">${kit.substance.name}, Erä 
+                                                <option id="1" onclick="eluateAmounts(event)" value="${(kit.id+storage.id)}">${kit.substance.name}, Erä 
                                                     ${kit.batchNumber}, Käyt. ennen <fmt:formatDate value="${kit.expDate}" pattern="dd.MM.yyyy"/>, Sijainti: ${storage.name}
                                                 </option>
+                                            </c:if>
+                                        </c:forEach>
+                                    </c:if>
+                                </c:if>
+                            </c:forEach>
+                        </c:forEach>
+                    </select>
+                    <select style="display: none;" multiple="multiple" name="storageIds">
+                        <c:forEach var="kit" items="${kits}" varStatus="i">
+                            <c:forEach var="location" items="${kit.storageLocations}">
+                                <c:if test="${location[1] != null}">
+                                    <c:if test="${location[1] > 0}">
+                                        <c:forEach var="storage" items="${storages}" varStatus="i">
+                                            <c:if test="${storage.id == location[0]}">
+                                                <option id="storage${(kit.id+storage.id)}" value="${storage.id}">jee ${storage.id}</option>
                                             </c:if>
                                         </c:forEach>
                                     </c:if>

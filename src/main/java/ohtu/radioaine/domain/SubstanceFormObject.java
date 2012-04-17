@@ -12,7 +12,7 @@ import javax.validation.constraints.NotNull;
  */
 public class SubstanceFormObject {
 
-    @NotNull(message = "Nimi ei saa olla tyhjä")
+    @NotNull(message = "Nimi ei saa olla tyhjÃ¤")
     private String name;
     private String genericName;
     private String eluateName;

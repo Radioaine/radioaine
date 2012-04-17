@@ -139,27 +139,27 @@ public class RadioMedicineController {
         List<Batch> kits = new ArrayList<Batch>();
         Long[] kitsTable = rmfo.getKits();
         for (int i = 0; i < kitsTable.length; ++i) {
-            System.out.println("kitti indexi: " + i + " kittiTable koko: " + kitsTable.length +" storageIds koko: " + storageIds.length + " storage sisältö: " + storageIds[i]);
-            //Tässä bugia kun valitaan samaa kittiä useampi, koska tällöin storageIds taulukko ei kasva jolloin kitsTable on eri kokoinen kuin storageIds ja tämän takia tulee nullPointeria...
+//            System.out.println("kitti indexi: " + i + " kittiTable koko: " + kitsTable.length +" storageIds koko: " + storageIds.length + " storage sisÃ¤ltÃ¶: " + storageIds[i]);
+            //TÃ¤ssÃ¤ bugia kun valitaan samaa kittiÃ¤ useampi, koska tÃ¤llÃ¶in storageIds taulukko ei kasva jolloin kitsTable on eri kokoinen kuin storageIds ja tÃ¤mÃ¤n takia tulee nullPointeria...
             if (kitsTable[i] != null) {
-                kitsTable[i] = kitsTable[i] - storageIds[i];
+//                kitsTable[i] = kitsTable[i] - storageIds[i];
                 kits.add(batchService.read(kitsTable[i]));
-                for(int j=0; j < batchService.read(kitsTable[i]).getStorageLocations().length; j++) {
-                    if(batchService.read(kitsTable[i]).getStorageLocations()[j][0] != null)    {
-                        if(batchService.read(kitsTable[i]).getStorageLocations()[j][0] == storageIds[i])    { //ykkösen tilalle tarttisi saada vähennettävän storagenId!!!!!!!!
-                            System.out.println("TÄMÄHÄN SE");
-                            Batch temp = batchService.read(kitsTable[i]);
-                            Long[][] tempi = temp.getStorageLocations();
-                            tempi[j][1] = tempi[j][1] - 1;
-                            temp.setStorageLocations(tempi);
-                            temp.setAmount(temp.getAmount() - 1);
-                            batchService.createOrUpdate(temp);
-                            Substance substanceTemp = temp.getSubstance();
-                            substanceTemp.setTotalAmount(substanceTemp.getTotalAmount() - 1);
-                            substanceService.createOrUpdate(substanceTemp);
-                        }        
-                    }
-                }
+//                for(int j=0; j < batchService.read(kitsTable[i]).getStorageLocations().length; j++) {
+//                    if(batchService.read(kitsTable[i]).getStorageLocations()[j][0] != null)    {
+//                        if(batchService.read(kitsTable[i]).getStorageLocations()[j][0] == storageIds[i])    { //ykkÃ¶sen tilalle tarttisi saada vÃ¤hennettÃ¤vÃ¤n storagenId!!!!!!!!
+//                            System.out.println("TÃ„MÃ„HÃ„N SE");
+//                            Batch temp = batchService.read(kitsTable[i]);
+//                            Long[][] tempi = temp.getStorageLocations();
+//                            tempi[j][1] = tempi[j][1] - 1;
+//                            temp.setStorageLocations(tempi);
+//                            temp.setAmount(temp.getAmount() - 1);
+//                            batchService.createOrUpdate(temp);
+//                            Substance substanceTemp = temp.getSubstance();
+//                            substanceTemp.setTotalAmount(substanceTemp.getTotalAmount() - 1);
+//                            substanceService.createOrUpdate(substanceTemp);
+//                        }        
+//                    }
+//                }
             }
         }
 

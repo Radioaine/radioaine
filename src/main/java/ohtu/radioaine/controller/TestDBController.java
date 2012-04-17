@@ -36,25 +36,25 @@ public class TestDBController {
     private StorageService storageService;
     private String[][] substances = {
         // Kitit
-        {"Angiocis 20.12mg", "10", "12", "true", "false", "Lääkefirma Jamppa", "Magnum Medical Finland Oy", "0"},
-        {"Bridatec", "3", "4", "false", "true", "Lääkefirma Perttilä", "Oy GE Healthcare Bio-Sciences Ab", "0"},
-        {"Ceretec Exametazine Agent", "3", "4", "false", "true", "Lääkefirma Perttilä", "Oy GE Healthcare Bio-Sciences Ab", "0"},
-        {"Ceretec Stabilised", "3", "4", "true", "false", "Lääkefirma Perttilä", "Oy GE Healthcare Bio-Sciences Ab", "0"},
-        {"Myoview", "10", "12", "true", "false", "Lääkefirma Jamppa", "Magnum Medical Finland Oy", "0"},
-        {"Nanocoll", "3", "4", "false", "true", "Lääkefirma Perttilä", "Oy GE Healthcare Bio-Sciences Ab", "0"},
-        {"Nephromag 0.2mg", "3", "4", "false", "true", "Lääkefirma Perttilä", "Oy GE Healthcare Bio-Sciences Ab", "0"},
-        {"Octreoscan (In-111)", "3", "4", "true", "false", "Lääkefirma Perttilä", "Oy GE Healthcare Bio-Sciences Ab", "0"},
-        {"Pentacis", "10", "12", "true", "false", "Lääkefirma Jamppa", "Magnum Medical Finland Oy", "0"},
-        {"Technescan DMSA", "3", "4", "false", "true", "Lääkefirma Perttilä", "Oy GE Healthcare Bio-Sciences Ab", "0"},
-        {"Technescan Sestamibi", "3", "4", "false", "true", "Lääkefirma Perttilä", "Oy GE Healthcare Bio-Sciences Ab", "0"},
-        {"Technescan LyoMAA", "3", "4", "true", "false", "Lääkefirma Perttilä", "Oy GE Healthcare Bio-Sciences Ab", "0"},
+        {"Angiocis 20.12mg", "10", "12", "true", "false", "LÃ¤Ã¤kefirma Jamppa", "Magnum Medical Finland Oy", "0"},
+        {"Bridatec", "3", "4", "false", "true", "LÃ¤Ã¤kefirma PerttilÃ¤", "Oy GE Healthcare Bio-Sciences Ab", "0"},
+        {"Ceretec Exametazine Agent", "3", "4", "false", "true", "LÃ¤Ã¤kefirma PerttilÃ¤", "Oy GE Healthcare Bio-Sciences Ab", "0"},
+        {"Ceretec Stabilised", "3", "4", "true", "false", "LÃ¤Ã¤kefirma PerttilÃ¤", "Oy GE Healthcare Bio-Sciences Ab", "0"},
+        {"Myoview", "10", "12", "true", "false", "LÃ¤Ã¤kefirma Jamppa", "Magnum Medical Finland Oy", "0"},
+        {"Nanocoll", "3", "4", "false", "true", "LÃ¤Ã¤kefirma PerttilÃ¤", "Oy GE Healthcare Bio-Sciences Ab", "0"},
+        {"Nephromag 0.2mg", "3", "4", "false", "true", "LÃ¤Ã¤kefirma PerttilÃ¤", "Oy GE Healthcare Bio-Sciences Ab", "0"},
+        {"Octreoscan (In-111)", "3", "4", "true", "false", "LÃ¤Ã¤kefirma PerttilÃ¤", "Oy GE Healthcare Bio-Sciences Ab", "0"},
+        {"Pentacis", "10", "12", "true", "false", "LÃ¤Ã¤kefirma Jamppa", "Magnum Medical Finland Oy", "0"},
+        {"Technescan DMSA", "3", "4", "false", "true", "LÃ¤Ã¤kefirma PerttilÃ¤", "Oy GE Healthcare Bio-Sciences Ab", "0"},
+        {"Technescan Sestamibi", "3", "4", "false", "true", "LÃ¤Ã¤kefirma PerttilÃ¤", "Oy GE Healthcare Bio-Sciences Ab", "0"},
+        {"Technescan LyoMAA", "3", "4", "true", "false", "LÃ¤Ã¤kefirma PerttilÃ¤", "Oy GE Healthcare Bio-Sciences Ab", "0"},
         //Generaattorit
-        {"Teknetiumgeneraattori 21,5 GBq (581 mCi) Ultra Technekow FM", "10", "12", "true", "false", "Lääkefirma Jamppa", "Magnum Medical Finland Oy", "1"},
-        {"Teknetiumgeneraattori 24 GBq (649mCi)", "3", "4", "false", "true", "Lääkefirma Perttilä", "Oy GE Healthcare Bio-Sciences Ab", "1"},
-        {"Teknetiumgeneraattori 30 GBq (811mCi)", "3", "4", "false", "true", "Lääkefirma Perttilä", "Oy GE Healthcare Bio-Sciences Ab", "1"},
+        {"Teknetiumgeneraattori 21,5 GBq (581 mCi) Ultra Technekow FM", "10", "12", "true", "false", "LÃ¤Ã¤kefirma Jamppa", "Magnum Medical Finland Oy", "1"},
+        {"Teknetiumgeneraattori 24 GBq (649mCi)", "3", "4", "false", "true", "LÃ¤Ã¤kefirma PerttilÃ¤", "Oy GE Healthcare Bio-Sciences Ab", "1"},
+        {"Teknetiumgeneraattori 30 GBq (811mCi)", "3", "4", "false", "true", "LÃ¤Ã¤kefirma PerttilÃ¤", "Oy GE Healthcare Bio-Sciences Ab", "1"},
         //Muut
-        {"NaCl 30 ml", "3", "4", "true", "false", "Lääkefirma Perttilä", "Oy GE Healthcare Bio-Sciences Ab", "2"},
-        {"NaCl 1000 ml", "3", "4", "true", "false", "Lääkefirma Perttilä", "Oy GE Healthcare Bio-Sciences Ab", "2"}};
+        {"NaCl 30 ml", "3", "4", "true", "false", "LÃ¤Ã¤kefirma PerttilÃ¤", "Oy GE Healthcare Bio-Sciences Ab", "2"},
+        {"NaCl 1000 ml", "3", "4", "true", "false", "LÃ¤Ã¤kefirma PerttilÃ¤", "Oy GE Healthcare Bio-Sciences Ab", "2"}};
     private String[][] batches = {
         {"123445EE", "8", "30", "0", "Paljon huomautettavaa", "12.2.2010 08:35"},
         {"99AADD22", "3", "10", "1", "puolet rikki", "03.4.2012 10:35"},
@@ -70,11 +70,11 @@ public class TestDBController {
         {"547u399AADD22", "3", "10", "1", "puolet rikki", "13.2.2012 10:35"},
         {"9678AAD175", "3", "10", "2", "1 lainassa", "13.7.2012 11:53"},
         {"+09+09AAD175", "3", "10", "2", "1 lainassa", "13.4.2012 11:52"},
-        {"´+0AAD175", "3", "10", "2", "1 lainassa", "14.6.2012 09:23"},
-        {"äsd123445EE", "8", "30", "0", "Jeejeee paljon huomautettavaa", "12.4.2012 08:35"},
+        {"Â´+0AAD175", "3", "10", "2", "1 lainassa", "14.6.2012 09:23"},
+        {"Ã¤sd123445EE", "8", "30", "0", "Jeejeee paljon huomautettavaa", "12.4.2012 08:35"},
         // {"hgfj799AADD22", "3", "10", "1", "puolet rikki", "13.2.2012 10:35"},
         {"FSHAAD175", "3", "10", "2", "1 lainassa", "13.6.2013 11:55"}};
-    private String[] storages = {"Alakerran kaappi", "Yläkerran kaappi", "Varastokaappi", "Hoitajien kaappi"};
+    private String[] storages = {"Alakerran kaappi", "YlÃ¤kerran kaappi", "Varastokaappi", "Hoitajien kaappi"};
 
     @RequestMapping("generateTestDB")
     public String createDBCTRL() {

@@ -14,10 +14,15 @@ public class SubstanceFormObject {
 
     @NotNull(message = "Nimi ei saa olla tyhjä")
     private String name;
+    private String genericName;
+    private String eluateName;
     private int type;
     private int halflife;
-    private int alertLimit1;
-    private int alertLimit2;
+    private int warningBeforeDays;
+    private int warningBeforeAmount;
+    private int volume;
+    private String strength;
+    private int qualityControl;
     private boolean needsColdStorage;
     private String manufacturer;
     private String supplier;
@@ -39,20 +44,20 @@ public class SubstanceFormObject {
         this.type = type;
     }
 
-    public int getAlertLimit1() {
-        return alertLimit1;
+    public int getWarningBeforeAmount() {
+        return warningBeforeAmount;
     }
 
-    public void setAlertLimit1(int alertLimit1) {
-        this.alertLimit1 = alertLimit1;
+    public void setWarningBeforeAmount(int warningBeforeAmount) {
+        this.warningBeforeAmount = warningBeforeAmount;
     }
 
-    public int getAlertLimit2() {
-        return alertLimit2;
+    public int getWarningBeforeDays() {
+        return warningBeforeDays;
     }
 
-    public void setAlertLimit2(int alertLimit2) {
-        this.alertLimit2 = alertLimit2;
+    public void setWarningBeforeDays(int warningBeforeDays) {
+        this.warningBeforeDays = warningBeforeDays;
     }
 
     public String getManufacturer() {
@@ -93,5 +98,45 @@ public class SubstanceFormObject {
 
     public void setHalflife(int halflife) {
         this.halflife = halflife;
+    }
+
+    public String getEluateName() {
+        return eluateName;
+    }
+
+    public void setEluateName(String eluateName) {
+        this.eluateName = eluateName;
+    }
+
+    public String getGenericName() {
+        return genericName;
+    }
+
+    public void setGenericName(String genericName) {
+        this.genericName = genericName;
+    }
+
+    public int getVolume() {
+        return volume;
+    }
+
+    public void setVolume(int volume) {
+        this.volume = volume;
+    }
+
+    public String getStrength() {
+        return strength;
+    }
+
+    public void setStrength(String strength) {
+        this.strength = strength.replaceAll(",", ".");
+    }
+
+    public int getQualityControl() {
+        return qualityControl;
+    }
+
+    public void setQualityControl(int qualityControl) {
+        this.qualityControl = qualityControl;
     }
 }

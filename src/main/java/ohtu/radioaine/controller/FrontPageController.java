@@ -1,5 +1,8 @@
 package ohtu.radioaine.controller;
 
+import java.sql.Timestamp;
+import java.util.Calendar;
+import java.util.Date;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -7,6 +10,7 @@ import ohtu.radioaine.service.BatchService;
 import ohtu.radioaine.service.EluateService;
 import ohtu.radioaine.service.RadioMedService;
 import ohtu.radioaine.service.StorageService;
+import ohtu.radioaine.tools.Time;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -29,13 +33,16 @@ public class FrontPageController {
     private StorageService storageService;
 
     @RequestMapping("*")
-    public String list() {
+    public String redirectToFrontpageCTRL() {
         return "redirect:/frontpage";
     }
 
     @RequestMapping(value = "frontpage", method = RequestMethod.GET)
-    public String frontPage(Model model) {
-        model.addAttribute("eluates", eluateService.list());
+    public String frontPageCTRL(Model model) {
+        Calendar calendar = Calendar.getInstance();
+        Date now = calendar.getTime();
+        Timestamp timestamp = new java.sql.Timestamp(now.getTime());
+        model.addAttribute("eluates", eluateService.getAllByDate(Time.getTodayDate()));
         model.addAttribute("radioMeds", radioMedService.list());
         model.addAttribute("generators", batchService.getBatchesByType(GENERATOR));
         model.addAttribute("storages", storageService.list());

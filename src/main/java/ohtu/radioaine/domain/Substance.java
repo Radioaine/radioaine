@@ -19,11 +19,15 @@ public class Substance implements Serializable {
     private Long id;
     @Column(nullable = false)
     private String name;
+    private String genericName;
+    private String eluateName;
     @Column(nullable = false)
     private int type;
     private int halflife;
-    private int alertLimit1;
-    private int alertLimit2;
+    private int warningBeforeDays;
+    private int warningBeforeAmount;
+    private int volume;
+    private double strength;
     private boolean ordered;
     private boolean needsColdStorage;
     private String manufacturer;
@@ -34,6 +38,7 @@ public class Substance implements Serializable {
     private String signature;
     private String[] statusMessages = new String[3];
     private int qualityStatus;
+    private int qualityControl;
 
     public Timestamp getWarningDate() {
         return warningDate;
@@ -42,7 +47,7 @@ public class Substance implements Serializable {
     public void setWarningDate(Timestamp warningDate) {
         this.warningDate = warningDate;
     }
-    
+
     public int getQualityStatus() {
         return qualityStatus;
     }
@@ -50,7 +55,7 @@ public class Substance implements Serializable {
     public void setQualityStatus(int qualityStatus) {
         this.qualityStatus = qualityStatus;
     }
-    
+
     public String[] getStatusMessages() {
         return statusMessages;
     }
@@ -58,7 +63,7 @@ public class Substance implements Serializable {
     public void setStatusMessages(String[] statusMessages) {
         this.statusMessages = statusMessages;
     }
-    
+
     public String getSignature() {
         return signature;
     }
@@ -78,7 +83,7 @@ public class Substance implements Serializable {
     public void setType(int type) {
         this.type = type;
     }
-    
+
     public Timestamp getOldestDate() {
         return oldestDate;
     }
@@ -122,26 +127,27 @@ public class Substance implements Serializable {
     public Long getId() {
         return id;
     }
-    
+
     public void setId(Long id) {
         this.id = id;
     }
-    
-    public int getAlertLimit1() {
-        return alertLimit1;
+
+    public int getWarningBeforeAmount() {
+        return warningBeforeAmount;
     }
 
-    public void setAlertLimit1(int alertLimit1) {
-        this.alertLimit1 = alertLimit1;
+    public void setWarningBeforeAmount(int warningBeforeAmount) {
+        this.warningBeforeAmount = warningBeforeAmount;
     }
 
-    public int getAlertLimit2() {
-        return alertLimit2;
+    public int getWarningBeforeDays() {
+        return warningBeforeDays;
     }
 
-    public void setAlertLimit2(int alertLimit2) {
-        this.alertLimit2 = alertLimit2;
+    public void setWarningBeforeDays(int warningBeforeDays) {
+        this.warningBeforeDays = warningBeforeDays;
     }
+
 
     public boolean hasBeenOrdered() {
         return ordered;
@@ -167,12 +173,7 @@ public class Substance implements Serializable {
         this.needsColdStorage = needsColdStorage;
     }
 
-    @Override
-    public String toString() {
-        return "Substance{" + "id=" + id + ", name=" + name + ", type=" + type + ", halflife=" + halflife + ", alertLimit1=" + alertLimit1 + ", alertLimit2=" + alertLimit2 + ", ordered=" + ordered + ", needsColdStorage=" + needsColdStorage + ", manufacturer=" + manufacturer + ", supplier=" + supplier + ", totalAmount=" + totalAmount + ", oldestDate=" + oldestDate + ", warningDate=" + warningDate + ", signature=" + signature + ", statusMessages=" + statusMessages + ", qualityStatus=" + qualityStatus + '}';
-    }
-
-    public void useOne(){
+    public void useOne() {
         totalAmount--;
     }
 
@@ -182,5 +183,45 @@ public class Substance implements Serializable {
 
     public void setHalflife(int halflife) {
         this.halflife = halflife;
+    }
+
+    public String getEluateName() {
+        return eluateName;
+    }
+
+    public void setEluateName(String eluateName) {
+        this.eluateName = eluateName;
+    }
+
+    public String getGenericName() {
+        return genericName;
+    }
+
+    public void setGenericName(String genericName) {
+        this.genericName = genericName;
+    }
+
+    public int getVolume() {
+        return volume;
+    }
+
+    public void setVolume(int volume) {
+        this.volume = volume;
+    }
+
+    public double getStrength() {
+        return strength;
+    }
+
+    public void setStrength(double strength) {
+        this.strength = strength;
+    }
+
+    public int getQualityControl() {
+        return qualityControl;
+    }
+
+    public void setQualityControl(int qualityControl) {
+        this.qualityControl = qualityControl;
     }
 }

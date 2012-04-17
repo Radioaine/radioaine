@@ -15,90 +15,153 @@
 
 
 <div id="contents">
-    <h2>Eluuatin muokkaus</h2>
-    
+    <h2>Eluuatin ${eluate.id} muokkaus</h2>
+    <br/>   
     <form:form commandName="eluateForm" action="${pageContext.servletContext.contextPath}/modifyEluate/${eluate.id}" method="POST">
-        <table style="float: right;">
-            <th>Valitut</th>
-            <tr>
-                <td style="float: right; border: none; font-size: 90%;" id="selected">
-                    <c:forEach var="gene" items="${eluate.generators}">
-                        <script> generateDivs("${gene.substance.name}", ${gene.id}, 0);</script>
-                    </c:forEach>
-                    <c:forEach var="oth" items="${eluate.others}">
-                        <script> generateDivs("${oth.substance.name}", ${oth.id}, 4);</script>
-                    </c:forEach>
-                </td>
-            </tr>
-        </table>
         <table class="noborder">
             <tr>
-                <td>Generaattori:</td>
-                <td><select multiple="multiple" >
-                        <c:forEach var="generator" items="${generators}">
-                            <option id="0" onclick="eluateAmounts(event)"  value="${generator.id}">${generator.substance.name}</option>
+                <td colspan="3">&nbsp; </td>
+            </tr>
+            <tr>
+                <td rowspan="4" >Valitut</td>
+                <th>Aiempi</th>
+            </tr>
+            <tr>
+                <td class="infotext" colspan="3">
+                    <c:forEach var="gene" items="${eluate.generators}">
+                        ${gene.substance.name}, Erä ${gene.batchNumber}, Käyt. ennen <fmt:formatDate value="${gene.expDate}" pattern="dd.MM.yyyy"/>, Sijainti: 
+                        <c:forEach var="location" items="${gene.storageLocations}">
+                            <c:if test="${location[1] != null}">
+                                <c:if test="${location[1] > 0}">
+                                    <c:forEach var="storage" items="${storages}">
+                                        <c:if test="${storage.id == location[0]}">
+                                            ${storage.name}
+                                        </c:if>
+                                    </c:forEach>
+                                </c:if>
+                            </c:if>
                         </c:forEach>
-                    </select>
+                        <br/>
+                    </c:forEach>
+                    <c:forEach var="oth" items="${eluate.others}">
+                        ${oth.substance.name}, Erä ${oth.batchNumber}, Käyt. ennen <fmt:formatDate value="${oth.expDate}" pattern="dd.MM.yyyy"/>, Sijainti:
+                        <c:forEach var="location" items="${oth.storageLocations}">
+                            <c:if test="${location[1] != null}">
+                                <c:if test="${location[1] > 0}">
+                                    <c:forEach var="storage" items="${storages}">
+                                        <c:if test="${storage.id == location[0]}">
+                                            ${storage.name}
+                                        </c:if>
+                                    </c:forEach>
+                                </c:if>
+                            </c:if>
+                        </c:forEach>
+                        <br/>
+                    </c:forEach>
                 </td>
             </tr>
             <tr>
-                <td>Muut:</td>
-                <td><select multiple="multiple" >
-                        <c:forEach var="other" items="${others}">
-                            <option id="2" onclick="eluateAmounts(event)" value="${other.id}">${other.substance.name},
-                                ${other.batchNumber}, <fmt:formatDate value="${other.expDate}" pattern="dd.MM.yyyy"/></option>
-                            </c:forEach>
-                    </select>
-                <td>
+                <td colspan="3">&nbsp; </td>
+            </tr>
+            <tr style="display: none;">
+                <td class="infotext" id="selected" colspan="3">
+                    <c:forEach var="gene" items="${eluate.generators}">
+                        <script> generateDivs("${gene.substance.name}, Erä ${gene.batchNumber}, Käyt. ennen <fmt:formatDate value="${gene.expDate}" pattern="dd.MM.yyyy"/>, TODO Sijainti", ${gene.id}, 0);</script>
+                    </c:forEach>
+                    <c:forEach var="oth" items="${eluate.others}">
+                        <script> generateDivs("${oth.substance.name}, Erä ${oth.batchNumber}, Käyt. ennen <fmt:formatDate value="${oth.expDate}" pattern="dd.MM.yyyy"/>, TODO Sijainti", ${oth.id}, 4);</script>
+                    </c:forEach>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="4">&nbsp; </td>
+            </tr>
+            <tr>
+                <th></th>
+                <th class="new">Päivitetty</th>
+                <th class="new" colspan="2">Aiempi</th>
             </tr>
             <tr>
                 <td></td>
-                <td>Klo<span id="pvm">Pvm</span></td>
+                <td class="infotext">Klo<span id="pvm">Pvm</span></td>
+                <td class="infotext">Klo<span id="pvm"> &nbsp; &nbsp;Pvm</span></td>
+                <td></td>
             </tr>
             <tr>
-                <td>Eluointiaika:</td>
+                <td>Eluointiaika</td>
                 <td><input required name="hours" type="text" id="hours" value="${eluateHours}" size="2"/>:<input
                         required name="minutes" type="text" id="minutes" size="2" value="${eluateMinutes}"/>
-                    <input required name="date" type="text" id="eluatingtime" value="${eluateDate}"/></td>
+                    <input required name="date" type="text" id="eluatingtime" value="${eluateDate}"/>
+                </td>
+                <td class="infotext">${eluateHours}:${eluateMinutes}<span id="pvm">${eluateDate}</span></td>
+                <td></td>
             </tr>
             <tr>
-                <td>Aktiivisuus:</td>
-                <td><input pattern="\d+(\.\d)?" value="${eluate.strength}" name="strength" type="text"/>
+                <td>Aktiivisuus</td>
+                <td><input pattern="^[0-9]{1,4}([,.][0-9]{1,4})?$" value="${eluate.strength}" name="strength" type="text" size="5"/>
                     <form:select path="unit">
                         <option value="0">GBq</option>
                         <option value="1">MBq</option>
                     </form:select>
-
-            </td>
-            </tr>
-            <tr>
-                <td>Tilavuus:</td>
-                <td><input type="text" name="volume" value="${eluate.volume}"/> ml
+                </td>
+                <td class="infotext" colspan="2">${eluate.strength}
+                    <c:choose>
+                        <c:when test="${eluate.unit == 0}">
+                            GBq
+                        </c:when>
+                        <c:otherwise>
+                            MBq
+                        </c:otherwise>
+                    </c:choose>
                 </td>
             </tr>
             <tr>
+                <td>Tilavuus</td>
+                <td><input type="text" pattern="^[0-9]{1,4}([,.][0-9]{1,4})?$" name="volume" value="${eluate.volume}" size="5"/> ml</td>
+                <td class="infotext" colspan="2">${eluate.volume} ml</td>
+            </tr>
+            <tr>
                 <td>Varastopaikka</td>
-                <td><form:select  path="storageLocation">
+                <td><form:select path="storageLocation">
                         <c:forEach var="storage" items="${storages}" varStatus="i">
                             <c:if test="${storage.hidden == false}">
-                                <form:option value="${i.index+1}">${storage.name}</form:option>
+                                <c:choose>
+                                    <c:when test="${storage.id == eluate.storageLocation}">
+                                        <form:option selected="selected" value="${storage.id}">${storage.name}</form:option>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <form:option value="${storage.id}">${storage.name}</form:option>
+                                    </c:otherwise>
+                                </c:choose>
                             </c:if>
                         </c:forEach>
-                    </form:select></td>
+                    </form:select>
+                </td>
+                <td class="infotext" colspan="2">
+                    <c:forEach var="storage" items="${storages}" varStatus="i">
+                        <c:if test="${storage.id == eluate.storageLocation}">
+                            ${storage.name}
+                        </c:if>
+                    </c:forEach>
+                </td>
             </tr>
             <tr>
-                <td>Huomautuksia:</td>
-                <td><form:textarea path="note" type="text"/><form:errors path="note"/></td>
+                <td>Kommentit</td>
+                <td><form:input path="note" type="text" value="${eluate.note}"/><form:errors path="note"/></td>
+                <td class="infotext" colspan="2">${eluate.note}</td>
             </tr>
             <tr>
-                <td>Nimikirjaimet:</td>
-                <td><input required name="signature" type="text" id="signature"/></td>
+                <td colspan="4">&nbsp; </td>
             </tr>
             <tr>
-                <td><input type="submit" value="Tallenna muutokset"></td>
-                <td><input type="button" value="Peruuta" onClick="parent.location = '${pageContext.servletContext.contextPath}/frontpage'" /></td>
+                <td>Nimikirjaimet</td>
+                <td colspan="3"><input required name="signature" type="text" id="signature" size="6"/></td>
             </tr>
-        </table>
+         </table>
+         <br/>
+
+        <input type="submit" value="Tallenna">&nbsp; &nbsp;
+        <input type="button" value="Peruuta" onClick="parent.location = '${pageContext.servletContext.contextPath}/eluate/${eluate.id}'" />
 
     </form:form>
 

@@ -18,103 +18,168 @@
 </script>
 
 <div id="contents">
-    <h2>Uusi radiol‰‰ke</h2>
+    <h2>Radiol‰‰kkeen ${radioMedicine.id} muokkaus</h2>
     <br/>
-    <form:form commandName="radioMedicine" action="createRadioMedicine" method="POST">
-        <!--<table style="float: right;">
-            <th>Valitut</th>
-            <tr>
-                <td style="float: right; border: none; font-size: 90%;" id="selected"></td>
-                </td>
-            </tr>
-        </table>-->
+    <form:form commandName="radioMedicineForm" action="${pageContext.servletContext.contextPath}/modifyRadioMed/${radioMedicine.id}" method="POST">
+
         <table class="noborder">
             <tr>
-                <td class="name">Eluaatti</td>
-                <td>
-                    <select multiple="multiple" class="list" >
-                        <c:forEach var="eluate" items="${eluates}">
-                            <option id="3" onclick="eluateAmounts(event)" value="${eluate.id}">Klo <fmt:formatDate value="${eluate.date}" pattern="hh.mm"/>, TODO Eluaatin nimi, Aktiivisuus ${eluate.strength}, Sijainti TODO${eluate.storageLocation}, Tekij‰ ${eluate.signature}</option>
+                <td colspan="3">&nbsp; </td>
+            </tr>
+                        <tr>
+                <td rowspan="4" >Valitut</td>
+            </tr>
+            <tr>
+                <td class="infotext" colspan="3">
+                    <c:forEach var="eluate" items="${radioMedicine.eluates}">
+                        Klo <fmt:formatDate value="${eluate.date}" pattern="hh.mm"/> ${eluate.getName()}, Er‰ ${eluate.generators.get(0).batchNumber}, Aktiivisuus ${eluate.strength}, Sijainti:
+                        <c:forEach var="storage" items="${storages}">
+                            <c:if test="${storage.id == eluate.storageLocation}">
+                                ${storage.name},
+                            </c:if>
+                        </c:forEach>Tekij‰ ${eluate.signature}<br/>
+                    </c:forEach>
+                    <c:forEach var="kit" items="${radioMedicine.kits}">
+                        ${kit.substance.name}, Er‰ ${kit.batchNumber}, K‰yt. ennen <fmt:formatDate value="${kit.expDate}" pattern="dd.MM.yyyy"/>, Sijainti:
+                        <c:forEach var="location" items="${kit.storageLocations}">
+                            <c:if test="${location[1] != null}">
+                                <c:if test="${location[1] > 0}">
+                                    <c:forEach var="storage" items="${storages}">
+                                        <c:if test="${storage.id == location[0]}">
+                                            ${storage.name}
+                                        </c:if>
+                                    </c:forEach>
+                                </c:if>
+                            </c:if>
                         </c:forEach>
-                    </select>
+                        <br/>
+                    </c:forEach>
+                    <c:forEach var="oth" items="${radioMedicine.others}">
+                        ${oth.substance.name}, Er‰ ${oth.batchNumber}, K‰yt. ennen <fmt:formatDate value="${oth.expDate}" pattern="dd.MM.yyyy"/>, Sijainti:
+                        <c:forEach var="location" items="${oth.storageLocations}">
+                            <c:if test="${location[1] != null}">
+                                <c:if test="${location[1] > 0}">
+                                    <c:forEach var="storage" items="${storages}">
+                                        <c:if test="${storage.id == location[0]}">
+                                            ${storage.name}
+                                        </c:if>
+                                    </c:forEach>
+                                </c:if>
+                            </c:if>
+                        </c:forEach>
+                        <br/>
+                    </c:forEach>
                 </td>
             </tr>
             <tr>
-                <td>Kitti</td>
-                <td><select multiple="multiple" class="list">
-                        <c:forEach var="kit" items="${kits}">
-                            <option id="1" onclick="eluateAmounts(event)" value="${kit.id}">${kit.substance.name}, Er‰ 
-                                ${kit.batchNumber}, K‰yt. ennen <fmt:formatDate value="${kit.expDate}" pattern="dd.MM.yyyy"/>, TODO Sijainti</option>
-                        </c:forEach>
-                    </select>
-                </td>
+                <td colspan="3">&nbsp; </td>
+            </tr>
+            <tr style="display: none;">
+                <td class="infotext" id="selected" colspan="3">
+                    <c:forEach var="eluate" items="${radioMedicine.eluates}">
+                        <script> generateDivs("Klo <fmt:formatDate value="${eluate.date}" pattern="hh.mm"/> ${eluate.getName()}, Er‰ ${eluate.generators.get(0).batchNumber}, Aktiivisuus ${eluate.strength}, Sijainti TODO${eluate.storageLocation}, Tekij‰ ${eluate.signature} ", ${eluate.id}, 3);</script>
+                    </c:forEach>
+                    <c:forEach var="kit" items="${radioMedicine.kits}">
+                        <script> generateDivs("${kit.substance.name}, Er‰ ${kit.batchNumber}, K‰yt. ennen <fmt:formatDate value="${kit.expDate}" pattern="dd.MM.yyyy"/>, TODO Sijainti", ${kit.id}, 1);</script>
+                    </c:forEach>
+                    <c:forEach var="oth" items="${radioMedicine.others}">
+                        <script> generateDivs("${oth.substance.name}, Er‰ ${oth.batchNumber}, K‰yt. ennen <fmt:formatDate value="${oth.expDate}" pattern="dd.MM.yyyy"/>, TODO Sijainti", ${oth.id}, 4);</script>
+                    </c:forEach>
+            </td>
+            </tr>
+            
+            <tr>
+                <td colspan="4">&nbsp; </td>
             </tr>
             <tr>
-                <td>Muu</td>
-                <td><select multiple="multiple" class="list" >
-                        <c:forEach var="other" items="${others}">
-                            <option id="2" onclick="eluateAmounts(event)" value="${other.id}">${other.substance.name}, Er‰
-                                ${other.batchNumber}, K‰yt. ennen <fmt:formatDate value="${other.expDate}" pattern="dd.MM.yyyy"/>, TODO Sijainti</option>
-                            </c:forEach>
-                    </select>
-                <td>
-            </tr>
-            <tr>
-                <td>&nbsp; </td>
-                <td> </td>
-            </tr>
-            <tr>
-                <td>Valitut</td>
-                <td style="font-size: 90%;" id="selected"></td>
-            </tr>
-            <tr>
-                <td>&nbsp; </td>
-                <td> </td>
+                <th></th>
+                <th class="new">P‰ivitetty</th>
+                <th class="new" colspan="2">Aiempi</th>
             </tr>
             <tr>
                 <td></td>
-                <td style="font-size: 90%;">Klo<span id="pvm">Pvm</span></td>
+                <td class="infotext">Klo<span id="pvm">Pvm</span></td>
+                <td class="infotext">Klo<span id="pvm"> &nbsp; &nbsp;Pvm</span></td>
+                <td></td>
             </tr>
             <tr>
                 <td>Luontiaika</td>
-                <td><input required name="hours" type="text" id="hours" size="2" value="${hours}"/>:<input required
-                        name="minutes" type="text" id="minutes" size="2" value="${minutes}"/>
-                    <input required name="date" type="text" id="creationtime" value="${date}"/></td>
+                <fmt:formatDate value="${radioMedicine.date}" pattern="HH" var="radiohours"/>
+                <fmt:formatDate value="${radioMedicine.date}" pattern="mm" var="radiominutes"/>
+                <fmt:formatDate value="${radioMedicine.date}" pattern="dd.MM.yyyy" var="radiodate"/>
+                <td><input required name="hours" type="text" id="hours" size="2" value="${radiohours}"/>:<input required
+                        name="minutes" type="text" id="minutes" size="2" value="${radiominutes}"/>
+                    <input required name="date" type="text" id="creationtime" value="${radiodate}"/>
+                </td>
+                <td class="infotext">${radiohours}:${radiominutes}<span id="pvm">${radiodate}</span></td>
+                <td></td>
             </tr>
             <tr>
                 <td>Aktiivisuus</td>
-                <td><form:input path="strength" type="text" size="5"/><form:errors path="strength"/>
+                <td><form:input path="strength" type="text" size="5" value="${radioMedicine.strength}"/><form:errors path="strength"/>
                     <form:select path="unit">
                     <option value="0">GBq</option>
                     <option value="1">MBq</option>
                     </form:select>
                 </td>
+                <td class="infotext" colspan="2">${radioMedicine.strength}
+                    <c:choose>
+                        <c:when test="${radioMedicine.unit == 0}">
+                            GBq
+                        </c:when>
+                        <c:otherwise>
+                            MBq
+                        </c:otherwise>
+                    </c:choose>
+                </td>
             </tr>
             <tr>
                 <td>Tilavuus</td>
-                <td><form:input path="volume" type="text" size="5"/><form:errors path="volume"/>ml</td>
+                <td><form:input path="volume" pattern="^[0-9]{1,4}([,.][0-9]{1,4})?$" type="text" size="5" value="${radioMedicine.volume}" /><form:errors path="volume"/>ml</td>
+                <td class="infotext" colspan="2">${radioMedicine.volume} ml</td>
             </tr>
             <tr>
                 <td>Varastopaikka</td>
-                <td><form:select  path="storageLocation">
+                <td><form:select path="storageLocation">
                         <c:forEach var="storage" items="${storages}" varStatus="i">
-                            <form:option value="${i.index+1}">${storage.name}</form:option>
+                            <c:if test="${storage.hidden == false}">
+                                <c:choose>
+                                    <c:when test="${storage.id == radioMedicine.storageLocation}">
+                                        <form:option selected="selected" value="${storage.id}">${storage.name}</form:option>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <form:option value="${storage.id}">${storage.name}</form:option>
+                                    </c:otherwise>
+                                </c:choose>
+                            </c:if>
                         </c:forEach>
-                    </form:select></td>
+                    </form:select>
+                </td>
+                <td class="infotext" colspan="2">
+                    <c:forEach var="storage" items="${storages}" varStatus="i">
+                        <c:if test="${storage.id == radioMedicine.storageLocation}">
+                            ${storage.name}
+                        </c:if>
+                    </c:forEach>
+                </td>
             </tr>
             <tr>
-                <td>Huomautuksia</td>
-                <td><form:textarea path="note" type="text"/><form:errors path="note"/></td>
+                <td>Kommentit</td>
+                <td><form:input path="note" type="text" value="${radioMedicine.note}"/><form:errors path="note"/></td>
+                <td class="infotext" colspan="2">${radioMedicine.note}</td>
+            </tr>
+            <tr>
+                <td colspan="4">&nbsp; </td>
             </tr>
             <tr>
                 <td>Nimikirjaimet</td>
-                <td><form:input path="signature" type="text" id="signature" size="6"/><form:errors path="signature"/></td>
+                <td colspan="3"><form:input required="required" path="signature" type="text" id="signature" size="6"/><form:errors path="signature"/></td>
             </tr>
         </table>
         <br/>
         
-        <td><input type="submit" value="Tallenna"></td>&nbsp; &nbsp;
-        <td><input type="button" value="Peruuta" onClick="parent.location = '${pageContext.servletContext.contextPath}/frontpage'" /></td>
+        <input type="submit" value="Tallenna muutokset">&nbsp; &nbsp;
+        <input type="button" value="Peruuta" onClick="parent.location = '${pageContext.servletContext.contextPath}/RadioMedicine/${radioMedicine.id}'" />
         
     </form:form>
 </div>

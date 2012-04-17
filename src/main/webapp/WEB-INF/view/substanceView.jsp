@@ -4,15 +4,20 @@
 
 <div id="contents">
     
-    <h2>Kitit</h2>
+    <h2>Tuotenimikkeet</h2>
     <br/>
     
-    <form method="link" action="${pageContext.servletContext.contextPath}/addSubstance">
-        <input type="submit" value="Lisää">
-    </form>
-    
-    <br/>
-    
+    <table class="noborder">
+        <tr>
+            <td class="substanceHeader">Kitit &nbsp; &nbsp;</td>
+            <td>
+                <form method="link" action="${pageContext.servletContext.contextPath}/addSubstance/0">
+                    <input type="submit" value="Lisää">
+                </form>
+            </td>
+        </tr>
+    </table>
+
     <table class="noborder">
         
         <c:forEach var="substance" items="${substances}">
@@ -28,14 +33,17 @@
     
     <br/>
 
-    <h2>Generaattorit</h2>
-    <br/>
-    
-    <form method="link" action="${pageContext.servletContext.contextPath}/addSubstance">
-        <input type="submit" value="Lisää">
-    </form>
-    
-    <br/>
+    <table class="noborder">
+        <tr>
+            <td class="substanceHeader">Generaattorit &nbsp; &nbsp;</td>
+            <td>
+                <form method="link" action="${pageContext.servletContext.contextPath}/addSubstance/1">
+                    <input type="submit" value="Lisää">
+                </form>
+            </td>
+        </tr>
+    </table>
+
     <table class="noborder">
         <c:forEach var="substance" items="${substances}">
             <c:if test="${substance.type == '1'}">
@@ -49,14 +57,17 @@
     </table>
     <br/>
 
-    <h2>Muut</h2>
-    <br/>
+    <table class="noborder">
+        <tr>
+            <td class="substanceHeader">Muut &nbsp; &nbsp;</td>
+            <td>
+                <form method="link" action="${pageContext.servletContext.contextPath}/addSubstance/2">
+                    <input type="submit" value="Lisää">
+                </form>
+            </td>
+        </tr>
+    </table>
     
-    <form method="link" action="${pageContext.servletContext.contextPath}/addSubstance">
-        <input type="submit" value="Lisää">
-    </form>
-    
-    <br/>
     <table class="noborder">
         <c:forEach var="substance" items="${substances}">
             <c:if test="${substance.type == '2'}">

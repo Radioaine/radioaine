@@ -3,17 +3,16 @@
 <%@include file="headeradmin.jsp" %>
 
 <div id="contents">
-    <h1>Varastopaikat</h1>
+    <h2>Varastopaikat</h2>
+    <br/>
     
     <table class="noborder">
-        <tr>
-            <td><b>Nimi</b></td>
-        </tr>
+        
             <c:forEach var="storage" items="${storages}" varStatus="i">
                 <c:if test="${storage.hidden == false}">
                     <tr>
                         <form action="${pageContext.servletContext.contextPath}/updateStorageName/${i.index+1}" method="POST">
-                                <td>
+                                <td class="name">
                                     <div id="name${i.index+1}">${storage.name}</div>
                                     <input required name="name" id="inp${i.index+1}" style="display: none;"></input>
                                 </td>

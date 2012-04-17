@@ -5,6 +5,7 @@
 
 <div id="contents">
     
+    <h2>Varoitukset</h2>
     </br>
     <table class="listing">
 
@@ -17,62 +18,71 @@
         </tr>
 
         <c:forEach var="substance" items="${substances}">
-            <c:if test="${substance.oldestDate < compareDate}">
-                <tr class="red">
-                    <td class="center">${date}</td>
-                    <td><a href="substance/${substance.id}">${substance.name}</a></td>
-                    <td><fmt:formatDate pattern="dd.MM.yyyy" value="${substance.oldestDate}"/></td>
-                    <td>Eriä vanhentunut</td>
-                    <td><form action="addStatusComment/${substance.id}+0" method="POST" >
-                            <input name="comment" type="text" value="${substance.statusMessages[0]}" class="comm" />
-                            <button type="submit">Tallenna</button>
-                        </form>
-                    </td>
+            <c:if test="${substance.warningDate < compareDate}">
+                <c:choose>
+                    <c:when test="${substance.oldestDate < compareDate}">
+                        <tr class="red">
+                            <td class="center">${date}</td>
+                            <td><a href="substance/${substance.id}">${substance.name}</a></td>
+                            <td><fmt:formatDate pattern="dd.MM.yyyy" value="${substance.oldestDate}"/></td>
+                            <td>Eriä vanhentunut</td>
+                            <td><form action="addStatusComment/${substance.id}+0" method="POST" >
+                                    <input name="comment" type="text" value="${substance.statusMessages[0]}" class="comm" />
+                                    <button type="submit">Tallenna</button>
+                                </form>
+                            </td>
+                        </tr>
+                    </c:when>
+                    <c:otherwise>
+                       <tr class="blue">
+                            <td class="center">${date}</td>
+                            <td><a href="substance/${substance.id}">${substance.name}</a></td>
+                            <td><fmt:formatDate pattern="dd.MM.yyyy" value="${substance.oldestDate}"/></td>
+                            <td>Eriä vanhenemassa</td>
+                            <td><form action="addStatusComment/${substance.id}+0" method="POST" >
+                                    <input name="comment" type="text" value="${substance.statusMessages[0]}" class="comm" />
+                                    <button type="submit">Tallenna</button>
+                                </form>
+                            </td>
 
-                </tr>
-            </c:if>
-            <c:if test="${substance.warningDate < wDate}">
-                <tr class="blue">
-                    <td class="center">${date}</td>
-                    <td><a href="substance/${substance.id}">${substance.name}</a></td>
-                    <td><fmt:formatDate pattern="dd.MM.yyyy" value="${substance.oldestDate}"/></td>
-                    <td>Eriä vanhenemassa</td>
-                    <td><form action="addStatusComment/${substance.id}+0" method="POST" >
-                            <input name="comment" type="text" value="${substance.statusMessages[0]}" class="comm" />
-                            <button type="submit">Tallenna</button>
-                        </form>
-                    </td>
-
-                </tr>
+                        </tr>     
+                    </c:otherwise>
+                    
+                </c:choose>
+                
             </c:if>
             <!--Tähän aineitten hälytysrajat-->
-            <c:if test="${substance.totalAmount < 10}">
-                <tr class="yellow">
-                    <td class="center">${date}</td>
-                    <td><a href="substance/${substance.id}">${substance.name}</a></td>
-                    <td><fmt:formatDate pattern="dd.MM.yyyy" value="${substance.oldestDate}"/></td>
-                    <td>Vähissä</td>
-                    <td><form action="addStatusComment/${substance.id}+1" method="POST" >
-                            <input name="comment" type="text" value="${substance.statusMessages[1]}" class="comm" />
-                            <button type="submit">Tallenna</button>
-                        </form>
-                    </td>
-                </tr>
+            <c:if test="${substance.totalAmount < substance.warningBeforeAmount}">
+                <c:choose>
+                    <c:when test="${substance.totalAmount == 0}">
+                        <tr class="red">
+                            <td class="center">${date}</td>
+                            <td><a href="substance/${substance.id}">${substance.name}</a></td>
+                            <td><fmt:formatDate pattern="dd.MM.yyyy" value="${substance.oldestDate}"/></td>
+                            <td>Loppu</td>
+                            <td><form action="addStatusComment/${substance.id}+1" method="POST" >
+                                    <input name="comment" type="text" value="${substance.statusMessages[1]}" class="comm"/>
+                                    <button type="submit">Tallenna</button>
+                                </form>
+                            </td>
+                        </tr>
+                    </c:when>
+                    <c:otherwise>
+                        <tr class="yellow">
+                            <td class="center">${date}</td>
+                            <td><a href="substance/${substance.id}">${substance.name}</a></td>
+                            <td><fmt:formatDate pattern="dd.MM.yyyy" value="${substance.oldestDate}"/></td>
+                            <td>Vähissä</td>
+                            <td><form action="addStatusComment/${substance.id}+1" method="POST" >
+                                    <input name="comment" type="text" value="${substance.statusMessages[1]}" class="comm" />
+                                    <button type="submit">Tallenna</button>
+                                </form>
+                            </td>
+                        </tr>
+                    </c:otherwise>
+                </c:choose>             
             </c:if>
-            <c:if test="${substance.totalAmount == 0}">
-                <tr class="red">
-                    <td class="center">${date}</td>
-                    <td><a href="substance/${substance.id}">${substance.name}</a></td>
-                    <td><fmt:formatDate pattern="dd.MM.yyyy" value="${substance.oldestDate}"/></td>
-                    <td>Loppu</td>
-                    <td><form action="addStatusComment/${substance.id}+1" method="POST" >
-                            <input name="comment" type="text" value="${substance.statusMessages[1]}" class="comm"/>
-                            <button type="submit">Tallenna</button>
-                        </form>
-                    </td>
-                </tr>
-            </c:if>
-            <c:if test="${substance.qualityStatus == 0}">
+                    <c:if test="${substance.qualityStatus == 0 && substance.totalAmount > 0}">
                 <tr class="orange">
                     <td class="center">${date}</td>
                     <td><a href="substance/${substance.id}">${substance.name}</a></td>
@@ -85,9 +95,6 @@
                     </td>
                 </tr>
             </c:if>
-
-
-
         </c:forEach>
 
     </table>

@@ -4,6 +4,7 @@
  */
 package ohtu.radioaine.database;
 
+import java.sql.Timestamp;
 import java.util.List;
 import ohtu.radioaine.domain.Eluate;
 
@@ -13,4 +14,7 @@ import ohtu.radioaine.domain.Eluate;
  */
 public interface EluateDBDao extends DAO<Eluate>{
     public List<Eluate> list();
+    public List<Eluate> getAllByDate(Timestamp timestamp);
 }
+
+

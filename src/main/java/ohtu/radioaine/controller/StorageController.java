@@ -19,7 +19,7 @@ public class StorageController {
     private BatchService esinePalvelu;
     
     @RequestMapping(value = "storage", method = RequestMethod.GET)
-    public String storageView(Model model) {
+    public String storageViewCTRL(Model model) {
         model.addAttribute("substances", substanceService.list());
         return "storageView";
     }

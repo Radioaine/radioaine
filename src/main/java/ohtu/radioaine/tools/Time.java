@@ -21,6 +21,11 @@ public class Time {
         return timestamp;
     }
 
+    public static Timestamp getTodayDate() {
+        Timestamp timestamp = getTimestamp();
+        return parseTime(timestamp.toString(), "yyyy-MM-dd");
+    }
+
     public static Timestamp parseTime(String time, String format) {
         DateFormat sdf = new SimpleDateFormat(format);
         Timestamp timestamp = null;
@@ -43,17 +48,16 @@ public class Time {
         return parseTime(time, "dd.MM.yyyy HH:mm");
 
     }
-    
-    public static Timestamp parseWarningDate(Timestamp time){
+
+    public static Timestamp parseWarningDate(Timestamp time, int days) {
         long day = 84600000;
-        Timestamp temp = new Timestamp(time.getTime()-day*5);
+        Timestamp temp = new Timestamp(time.getTime() - day * days);
         return temp;
     }
 
-    public static Date getWarningDate() {
+    public static Date getWarningDate(int days) {
         GregorianCalendar cal = new GregorianCalendar();
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-        cal.add(GregorianCalendar.DAY_OF_MONTH, -6);   
+        cal.add(GregorianCalendar.DAY_OF_MONTH, -days);   
         return cal.getTime();
     }
 }

@@ -17,6 +17,7 @@
 
 <div id="contents">
     <h2>Lis‰‰ l‰hetys</h2>
+    <br/>
         
     <form:form commandName="batch" action="batch" method="POST">
         <table class="noborder">
@@ -24,29 +25,44 @@
                 <td class="name">Tuote</td>
                 <td>
                     <form:select path="substance">
-                        <c:forEach var="substance" items="${substances}">
-                            <form:option value="${substance.id}">${substance.name}</form:option>
-                        </c:forEach>
+                        <optgroup label="Kitit">
+                            <c:forEach var="substance" items="${substances}">
+                                <c:if test="${substance.type == '0'}">
+                                    <form:option value="${substance.id}">${substance.name}</form:option> 
+                                </c:if>
+                            </c:forEach>
+                        </optgroup>
+                        <optgroup label="Generaattorit">
+                            <c:forEach var="substance" items="${substances}">
+                                <c:if test="${substance.type == '1'}">
+                                    <form:option value="${substance.id}">${substance.name}</form:option> 
+                                </c:if>
+                            </c:forEach>
+                        </optgroup>
+                        <optgroup label="Muut">
+                            <c:forEach var="substance" items="${substances}">
+                                <c:if test="${substance.type == '2'}">
+                                    <form:option value="${substance.id}">${substance.name}</form:option> 
+                                </c:if>
+                            </c:forEach>
+                        </optgroup>
                     </form:select>                            
                 </td>
-                <td>Pit‰‰kˆ t‰ss‰ pysty‰ lis‰‰m‰‰n kategoriaan "Muu" tuote, jota ei ole lis‰tty j‰rjestelm‰‰n aineen lis‰‰misen kautta?</td>
             </tr>
             <tr>
                 <td>Er‰numero</td>
-                <td><form:input path="batchNumber" type="text"/><form:errors path="batchNumber"/></td>
+                <td><form:input required="required" path="batchNumber" type="text"/><form:errors path="batchNumber"/></td>
             </tr>
             <tr>
                 <td>Saapumisp‰iv‰</td>
-                <td><form:input path="arrivalDate" type="text" value="${date}" id="arrivalDate"/><form:errors path="arrivalDate"/></td>
-                <td></td>
+                <td><form:input required="required" pattern="^(0[1-9]|[1-2][0-9]|3[0-1])\.(0[1-9]|1[0-2])\.[0-9]{4}$" path="arrivalDate" type="text" value="${date}" id="arrivalDate"/><form:errors path="arrivalDate"/></td>
             </tr>
             <tr>
                 <td>Vanhenemisp‰iv‰</td>
-                <td><form:input path="expDate" type="text" id="expDate"/><form:errors path="expDate"/></td>
-                <td></td>
+                <td><form:input required="required" pattern="^(0[1-9]|[1-2][0-9]|3[0-1])\.(0[1-9]|1[0-2])\.[0-9]{4}$" placeholder="Muodossa pp.kk.vvvv" path="expDate" type="text" id="expDate"/><form:errors path="expDate"/></td>
             </tr>
             <tr>
-                <td valign="top">Sijainti</td>
+                <td>Sijainti</td>
                 <td>
                     <div id="varastot">
                         <form:select  path="storageLocations[0][0]">
@@ -55,21 +71,18 @@
                                     <form:option value="${i.index+1}">${storage.name}</form:option>
                                 </c:if>
                             </c:forEach>
-                        </form:select> <form:input class="temp" onchange="countAmount()" id="storageAmount" path="storageLocations[0][1]" type="number" size="3"/> kpl<br/> 
+                        </form:select> <form:input required="required" class="temp" onchange="countAmount()" id="storageAmount" path="storageLocations[0][1]" type="number" size="3"/> kpl<br/> 
                     </div>
                 </td>
                 <td valign="bottom"><button type="button" onClick="addStorage(1, ${batch.storageLocationsCount}, ${storageNames})">Lis‰‰ varastopaikka</button></td>
-                <td></td>
             </tr>
             <tr>
                 <td>M‰‰r‰ yhteens‰</td>
                 <td id="t">0</td>
-                <td></td>
             </tr>
             <tr>
-                <td>Huomautuksia</td>
+                <td>Kommentteja</td>
                 <td><form:textarea path="note" type="text" /><form:errors path="note"/></td>
-                <td></td>
             </tr>
         </table>
         
@@ -78,8 +91,7 @@
         <table class="noborder">
             <tr>
                 <td class="name">Nimikirjaimet</td>
-                <td><form:input path="signature" type="text" id="signature" size="6"/><form:errors path="signature"/></td>
-                <td></td>
+                <td><form:input required="required" path="signature" type="text" id="signature" size="6"/><form:errors path="signature"/></td>
             </tr>
         </table>
         

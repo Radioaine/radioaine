@@ -1,6 +1,5 @@
 package ohtu.radioaine.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import ohtu.radioaine.domain.Batch;
@@ -78,7 +77,7 @@ public class TestDBController {
     private String[] storages = {"Alakerran kaappi", "Yläkerran kaappi", "Varastokaappi", "Hoitajien kaappi"};
 
     @RequestMapping("generateTestDB")
-    public String createDB() {
+    public String createDBCTRL() {
         createStorages();
         createSubstances();
         createBatches();
@@ -102,14 +101,18 @@ public class TestDBController {
         for (int i = 0; i < substances.length; i++) {
             Substance substance = new Substance();
             substance.setName(substances[i][0]);
-            substance.setAlertLimit1(Integer.parseInt(substances[i][1]));
-            substance.setAlertLimit2(Integer.parseInt(substances[i][2]));
+            substance.setWarningBeforeDays(Integer.parseInt(substances[i][1]));
+            substance.setWarningBeforeAmount(Integer.parseInt(substances[i][2]));
             substance.setHasBeenOrdered(Boolean.parseBoolean(substances[i][3]));
             substance.setNeedsColdStorage(Boolean.parseBoolean(substances[i][4]));
             substance.setManufacturer(substances[i][5]);
             substance.setSupplier(substances[i][6]);
             substance.setType(Integer.parseInt(substances[i][7]));
+            if (substance.getType() == 1) {
+                substance.setEluateName("eluaattinimi-" + substance.getName());
+            }
             substance.setOldestDate(Time.parseTimeStamp("13.6.2050 10:00"));
+            substance.setGenericName("geneerinen nimi");
             Random randomGenerator = new Random();
             int randomInt = randomGenerator.nextInt(3);
             substance.setQualityStatus(randomInt);
@@ -133,7 +136,7 @@ public class TestDBController {
                 batch.setBatchNumber(batches[randomNumber][0]);
 
                 batch.setAmount(Integer.parseInt(batches[randomNumber][1]));
-                Long[][] storageLocations = new Long[10][2];
+                Long[][] storageLocations = new Long[100][2];
                 storageLocations[0][0] = (long) 1;
                 storageLocations[0][1] = Long.parseLong(batches[randomNumber][1]);
                 Storage storage = storageService.read((long) 1);
@@ -152,7 +155,7 @@ public class TestDBController {
                 System.out.println("Substancelistan koko: " + substanceList.size());
                 if (substance.getOldestDate().compareTo(batch.getExpDate()) > 0) {
                     substance.setOldestDate(batch.getExpDate());
-                    substance.setWarningDate(Time.parseWarningDate(batch.getExpDate()));
+                    substance.setWarningDate(Time.parseWarningDate(batch.getExpDate(), substance.getWarningBeforeDays()));
                 }
                 substance.setTotalAmount(substance.getTotalAmount() + batch.getAmount());
                 substanceService.createOrUpdate(substance);

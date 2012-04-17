@@ -4,180 +4,197 @@
 <%@include file="headeradmin.jsp" %>
 
 <div id="contents">
-    <table class="noborder">
-        <h2>Saapuneet radiol‰‰kkeet <fmt:formatDate pattern="dd.MM.yyyy" value="${startDate}"/>  - <fmt:formatDate pattern="dd.MM.yyyy" value="${endDate}"/></h2>
-        <c:forEach var="substance" items="${substances}" varStatus="i">   
-                <tr id="substance${i.index}" style="display: none;">
-                        <th colspan="5" >${substance.name}</th>
+         
+    <div id="arrived">
+        <h2 id="reportHeader1" style="display: none;">Saapuneet radiol‰‰kkeet <fmt:formatDate pattern="dd.MM.yyyy" value="${startDate}"/>  - <fmt:formatDate pattern="dd.MM.yyyy" value="${endDate}"/></h2>
+
+        <c:forEach var="substance" items="${substances}" varStatus="i">  
+            <table class="noborder" id="substance${i.index}" style="display: none;">        
+                <tr>
+                    <td>&nbsp;</td>
                 </tr>
+                <tr>
+                    <th>${substance.name}</th>
+                </tr>
+            </table>
+
+            <table class="noborder">                
                 <c:forEach var="event" items="${arrived}">
                     <c:if test="${event.substanceName == substance.name}">
                         <script>$("#substance${i.index}").css("display","inline");</script>
-                    <tr>
-                        <td class="date"><fmt:formatDate pattern="dd.MM.yyyy" value="${event.arrivalDate}"/></td>
-                        <td class="batch">er‰ ${event.batchNumber}</td>
-                        <td class="before">k‰yt. ennen <fmt:formatDate pattern="dd.MM.yyyy" value="${event.expDate}"/></td>
-                        <td class="reportAmount">${event.amount} kpl</td>
-                        <td>${event.signature}</td>
-                    </tr>
+                        <script>$("#reportHeader1").css("display","inline");</script>
+                        <tr>
+                            <td class="date"><fmt:formatDate pattern="dd.MM.yyyy" value="${event.arrivalDate}"/></td>
+                            <td class="batch">er‰ ${event.batchNumber}</td>
+                            <td class="before">k‰yt. ennen <fmt:formatDate pattern="dd.MM.yyyy" value="${event.expDate}"/></td>
+                            <td class="reportAmount">${event.amount} kpl</td>
+                            <td>${event.signature}</td>
+                        </tr>
                     </c:if>
-                </c:forEach>     
-         </c:forEach>
-    </table>
-    <table class="noborder">
-        <h2>Poistuneet radiol‰‰kkeet <fmt:formatDate pattern="dd.MM.yyyy" value="${startDate}"/>  - <fmt:formatDate pattern="dd.MM.yyyy" value="${endDate}"/></h2>
-         <c:forEach var="substance" items="${substances}" varStatus="j">
-            <tr>
-                    <th colspan="5" id="substance${j.index}" style="display: none;">${substance.name}</th>
-            </tr>
-            <c:forEach var="event" items="${removed}">
-                <c:if test="${event.substanceName == substance.name}">
-                    <script>$("#substance${j.index}").css("display","inline");</script>
-                <tr>
-                    <td class="date"><fmt:formatDate pattern="dd.MM.yyyy" value="${event.arrivalDate}"/></td>
-                    <td class="batch">er‰ ${event.batchNumber}</td>
-                    <td class="before">k‰yt. ennen <fmt:formatDate pattern="dd.MM.yyyy" value="${event.expDate}"/></td>
-                    <td class="reportAmount">${event.amount} kpl</td>
-                    <td>${event.signature}</td>
-                </tr>
-                </c:if>
-            </c:forEach>
-         </c:forEach>
-    </table>
-    <table class="noborder">
-         <c:forEach var="radioMed" items="${radioMeds}">
-            <tr>
-                <td>Radiol‰‰ke ${radioMed.id}</td>
-                <td>P‰iv‰ys ${radioMed.date}</td>    
-            </tr>
-         </c:forEach>
-    </table>
-    
+                </c:forEach>
+            </table>
+        </c:forEach>   
+        <br/>
+    </div>
+        
+    <div id="removed">
+        <h2 id="reportHeader2" style="display: none;">Poistuneet radiol‰‰kkeet <fmt:formatDate pattern="dd.MM.yyyy" value="${startDate}"/>  - <fmt:formatDate pattern="dd.MM.yyyy" value="${endDate}"/></h2>
+
+        <c:forEach var="substance" items="${substances}" varStatus="j">
             
-    <div id="arrived">
-		<p>
-        <h2>Saapuneet radiol‰‰kkeet 1.1.2012-31.12.2012</h2>
-		</p>
-		<p>
-        <table class="noborder">
-            <tr>
-                <th colspan="5">Angiocis</th>
-            </tr>
-            <tr>
-                <td class="date">1.2.2012</td>
-                <td class="batch">er‰ OIUHTTK</td>
-                <td class="before">k‰yt. ennen 30.4.2012</td>
-                <td class="reportAmount">3 kpl</td>
-                <td>MK</td>
-            </tr>
-            <tr>
-                <td>3.5.2012</td>
-                <td>er‰ OIUYYTK</td>
-                <td>k‰yt. ennen 5.7.2012</td>
-                <td>6 kpl</td>
-                <td>RR</td>
-            </tr>
-            <tr>
-                <td>6.7.2012</td>
-                <td>er‰ AOTHTTK</td>
-                <td>k‰yt. ennen 15.8.2012</td>
-                <td>1 kpl</td>
-                <td>TL</td>
-            </tr>
-		</table>
-		</br>	
-		<table class="noborder">
-            <tr>
-                <th colspan="5">Bridatec</th>
-            </tr>
-            <tr>
-                <td class="date">5.3.2012</td>
-                <td class="batch">er‰ 13541254</td>
-                <td class="before">k‰yt. ennen 28.4.2012</td>
-                <td class="reportAmount">2 kpl</td>
-                <td>NN</td>
-            </tr>
-            <tr>
-                <td>3.5.2012</td>
-                <td>er‰ 6758654</td>
-                <td>k‰yt. ennen 5.7.2012</td>
-                <td>3 kpl</td>
-                <td>MM</td>
-            </tr>
-            <tr>
-                <td>6.7.2012</td>
-                <td>er‰ 4136584</td>
-                <td>k‰yt. ennen 15.8.2012</td>
-                <td>4 kpl</td>
-                <td>KK</td>
-            </tr>
-		</table>
-		</br>
-		</p>
-		</div>
-		
-		<div id="removed">
-		<p>
-			<h2>Poistuneet radiol‰‰kkeet 1.1.2012-31.12.2012</h2>
-		</p>
+            <table class="noborder"  id="removed${j.index}" style="display: none;">        
+                <tr>
+                    <td>&nbsp;</td>
+                </tr>
+                <tr>
+                    <th>${substance.name}</th>
+                </tr>
+            </table>
+            
+            <table class="noborder" >
+                    
+                    <c:forEach var="event" items="${removed}">
+                        <c:if test="${event.substanceName == substance.name}">
+                            <script>$("#removed${j.index}").css("display","inline");</script>
+                            <script>$("#reportHeader2").css("display","inline");</script>
+                        <tr>
+                            <td class="date"><fmt:formatDate pattern="dd.MM.yyyy" value="${event.timestamp}"/></td>
+                            <!--<td class="batch">er‰ ${event.batchNumber}</td>-->
+                            <td class="reportAmount">${event.amount} kpl</td>
+                            <td class="reportReason">${event.note}</td>
+                            <td>${event.signature}</td>
+                        </tr>
+                        
+                        </c:if>
+                    </c:forEach>
+            </table>           
+        </c:forEach>
+        <br/>
+    </div>
+        
+    <div id="RadioMedQuantity">
+        <h2 id="reportHeader3" style="display: none;">K‰yttˆkuntoon saatetut radiol‰‰kkeet / lkm <fmt:formatDate pattern="dd.MM.yyyy" value="${startDate}"/>  - <fmt:formatDate pattern="dd.MM.yyyy" value="${endDate}"/></h2>
+        <br/>
+        <br/>
+        <table class="noborder">        
+            <c:forEach var="substance" items="${substances}" varStatus="k">
+                <tr id="radio${k.index}" style="display: none;">
+                    <th class="reportName">${substance.name}</th>
+                    <c:set var="count" value="0"/>
 
-		<p>
-			<table class="noborder">
-            <tr>
-                <th colspan="4">Angiocis</th>
-            </tr>
-            <tr>
-                <td class="date">1.2.2012</td>
-                <td class="reportAmount">1 kpl</td>
-                <td class="reportReason">lainattu Jorviin</td>
-                <td>JK</td>
-            </tr>
-            <tr>
-                <td>3.5.2012</td>
-                <td>1 kpl</td>
-                <td>mennyt rikki</td>
-                <td>TL</td>
-            </tr>
-		</table>
-		</br>	
-		<table class="noborder">
-            <tr>
-                <th colspan="4">Bridatec</th>
-            </tr>
-            <tr>
-                <td class="date">6.7.2012</td>
-                <td class="reportAmount">5 kpl</td>
-                <td class="reportReason">vanhentunut</td>
-                <td>LL</td>
-            </tr>
-		</table>
-		</br>
-		</p>
-		</div>
-		
-		<div id="RadioMedQuantity">
-		<p>
-			<h2>K‰yttˆkuntoon saatetut radiol‰kkeet / lkm 1.1.2012-31.12.2012</h2>
-		</p>
+                    <c:forEach var="radioMed" items="${radioMeds}">
+                        <c:if test="${radioMed.getName() == substance.name}">
+                            <script>$("#radio${k.index}").css("display","inline");</script>
+                            <script>$("#reportHeader3").css("display","inline");</script>
+                            <c:set var="count" value="${count + 1}"/>
+                        </c:if>    
+                    </c:forEach>
+                    <td>${count} kpl</td>
+                    <tr>
+                        <td colspan="2"></td>
+                    </tr>
+                </tr>
+            </c:forEach>
+        </table>
+    </div>
+        
+    <div id="RadioMedDetails">
+        <h2>K‰yttˆkuntoon saatetut radiol‰‰kkeet <fmt:formatDate pattern="dd.MM.yyyy" value="${startDate}"/>  - <fmt:formatDate pattern="dd.MM.yyyy" value="${endDate}"/></h2>  
+        <br/>
+        <br/>
+        <table class="noborder">    
+            <c:forEach var="radioMed" items="${radioMeds}">
+                    <tr>
+                        <td class="timestamp"><fmt:formatDate pattern="HH.mm dd.MM.yyyy" value="${radioMed.date}"/> </td>
 
-		<p>
-			<table class="noborder">
+                    </tr>
+
+                    <c:forEach var="kit" items="${radioMed.kits}">
+                        
+                        <tr>
+                            <td class="time"></td>
+                            <td>${kit.substance.name}</td>
+                            <td class="batch">er‰ ${kit.batchNumber}</td>
+                            <td class="before">k‰yt. ennen <fmt:formatDate pattern="dd.MM.yyyy" value="${kit.expDate}"/> </td>
+                        </tr> 
+                    </c:forEach>
+
+            </c:forEach>
+        </table>
+    </div>
+        
+ 
+        <c:forEach var="eluate" items="${eluates}">
+        <table class="listing">
             <tr>
-                <td class="reportName">Angiocis</td>
-                <td>16 kpl</td>
-            </tr>
+                <th class="time">Klo</th>
+                <th class="time">Aine</th>
+                <th class="substance"></th>
+                <th class="activity">Aktiivisuus</th>
+                <th class="amount">M‰‰r‰</th>
+                <th class="location">Sijainti</th>
+                <th class="signature">Tekij‰</th>
+            </tr>  
             <tr>
-                <td>Bridatec</td>
-                <td>5 kpl</td>
+                <td><fmt:formatDate value="${eluate.date}" pattern="HH:mm"/> </td>
+                <td colspan="2"><c:forEach var="generator" items="${eluate.generators}">
+                        <a href="eluate/${eluate.id}"><b>${generator.substance.name}</b></a><br>
+                    </c:forEach></td>
+                <td>${eluate.strength}
+                    <c:choose>
+                        <c:when test="${eluate.unit == 0}">
+                            GBq
+                        </c:when>
+                        <c:otherwise>
+                            MBq
+                        </c:otherwise>
+                    </c:choose>
+                </td>
+                <td>${eluate.volume} ml</td>
+                <td>
+                    <c:forEach var="storage" items="${storages}" varStatus="i">
+                        <c:if test="${eluate.storageLocation == storage.id}">
+                            ${storage.name}
+                        </c:if>
+                    </c:forEach>
+                </td>
+                <td>${eluate.signature}</td>
             </tr>
-            <tr>
-                <td>Nanocoll</td>
-                <td>60 kpl</td>
-            </tr>
-		</table>
-		</br>	
-		</p>
-		</div>
+
+            <c:forEach var="radioMed" items="${radioMeds}">
+                <c:if test="${radioMed.eluates[0].id == eluate.id}">
+                    <tr>
+                        <td class="noborder" style="background-color:#FDFDF0"></td>
+                        <td><fmt:formatDate value="${radioMed.date}" pattern="HH:mm"/></td>
+                        <td><c:forEach var="kit" items="${radioMed.kits}">
+                                <a href="RadioMedicine/${radioMed.id}">${kit.substance.name}</a><br>
+                            </c:forEach></td>
+                        <td>${radioMed.strength}
+                            <c:choose>
+                                <c:when test="${radioMed.unit == 0}">
+                                    GBq
+                                </c:when>
+                                <c:otherwise>
+                                    MBq
+                                </c:otherwise>
+                            </c:choose>
+                        </td>
+                        <td>${radioMed.volume} ml</td>
+                        <td>
+                            <c:forEach var="storage" items="${storages}" varStatus="i">
+                                <c:if test="${radioMed.storageLocation == storage.id}">
+                                    ${storage.name}
+                                </c:if>
+                            </c:forEach>
+                        </td>
+                        <td>${radioMed.signature}</td>
+                    </tr>
+                </c:if>   
+            </c:forEach> 
+        </table>
+        </br>
+    </c:forEach>    
+        
 		
 		<div id="RadioMedDetails">
 		
@@ -193,20 +210,17 @@
                 <td class="reportName">Teknetiumeluaatti</td>
                 <td class="batch">er‰ 6758654</td>
                 <td class="before">k‰yt. ennen 3.3.2012</td>
-                <td></td>
             </tr>
             <tr>
                 <td></td>
                 <td>NaCl 100 ml</td>
                 <td>er‰ OIUHTTK</td>
                 <td>k‰yt. ennen 5.7.2012</td>
-                <td>5 ml</td>
             </tr>
             <tr>
                 <td></td>
                 <td>Aktiivisuus</td>
                 <td>16,56 GBq</td>
-                <td></td>
                 <td></td>
             </tr>
             <tr>
@@ -214,13 +228,11 @@
                 <td>Tilavuus</td>
                 <td>5 ml</td>
                 <td></td>
-                <td></td>
             </tr>
             <tr>
                 <td></td>
                 <td>K‰ytett‰v‰ ennen</td>
                 <td>klo 12.38</td>
-                <td></td>
                 <td></td>
             </tr>
             <tr>
@@ -228,13 +240,11 @@
                 <td>Huomautuksia</td>
                 <td colspan="3"></td>
                 <td></td>
-                <td></td>
             </tr>
             <tr>
                 <td></td>
                 <td>Nimikirjaimet</td>
                 <td>TT</td>
-                <td></td>
                 <td></td>
             </tr>
 		</table>
@@ -245,27 +255,23 @@
                 <td class="reportName">Myoview</td>
                 <td class="batch">er‰ 15611654</td>
                 <td class="before">k‰yt. ennen 5.4.2012</td>
-                <td></td>
             </tr>
             <tr>
                 <td></td>
                 <td>Myoview</td>
                 <td>er‰ 15611654</td>
                 <td>k‰yt. ennen 5.4.2012</td>
-                <td></td>
             </tr>
             <tr>
                 <td></td>
                 <td>NaCl 100 ml</td>
                 <td>er‰ OIUHTTK</td>
                 <td>k‰yt. ennen 5.7.2012</td>
-                <td>10 ml</td>
             </tr>
             <tr>
                 <td></td>
                 <td>Aktiivisuus</td>
                 <td>4,23 GBq</td>
-                <td></td>
                 <td></td>
             </tr>
             <tr>
@@ -273,13 +279,11 @@
                 <td>Tilavuus</td>
                 <td>12 ml</td>
                 <td></td>
-                <td></td>
             </tr>
             <tr>
                 <td></td>
                 <td>K‰ytett‰v‰ ennen</td>
                 <td>klo 12.45</td>
-                <td></td>
                 <td></td>
             </tr>
             <tr>
@@ -287,13 +291,11 @@
                 <td>Huomautuksia</td>
                 <td colspan="3"></td>
                 <td></td>
-                <td></td>
             </tr>
             <tr>
                 <td></td>
                 <td>Nimikirjaimet</td>
                 <td>MM</td>
-                <td></td>
                 <td></td>
             </tr>
 		</table>

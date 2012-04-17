@@ -26,10 +26,28 @@ public class BatchFormObject {
     @NotNull(message = "Vanhenemispäivä ei saa olla tyhjä")
     private String expDate;
     private String note;
-    private int storageLocationsCount = 10;
+    private int storageLocationsCount = 100;
     private Long[][] storageLocations = new Long[storageLocationsCount][2];
     @NotNull(message = "Nimi ei saa olla tyhjä")
     private String signature;
+    private int qualityCheck;
+    private double activity;
+
+    public double getActivity() {
+        return activity;
+    }
+
+    public void setActivity(double activity) {
+        this.activity = activity;
+    }
+
+    public int getQualityCheck() {
+        return qualityCheck;
+    }
+
+    public void setQualityCheck(int qualityCheck) {
+        this.qualityCheck = qualityCheck;
+    }
 
     public Long[][] getStorageLocations() {
         return storageLocations;

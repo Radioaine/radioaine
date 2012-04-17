@@ -63,7 +63,7 @@ public class JPAEventDBDAO implements EventDBDao {
     
     @Override
     public List<Event> listRemoved(Timestamp start, Timestamp end) {
-        Query q = entityManager.createQuery("SELECT e FROM Event e WHERE e.info LIKE '%type=removed%' AND (e.arrivalDate between '"+start+"' AND '"+end+"')");
+        Query q = entityManager.createQuery("SELECT e FROM Event e WHERE e.info LIKE '%type=removed%' AND (e.timestamp between '"+start+"' AND '"+end+"')");
         return q.getResultList();
     }
     

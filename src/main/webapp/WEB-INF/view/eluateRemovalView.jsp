@@ -5,17 +5,18 @@
 <%@include file="headerfront.jsp" %>
 
 <div id="contents">
-    <h2>${eluate.generators[0].substance.eluateName}</h2>
-    <br>
+    <h2>Eluaatin ${eluate.id} tiedot</h2>
+    
     <table class="noborder">
         <tr>
             <td class="name">Käytetyt aineet</td>
             <td>
+                <br />
                 <c:forEach var="generator" items="${eluate.generators}">
                     <a href="${pageContext.servletContext.contextPath}/substance/${generator.substance.id}">${generator.substance.name}</a>, 
                     <a href="${pageContext.servletContext.contextPath}/batch/${generator.id}">Erä ${generator.batchNumber}</a><br />
                 </c:forEach>
-
+                    
                 <c:forEach var="other" items="${eluate.others}">
                     <a href="${pageContext.servletContext.contextPath}/substance/${other.substance.id}">${other.substance.name}</a>, 
                     <a href="${pageContext.servletContext.contextPath}/batch/${other.id}">Erä ${other.batchNumber}</a><br />
@@ -64,25 +65,24 @@
 
     </table>
     <br />
-
-    <table class="noborder">
-        <tr>
-            <td class="editButton">
-                <form action="${pageContext.servletContext.contextPath}/modifyEluate/${eluate.id}" method="GET">  
-                    <input type="submit" value="Muokkaa" />
-                </form>
-            </td>
-            <td>
-                <input type="button" value="Palaa" onClick="parent.location = '${pageContext.servletContext.contextPath}/frontpage'" />
-            </td>
-            <td>
-                <form action="${pageContext.servletContext.contextPath}/removeEluateRequest/${eluate.id}" method="GET">  
-                    <input type="submit" value="Poista" />
-                </form>
-            </td>
-        </tr>
-    </table>
-
+    <form action="${pageContext.servletContext.contextPath}/removeEluate/${eluate.id}" method="POST">
+        <table class="noborder">
+       
+            <tr>
+                <td>Poiston syy</td>
+                <td><input required="required" type="text" name="reason" /></td>
+            </tr>    
+            <tr>
+                <td colspan="2">&nbsp;</td>
+            </tr>     
+            <tr>
+                <td>Nimikirjaimet</td>
+                <td><input required="required" type="text" size="6" name="remover" /></td>
+            </tr>
+        </table><br/>
+        <input type="submit" value="Poista" /> &nbsp; &nbsp;<input type="button" value="Peruuta" onClick="parent.location = '${pageContext.servletContext.contextPath}/eluate/${eluate.id}'" />
+    </form>
+            
 </div>
 
 

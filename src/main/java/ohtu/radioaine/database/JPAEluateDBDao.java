@@ -4,6 +4,7 @@
  */
 package ohtu.radioaine.database;
 
+import java.sql.Timestamp;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -17,10 +18,10 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public class JPAEluateDBDao implements EluateDBDao {
-    
+
     @PersistenceContext
     EntityManager entityManager;
-    
+
     @Override
     public Eluate createOrUpdate(Eluate instance) {
         return entityManager.merge(instance);
@@ -46,5 +47,10 @@ public class JPAEluateDBDao implements EluateDBDao {
         Query q = entityManager.createQuery("SELECT e FROM Eluate e");
         return q.getResultList();
     }
-    
+
+    @Override
+    public List<Eluate> getAllByDate(Timestamp timestamp) {
+        Query q = entityManager.createQuery("SELECT e FROM Eluate e WHERE e.date >'" + timestamp + "'");
+        return q.getResultList();
+    }
 }

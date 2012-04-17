@@ -31,6 +31,7 @@ public class Eluate implements Serializable {
     private String note;
     @Column
     private Long storageLocation;
+    private String name;
     @OneToMany
     @JoinColumn(name = "ELUATE_GENERATORS")
     private List<Batch> generators;
@@ -153,8 +154,12 @@ public class Eluate implements Serializable {
         this.unit = unit;
     }
     
+    public void setName(){
+        this.name = generators.get(0).getSubstance().getName();
+    }
+    
     public String getName(){
-        return generators.get(0).getSubstance().getName();
+        return name;
     }
     
 }

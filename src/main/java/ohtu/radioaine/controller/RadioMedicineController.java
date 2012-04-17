@@ -72,16 +72,14 @@ public class RadioMedicineController {
     } 
 
     @RequestMapping(value = "createRadioMedicine", method = RequestMethod.POST)
-    public String newRadioMedicineCTRL(@Valid @ModelAttribute("radioMedicine") RadioMedicineFormObject rmfo, BindingResult result, @RequestParam("storageIds") int[] storageIds) {
-        for(int i=0; i < storageIds.length; i++)    {
-            System.out.println("storage id " + (i+1) + ": " + storageIds[i]);
-        }
+    public String newRadioMedicineCTRL(@Valid @ModelAttribute("radioMedicine") RadioMedicineFormObject rmfo, BindingResult result) {
+        
         if (result.hasErrors()) {
 //            System.out.println(result);
             return "createRadioMedicine";
         }
 
-        RadioMedicine newRadioMedicine = radioMedService.createOrUpdate(createRD(rmfo, storageIds));
+        RadioMedicine newRadioMedicine = radioMedService.createOrUpdate(createRD(rmfo));
         return "redirect:/frontpage";
     }
 
@@ -109,7 +107,7 @@ public class RadioMedicineController {
         return "redirect:/frontpage";
     }
 
-    private RadioMedicine createRD(RadioMedicineFormObject rmfo, int[] storageIds) {
+    private RadioMedicine createRD(RadioMedicineFormObject rmfo) {
         RadioMedicine radioMedicine = new RadioMedicine();
 
         radioMedicine.setNote(rmfo.getNote());
@@ -131,38 +129,19 @@ public class RadioMedicineController {
         List<Eluate> eluates = new ArrayList<Eluate>();
         Long[] eluatesTable = rmfo.getEluates();
         for (int i = 0; i < eluatesTable.length; ++i) {
+            System.out.println(eluatesTable[i]);
             if (eluatesTable[i] != null) {
                 eluates.add(eluateService.read(eluatesTable[i]));
             }
         }
-
         List<Batch> kits = new ArrayList<Batch>();
         Long[] kitsTable = rmfo.getKits();
         for (int i = 0; i < kitsTable.length; ++i) {
-//            System.out.println("kitti indexi: " + i + " kittiTable koko: " + kitsTable.length +" storageIds koko: " + storageIds.length + " storage sisÃ¤ltÃ¶: " + storageIds[i]);
-            //TÃ¤ssÃ¤ bugia kun valitaan samaa kittiÃ¤ useampi, koska tÃ¤llÃ¶in storageIds taulukko ei kasva jolloin kitsTable on eri kokoinen kuin storageIds ja tÃ¤mÃ¤n takia tulee nullPointeria...
+            System.out.println(kitsTable[i]);
             if (kitsTable[i] != null) {
-//                kitsTable[i] = kitsTable[i] - storageIds[i];
-                kits.add(batchService.read(kitsTable[i]));
-//                for(int j=0; j < batchService.read(kitsTable[i]).getStorageLocations().length; j++) {
-//                    if(batchService.read(kitsTable[i]).getStorageLocations()[j][0] != null)    {
-//                        if(batchService.read(kitsTable[i]).getStorageLocations()[j][0] == storageIds[i])    { //ykkÃ¶sen tilalle tarttisi saada vÃ¤hennettÃ¤vÃ¤n storagenId!!!!!!!!
-//                            System.out.println("TÃ„MÃ„HÃ„N SE");
-//                            Batch temp = batchService.read(kitsTable[i]);
-//                            Long[][] tempi = temp.getStorageLocations();
-//                            tempi[j][1] = tempi[j][1] - 1;
-//                            temp.setStorageLocations(tempi);
-//                            temp.setAmount(temp.getAmount() - 1);
-//                            batchService.createOrUpdate(temp);
-//                            Substance substanceTemp = temp.getSubstance();
-//                            substanceTemp.setTotalAmount(substanceTemp.getTotalAmount() - 1);
-//                            substanceService.createOrUpdate(substanceTemp);
-//                        }        
-//                    }
-//                }
+                kits.add(batchService.read(kitsTable[i]));      
             }
         }
-
         List<Batch> others = new ArrayList<Batch>();
         Long[] othersTable = rmfo.getOthers();
         for (int i = 0; i < othersTable.length; ++i) {
@@ -170,11 +149,10 @@ public class RadioMedicineController {
                 others.add(batchService.read(othersTable[i]));
             }
         }
-
+        radioMedicine.setKits(kits);
         radioMedicine.setEluates(eluates);
         radioMedicine.setOthers(others);
-        radioMedicine.setKits(kits);
-
+        
         return radioMedicine;
     }
     

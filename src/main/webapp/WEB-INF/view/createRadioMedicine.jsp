@@ -34,13 +34,14 @@
                 <td>
                     <select multiple="multiple" class="list" >
                         <c:forEach var="eluate" items="${eluates}">
-                            <option id="3" onclick="eluateAmounts(event)" value="${eluate.id}">Klo <fmt:formatDate value="${eluate.date}" pattern="hh.mm"/>, ${eluate.name}, Aktiivisuus ${eluate.strength}, Sijainti 
+                            <option id="3" onclick="eluateAmounts(event)" value="${eluate.id}">Klo <fmt:formatDate value="${eluate.date}" pattern="HH.mm"/> ${eluate.generators[0].substance.eluateName}, Aktiivisuus ${eluate.strength}, Sijainti 
                                 <c:forEach var="storage" items="${storages}">
                                     <c:if test="${storage.id == eluate.storageLocation}">
-                                        ${storage.name}
+                                        ${storage.name},
                                     </c:if>
                                 </c:forEach>
-                            , Tekijä ${eluate.signature}</option>
+                                Tekijä ${eluate.signature}
+                            </option>
                         </c:forEach>
                     </select>
                 </td>

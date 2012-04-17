@@ -18,7 +18,7 @@
 </script>
 
 <div id="contents">
-    <h2>Radiol‰‰kkeen ${radioMedicine.id} muokkaus</h2>
+    <h2>Radiol‰‰ke ${radioMedicine.kits[0].substance.name}, muokkaus</h2>
     <br/>
     <form:form commandName="radioMedicineForm" action="${pageContext.servletContext.contextPath}/modifyRadioMed/${radioMedicine.id}" method="POST">
 
@@ -27,7 +27,7 @@
                 <td>Valitut</td>
                 <td class="infotext" colspan="3">
                     <c:forEach var="eluate" items="${radioMedicine.eluates}">
-                        Klo <fmt:formatDate value="${eluate.date}" pattern="hh.mm"/> ${eluate.getName()}, Er‰ ${eluate.generators.get(0).batchNumber}, Aktiivisuus ${eluate.strength}, Sijainti:
+                        Klo <fmt:formatDate value="${eluate.date}" pattern="HH.mm"/> ${eluate.generators[0].substance.eluateName}, Er‰ ${eluate.generators.get(0).batchNumber}, Aktiivisuus ${eluate.strength}, Sijainti:
                         <c:forEach var="storage" items="${storages}">
                             <c:if test="${storage.id == eluate.storageLocation}">
                                 ${storage.name},

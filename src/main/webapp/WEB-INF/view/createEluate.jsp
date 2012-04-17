@@ -87,21 +87,20 @@
             <tr>
                 <td>Aktiivisuus</td>
                 <td><input pattern="^[0-9]{1,4}([,.][0-9]{1,4})?$" name="strength" type="text" size="5"/>
-
                     <form:select path="unit">
-                <option value="0">GBq</option>
-                <option value="1">MBq</option>
-            </form:select>
+                        <option value="0">GBq</option>
+                        <option value="1">MBq</option>
+                    </form:select>
 
             </td>
             </tr>
             <tr>
                 <td>Tilavuus</td>
-                <td><form:select path="volume" type="text" class="am">
-                        <form:option value="5"/>
-                        <form:option value="10"/>
-                        <form:option value="11"/>
-                    </form:select><form:errors path="volume"/> &nbsp;ml
+                <td id="volPlace"><select id="vol" name="volume" class="am">
+                        <option value="5">5</option>
+                        <option value="10">10</option>
+                        <option value="11">11</option>
+                    </select> &nbsp;ml
                 </td>
             </tr>
             <tr>

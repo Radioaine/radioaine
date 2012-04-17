@@ -17,19 +17,13 @@ public class Eluate implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(nullable = false)
     private Long id;
-    @Column
     private double strength;
-    @Column
     private int unit;
-    @Column
     private double volume;
-    @Column
     private Timestamp date;
-    @Column
     private String signature;
-    @Column
     private String note;
-    @Column
+    private String name;
     private Long storageLocation;
     @OneToMany
     @JoinColumn(name = "ELUATE_GENERATORS")
@@ -153,8 +147,12 @@ public class Eluate implements Serializable {
         this.unit = unit;
     }
     
+    public void setName(){
+        this.name = generators.get(0).getSubstance().getName();
+    }
+    
     public String getName(){
-        return generators.get(0).getSubstance().getName();
+        return name;
     }
     
 }

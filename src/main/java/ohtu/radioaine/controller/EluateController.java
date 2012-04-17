@@ -109,6 +109,7 @@ public class EluateController {
         }
         eluate.setGenerators(generators);
         eluate.setOthers(others);
+        eluate.setName();
         return eluate;
     }
     

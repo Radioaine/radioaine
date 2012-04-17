@@ -24,12 +24,7 @@
 
         <table class="noborder">
             <tr>
-                <td colspan="3">&nbsp; </td>
-            </tr>
-                        <tr>
-                <td rowspan="4" >Valitut</td>
-            </tr>
-            <tr>
+                <td>Valitut</td>
                 <td class="infotext" colspan="3">
                     <c:forEach var="eluate" items="${radioMedicine.eluates}">
                         Klo <fmt:formatDate value="${eluate.date}" pattern="hh.mm"/> ${eluate.getName()}, Erä ${eluate.generators.get(0).batchNumber}, Aktiivisuus ${eluate.strength}, Sijainti:
@@ -72,7 +67,7 @@
                 </td>
             </tr>
             <tr>
-                <td colspan="3">&nbsp; </td>
+                <td colspan="4">&nbsp; </td>
             </tr>
             <tr style="display: none;">
                 <td class="infotext" id="selected" colspan="3">
@@ -85,16 +80,13 @@
                     <c:forEach var="oth" items="${radioMedicine.others}">
                         <script> generateDivs("${oth.substance.name}, Erä ${oth.batchNumber}, Käyt. ennen <fmt:formatDate value="${oth.expDate}" pattern="dd.MM.yyyy"/>, TODO Sijainti", ${oth.id}, 4);</script>
                     </c:forEach>
-            </td>
-            </tr>
-            
-            <tr>
-                <td colspan="4">&nbsp; </td>
+                </td>
             </tr>
             <tr>
                 <th></th>
                 <th class="new">Päivitetty</th>
-                <th class="new" colspan="2">Aiempi</th>
+                <th>Aiempi</th>
+                <th></th>
             </tr>
             <tr>
                 <td></td>

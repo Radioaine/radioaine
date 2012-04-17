@@ -34,7 +34,7 @@
                 <td>
                     <select multiple="multiple" class="list" >
                         <c:forEach var="eluate" items="${eluates}">
-                            <option id="3" onclick="eluateAmounts(event)" value="${eluate.id}">Klo <fmt:formatDate value="${eluate.date}" pattern="hh.mm"/>, ${eluate.name}, Aktiivisuus ${eluate.strength}, Sijainti: 
+                            <option id="3" onclick="eluateAmounts(event)" value="${eluate.id}">Klo <fmt:formatDate value="${eluate.date}" pattern="hh.mm"/>, ${eluate.name}, Aktiivisuus ${eluate.strength}, Sijainti 
                                 <c:forEach var="storage" items="${storages}">
                                     <c:if test="${storage.id == eluate.storageLocation}">
                                         ${storage.name}
@@ -55,7 +55,7 @@
                                         <c:forEach var="storage" items="${storages}" varStatus="i">
                                             <c:if test="${storage.id == location[0]}">
                                                 <option id="1" onclick="eluateAmounts(event, ${kit.amount})" value="${(kit.id+storage.id)}">${kit.substance.name}, Erä 
-                                                    ${kit.batchNumber}, Käyt. ennen <fmt:formatDate value="${kit.expDate}" pattern="dd.MM.yyyy"/>, Sijainti: ${storage.name}
+                                                    ${kit.batchNumber}, Käyt. ennen <fmt:formatDate value="${kit.expDate}" pattern="dd.MM.yyyy"/>, Sijainti ${storage.name}
                                                 </option>
                                             </c:if>
                                         </c:forEach>
@@ -89,7 +89,7 @@
                                 <c:if test="${location[1] != null}">
                                     <c:if test="${location[1] > 0}">
                                         <option id="2" onclick="eluateAmounts(event)" value="${other.id}">${other.substance.name},
-                                            ${other.batchNumber}, <fmt:formatDate value="${other.expDate}" pattern="dd.MM.yyyy"/>, Sijainti: 
+                                            ${other.batchNumber}, Käyt. ennen <fmt:formatDate value="${other.expDate}" pattern="dd.MM.yyyy"/>, Sijainti 
                                             <c:forEach var="storage" items="${storages}">
                                                 <c:if test="${storage.id == location[0]}">
                                                     ${storage.name}

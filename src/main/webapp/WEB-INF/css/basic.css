@@ -61,7 +61,7 @@ table.eluate {background-color: #FFF;}
 
 .infotext {font-size: 90%;}
 
-select.list {width: 800px;}
+select.list {width: 1200px;}
 
 table.listing {
     border: 0px;
@@ -117,7 +117,7 @@ td.noborder, th.noborder {border: none;}
 
 .signature {width: 60px;}
 
-.substance {width: 260px;}
+.substance {width: 340px;}
 
 select.substance {width: 250px;}
 

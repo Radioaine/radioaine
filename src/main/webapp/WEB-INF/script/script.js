@@ -31,18 +31,24 @@ function qualityResults(){
     $("#qualityCheck").html("<form action=\"doCheck\"><select name=\"qualityCheck\"><option value=\"1\">Hyväksytty</option><option value=\"2\">Hylätty</option></select>");
 }
 
-function eluateAmounts(e, batchAmount){
+function eluateAmounts(e, batchAmount, storageId){
     var temp = $('<div>').attr("id", "selection"+selectionCounter );
     var newHTML = "";
     if(e.target.id == "0"){
         newHTML = "<button type=\"button\" onclick=\"removeSelection(event)\">Poista</button> &nbsp;"+e.target.innerHTML+"<input type=\"hidden\" name=\"generators\" value=\""+e.target.value+"\"\>";
     }
     else if(e.target.id == "1"){
-        //document.getElementById("storage"+e.target.value).selected = true;
         if(!countCheck(batchAmount, e.target.value)){
             return;
         }
-        newHTML = "<button type=\"button\" onclick=\"removeSelection(event)\">Poista</button> &nbsp;"+e.target.innerHTML+"<input class=\"kitCount\" type=\"hidden\" name=\"kits\" value=\""+e.target.value+"\"\>";
+        var tempOption = $('<option>').attr({
+                            value: storageId,
+                            label: "jee"+e.target.value,
+                            id: "storageId"+e.target.value,
+                            selected: "selected"
+        });
+        $("#storageIds").append(tempOption);
+        newHTML = "<button type=\"button\" onclick=\"removeSelection(event,"+e.target.value+")\">Poista</button> &nbsp;"+e.target.innerHTML+"<input class=\"kitCount\" type=\"hidden\" name=\"kits\" value=\""+e.target.value+"\"\>";
     }
     else if(e.target.id == "3"){
         newHTML = "<button type=\"button\" onclick=\"removeSelection(event)\">Poista</button> &nbsp;"+e.target.innerHTML+"<input type=\"hidden\" name=\"eluates\" value=\""+e.target.value+"\"\>";
@@ -84,11 +90,12 @@ function generateDivs(name, value, type){
     $("#selected").append(temp);
 }
 
-function removeSelection(e){
+function removeSelection(e, value){
     console.log(e.target.parentNode);
-    //document.getElementById("storage"+e.target.parentNode.lastChild.value).selected = false;
-    console.log(e.target.parentNode.lastChild.value);
-    //document.getElementById("storage"+e.target.value).selected = false;
+    if(value!=null) {
+        var temp = document.getElementById("storageId"+value);
+        temp.parentNode.removeChild(temp);
+    }
     $(e.target.parentNode).remove();
     selectionCounter--;
 }

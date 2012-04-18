@@ -67,12 +67,10 @@
                             </c:forEach>
                         </c:forEach>
                     </select>
-<<<<<<< HEAD
                 <td/>
-=======
                     <select style="display: none;" multiple="multiple" name="storageIds" id="storageIds"></select>
                 </td>
->>>>>>> master
+
             </tr>
             <tr>
                 <td>Muu</td>

@@ -72,14 +72,14 @@ public class RadioMedicineController {
     } 
 
     @RequestMapping(value = "createRadioMedicine", method = RequestMethod.POST)
-    public String newRadioMedicineCTRL(@Valid @ModelAttribute("radioMedicine") RadioMedicineFormObject rmfo, BindingResult result) {
+    public String newRadioMedicineCTRL(@Valid @ModelAttribute("radioMedicine") RadioMedicineFormObject rmfo, BindingResult result, @RequestParam("storageIds") int[] storageIds) {
         
         if (result.hasErrors()) {
 //            System.out.println(result);
             return "createRadioMedicine";
         }
 
-        RadioMedicine newRadioMedicine = radioMedService.createOrUpdate(createRD(rmfo));
+        RadioMedicine newRadioMedicine = radioMedService.createOrUpdate(createRD(rmfo, storageIds));
         return "redirect:/frontpage";
     }
 
@@ -107,7 +107,7 @@ public class RadioMedicineController {
         return "redirect:/frontpage";
     }
 
-    private RadioMedicine createRD(RadioMedicineFormObject rmfo) {
+    private RadioMedicine createRD(RadioMedicineFormObject rmfo, int [] storageIds) {
         RadioMedicine radioMedicine = new RadioMedicine();
 
         radioMedicine.setNote(rmfo.getNote());

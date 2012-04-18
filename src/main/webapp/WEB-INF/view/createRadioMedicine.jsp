@@ -34,13 +34,14 @@
                 <td>
                     <select multiple="multiple" class="list" >
                         <c:forEach var="eluate" items="${eluates}">
-                            <option id="3" onclick="eluateAmounts(event)" value="${eluate.id}">Klo <fmt:formatDate value="${eluate.date}" pattern="hh.mm"/>, ${eluate.name}, Aktiivisuus ${eluate.strength}, Sijainti: 
+                            <option id="3" onclick="eluateAmounts(event)" value="${eluate.id}">Klo <fmt:formatDate value="${eluate.date}" pattern="HH.mm"/> ${eluate.generators[0].substance.eluateName}, Aktiivisuus ${eluate.strength}, Sijainti 
                                 <c:forEach var="storage" items="${storages}">
                                     <c:if test="${storage.id == eluate.storageLocation}">
-                                        ${storage.name}
+                                        ${storage.name},
                                     </c:if>
                                 </c:forEach>
-                            , Tekijä ${eluate.signature}</option>
+                                Tekijä ${eluate.signature}
+                            </option>
                         </c:forEach>
                     </select>
                 </td>
@@ -89,7 +90,7 @@
                                 <c:if test="${location[1] != null}">
                                     <c:if test="${location[1] > 0}">
                                         <option id="2" onclick="eluateAmounts(event)" value="${other.id}">${other.substance.name},
-                                            ${other.batchNumber}, <fmt:formatDate value="${other.expDate}" pattern="dd.MM.yyyy"/>, Sijainti: 
+                                            ${other.batchNumber}, Käyt. ennen <fmt:formatDate value="${other.expDate}" pattern="dd.MM.yyyy"/>, Sijainti 
                                             <c:forEach var="storage" items="${storages}">
                                                 <c:if test="${storage.id == location[0]}">
                                                     ${storage.name}

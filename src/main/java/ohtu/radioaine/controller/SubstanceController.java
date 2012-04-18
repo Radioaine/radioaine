@@ -1,6 +1,8 @@
 package ohtu.radioaine.controller;
 
+import java.util.List;
 import javax.validation.Valid;
+import ohtu.radioaine.domain.Batch;
 import ohtu.radioaine.domain.Substance;
 import ohtu.radioaine.domain.SubstanceFormObject;
 import ohtu.radioaine.service.BatchService;
@@ -67,6 +69,7 @@ public class SubstanceController {
         substance.setVolume(sfo.getVolume());
         substance.setQualityControl(sfo.getQualityControl());
         substance.setStrength(Double.parseDouble(sfo.getStrength()));
+        substance.setInUse(true);
         if (sfo.getType() == 1) {
             substance.setHalflife(sfo.getHalflife());
             substance.setEluateName(sfo.getEluateName());
@@ -115,6 +118,35 @@ public class SubstanceController {
     public String updateSubstanceViewCTRL(Model model, @PathVariable Long id) {
         System.out.println(id);
         model.addAttribute("substance", substanceService.read(id));
+        model.addAttribute("substanceInUse", checkIfSubstancesInUse(id));
         return "substanceUpdateView";
+    }
+    
+    @RequestMapping(value = "deactivateSubstance/{id}", method = RequestMethod.POST)
+    public String deactivateSubstanceCTRL(@PathVariable Long id, Model model) {
+        Substance sub = (Substance) substanceService.read(id);
+        sub.setInUse(false);
+        substanceService.createOrUpdate(sub);
+        
+        return "redirect:/updateSubstance/"+id;
+    }
+    
+    @RequestMapping(value = "activateSubstance/{id}", method = RequestMethod.POST)
+    public String activateSubstanceCTRL(@PathVariable Long id, Model model) {
+        Substance sub = (Substance) substanceService.read(id);
+        sub.setInUse(true);
+        substanceService.createOrUpdate(sub);
+        
+        return "redirect:/updateSubstance/"+id;
+    }
+    
+    private boolean checkIfSubstancesInUse(Long id)    {
+        boolean isInUse = false;
+        List<Batch> temp = batchService.listSubstanceBatches(id);
+        for(int i=0; i < temp.size(); i++) {
+            if(temp.get(i).getAmount() > 0)
+                isInUse = true;
+        }
+        return isInUse;
     }
 }

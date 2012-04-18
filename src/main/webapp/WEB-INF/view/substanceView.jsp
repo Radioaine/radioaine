@@ -21,7 +21,7 @@
     <table class="noborder">
         
         <c:forEach var="substance" items="${substances}">
-            <c:if test="${substance.type == '0'}">
+            <c:if test="${substance.type == '0' && substance.inUse == true}">
                 <tr>
                     <td>
                         <a href="<c:out value="${pageContext.servletContext.contextPath}" />/updateSubstance/${substance.id}">${substance.name}</a>
@@ -46,7 +46,7 @@
 
     <table class="noborder">
         <c:forEach var="substance" items="${substances}">
-            <c:if test="${substance.type == '1'}">
+            <c:if test="${substance.type == '1' && substance.inUse == true}">
                 <tr>
                     <td>
                         <a href="<c:out value="${pageContext.servletContext.contextPath}" />/updateSubstance/${substance.id}">${substance.name}</a>
@@ -70,7 +70,50 @@
     
     <table class="noborder">
         <c:forEach var="substance" items="${substances}">
-            <c:if test="${substance.type == '2'}">
+            <c:if test="${substance.type == '2' && substance.inUse == true}">
+                <tr>
+                    <td>
+                        <a href="<c:out value="${pageContext.servletContext.contextPath}" />/updateSubstance/${substance.id}">${substance.name}</a>
+                    </td>
+                </tr>
+            </c:if>
+        </c:forEach>
+    </table>
+    
+    <br />
+    <table class="noborder">
+        <tr>
+            <td class="substanceHeader">Käytöstä poistetut&nbsp; &nbsp;</td>
+        </tr>
+    </table> 
+                    
+    <table class="noborder">
+        <c:forEach var="substance" items="${substances}">
+            <c:if test="${substance.type == '0' && substance.inUse == false}">
+                <tr>
+                    <td>
+                        <a href="<c:out value="${pageContext.servletContext.contextPath}" />/updateSubstance/${substance.id}">${substance.name}</a>
+                    </td>
+                </tr>
+            </c:if>
+        </c:forEach>
+    </table>
+                    
+    <table class="noborder">
+        <c:forEach var="substance" items="${substances}">
+            <c:if test="${substance.type == '1' && substance.inUse == false}">
+                <tr>
+                    <td>
+                        <a href="<c:out value="${pageContext.servletContext.contextPath}" />/updateSubstance/${substance.id}">${substance.name}</a>
+                    </td>
+                </tr>
+            </c:if>
+        </c:forEach>
+    </table>
+                    
+    <table class="noborder">
+        <c:forEach var="substance" items="${substances}">
+            <c:if test="${substance.type == '2' && substance.inUse == false}">
                 <tr>
                     <td>
                         <a href="<c:out value="${pageContext.servletContext.contextPath}" />/updateSubstance/${substance.id}">${substance.name}</a>

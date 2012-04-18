@@ -39,6 +39,7 @@ public class Substance implements Serializable {
     private String[] statusMessages = new String[3];
     private int qualityStatus;
     private int qualityControl;
+    private boolean inUse;
 
     public Timestamp getWarningDate() {
         return warningDate;
@@ -224,4 +225,13 @@ public class Substance implements Serializable {
     public void setQualityControl(int qualityControl) {
         this.qualityControl = qualityControl;
     }
+
+    public boolean isInUse() {
+        return inUse;
+    }
+
+    public void setInUse(boolean inUse) {
+        this.inUse = inUse;
+    }
+    
 }

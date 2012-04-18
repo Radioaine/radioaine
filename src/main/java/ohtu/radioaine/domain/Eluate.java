@@ -25,7 +25,6 @@ public class Eluate implements Serializable {
     private String note;
     private String name;
     private Long storageLocation;
-    private String name;
     @OneToMany
     @JoinColumn(name = "ELUATE_GENERATORS")
     private List<Batch> generators;

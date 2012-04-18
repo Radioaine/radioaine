@@ -38,7 +38,7 @@ function eluateAmounts(e, batchAmount){
         newHTML = "<button type=\"button\" onclick=\"removeSelection(event)\">Poista</button> &nbsp;"+e.target.innerHTML+"<input type=\"hidden\" name=\"generators\" value=\""+e.target.value+"\"\>";
     }
     else if(e.target.id == "1"){
-        document.getElementById("storage"+e.target.value).selected = true;
+        //document.getElementById("storage"+e.target.value).selected = true;
         if(!countCheck(batchAmount, e.target.value)){
             return;
         }
@@ -86,7 +86,7 @@ function generateDivs(name, value, type){
 
 function removeSelection(e){
     console.log(e.target.parentNode);
-    document.getElementById("storage"+e.target.parentNode.lastChild.value).selected = false;
+    //document.getElementById("storage"+e.target.parentNode.lastChild.value).selected = false;
     console.log(e.target.parentNode.lastChild.value);
     //document.getElementById("storage"+e.target.value).selected = false;
     $(e.target.parentNode).remove();

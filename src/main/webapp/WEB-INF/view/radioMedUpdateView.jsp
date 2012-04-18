@@ -18,7 +18,7 @@
 </script>
 
 <div id="contents">
-    <h2>Radiol‰‰ke ${radioMedicine.kits[0].substance.name}, muokkaus</h2>
+    <h2>Radiol‰‰kkeen ${radioMedicine.kits[0].substance.name} muokkaus</h2>
     <br/>
     <form:form commandName="radioMedicineForm" action="${pageContext.servletContext.contextPath}/modifyRadioMed/${radioMedicine.id}" method="POST">
 
@@ -27,7 +27,7 @@
                 <td>Valitut</td>
                 <td class="infotext" colspan="3">
                     <c:forEach var="eluate" items="${radioMedicine.eluates}">
-                        Klo <fmt:formatDate value="${eluate.date}" pattern="HH.mm"/> ${eluate.generators[0].substance.eluateName}, Er‰ ${eluate.generators.get(0).batchNumber}, Aktiivisuus ${eluate.strength}, Sijainti:
+                        Klo <fmt:formatDate value="${eluate.date}" pattern="HH.mm"/> ${eluate.generators[0].substance.eluateName}, Er‰ ${eluate.generators.get(0).batchNumber}, Aktiivisuus ${eluate.strength}, Sijainti
                         <c:forEach var="storage" items="${storages}">
                             <c:if test="${storage.id == eluate.storageLocation}">
                                 ${storage.name},
@@ -35,7 +35,7 @@
                         </c:forEach>Tekij‰ ${eluate.signature}<br/>
                     </c:forEach>
                     <c:forEach var="kit" items="${radioMedicine.kits}">
-                        ${kit.substance.name}, Er‰ ${kit.batchNumber}, K‰yt. ennen <fmt:formatDate value="${kit.expDate}" pattern="dd.MM.yyyy"/>, Sijainti:
+                        ${kit.substance.name}, Er‰ ${kit.batchNumber}, K‰yt. ennen <fmt:formatDate value="${kit.expDate}" pattern="dd.MM.yyyy"/>, Sijainti
                         <c:forEach var="location" items="${kit.storageLocations}">
                             <c:if test="${location[1] != null}">
                                 <c:if test="${location[1] > 0}">
@@ -50,7 +50,7 @@
                         <br/>
                     </c:forEach>
                     <c:forEach var="oth" items="${radioMedicine.others}">
-                        ${oth.substance.name}, Er‰ ${oth.batchNumber}, K‰yt. ennen <fmt:formatDate value="${oth.expDate}" pattern="dd.MM.yyyy"/>, Sijainti:
+                        ${oth.substance.name}, Er‰ ${oth.batchNumber}, K‰yt. ennen <fmt:formatDate value="${oth.expDate}" pattern="dd.MM.yyyy"/>, Sijainti
                         <c:forEach var="location" items="${oth.storageLocations}">
                             <c:if test="${location[1] != null}">
                                 <c:if test="${location[1] > 0}">
@@ -92,7 +92,7 @@
                 <td></td>
                 <td class="infotext">Klo<span id="pvm">Pvm</span></td>
                 <td class="infotext">Klo<span id="pvm"> &nbsp; &nbsp;Pvm</span></td>
-                <td></td>
+                <td class="new"></td>
             </tr>
             <tr>
                 <td>Luontiaika</td>

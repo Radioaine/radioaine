@@ -5,7 +5,7 @@
 <%@include file="headerfront.jsp" %>
 
 <div id="contents">
-    <h2>${eluate.generators[0].substance.eluateName}</h2>
+    <h2>Eluaatti ${eluate.generators[0].substance.eluateName}</h2>
     <br/>
     <table class="noborder">
         <tr>

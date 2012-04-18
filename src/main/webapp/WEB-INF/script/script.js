@@ -86,7 +86,7 @@ function generateDivs(name, value, type){
 
 function removeSelection(e){
     console.log(e.target.parentNode);
-    document.getElementById("storage"+e.target.parentNode.lastChild.value).selected = false;
+    //document.getElementById("storage"+e.target.parentNode.lastChild.value).selected = false;
     console.log(e.target.parentNode.lastChild.value);
     //document.getElementById("storage"+e.target.value).selected = false;
     $(e.target.parentNode).remove();

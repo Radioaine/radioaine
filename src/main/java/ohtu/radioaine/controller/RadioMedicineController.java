@@ -40,7 +40,7 @@ public class RadioMedicineController {
         model.addAttribute("generators", batchService.getBatchesByType(GENERATOR));
         model.addAttribute("kits", batchService.getBatchesByType(KIT));
         model.addAttribute("others", batchService.getBatchesByType(OTHER));
-        model.addAttribute("eluates", eluateService.list());
+        model.addAttribute("eluates", eluateService.getAllByDate(Time.getTodayDate()));
         model.addAttribute("storages", storageService.list());
 
         return "createRadioMedicine";

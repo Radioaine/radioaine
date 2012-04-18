@@ -9,6 +9,7 @@
  */
 package ohtu.radioaine.controller;
 
+import java.sql.Timestamp;
 import java.util.List;
 import javax.validation.Valid;
 import ohtu.radioaine.domain.*;
@@ -45,6 +46,11 @@ public class BatchController {
     @Autowired
     private StorageService storageService;
 
+    /***************
+     * CONTROLLERS *
+     ***************/  
+     
+    
     @RequestMapping(value = "batch/{id}", method = RequestMethod.GET)
     public String getBatchByIdCTRL(@PathVariable Long id, Model model) {
         model.addAttribute("batch", batchService.read(id));
@@ -86,18 +92,7 @@ public class BatchController {
         return "addBatchView";
     }
 
-    private void addNames(Model model) {
-        String names = "'";
-        for (int i = 0; i < storageService.storageNamesList().size(); i++) {
-            if (!storageService.list().get(i).isHidden()) {
-                names += storageService.storageNamesList().get(i) + "^separate^";
-            } else {
-                names += "^hidden^^separate^";
-            }
-        }
-        names += "'";
-        model.addAttribute("storageNames", names);
-    }
+    
 
     @RequestMapping(value = "removeFromBatch/{id}", method = RequestMethod.GET)
     public String removeFromBatchViewCTRL(@PathVariable Long id, Model model) {
@@ -112,31 +107,7 @@ public class BatchController {
         return "redirect:/batch/" + id;
     }
 
-    private void removeItemsFromBatch(Long id, Integer[] amounts, String reason, String remover) {
-        Batch temp = batchService.read(id);
-        Substance substance = (Substance) substanceService.read(temp.getSubstance().getId());
-        Long[][] locs = temp.getStorageLocations();
-        int tempTotalAmount = 0;
-        int totalRemoved = 0;
-        for (int i = 0; i < amounts.length; ++i) {
-            if (amounts[i] != null && locs[i][1] != null) {
-                if (amounts[i] > 0 && locs[i][1] >= amounts[i]) {
-                    totalRemoved += amounts[i];
-                    locs[i][1] -= amounts[i];
-                }
-            }
-            if (locs[i][1] != null) {
-                tempTotalAmount += locs[i][1];
-            }
-        }
-        temp.setAmount(tempTotalAmount);
-        temp.setStorageLocations(locs);
-        substance.setTotalAmount(substance.getTotalAmount() - totalRemoved);
-        batchService.createOrUpdate(temp);
-        substanceService.createOrUpdate(substance);
-        Event event = EventHandler.removeFromBatchEvent(temp, remover, reason, totalRemoved);
-        eventService.createOrUpdate(event);
-    }
+    
 
     @RequestMapping(value = "batch", method = RequestMethod.POST)
     public String addBatchCTRL(@Valid @ModelAttribute("batch") BatchFormObject bfo, BindingResult result) {
@@ -148,18 +119,7 @@ public class BatchController {
         return "redirect:/batch/" + batch.getId();
     }
 
-    private Batch addBatchToDatabase(BatchFormObject bfo) {
-        Batch batch = createBatch(bfo);
-        Batch temp = batchService.read(batch.getBatchNumber(), bfo.getSubstance());
-        if (temp == null) {
-            batch = batchService.createOrUpdate(batch);
-            Event event = EventHandler.newBatchEvent(batch, bfo.getSignature());
-            eventService.createOrUpdate(event);
-        } else {
-            batch = addToBatch(temp.getId(), bfo);
-        }
-        return batch;
-    }
+   
 
     @RequestMapping(value = "updateBatch/{id}")
     public String batchUpdateRequestCTRL(Model model, @PathVariable Long id) {
@@ -196,11 +156,72 @@ public class BatchController {
         updateBatch(id, bfm);
         return "redirect:/batch/" + id;
     }
-
+    
+     private Batch addBatchToDatabase(BatchFormObject bfo) {
+        Batch batch = createBatch(bfo);
+        Batch temp = batchService.read(batch.getBatchNumber(), bfo.getSubstance());
+        if (temp == null) {
+            batch = batchService.createOrUpdate(batch);
+            Event event = EventHandler.newBatchEvent(batch, bfo.getSignature());
+            eventService.createOrUpdate(event);
+        } else {
+            batch = addToBatch(temp.getId(), bfo);
+        }
+        return batch;
+    }
+    
+    private void addNames(Model model) {
+        String names = "'";
+        for (int i = 0; i < storageService.storageNamesList().size(); i++) {
+            if (!storageService.list().get(i).isHidden()) {
+                names += storageService.storageNamesList().get(i) + "^separate^";
+            } else {
+                names += "^hidden^^separate^";
+            }
+        }
+        names += "'";
+        model.addAttribute("storageNames", names);
+    }
+    
+     /*******************
+     * HELPER FUNCTIONS *
+     ********************/
+    
+    
     private boolean totalAmountDiffers(BindingResult result, Batch temp, int newTotalAmount) {
         return result.hasErrors() || temp.getAmount() != newTotalAmount;
     }
-
+    
+    private void removeItemsFromBatch(Long id, Integer[] amounts, String reason, String remover) {
+        Batch temp = batchService.read(id);
+        Substance substance = (Substance) substanceService.read(temp.getSubstance().getId());
+        Long[][] locs = temp.getStorageLocations();
+        int tempTotalAmount = 0;
+        int totalRemoved = 0;
+        for (int i = 0; i < amounts.length; ++i) {
+            if (amounts[i] != null && locs[i][1] != null) {
+                if (amounts[i] > 0 && locs[i][1] >= amounts[i]) {
+                    totalRemoved += amounts[i];
+                    locs[i][1] -= amounts[i];
+                }
+            }
+            if (locs[i][1] != null) {
+                tempTotalAmount += locs[i][1];
+            }
+        }
+        temp.setAmount(tempTotalAmount);
+        temp.setStorageLocations(locs);
+        substance.setTotalAmount(substance.getTotalAmount() - totalRemoved);
+        batchService.createOrUpdate(temp);
+        substanceService.createOrUpdate(substance);
+        if(tempTotalAmount == 0){
+            substance = checkSubstanceExpDate(substance);
+            substanceService.createOrUpdate(substance);
+        }
+        Event event = EventHandler.removeFromBatchEvent(temp, remover, reason, totalRemoved);
+        eventService.createOrUpdate(event);
+    }
+    
     private int countAmount(BatchFormObject bfm) {
         //Checks if the new total amount differs from the old total amount and if it does, the update fails
         int newTotalAmount = 0;
@@ -364,5 +385,25 @@ public class BatchController {
 
         }
         return storageTemp;
+    }
+
+    private Substance checkSubstanceExpDate(Substance substance) {
+        System.out.println("Mentii checkkii");
+        Timestamp oldestDate = Time.parseTimeStamp("13.6.2900 10:00");
+        System.out.println(" "+oldestDate);
+        List<Batch> batches = batchService.listSubstanceBatches(substance.getId());
+        for(Batch batch : batches){
+            if(batch.getAmount() > 0){
+                System.out.println("Erä suurempi ku 0");
+                if(batch.getExpDate().compareTo(oldestDate) < 0){
+                    System.out.println("Erän vanhenee "+batch.getExpDate()+" oldest "+oldestDate);
+                    oldestDate = batch.getExpDate();
+                }
+            }
+        }
+        System.out.println("asetetaa "+oldestDate);
+        substance.setOldestDate(oldestDate);
+        return substance;
+        
     }
 }

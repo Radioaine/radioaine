@@ -55,8 +55,8 @@
                                     <c:if test="${location[1] > 0}">
                                         <c:forEach var="storage" items="${storages}" varStatus="i">
                                             <c:if test="${storage.id == location[0]}">
-                                                <option id="1" onclick="eluateAmounts(event, ${kit.amount})" value="${(kit.id+storage.id)}">${kit.substance.name}, Erä 
-                                                    ${kit.batchNumber}, Käyt. ennen <fmt:formatDate value="${kit.expDate}" pattern="dd.MM.yyyy"/>, Sijainti ${storage.name}
+                                                <option id="1" onclick="eluateAmounts(event, ${kit.amount})" value="${kit.id}">${kit.substance.name}, Erä 
+                                                    ${kit.batchNumber}, Käyt. ennen <fmt:formatDate value="${kit.expDate}" pattern="dd.MM.yyyy"/>, Sijainti: ${storage.name}
                                                 </option>
                                             </c:if>
                                         </c:forEach>
@@ -72,7 +72,7 @@
                                     <c:if test="${location[1] > 0}">
                                         <c:forEach var="storage" items="${storages}" varStatus="i">
                                             <c:if test="${storage.id == location[0]}">
-                                                <option id="storage${(kit.id+storage.id)}" value="${storage.id}">jee ${storage.id}</option>
+                                                <option selected="selected" id="storage${(kit.id+storage.id)}" value="${storage.id}">jee ${storage.id}</option>
                                             </c:if>
                                         </c:forEach>
                                     </c:if>

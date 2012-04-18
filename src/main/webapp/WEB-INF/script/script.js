@@ -38,7 +38,7 @@ function eluateAmounts(e, batchAmount){
         newHTML = "<button type=\"button\" onclick=\"removeSelection(event)\">Poista</button> &nbsp;"+e.target.innerHTML+"<input type=\"hidden\" name=\"generators\" value=\""+e.target.value+"\"\>";
     }
     else if(e.target.id == "1"){
-        document.getElementById("storage"+e.target.value).selected = true;
+        //document.getElementById("storage"+e.target.value).selected = true;
         if(!countCheck(batchAmount, e.target.value)){
             return;
         }

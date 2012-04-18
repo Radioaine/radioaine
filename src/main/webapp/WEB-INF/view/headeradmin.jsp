@@ -25,7 +25,7 @@
                 <li><a class="current" href="<c:out value="${pageContext.servletContext.contextPath}"/>/admin">HALLINTA</a></li>
                 <ul id="secondary">
                     <li><a href="<c:out value="${pageContext.servletContext.contextPath}" />/admin">Varoitukset</a></li>
-                    <li><a href="<c:out value="${pageContext.servletContext.contextPath}" />/historyView">Raportit</a></li>
+                    <!-- EI VALMIS! <li><a href="<c:out value="${pageContext.servletContext.contextPath}" />/historyView">Raportit</a></li>-->
                     <li><a href="<c:out value="${pageContext.servletContext.contextPath}" />/substanceView">Tuotenimikkeet</a></li>
                     <li><a href="<c:out value="${pageContext.servletContext.contextPath}" />/storagesView" class="last">Varastopaikat</a></li>
                 </ul>  

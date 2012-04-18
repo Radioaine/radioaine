@@ -137,9 +137,16 @@ public class RadioMedicineController {
         List<Batch> kits = new ArrayList<Batch>();
         Long[] kitsTable = rmfo.getKits();
         for (int i = 0; i < kitsTable.length; ++i) {
+<<<<<<< HEAD
             System.out.println(kitsTable[i]);
             if (kitsTable[i] != null) {
                 kits.add(batchService.read(kitsTable[i]));      
+=======
+            System.out.println("kitti indexi: " + i + " kittiTable koko: " + kitsTable.length +" storageIds koko: " + storageIds.length + " storage sisältö: " + storageIds[i]);
+            if (kitsTable[i] != null) {
+                kits.add(batchService.read(kitsTable[i]));
+                decreaseKitAmountsOnCreation(i, kitsTable, storageIds);
+>>>>>>> master
             }
         }
         List<Batch> others = new ArrayList<Batch>();
@@ -154,6 +161,24 @@ public class RadioMedicineController {
         radioMedicine.setOthers(others);
         
         return radioMedicine;
+    }
+    
+    private void decreaseKitAmountsOnCreation(int i, Long[] kitsTable, int[] storageIds)    {
+        for(int j=0; j < batchService.read(kitsTable[i]).getStorageLocations().length; j++) {
+            if(batchService.read(kitsTable[i]).getStorageLocations()[j][0] != null)    {
+                if(batchService.read(kitsTable[i]).getStorageLocations()[j][0] == storageIds[i])    {
+                    Batch temp = batchService.read(kitsTable[i]);
+                    Long[][] tempStorages = temp.getStorageLocations();
+                    tempStorages[j][1] = tempStorages[j][1] - 1;
+                    temp.setStorageLocations(tempStorages);
+                    temp.setAmount(temp.getAmount() - 1);
+                    batchService.createOrUpdate(temp);
+                    Substance substanceTemp = temp.getSubstance();
+                    substanceTemp.setTotalAmount(substanceTemp.getTotalAmount() - 1);
+                    substanceService.createOrUpdate(substanceTemp);
+                }        
+            }
+        }
     }
     
     private void updateRadioMed(Long id, RadioMedicineFormObject rmfo) {

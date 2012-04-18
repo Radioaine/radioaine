@@ -25,7 +25,7 @@
                                 <c:if test="${location[1] != null}">
                                     <c:if test="${location[1] > 0}">
                                         <option id="0" onclick="eluateAmounts(event)"  value="${generator.id}">${generator.substance.name}, Erä 
-                                            ${generator.batchNumber}, Käyt. ennen <fmt:formatDate value="${generator.expDate}" pattern="dd.MM.yyyy"/>, Sijainti: 
+                                            ${generator.batchNumber}, Käyt. ennen <fmt:formatDate value="${generator.expDate}" pattern="dd.MM.yyyy"/>, Sijainti 
                                             <c:forEach var="storage" items="${storages}">
                                                 <c:if test="${storage.id == location[0]}">
                                                     ${storage.name}
@@ -47,7 +47,7 @@
                                 <c:if test="${location[1] != null}">
                                     <c:if test="${location[1] > 0}">
                                         <option id="2" onclick="eluateAmounts(event)" value="${other.id}">${other.substance.name},
-                                            ${other.batchNumber}, <fmt:formatDate value="${other.expDate}" pattern="dd.MM.yyyy"/>, Sijainti: 
+                                            ${other.batchNumber}, Käyt. ennen <fmt:formatDate value="${other.expDate}" pattern="dd.MM.yyyy"/>, Sijainti 
                                             <c:forEach var="storage" items="${storages}">
                                                 <c:if test="${storage.id == location[0]}">
                                                     ${storage.name}
@@ -100,7 +100,7 @@
                         <option value="5">5</option>
                         <option value="10">10</option>
                         <option value="11">11</option>
-                    </select> &nbsp;ml
+                    </select> ml &nbsp; &nbsp; <button type="button" onclick="customVolume()">Syötä muu tilavuus</button>
                 </td>
             </tr>
             <tr>

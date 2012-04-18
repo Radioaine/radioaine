@@ -5,7 +5,7 @@
 <%@include file="headerfront.jsp" %>
 
 <div id="contents">
-    <h2>Radiol‰‰kkeen ${radioMedicine.id} tiedot</h2>
+    <h2>Radiol‰‰ke ${radioMedicine.kits[0].substance.name}</h2>
 
     <table class="noborder">
         <tr>
@@ -13,7 +13,7 @@
             <td>
                 <br/>
                 <c:forEach var="eluate" items="${radioMedicine.eluates}">
-                    <a href="${pageContext.servletContext.contextPath}/eluate/${eluate.id}">Eluaatti ${eluate.id} TODO T‰h‰n eluaattiin k‰ytetyn (yhden) generaattorin eluaatin nimi</a><br/>
+                    <a href="${pageContext.servletContext.contextPath}/eluate/${eluate.id}">Klo <fmt:formatDate value="${eluate.date}" pattern="HH.mm"/> ${eluate.generators[0].substance.eluateName}</a><br/>
                 </c:forEach>
 
                 <c:forEach var="kit" items="${radioMedicine.kits}">
@@ -78,13 +78,13 @@
                     <input type="submit" value="Muokkaa" />
                 </form>
             </td>
-            <td>
-                <input type="button" value="Palaa" onClick="parent.location = '${pageContext.servletContext.contextPath}/frontpage'" />
-            </td>
-            <td>
+            <td class="deleteButton">
                 <form action="${pageContext.servletContext.contextPath}/removeRadioMedRequest/${radioMedicine.id}" method="GET">  
                     <input type="submit" value="Poista" />
                 </form>
+            </td>
+            <td>
+                <input type="button" value="Palaa" onClick="parent.location = '${pageContext.servletContext.contextPath}/frontpage'" />
             </td>
         </tr>
     </table>

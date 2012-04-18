@@ -72,14 +72,15 @@
                     <input type="submit" value="Muokkaa" />
                 </form>
             </td>
-            <td>
-                <input type="button" value="Palaa" onClick="parent.location = '${pageContext.servletContext.contextPath}/frontpage'" />
-            </td>
-            <td>
+            <td class="deleteButton">
                 <form action="${pageContext.servletContext.contextPath}/removeEluateRequest/${eluate.id}" method="GET">  
                     <input type="submit" value="Poista" />
                 </form>
             </td>
+            <td>
+                <input type="button" value="Palaa" onClick="parent.location = '${pageContext.servletContext.contextPath}/frontpage'" />
+            </td>
+            
         </tr>
     </table>
 

@@ -15,18 +15,12 @@
 
 
 <div id="contents">
-    <h2>Eluuatin ${eluate.id} muokkaus</h2>
+    <h2>${eluate.generators[0].substance.eluateName}, muokkaus</h2>
     <br/>   
     <form:form commandName="eluateForm" action="${pageContext.servletContext.contextPath}/modifyEluate/${eluate.id}" method="POST">
         <table class="noborder">
             <tr>
-                <td colspan="3">&nbsp; </td>
-            </tr>
-            <tr>
-                <td rowspan="4" >Valitut</td>
-                <th>Aiempi</th>
-            </tr>
-            <tr>
+                <td>Valitut</td>
                 <td class="infotext" colspan="3">
                     <c:forEach var="gene" items="${eluate.generators}">
                         ${gene.substance.name}, Erä ${gene.batchNumber}, Käyt. ennen <fmt:formatDate value="${gene.expDate}" pattern="dd.MM.yyyy"/>, Sijainti: 
@@ -60,9 +54,7 @@
                     </c:forEach>
                 </td>
             </tr>
-            <tr>
-                <td colspan="3">&nbsp; </td>
-            </tr>
+            
             <tr style="display: none;">
                 <td class="infotext" id="selected" colspan="3">
                     <c:forEach var="gene" items="${eluate.generators}">
@@ -79,7 +71,8 @@
             <tr>
                 <th></th>
                 <th class="new">Päivitetty</th>
-                <th class="new" colspan="2">Aiempi</th>
+                <th>Aiempi</th>
+                <th></th>
             </tr>
             <tr>
                 <td></td>

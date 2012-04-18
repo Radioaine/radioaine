@@ -118,14 +118,32 @@
         </table>
 
         <br />
-        <input type="submit" value="Tallenna">&nbsp; &nbsp;
+        <c:choose>
+            <c:when test="${substance.inUse == true}">
+                <input type="submit" value="Tallenna">&nbsp; &nbsp;
+            </c:when>
+            <c:otherwise>
+                <input disabled="disabled" type="submit" value="Tallenna">&nbsp; &nbsp;
+            </c:otherwise>
+        </c:choose>
+        
         <input type="button" value="Peruuta" onClick="parent.location = '${pageContext.servletContext.contextPath}/substanceView'" />
         <br />
-        <br />
-
-        <input type="button" value="Poista aine" onClick="parent.location = '${pageContext.servletContext.contextPath}/substanceView'" />TODO
-
     </form:form>
+        
+    <c:if test="${substanceInUse == false && substance.inUse == true}">
+        <form action="${pageContext.servletContext.contextPath}/deactivateSubstance/${substance.id}" method="POST">
+            <input type="submit" value="Poista aine käytöstä" />
+        </form>
+    </c:if>
+    <c:if test="${substanceInUse == true }">
+        <input disabled="disabled" type="submit" value="Poista aine käytöstä" />
+    </c:if>
+    <c:if test="${substance.inUse == false}">
+        <form action="${pageContext.servletContext.contextPath}/activateSubstance/${substance.id}" method="POST">
+            <input type="submit" value="Ota aine käyttöön" />
+        </form>
+    </c:if>
 </div>
 
 <%@include file="footer.jsp" %>

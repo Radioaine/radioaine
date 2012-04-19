@@ -122,7 +122,7 @@
                                 <form:select path="storageLocations[${status.index}][0]"> 
                                     <c:forEach var="storage" items="${storages}" varStatus="i">
                                         <c:if test="${storage.hidden == false}">
-                                            <form:option value="${i.index+1}">${storage.name}</form:option>
+                                            <form:option value="${storage.id}">${storage.name}</form:option>
                                         </c:if>
                                     </c:forEach>
                                 </form:select> <form:input path="storageLocations[${status.index}][1]" type="number"/> kappaletta<br/>
@@ -136,7 +136,11 @@
                 <c:forEach var="location" varStatus="i" items="${batch.storageLocations}">
                     <c:choose>
                         <c:when test="${batch.storageLocations[i.index][1] > 0}">
-                            ${storages[(batch.storageLocations[i.index][0]-1)].name} ${location[1]} kpl<br/>
+                            <c:forEach var="storage" items="${storages}">
+                                <c:if test="${storage.id == location[0]}">
+                                    ${storage.name} ${location[1]} kpl<br/>
+                                </c:if>
+                            </c:forEach>
                         </c:when>
                     </c:choose>
                 </c:forEach>

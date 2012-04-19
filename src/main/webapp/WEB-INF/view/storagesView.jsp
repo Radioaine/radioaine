@@ -11,28 +11,28 @@
             <c:forEach var="storage" items="${storages}" varStatus="i">
                 <c:if test="${storage.hidden == false}">
                     <tr>
-                        <form action="${pageContext.servletContext.contextPath}/updateStorageName/${i.index+1}" method="POST">
+                        <form action="${pageContext.servletContext.contextPath}/updateStorageName/${storage.id}" method="POST">
                                 <td class="name">
-                                    <div id="name${i.index+1}">${storage.name}</div>
-                                    <input required name="name" id="inp${i.index+1}" style="display: none;"></input>
+                                    <div id="name${storage.id}">${storage.name}</div>
+                                    <input required name="name" id="inp${storage.id}" style="display: none;"></input>
                                 </td>
-                                <td id="editButton${i.index+1}">
-                                    <div id="edit${i.index+1}">
-                                        <button type="button" onClick="editStorageName(${i.index+1})">Muokkaa</button>
+                                <td id="editButton${storage.id}">
+                                    <div id="edit${storage.id}">
+                                        <button type="button" onClick="editStorageName(${storage.id})">Muokkaa</button>
 
                                     </div>
-                                    <div id="save${i.index+1}" style="display: none;">
+                                    <div id="save${storage.id}" style="display: none;">
                                         <button type="submit">Tallenna</button>
                                     </div>
                                 </td>
-                                <td id="cancel${i.index+1}" style="display: none;">
+                                <td id="cancel${storage.id}" style="display: none;">
                                     <button type="button" onClick="parent.location = '/radioaine/storagesView'">Peruuta</button>
                                 </td>
                         </form>
                         <c:if test="${storage.inUse == false}">
-                            <form action="${pageContext.servletContext.contextPath}/removeStorageName/${i.index+1}" method="POST">
+                            <form action="${pageContext.servletContext.contextPath}/removeStorageName/${storage.id}" method="POST">
                                 <td>
-                                    <button id="remove${i.index+1}" type="submit">Poista</button>
+                                    <button id="remove${storage.id}" type="submit">Poista</button>
                                 </td>
                             </form>
                         </c:if>

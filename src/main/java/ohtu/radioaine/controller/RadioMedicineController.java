@@ -209,7 +209,10 @@ public class RadioMedicineController {
                 others.add(batchService.read(othersTable[i]));
             }
         }
-
+        radioMedicine.setEluates(null);
+        radioMedicine.setOthers(null);
+        radioMedicine.setKits(null);
+        radioMedService.createOrUpdate(radioMedicine);
         radioMedicine.setEluates(eluates);
         radioMedicine.setOthers(others);
         radioMedicine.setKits(kits);

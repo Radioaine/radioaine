@@ -38,7 +38,7 @@ function eluateAmounts(e, batchAmount, storageId){
         newHTML = "<button type=\"button\" onclick=\"removeSelection(event)\">Poista</button> &nbsp;"+e.target.innerHTML+"<input type=\"hidden\" name=\"generators\" value=\""+e.target.value+"\"\>";
     }
     else if(e.target.id == "1"){
-        if(!countCheck(batchAmount, e.target.value)){
+        if(!countCheck(batchAmount, e.target.value, storageId)){
             return;
         }
         var tempOption = $('<option>').attr({
@@ -61,9 +61,9 @@ function eluateAmounts(e, batchAmount, storageId){
     $("#selected").append(temp);
 }
 
-function countCheck(amount, id){
-    var kitsSelected = $("input[value^="+id+"]");
-    if(kitsSelected.length < amount) return true;
+function countCheck(amount, id, storageId){
+    var kitsSelected = $("option[value="+storageId+"][id=storageId"+id+"]");
+    if(kitsSelected.length <= amount) return true;
     else{
         alert("Varastossa on vain "+amount)
         return false;

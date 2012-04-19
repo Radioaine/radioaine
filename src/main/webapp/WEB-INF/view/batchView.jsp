@@ -61,10 +61,14 @@
         <tr>
             <td>Sijainnit</td>
             <td>
-                <c:forEach var="storage" varStatus="i" items="${batch.storageLocations}">
+                <c:forEach var="location" varStatus="i" items="${batch.storageLocations}">
                     <c:choose>
                         <c:when test="${batch.storageLocations[i.index][1] > 0}">
-                            ${storage[1]} kpl ${storages[(storage[0])-1].name} <br/>
+                            <c:forEach var="storage" items="${storages}">
+                                <c:if test="${storage.id == location[0]}">
+                                    ${location[1]} kpl ${storage.name} <br/>
+                                </c:if>
+                            </c:forEach>
                         </c:when>
                     </c:choose>
                 </c:forEach>

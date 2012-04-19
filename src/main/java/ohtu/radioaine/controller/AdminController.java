@@ -111,10 +111,12 @@ public class AdminController {
                 if (locations[i][0] == null) {
                     locations[i][0] = (long) 0;
                 }
-                if (locations[i][0] > 0 && !storageService.read(locations[i][0]).isInUse()) {
-                    Storage temp = storageService.read(locations[i][0]);
-                    temp.setInUse(true);
-                    storageService.createOrUpdate(temp);
+                if (locations[i][0] > 0) {
+                    if(!storageService.read(locations[i][0]).isInUse()) {
+                        Storage temp = storageService.read(locations[i][0]);
+                        temp.setInUse(true);
+                        storageService.createOrUpdate(temp);
+                    }
                 }
             }
         }

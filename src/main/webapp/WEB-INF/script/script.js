@@ -4,20 +4,20 @@ var selectionCounter = 0;
 var eluateKitCounter = 0;
 
 function addStorage(usedStorageLocationsCount, storageLocationsCount, names){
-    var p = names.split("^separate^");
     if(usedStorageLocationsCount > 0 && usedStorageLocationsCount >= storageCounter)
         storageCounter = usedStorageLocationsCount + 1;
- 
-    var newHTML = "<select name=\"storageLocations["+(storageCounter-1)+"][0]\">";
-    for(var i = 0; i < (p.length-1); i++)  {
-        if(p[i] != "^hidden^")
-            newHTML += "<option value=\""+(i+1)+"\">"+ p[i] +"</option>";
-    }
-    newHTML += "</select> <input class=\"temp\" onchange=\"countAmount()\" value=\"0\" id=\"storageAmount\" type=\"number\" size=\"3\" name=\"storageLocations["+(storageCounter-1)+"][1] \"> kpl &nbsp; <button type=\"button\" onClick=\"removeStorage("+storageCounter+")\">Poista</button>";
-    var temp = $('<div>').attr("id", "varasto"+storageCounter );
-    temp.html(newHTML);
+    
+    var temp = $("#storageLocations00");
+    temp = temp.clone();
+    temp.attr({name: "storageLocations["+(storageCounter-1)+"][0]",
+                id: "storageLocations"+(storageCounter-1)+"0"  
+    });
+    temp = $('<div>').append($(temp).clone()).html();
+    temp += "<input class=\"temp\" onchange=\"countAmount()\" value=\"0\" id=\"storageAmount\" type=\"number\" size=\"3\" name=\"storageLocations["+(storageCounter-1)+"][1] \"> kpl &nbsp; <button type=\"button\" onClick=\"removeStorage("+storageCounter+")\">Poista</button>";
+    var newDiv = $("<div>").html(temp);
     storageCounter++;
-    $("#varastot").append(temp);
+    $("#varastot").append(newDiv);
+    
 }
 
 //Ongelma jossa jos lisää vaikka kome ja poistaa keskimmäisen niin numerointi menee sekaisin;

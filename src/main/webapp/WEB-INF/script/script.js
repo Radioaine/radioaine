@@ -38,7 +38,14 @@ function eluateAmounts(e, batchAmount, storageId){
         newHTML = "<button type=\"button\" onclick=\"removeSelection(event)\">Poista</button> &nbsp;"+e.target.innerHTML+"<input type=\"hidden\" name=\"generators\" value=\""+e.target.value+"\"\>";
     }
     else if(e.target.id == "1"){
-        if(!countCheck(batchAmount, e.target.value)){
+        function eluateAmounts(e, amount, storageId){
+    var temp = $('<div>').attr("id", "selection"+selectionCounter );
+    var newHTML = "";
+    if(e.target.id == "0"){
+        newHTML = "<button type=\"button\" onclick=\"removeSelection(event)\">Poista</button> &nbsp;"+e.target.innerHTML+"<input type=\"hidden\" name=\"generators\" value=\""+e.target.value+"\"\>";
+    }
+    else if(e.target.id == "1"){
+        if(!countCheck(amount, storageId, e.target.value)){
             return;
         }
         var tempOption = $('<option>').attr({
@@ -61,8 +68,8 @@ function eluateAmounts(e, batchAmount, storageId){
     $("#selected").append(temp);
 }
 
-function countCheck(amount, id){
-    var kitsSelected = $("input[value^="+id+"]");
+function countCheck(amount, storageId, id){
+    var kitsSelected = $("option[value="+storageId+"][id=storageId"+id+"]");
     if(kitsSelected.length < amount) return true;
     else{
         alert("Varastossa on vain "+amount)

@@ -80,13 +80,14 @@
         </c:forEach>
     </table>
     
-    <br />
-    <table class="noborder">
-        <tr>
-            <td class="substanceHeader">Käytöstä poistetut&nbsp; &nbsp;</td>
-        </tr>
-    </table> 
-                    
+    <br/>
+    <br/>
+    
+    <h2>Käytöstä poistetut</h2>
+    <br/>
+    
+    <div class="substanceHeader">Kitit</div>
+    
     <table class="noborder">
         <c:forEach var="substance" items="${substances}">
             <c:if test="${substance.type == '0' && substance.inUse == false}">
@@ -98,6 +99,8 @@
             </c:if>
         </c:forEach>
     </table>
+    
+    <div class="substanceHeader">Generaattorit</div>
                     
     <table class="noborder">
         <c:forEach var="substance" items="${substances}">
@@ -110,6 +113,8 @@
             </c:if>
         </c:forEach>
     </table>
+    
+    <div class="substanceHeader">Muut</div>
                     
     <table class="noborder">
         <c:forEach var="substance" items="${substances}">

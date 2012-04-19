@@ -89,7 +89,7 @@ public class AdminController {
 
     @RequestMapping("storagesView")
     public String storageViewCTRL(Model model) {
-        setStoragesInUse();
+        //setStoragesInUse();
         model.addAttribute("storages", storageService.list());
         return "storagesView";
     }

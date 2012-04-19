@@ -74,6 +74,7 @@
     </table>
     <br>
     <div id="batchButtons">
+        
         <table class="noborder">
             <tr>
                 <td class="editButton">
@@ -88,15 +89,8 @@
                 </td>
             </tr>
         </table>
-        
-
               
     </div>
-    <br/>
-    <h2>Tapahtumat</h2>
-    <br/>
-    TODO
-    <br />
 </div>
 
 <%@include file="footer.jsp" %>

@@ -18,7 +18,7 @@
         </tr>
 
         <c:forEach var="substance" items="${substances}">
-            <c:if test="${substance.warningDate < compareDate && substance.totalAmount > 0}">
+            <c:if test="${substance.warningDate < compareDate && substance.totalAmount > 0 && substance.inUse == true}">
                 <c:choose>
                     <c:when test="${substance.oldestDate < compareDate}">
                         <tr class="red">
@@ -52,7 +52,7 @@
                 
             </c:if>
             <!--Tähän aineitten hälytysrajat-->
-            <c:if test="${substance.totalAmount < substance.warningBeforeAmount}">
+            <c:if test="${substance.totalAmount < substance.warningBeforeAmount && substance.inUse == true}">
                 <c:choose>
                     <c:when test="${substance.totalAmount == 0}">
                         <tr class="red">
@@ -82,7 +82,7 @@
                     </c:otherwise>
                 </c:choose>             
             </c:if>
-                    <c:if test="${substance.qualityStatus == 0 && substance.totalAmount > 0}">
+                    <c:if test="${substance.qualityStatus == 0 && substance.totalAmount > 0 && substance.inUse == true}">
                 <tr class="orange">
                     <td class="center">${date}</td>
                     <td><a href="substance/${substance.id}">${substance.name}</a></td>

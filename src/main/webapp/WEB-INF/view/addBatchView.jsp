@@ -27,21 +27,21 @@
                     <form:select path="substance">
                         <optgroup label="Kitit">
                             <c:forEach var="substance" items="${substances}">
-                                <c:if test="${substance.type == '0'}">
+                                <c:if test="${substance.type == '0' && substance.inUse == true}">
                                     <form:option value="${substance.id}">${substance.name}</form:option> 
                                 </c:if>
                             </c:forEach>
                         </optgroup>
                         <optgroup label="Generaattorit">
                             <c:forEach var="substance" items="${substances}">
-                                <c:if test="${substance.type == '1'}">
+                                <c:if test="${substance.type == '1' && substance.inUse == true}">
                                     <form:option value="${substance.id}">${substance.name}</form:option> 
                                 </c:if>
                             </c:forEach>
                         </optgroup>
                         <optgroup label="Muut">
                             <c:forEach var="substance" items="${substances}">
-                                <c:if test="${substance.type == '2'}">
+                                <c:if test="${substance.type == '2' && substance.inUse == true}">
                                     <form:option value="${substance.id}">${substance.name}</form:option> 
                                 </c:if>
                             </c:forEach>

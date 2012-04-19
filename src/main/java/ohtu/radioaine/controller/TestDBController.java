@@ -116,6 +116,7 @@ public class TestDBController {
             Random randomGenerator = new Random();
             int randomInt = randomGenerator.nextInt(3);
             substance.setQualityStatus(randomInt);
+            substance.setInUse(true);
             substanceService.createOrUpdate(substance);
             Event event = EventHandler.newSubstanceEvent(substance, "test db");
             eventService.createOrUpdate(event);

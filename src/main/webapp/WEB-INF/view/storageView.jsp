@@ -18,7 +18,7 @@
         </tr>
 
         <c:forEach var="substance" items="${substances}">
-            <c:if test="${substance.type == '0'}">
+            <c:if test="${substance.type == '0' && substance.inUse == true}">
                 <tr>
                     <td>${substance.totalAmount}</td>
                     <td><a href="substance/${substance.id}">${substance.name}</a></td>
@@ -42,7 +42,7 @@
         </tr>
 
         <c:forEach var="substance" items="${substances}">
-            <c:if test="${substance.type == '1'}">
+            <c:if test="${substance.type == '1' && substance.inUse == true}">
                 <tr>                  
                     <td>${substance.totalAmount}</td>
                     <td><a href="substance/${substance.id}">${substance.name}</a></td>
@@ -65,7 +65,7 @@
         </tr>
 
         <c:forEach var="substance" items="${substances}">
-            <c:if test="${substance.type == '2'}">
+            <c:if test="${substance.type == '2' && substance.inUse == true}">
                 <tr>
                     <td>${substance.totalAmount}</td>
                     <td><a href="substance/${substance.id}">${substance.name}</a></td>

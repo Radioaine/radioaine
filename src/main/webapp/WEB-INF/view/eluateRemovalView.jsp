@@ -5,13 +5,12 @@
 <%@include file="headerfront.jsp" %>
 
 <div id="contents">
-    <h2>Eluaatin ${eluate.id} tiedot</h2>
-    
+    <h2>${eluate.generators[0].substance.eluateName}</h2>
+    <br/>
     <table class="noborder">
         <tr>
             <td class="name">Käytetyt aineet</td>
             <td>
-                <br />
                 <c:forEach var="generator" items="${eluate.generators}">
                     <a href="${pageContext.servletContext.contextPath}/substance/${generator.substance.id}">${generator.substance.name}</a>, 
                     <a href="${pageContext.servletContext.contextPath}/batch/${generator.id}">Erä ${generator.batchNumber}</a><br />

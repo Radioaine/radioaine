@@ -32,14 +32,16 @@
             <td>Tuotenimi</td>
             <td><form:select path="substance">
                     <c:forEach var="temp" items="${substances}">
-                        <c:choose>
-                            <c:when test="${temp.name == batch.substance.name}">
-                                <form:option value="${temp.id}" label="${temp.name}" selected="selected"></form:option>
-                            </c:when>
-                            <c:otherwise>
-                                <form:option value="${temp.id}" label="${temp.name}"></form:option>
-                            </c:otherwise>
-                        </c:choose>
+                        <c:if test="${temp.inUse == true}">
+                            <c:choose>
+                                <c:when test="${temp.name == batch.substance.name}">
+                                    <form:option value="${temp.id}" label="${temp.name}" selected="selected"></form:option>
+                                </c:when>
+                                <c:otherwise>
+                                    <form:option value="${temp.id}" label="${temp.name}"></form:option>
+                                </c:otherwise>
+                            </c:choose>
+                        </c:if>
                     </c:forEach>
                 </form:select>
             </td>

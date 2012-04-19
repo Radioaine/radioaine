@@ -58,7 +58,11 @@
                 <c:forEach var="location" varStatus="i" items="${batch.storageLocations}">
                     <c:choose>
                         <c:when test="${batch.storageLocations[i.index][1] > 0}">
-                            ${storages[(batch.storageLocations[i.index][0]-1)].name} ${location[1]} kpl<br/>
+                            <c:forEach var="storage" items="${storages}">
+                                <c:if test="${storage.id == location[0]}">
+                                    ${storage.name} ${location[1]} kpl<br/>
+                                </c:if>
+                            </c:forEach>
                         </c:when>
                     </c:choose>
                 </c:forEach>  
@@ -78,10 +82,14 @@
             <c:forEach var="location" varStatus="i" items="${batch.storageLocations}">
                 <c:choose>
                     <c:when test="${batch.storageLocations[i.index][1] > 0}">
-                        <tr>
-                            <td>${storages[(batch.storageLocations[i.index][0]-1)].name}</td>
-                            <td><input required="required" pattern="[0-9]{1,3}" type="number" name="amounts" /></td><br />
-                        </tr>
+                        <c:forEach var="storage" items="${storages}">
+                            <c:if test="${storage.id == location[0]}">
+                                <tr>
+                                    <td>${storage.name}</td>
+                                    <td><input required="required" pattern="[0-9]{1,3}" type="number" name="amounts" /></td><br />
+                                </tr>
+                            </c:if>
+                        </c:forEach>
                     </c:when>
                     <c:otherwise>
                         <input style="display: none;" value="0" required="required" pattern="[0-9]{1,3}" type="number" name="amounts" />

@@ -27,7 +27,7 @@
                 <td>Valitut</td>
                 <td class="infotext" colspan="3">
                     <c:forEach var="eluate" items="${radioMedicine.eluates}">
-                        Klo <fmt:formatDate value="${eluate.date}" pattern="HH.mm"/> ${eluate.generators[0].substance.eluateName}, Erä ${eluate.generators.get(0).batchNumber}, Aktiivisuus ${eluate.strength}, Sijainti
+                        Klo <fmt:formatDate value="${eluate.date}" pattern="HH.mm"/> ${eluate.generators[0].substance.eluateName}, Erä ${eluate.generators[0].batchNumber}, Aktiivisuus ${eluate.strength}, Sijainti
                         <c:forEach var="storage" items="${storages}">
                             <c:if test="${storage.id == eluate.storageLocation}">
                                 ${storage.name},
@@ -72,7 +72,7 @@
             <tr style="display: none;">
                 <td class="infotext" id="selected" colspan="3">
                     <c:forEach var="eluate" items="${radioMedicine.eluates}">
-                        <script> generateDivs("Klo <fmt:formatDate value="${eluate.date}" pattern="hh.mm"/> ${eluate.getName()}, Erä ${eluate.generators.get(0).batchNumber}, Aktiivisuus ${eluate.strength}, Sijainti TODO${eluate.storageLocation}, Tekijä ${eluate.signature} ", ${eluate.id}, 3);</script>
+                        <script> generateDivs("Klo <fmt:formatDate value="${eluate.date}" pattern="hh.mm"/> ${eluate.name}, Erä ${eluate.generators[0].batchNumber}, Aktiivisuus ${eluate.strength}, Sijainti TODO${eluate.storageLocation}, Tekijä ${eluate.signature} ", ${eluate.id}, 3);</script>
                     </c:forEach>
                     <c:forEach var="kit" items="${radioMedicine.kits}">
                         <script> generateDivs("${kit.substance.name}, Erä ${kit.batchNumber}, Käyt. ennen <fmt:formatDate value="${kit.expDate}" pattern="dd.MM.yyyy"/>, TODO Sijainti", ${kit.id}, 1);</script>

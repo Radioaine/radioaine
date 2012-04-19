@@ -15,7 +15,7 @@
 
 
 <div id="contents">
-    <h2>${eluate.generators[0].substance.eluateName}, muokkaus</h2>
+    <h2>Eluaatin ${eluate.generators[0].substance.eluateName} muokkaus</h2>
     <br/>   
     <form:form commandName="eluateForm" action="${pageContext.servletContext.contextPath}/modifyEluate/${eluate.id}" method="POST">
         <table class="noborder">
@@ -23,7 +23,7 @@
                 <td>Valitut</td>
                 <td class="infotext" colspan="3">
                     <c:forEach var="gene" items="${eluate.generators}">
-                        ${gene.substance.name}, Erä ${gene.batchNumber}, Käyt. ennen <fmt:formatDate value="${gene.expDate}" pattern="dd.MM.yyyy"/>, Sijainti: 
+                        ${gene.substance.name}, Erä ${gene.batchNumber}, Käyt. ennen <fmt:formatDate value="${gene.expDate}" pattern="dd.MM.yyyy"/>, Sijainti 
                         <c:forEach var="location" items="${gene.storageLocations}">
                             <c:if test="${location[1] != null}">
                                 <c:if test="${location[1] > 0}">
@@ -38,7 +38,7 @@
                         <br/>
                     </c:forEach>
                     <c:forEach var="oth" items="${eluate.others}">
-                        ${oth.substance.name}, Erä ${oth.batchNumber}, Käyt. ennen <fmt:formatDate value="${oth.expDate}" pattern="dd.MM.yyyy"/>, Sijainti:
+                        ${oth.substance.name}, Erä ${oth.batchNumber}, Käyt. ennen <fmt:formatDate value="${oth.expDate}" pattern="dd.MM.yyyy"/>, Sijainti
                         <c:forEach var="location" items="${oth.storageLocations}">
                             <c:if test="${location[1] != null}">
                                 <c:if test="${location[1] > 0}">
@@ -78,7 +78,7 @@
                 <td></td>
                 <td class="infotext">Klo<span id="pvm">Pvm</span></td>
                 <td class="infotext">Klo<span id="pvm"> &nbsp; &nbsp;Pvm</span></td>
-                <td></td>
+                <td class="new"></td>
             </tr>
             <tr>
                 <td>Eluointiaika</td>

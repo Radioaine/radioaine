@@ -19,7 +19,7 @@
         </tr>
     </table>
     <br/>
-    <h2>Valmisteet &nbsp;${date}</h2>
+    <h2>Valmisteet ${date}</h2>
     <br/>
 
     <c:forEach var="eluate" items="${eluates}">

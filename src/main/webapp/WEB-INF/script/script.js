@@ -31,14 +31,14 @@ function qualityResults(){
     $("#qualityCheck").html("<form action=\"doCheck\"><select name=\"qualityCheck\"><option value=\"1\">Hyväksytty</option><option value=\"2\">Hylätty</option></select>");
 }
 
-function eluateAmounts(e, batchAmount, storageId){
+function eluateAmounts(e, amount, storageId){
     var temp = $('<div>').attr("id", "selection"+selectionCounter );
     var newHTML = "";
     if(e.target.id == "0"){
         newHTML = "<button type=\"button\" onclick=\"removeSelection(event)\">Poista</button> &nbsp;"+e.target.innerHTML+"<input type=\"hidden\" name=\"generators\" value=\""+e.target.value+"\"\>";
     }
     else if(e.target.id == "1"){
-        if(!countCheck(batchAmount, e.target.value, storageId)){
+        if(!countCheck(amount, storageId, e.target.value)){
             return;
         }
         var tempOption = $('<option>').attr({
@@ -61,9 +61,9 @@ function eluateAmounts(e, batchAmount, storageId){
     $("#selected").append(temp);
 }
 
-function countCheck(amount, id, storageId){
+function countCheck(amount, storageId, id){
     var kitsSelected = $("option[value="+storageId+"][id=storageId"+id+"]");
-    if(kitsSelected.length <= amount) return true;
+    if(kitsSelected.length < amount) return true;
     else{
         alert("Varastossa on vain "+amount)
         return false;

@@ -34,6 +34,10 @@ public class AdminController {
     @Autowired
     private RadioMedService radioMedService;
 
+    /***************
+     * CONTROLLERS *
+     ***************/
+    
     @RequestMapping("admin")
     public String adminViewCTRL(Model model) {
         model.addAttribute("substances", substanceService.list());
@@ -64,6 +68,50 @@ public class AdminController {
         return "redirect:/storagesView";
     }
 
+    
+
+    @RequestMapping("storagesView")
+    public String storageViewCTRL(Model model) {
+        setStoragesInUse();
+        model.addAttribute("storages", storageService.list());
+        return "storagesView";
+    }
+
+    
+
+    @RequestMapping(value = "updateStorageName/{id}", method = RequestMethod.POST)
+    public String updateStorageNameCTRL(@RequestParam String name, @PathVariable Long id) {
+        Storage temp = storageService.read(id);
+        temp.setName(name);
+        storageService.createOrUpdate(temp);
+//        System.out.println("uusi nimi on: " + storageService.read(id).getName());
+        return "redirect:/storagesView";
+    }
+
+    @RequestMapping(value = "removeStorageName/{id}", method = RequestMethod.POST)
+    public String removeStorageNameCTRL(@PathVariable Long id, Model model) {
+        removeStorageLocation(id);
+        return "redirect:/storagesView";
+    }
+
+    
+
+    @RequestMapping(value = "addStatusComment/{sid}+{cid}")
+    public String addStatusCommentCTRL(@RequestParam String comment,
+            @PathVariable Long sid,
+            @PathVariable Integer cid) {
+        Substance temp = (Substance) substanceService.read(sid);
+        String[] comments = temp.getStatusMessages();
+        comments[cid] = comment;
+        temp.setStatusMessages(comments);
+        substanceService.createOrUpdate(temp);
+        return "redirect:/admin";
+    }
+    
+    /*******************
+     * HELPER FUNCTION *
+     *******************/
+    
     private boolean addNewStorage(String name) {
         List<Storage> storageList = storageService.list();
         for (Storage storage : storageList) {
@@ -86,14 +134,7 @@ public class AdminController {
         storage.setInUse(false);
         return storage;
     }
-
-    @RequestMapping("storagesView")
-    public String storageViewCTRL(Model model) {
-        setStoragesInUse();
-        model.addAttribute("storages", storageService.list());
-        return "storagesView";
-    }
-
+    
     public void setStoragesInUse() {
         List<Batch> batchList = batchService.list();
         List<Eluate> eluateList = eluateService.list();
@@ -109,9 +150,9 @@ public class AdminController {
             Long[][] locations = batch.getStorageLocations();
             for (int i = 0; i < locations.length; i++) {
                 if (locations[i][0] == null) {
-                    locations[i][0] = (long) 0;
+                    locations[i][0] = Long.valueOf(0);
                 }
-                if (locations[i][0] > 0) {
+                if (locations[i][0] > Long.valueOf(0)) {
                     if(!storageService.read(locations[i][0]).isInUse()) {
                         Storage temp = storageService.read(locations[i][0]);
                         temp.setInUse(true);
@@ -139,22 +180,7 @@ public class AdminController {
             }
         }
     }
-
-    @RequestMapping(value = "updateStorageName/{id}", method = RequestMethod.POST)
-    public String updateStorageNameCTRL(@RequestParam String name, @PathVariable Long id) {
-        Storage temp = storageService.read(id);
-        temp.setName(name);
-        storageService.createOrUpdate(temp);
-//        System.out.println("uusi nimi on: " + storageService.read(id).getName());
-        return "redirect:/storagesView";
-    }
-
-    @RequestMapping(value = "removeStorageName/{id}", method = RequestMethod.POST)
-    public String removeStorageNameCTRL(@PathVariable Long id, Model model) {
-        removeStorageLocation(id);
-        return "redirect:/storagesView";
-    }
-
+    
     private boolean removeStorageLocation(Long id) {
         List<Batch> batchList = batchService.list();
         List<Eluate> eluateList = eluateService.list();
@@ -191,16 +217,5 @@ public class AdminController {
         storageService.createOrUpdate(temp);
         return false;
     }
-
-    @RequestMapping(value = "addStatusComment/{sid}+{cid}")
-    public String addStatusCommentCTRL(@RequestParam String comment,
-            @PathVariable Long sid,
-            @PathVariable Integer cid) {
-        Substance temp = (Substance) substanceService.read(sid);
-        String[] comments = temp.getStatusMessages();
-        comments[cid] = comment;
-        temp.setStatusMessages(comments);
-        substanceService.createOrUpdate(temp);
-        return "redirect:/admin";
-    }
+    
 }

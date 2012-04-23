@@ -158,5 +158,5 @@ function confirmRadioMedRemoval(id){
 
 function customVolume(){
    $("#vol").remove();
-   $("#volPlace").html("<input type=\"text\" pattern=\"\" name=\"volume\"/> ml");
+   $("#volPlace").html("<input type=\"text\" name=\"volume\"/> ml");
 }

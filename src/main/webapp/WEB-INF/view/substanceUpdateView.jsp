@@ -77,7 +77,7 @@
             <c:if test="${substance.type=='1'}"><!--Tämä tarvitaan vain, jos tyyppi on generaattori-->
                 <tr>
                     <td>Puoliintumisaika</td>
-                    <td><form:input path="halflife" type="number"/><form:errors path="halflife"/></td>
+                    <td><form:input path="halflife" type="text"/><form:errors path="halflife"/></td>
                     <td class="infotext">${substance.halflife} tuntia</td>
                 </tr>   
             </c:if>

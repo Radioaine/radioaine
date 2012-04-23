@@ -17,10 +17,10 @@ public class SubstanceFormObject {
     private String genericName;
     private String eluateName;
     private int type;
-    private int halflife;
+    private String halflife;
     private int warningBeforeDays;
     private int warningBeforeAmount;
-    private int volume;
+    private String volume;
     private String strength;
     private int qualityControl;
     private boolean needsColdStorage;
@@ -92,12 +92,12 @@ public class SubstanceFormObject {
         this.supplier = supplier;
     }
 
-    public int getHalflife() {
+    public String getHalflife() {
         return halflife;
     }
 
-    public void setHalflife(int halflife) {
-        this.halflife = halflife;
+    public void setHalflife(String halflife) {
+        this.halflife = halflife.replaceAll(",", ".");
     }
 
     public String getEluateName() {
@@ -116,11 +116,11 @@ public class SubstanceFormObject {
         this.genericName = genericName;
     }
 
-    public int getVolume() {
+    public String getVolume() {
         return volume;
     }
 
-    public void setVolume(int volume) {
+    public void setVolume(String volume) {
         this.volume = volume;
     }
 

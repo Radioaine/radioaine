@@ -23,11 +23,11 @@ public class Substance implements Serializable {
     private String eluateName;
     @Column(nullable = false)
     private int type;
-    private int halflife;
+    private double halflife;
     private int warningBeforeDays;
     private int warningBeforeAmount;
-    private int volume;
-    private double strength;
+    private String volume;
+    private String strength;
     private boolean ordered;
     private boolean needsColdStorage;
     private String manufacturer;
@@ -178,11 +178,11 @@ public class Substance implements Serializable {
         totalAmount--;
     }
 
-    public int getHalflife() {
+    public double getHalflife() {
         return halflife;
     }
 
-    public void setHalflife(int halflife) {
+    public void setHalflife(double halflife) {
         this.halflife = halflife;
     }
 
@@ -202,19 +202,19 @@ public class Substance implements Serializable {
         this.genericName = genericName;
     }
 
-    public int getVolume() {
+    public String getVolume() {
         return volume;
     }
 
-    public void setVolume(int volume) {
+    public void setVolume(String volume) {
         this.volume = volume;
     }
 
-    public double getStrength() {
+    public String getStrength() {
         return strength;
     }
 
-    public void setStrength(double strength) {
+    public void setStrength(String strength) {
         this.strength = strength;
     }
 

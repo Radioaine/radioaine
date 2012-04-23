@@ -60,7 +60,11 @@ public class SubstanceController {
     private void createSubstance(SubstanceFormObject sfo, Substance substance) {
         substance.setType(sfo.getType());
         substance.setName(sfo.getName());
-        substance.setHalflife(sfo.getHalflife());
+        if (sfo.getHalflife().equals("")) {
+            substance.setHalflife(0.0);
+        } else {
+            substance.setHalflife(Double.parseDouble(sfo.getHalflife()));
+        }
         substance.setGenericName(sfo.getGenericName());
         substance.setManufacturer(sfo.getManufacturer());
         substance.setSupplier(sfo.getSupplier());
@@ -68,10 +72,10 @@ public class SubstanceController {
         substance.setWarningBeforeAmount(sfo.getWarningBeforeAmount());
         substance.setVolume(sfo.getVolume());
         substance.setQualityControl(sfo.getQualityControl());
-        substance.setStrength(Double.parseDouble(sfo.getStrength()));
+        substance.setStrength(sfo.getStrength());
         substance.setInUse(true);
         if (sfo.getType() == 1) {
-            substance.setHalflife(sfo.getHalflife());
+            substance.setHalflife(Double.parseDouble(sfo.getHalflife()));
             substance.setEluateName(sfo.getEluateName());
         }
         substanceService.createOrUpdate(substance);

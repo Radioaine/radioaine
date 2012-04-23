@@ -60,7 +60,7 @@ public class SubstanceController {
     private void createSubstance(SubstanceFormObject sfo, Substance substance) {
         substance.setType(sfo.getType());
         substance.setName(sfo.getName());
-        if (sfo.getHalflife().equals("")) {
+        if (sfo.getHalflife() == null || sfo.getHalflife().equals("")) {
             substance.setHalflife(0.0);
         } else {
             substance.setHalflife(Double.parseDouble(sfo.getHalflife()));

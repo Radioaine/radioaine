@@ -16,7 +16,7 @@
 </script>
 
 <div id="contents">
-    <h2>Lisää lähetys</h2>
+    <h2>Saapuminen varastoon</h2>
     <br/>
         
     <form:form commandName="batch" action="batch" method="POST">

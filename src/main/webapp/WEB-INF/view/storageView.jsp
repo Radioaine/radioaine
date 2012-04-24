@@ -4,7 +4,7 @@
 
 <div id="contents">
     <form method="link" action="addBatch">
-        <input type="submit" value="Lisää lähetys">
+        <input type="submit" value="Saapuminen varastoon">
     </form>
     <br/>
     <h2>Kitit</h2>

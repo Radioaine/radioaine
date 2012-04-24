@@ -51,7 +51,7 @@
             <th class="batchnumber">Eränumero</th>
             <th class="oldest">Käytettävä ennen</th>
             <th class="quality">Laadunvarmistus</th>
-            <th class="wide">Huomautuksia</th>
+            <th class="wide">Kommentit</th>
         </tr>
 
         <c:forEach var="batch" items="${substanceBatches}">

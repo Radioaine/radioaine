@@ -98,38 +98,99 @@
         <div id="RadioMedDetails">
             <h2>Käyttökuntoon saatetut radiolääkkeet <fmt:formatDate pattern="dd.MM.yyyy" value="${startDate}"/>  - <fmt:formatDate pattern="dd.MM.yyyy" value="${endDate}"/></h2>  
             <br/>
+            
             <br/>
-            <table class="noborder">    
-                <c:forEach var="substance" items="${substances}">
+            <table class="noborder">
+                <c:forEach var="eluate" items="${eluates}">
+                    <tr>
+                        <th class="timestamp"><fmt:formatDate value="${eluate.date}" pattern="dd.MM.yyyy HH:mm"/></th>
+                        <th colspan="3">
+                            <c:forEach var="generator" items="${eluate.generators}">
+                                ${generator.substance.eluateName}<br>
+                            </c:forEach>
+                        </th>
+                    </tr>
+
+                    <c:forEach var="generator" items="${eluate.generators}">
+                        <tr>
+                            <td></td>
+                            <td>${generator.substance.name}</td>
+                            <td>Erä ${generator.batchNumber}</td>
+                            <td>Käyt. ennen <fmt:formatDate value="${generator.expDate}" pattern="dd.MM.yyyy"/></td>
+                        </tr>
+                    </c:forEach>
+
+                    <c:forEach var="other" items="${eluate.others}">
+                        <tr>
+                            <td></td>
+                            <td>${other.substance.name}</td>
+                            <td>Erä ${other.batchNumber}</td>
+                            <td>Käyt. ennen <fmt:formatDate value="${other.expDate}" pattern="dd.MM.yyyy"/></td>
+                        </tr>
+                    </c:forEach>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td></td>
+                        <td>Aktiivisuus</td>
+                        <td>${eluate.strength}
+                            <c:choose>
+                                <c:when test="${eluate.unit == 0}">
+                                    GBq
+                                </c:when>
+                                <c:when test="${eluate.unit == 1}">
+                                    kBq
+                                </c:when>
+                                <c:otherwise>
+                                    MBq
+                                </c:otherwise>
+                            </c:choose>
+                        </td>
+                    </tr>
+                    
+                    <tr>
+                        <td></td>
+                        <td>Tilavuus</td>
+                        <td>${eluate.volume} ml</td>
+                    </tr>
+                    
+                    <tr>
+                        <td></td>
+                        <td>Kommentit</td>
+                        <td>${eluate.note}</td>
+                    </tr>
+                    
+                    <tr>
+                        <td></td>
+                        <td>Tekijä</td>
+                        <td>${eluate.signature}</td>
+                    </tr>
+                    <tr>
+                        <td>&nbsp; </td>
+                        <td colspan="3"></td>
+                    </tr>
+
                     <c:forEach var="radioMed" items="${radioMeds}">
-                        <c:if test="${substance.name == radioMed.kits[0].substance.name}">
+                        <c:if test="${radioMed.eluates[0].id == eluate.id}">
                             <tr>
-                                <td class="timestamp"><b><fmt:formatDate pattern="dd.MM.yyyy HH.mm" value="${radioMed.date}"/></b></td>
-
+                                <th></th>
+                                <th><fmt:formatDate value="${radioMed.date}" pattern=" HH:mm"/></th>
                             </tr>
-
                             <c:forEach var="kit" items="${radioMed.kits}">
                                 <tr>
-                                    <td class="time"></td>
-                                    <td><b>${kit.substance.name}</b></td>
-                                    <td class="batch">erä ${kit.batchNumber}</td>
-                                    <td class="before">käyt. ennen <fmt:formatDate pattern="dd.MM.yyyy" value="${kit.expDate}"/> </td>
-                                </tr> 
-                            </c:forEach>
-                            <c:forEach var="eluate" items="${radioMed.eluates}">
-                                <tr>
-                                    <td class="time"></td>
-                                    <td>${eluate.generators[0].substance.eluateName}</td>
-                                    <td class="batch">erä ${eluate.generators[0].batchNumber}</td>
-                                    <td class="before">käyt. ennen <fmt:formatDate pattern="dd.MM.yyyy" value="${eluate.date}"/> </td>
+                                    <td></td>
+                                    <th class="reportName">${kit.substance.name}</th>
+                                    <td class="batch">Erä ${kit.batchNumber}</td>
+                                    <td class="before">Käyt. ennen <fmt:formatDate pattern="dd.MM.yyyy" value="${kit.expDate}"/> </td>
                                 </tr> 
                             </c:forEach>
                             <c:forEach var="other" items="${radioMed.others}">
                                 <tr>
                                     <td class="time"></td>
                                     <td>${other.substance.name}</td>
-                                    <td class="batch">erä ${other.batchNumber}</td>
-                                    <td class="before">käyt. ennen <fmt:formatDate pattern="dd.MM.yyyy" value="${other.expDate}"/> </td>
+                                    <td class="batch">Erä ${other.batchNumber}</td>
+                                    <td class="before">Käyt. ennen <fmt:formatDate pattern="dd.MM.yyyy" value="${other.expDate}"/> </td>
                                 </tr> 
                             </c:forEach>
                             <tr>
@@ -156,7 +217,7 @@
                             </tr>
                             <tr>
                                 <td></td>
-                                <td>Huomautuksia</td>
+                                <td>Kommentit</td>
                                 <td>${radioMed.note}</td>
                                 <td></td>
                             </tr>
@@ -166,8 +227,11 @@
                                 <td>${radioMed.signature}</td>
                                 <td></td>
                             </tr>
-
-                        </c:if>
+                            <tr>
+                                <td>&nbsp; </td>
+                                <td colspan="3"></td>
+                            </tr>
+                        </c:if>   
                     </c:forEach>
                 </c:forEach>
             </table>

@@ -89,8 +89,8 @@
                 <td><input pattern="^[0-9]{1,4}([,.][0-9]{1,4})?$" name="strength" type="text" size="5"/>
                     <form:select path="unit">
                         <option value="0">GBq</option>
-                        <option value="1">kBq</option>
                         <option value="2">MBq</option>
+                        <option value="1">kBq</option>
                     </form:select>
 
             </td>

@@ -87,7 +87,7 @@
                             <c:if test="${storage.id == location[0]}">
                                 <tr>
                                     <td>${storage.name}</td>
-                                    <td><input required="required" pattern="[0-9]{1,3}" type="number" name="amounts" /></td><br />
+                                    <td><input required="required" pattern="[0-9]{1,3}" type="number" min="0" name="amounts" /></td><br />
                                 </tr>
                             </c:if>
                         </c:forEach>

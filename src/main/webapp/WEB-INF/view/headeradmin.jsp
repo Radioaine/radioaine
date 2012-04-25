@@ -3,11 +3,11 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta http-equiv="Content-Type" content="text/html" charset="UTF-8"/>
         <link rel="stylesheet" type="text/css" href="<c:out value="${pageContext.servletContext.contextPath}" />/css/basic.css" />
         <link rel="stylesheet" type="text/css" href="<c:out value="${pageContext.servletContext.contextPath}" />/css/tabs.css" />
         <link type="text/css" href="${pageContext.servletContext.contextPath}/css/flick/jquery-ui-1.8.17.custom.css" rel="stylesheet" />
-        <title>Radioaine</title>
+        <title>RadStore</title>
         <script type="text/javascript" src="<c:url value="/script/jquery-1.7.1.min.js" />"></script>
         <script type="text/javascript" src="<c:url value="/script/jquery-ui-1.8.17.custom.min.js" />"></script>
         <script type="text/javascript" src="<c:url value="/script/script.js" />"></script>
@@ -15,7 +15,7 @@
     </head>
     <body>
         <h3>
-            RADIOAINE
+            RadStore
         </h3>
 
         <div id="header">
@@ -25,7 +25,7 @@
                 <li><a class="current" href="<c:out value="${pageContext.servletContext.contextPath}"/>/admin">HALLINTA</a></li>
                 <ul id="secondary">
                     <li><a href="<c:out value="${pageContext.servletContext.contextPath}" />/admin">Varoitukset</a></li>
-                    <!-- EI VALMIS! <li><a href="<c:out value="${pageContext.servletContext.contextPath}" />/historyView">Raportit</a></li>-->
+                    <li><a href="<c:out value="${pageContext.servletContext.contextPath}" />/historyView">Raportit</a></li>
                     <li><a href="<c:out value="${pageContext.servletContext.contextPath}" />/substanceView">Tuotenimikkeet</a></li>
                     <li><a href="<c:out value="${pageContext.servletContext.contextPath}" />/storagesView" class="last">Varastopaikat</a></li>
                 </ul>  

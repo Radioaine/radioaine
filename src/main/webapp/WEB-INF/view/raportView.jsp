@@ -105,13 +105,12 @@
                         <c:if test="${substance.name == radioMed.kits[0].substance.name}">
                             <tr>
                                 <td class="timestamp"><b><fmt:formatDate pattern="dd.MM.yyyy HH.mm" value="${radioMed.date}"/></b></td>
-
                             </tr>
 
                             <c:forEach var="kit" items="${radioMed.kits}">
                                 <tr>
-                                    <td class="time"></td>
-                                    <td><b>${kit.substance.name}</b></td>
+                                    <td></td>
+                                    <td><a href="<c:out value="${pageContext.servletContext.contextPath}" />/RadioMedicine/${radioMed.id}"><b>${kit.substance.name}</b></a></td>
                                     <td class="batch">erä ${kit.batchNumber}</td>
                                     <td class="before">käyt. ennen <fmt:formatDate pattern="dd.MM.yyyy" value="${kit.expDate}"/> </td>
                                 </tr> 

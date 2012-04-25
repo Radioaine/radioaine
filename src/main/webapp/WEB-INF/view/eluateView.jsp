@@ -29,6 +29,9 @@
                     <c:when test="${eluate.unit == 0}">
                         GBq
                     </c:when>
+                    <c:when test="${eluate.unit == 1}">
+                        kBq
+                    </c:when>
                     <c:otherwise>
                         MBq
                     </c:otherwise>

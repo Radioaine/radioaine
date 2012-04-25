@@ -36,6 +36,9 @@
                     <c:when test="${radioMedicine.unit == 0}">
                         GBq
                     </c:when>
+                    <c:when test="${radioMedicine.unit == 1}">
+                        kBq
+                    </c:when>
                     <c:otherwise>
                         MBq
                     </c:otherwise>

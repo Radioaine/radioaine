@@ -13,7 +13,7 @@ function addStorage(usedStorageLocationsCount, storageLocationsCount, names){
                 id: "storageLocations"+(storageCounter-1)+"0"  
     });
     temp = $('<div>').append($(temp).clone()).html();
-    temp += "<input class=\"temp\" onchange=\"countAmount()\" value=\"0\" id=\"storageAmount\" type=\"number\" size=\"3\" name=\"storageLocations["+(storageCounter-1)+"][1] \"> kpl &nbsp; <button type=\"button\" onClick=\"removeStorage("+storageCounter+")\">Poista</button>";
+    temp += "<input class=\"temp\" onchange=\"countAmount()\" value=\"0\" id=\"storageAmount\" type=\"number\" min=\"0\" size=\"3\" name=\"storageLocations["+(storageCounter-1)+"][1] \"> kpl &nbsp; <button type=\"button\" onClick=\"removeStorage("+storageCounter+")\">Poista</button>";
     var newDiv = $("<div>").html(temp);
     storageCounter++;
     $("#varastot").append(newDiv);

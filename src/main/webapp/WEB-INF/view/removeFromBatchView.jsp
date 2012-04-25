@@ -60,7 +60,7 @@
                         <c:when test="${batch.storageLocations[i.index][1] > 0}">
                             <c:forEach var="storage" items="${storages}">
                                 <c:if test="${storage.id == location[0]}">
-                                    ${storage.name} ${location[1]} kpl<br/>
+                                    ${location[1]} kpl ${storage.name}<br/>
                                 </c:if>
                             </c:forEach>
                         </c:when>
@@ -70,13 +70,14 @@
         </tr>
 
     </table>
-        
+    <br/>    
     
-    <h3>Poistettavat</h3>
+    <h2>Poistettavat</h2>
     
     <form action="${pageContext.servletContext.contextPath}/removeFromBatch/${batch.id}" method="POST">
         <table class="noborder">
-            <tr><th class="name">Sijainti</th>
+            <tr>
+                <th class="name">Sijainti</th>
                 <th>Poistettava m‰‰r‰</th>
             </tr>
             <c:forEach var="location" varStatus="i" items="${batch.storageLocations}">
@@ -96,6 +97,10 @@
                     </c:otherwise>
                 </c:choose>
             </c:forEach>
+            
+            <tr>
+                <td colspan="2">&nbsp;</td>
+            </tr>
                         
             <tr>
                 <td>Poiston syy</td>

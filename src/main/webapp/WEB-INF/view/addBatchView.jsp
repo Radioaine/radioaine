@@ -71,7 +71,7 @@
                                     <form:option value="${storage.id}">${storage.name}</form:option>
                                 </c:if>
                             </c:forEach>
-                        </form:select> <form:input required="required" class="temp" onchange="countAmount()" id="storageAmount" path="storageLocations[0][1]" type="number" size="3"/> kpl<br/> 
+                        </form:select> <form:input required="required" class="temp" onchange="countAmount()" id="storageAmount" path="storageLocations[0][1]" type="number" min="0" size="3"/> kpl<br/> 
                     </div>
                 </td>
                 <td valign="bottom"><button type="button" onClick="addStorage(1, ${batch.storageLocationsCount}, ${storageNames})">Lisää varastopaikka</button></td>

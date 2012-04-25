@@ -114,10 +114,10 @@ public class RadioMedicineController {
 
         radioMedicine.setNote(rmfo.getNote());
         radioMedicine.setSignature(rmfo.getSignature());
-        if (rmfo.getStrength().equals("")) {
+        if (rmfo.getVolume().equals("")) {
             radioMedicine.setVolume(0.0);
         } else {
-            radioMedicine.setStrength(Double.parseDouble(rmfo.getVolume()));
+            radioMedicine.setVolume(Double.parseDouble(rmfo.getVolume()));
         }
         radioMedicine.setDate(Time.parseDate(rmfo.getDate()));
         if (rmfo.getStrength().equals("")) {

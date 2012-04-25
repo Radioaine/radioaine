@@ -40,6 +40,7 @@ public class Substance implements Serializable {
     private int qualityStatus;
     private int qualityControl;
     private boolean inUse;
+    private int countForReport = 0;
 
     public Timestamp getWarningDate() {
         return warningDate;
@@ -149,7 +150,6 @@ public class Substance implements Serializable {
         this.warningBeforeDays = warningBeforeDays;
     }
 
-
     public boolean hasBeenOrdered() {
         return ordered;
     }
@@ -233,5 +233,16 @@ public class Substance implements Serializable {
     public void setInUse(boolean inUse) {
         this.inUse = inUse;
     }
-    
+
+    public void incCountForReport() {
+        countForReport++;
+    }
+
+    public void resetCountForReport() {
+        countForReport = 0;
+    }
+
+    public int getCountForReport() {
+        return countForReport;
+    }
 }

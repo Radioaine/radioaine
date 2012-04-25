@@ -40,6 +40,7 @@ public class RadioMedicine implements Serializable{
     @OneToMany
     @JoinColumn(name = "RADIOMEDICINE_KITS")
     private List<Batch> kits;
+    private int countForReport = 0;
 
     public List<Eluate> getEluates() {
         return eluates;
@@ -149,4 +150,15 @@ public class RadioMedicine implements Serializable{
         return kits.get(0).getSubstance().getName();
     }
     
+    public void incCountForReport() {
+        countForReport++;
+    }
+    
+    public void resetCountForReport() {
+        countForReport = 0;
+    }
+    
+    public int getCountForReport() {
+        return countForReport;
+    }
 }

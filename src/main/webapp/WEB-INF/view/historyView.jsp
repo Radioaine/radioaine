@@ -22,11 +22,11 @@
             <tr>
                 <td>Alkupvm</td>
 
-                <td><input id="start" name="start" type="text" value=""/></td>
+                <td><input id="start" name="start" type="text" value="" required="required" pattern="^(0[1-9]|[1-2][0-9]|3[0-1])\.(0[1-9]|1[0-2])\.[0-9]{4}$"/></td>
             </tr>
             <tr>
                 <td>Loppupvm</td>
-                <td><input id="end" name="end" type="text" value=""/></td>
+                <td><input id="end" name="end" type="text" value="" required="required" pattern="^(0[1-9]|[1-2][0-9]|3[0-1])\.(0[1-9]|1[0-2])\.[0-9]{4}$"/></td>
             </tr>
         </table>
         </br>

@@ -63,7 +63,7 @@ table.eluate {background-color: #FFF;}
 
 .infotext {font-size: 90%;}
 
-select.list {width: 1200px;}
+select.list {width: 100%;}
 
 table.listing {
     border: 0px;
@@ -137,7 +137,9 @@ select.substance {width: 250px;}
 
 .time {width: 60px;}
 
-.timestamp {width: 160px;}
+.timestamp {width: 140px;}
+
+.updated {width: 360px;}
 
 .warnigs {width: 200px;}
 

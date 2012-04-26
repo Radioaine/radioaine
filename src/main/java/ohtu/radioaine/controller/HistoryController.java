@@ -93,7 +93,7 @@ public class HistoryController {
                 "startDate", startDate);
         model.addAttribute(
                 "endDate", endDate);
-        //model.addAttribute("eluates", eluateService.list());
+        model.addAttribute("eluates", eluateService.list());
 
 
 

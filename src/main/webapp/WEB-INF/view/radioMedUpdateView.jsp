@@ -110,14 +110,32 @@
                 <td>Aktiivisuus</td>
                 <td><form:input path="strength" type="text" size="5" value="${radioMedicine.strength}"/><form:errors path="strength"/>
                     <form:select path="unit">
-                    <option value="0">GBq</option>
-                    <option value="1">MBq</option>
+                        <c:choose>
+                            <c:when test="${radioMedicine.unit == 0}">
+                                <option value="0" selected="selected">GBq</option>
+                                <option value="2">MBq</option>
+                                <option value="1">kBq</option>
+                            </c:when>
+                            <c:when test="${radioMedicine.unit == 1}">
+                                <option value="0">GBq</option>
+                                <option value="2">MBq</option>
+                                <option value="1" selected="selected">kBq</option>
+                            </c:when>
+                            <c:otherwise>
+                                <option value="0">GBq</option>
+                                <option value="2" selected="selected">MBq</option>
+                                <option value="1">kBq</option>
+                            </c:otherwise>
+                        </c:choose>
                     </form:select>
                 </td>
                 <td class="infotext" colspan="2">${radioMedicine.strength}
                     <c:choose>
                         <c:when test="${radioMedicine.unit == 0}">
                             GBq
+                        </c:when>
+                        <c:when test="${radioMedicine.unit == 1}">
+                            kBq
                         </c:when>
                         <c:otherwise>
                             MBq

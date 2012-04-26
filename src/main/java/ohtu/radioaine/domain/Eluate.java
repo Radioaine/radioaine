@@ -133,7 +133,7 @@ public class Eluate implements Serializable {
 
     /**
      * Unit used to measure strength
-     * @return unit: 0 = GBq, 1 = MBq
+     * @return unit: 0 = GBq, 1 = kBq, 2 = MBq
      */
     public int getUnit() {
         return unit;
@@ -141,7 +141,7 @@ public class Eluate implements Serializable {
 
     /**
      * Unit used to measure strength
-     * @param unit: 0 = GBq, 1 = MBq
+     * @param unit: 0 = GBq, 1 = kBq, 2 = MBq
      */
     public void setUnit(int unit) {
         this.unit = unit;

@@ -23,8 +23,8 @@
     <form:form commandName="batch" action="${pageContext.servletContext.contextPath}/updateBatch/${batch.id}" method="POST">
     <table class="noborder">
         <tr>
-            <th></th>
-            <th>Päivitetty</th>
+            <th class="name"></th>
+            <th class="updated">Päivitetty</th>
             <th>Aiempi</th>
         </tr>
         
@@ -55,15 +55,15 @@
         </tr>
         <fmt:formatDate value="${batch.expDate}" pattern="dd.MM.yyyy" var="expire"/>
         <tr>
-            <td class="name">Käytettävä ennen</td>
+            <td>Käytettävä ennen</td>
             <td><form:input required="required" pattern="^(0[1-9]|[1-2][0-9]|3[0-1])\.(0[1-9]|1[0-2])\.[0-9]{4}$" placeholder="Muodossa pp.kk.vvvv" path="expDate" type="text" id="expDate" value="${expire}"/><form:errors path="expDate"/></td>
             <td>${expire}</td>
         </tr> 
         
-        <tr class="red" style="display: none;">
+        <tr class="red" style="display: none;"> <!--Turha tieto, mutta tietokanta vaatii, joten annetaan tietokannalle muttei näytetä-->
             <td>Saapumispäivä</td>
             <td><form:input path="arrivalDate" type="text" id="arrivalDate" value="${arrive}"/><form:errors path="arrivalDate"/></td>
-            <td>TODO Tallennus ei onnistu, jos tämä kenttä puuttuu. Tämä pitäisi kuitenkin poistaa!</td>
+            <td></td>
         </tr>
         
         <c:choose>
@@ -125,7 +125,7 @@
                                             <form:option value="${storage.id}">${storage.name}</form:option>
                                         </c:if>
                                     </c:forEach>
-                                </form:select> <form:input path="storageLocations[${status.index}][1]" type="number"/> kappaletta<br/>
+                                </form:select> <form:input path="storageLocations[${status.index}][1]" type="number"/> kpl<br/>
                             </c:when>
                         </c:choose>
                     </c:forEach>

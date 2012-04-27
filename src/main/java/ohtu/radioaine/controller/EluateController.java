@@ -31,6 +31,8 @@ public class EluateController {
     @Autowired
     private SubstanceService substanceService;
     @Autowired
+    private RadioMedService radioMedicineService;
+    @Autowired
     private StorageService storageService;
     long GENERATOR = 1;
     long KIT = 0;
@@ -112,7 +114,7 @@ public class EluateController {
         eluate.setName();
         return eluate;
     }
-    
+
     @RequestMapping(value = "modifyEluate/{id}", method = RequestMethod.GET)
     public String modifyEluateCTRL(Model model, @PathVariable Long id) {
         model.addAttribute("eluateForm", new EluateFormObject());
@@ -134,18 +136,36 @@ public class EluateController {
         updateEluate(id, efo);
         return "redirect:/frontpage";
     }
-    
+
     @RequestMapping("removeEluateRequest/{id}")
     public String removeEluate(Model model, @PathVariable Long id) {
-        model.addAttribute("eluate", eluateService.read(id));
-        model.addAttribute("storages", storageService.list());
-        return "eluateRemovalView";
+        Eluate eluate = eluateService.read(id);
+        List<RadioMedicine> radiomeds = radioMedicineService.list();
+        boolean radiomedForEluateFound = false;
+        for (RadioMedicine radiomed : radiomeds) {
+            List<Eluate> eluates = radiomed.getEluates();
+            for (Eluate eluateCandidate : eluates) {
+                if (eluateCandidate.getId() == eluate.getId()) {
+                    radiomedForEluateFound = true;
+                    break;
+                }
+            }
+            if (radiomedForEluateFound) {
+                break;
+            }
+        }
+        if (radiomedForEluateFound) {
+            model.addAttribute("removeError", 1);
+            return "eluate/" + id;
+        }
+        eluateService.delete(id);
+        return "redirect:/frontpage";
     }
-    
+
     @RequestMapping(value = "removeEluate/{id}", method = RequestMethod.POST)
     public String removeRadioMed(@RequestParam String reason,
-    @RequestParam String remover,
-    @PathVariable Long id) {     
+            @RequestParam String remover,
+            @PathVariable Long id) {
         Event event = EventHandler.removeEluateEvent(reason, remover, eluateService.read(id));
         eventService.createOrUpdate(event);
         eluateService.delete(id);

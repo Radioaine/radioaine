@@ -2,6 +2,7 @@ package ohtu.radioaine.controller;
 
 import java.sql.Timestamp;
 import java.util.List;
+import ohtu.radioaine.domain.Batch;
 import ohtu.radioaine.domain.Event;
 import ohtu.radioaine.domain.RadioMedicine;
 import ohtu.radioaine.domain.Substance;
@@ -78,9 +79,12 @@ public class HistoryController {
                 for (Substance substance : substances) {
                     substance.resetCountForReport();
                     for (RadioMedicine radiomed : radiomeds) {
-                        if (radiomed.getName().equals(substance.getName())) {
-                            substance.incCountForReport();
+                        for (Batch batch : radiomed.getKits()) {
+                            if (batch.getSubstance().getName().equals(substance.getName())) {
+                                substance.incCountForReport();
+                            }
                         }
+
                     }
                 }
                 model.addAttribute("radioMeds", radiomeds);

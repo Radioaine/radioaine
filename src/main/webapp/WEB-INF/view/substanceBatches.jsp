@@ -78,7 +78,7 @@
                     <td id="qualityCheck">
                         <c:choose>
                             <c:when test="${batch.qualityCheck==1}">
-                                Hyväksytty
+                                Hyväksytty / ${batch.qualityCheckSignature}
                             </c:when>
                             <c:when test="${batch.qualityCheck==2}">
                                 Hylätty

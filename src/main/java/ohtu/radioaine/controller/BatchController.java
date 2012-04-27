@@ -46,11 +46,6 @@ public class BatchController {
     @Autowired
     private StorageService storageService;
 
-    /***************
-     * CONTROLLERS *
-     ***************/  
-     
-    
     @RequestMapping(value = "batch/{id}", method = RequestMethod.GET)
     public String getBatchByIdCTRL(@PathVariable Long id, Model model) {
         model.addAttribute("batch", batchService.read(id));
@@ -76,6 +71,15 @@ public class BatchController {
         return "redirect:/substance/" + sid;
     }
 
+    private void setQualityCheck(Long id, Integer qualityCheck, String sig) {
+        Batch batch = batchService.read(id);
+        batch.setQualityCheck(qualityCheck);
+        batch.setQualityCheckSignature(sig);
+        batchService.createOrUpdate(batch);
+        updateSubstance(batch.getSubstance());
+        Event event = EventHandler.qualityCheckEvent(batch, sig);
+        eventService.createOrUpdate(event);
+    }
 
     @RequestMapping(value = "batch", method = RequestMethod.GET)
     public String batchListCTRL(Model model) {
@@ -92,8 +96,6 @@ public class BatchController {
         return "addBatchView";
     }
 
-    
-
     @RequestMapping(value = "removeFromBatch/{id}", method = RequestMethod.GET)
     public String removeFromBatchViewCTRL(@PathVariable Long id, Model model) {
         model.addAttribute("batch", batchService.read(id));
@@ -107,8 +109,6 @@ public class BatchController {
         return "redirect:/batch/" + id;
     }
 
-    
-
     @RequestMapping(value = "batch", method = RequestMethod.POST)
     public String addBatchCTRL(@Valid @ModelAttribute("batch") BatchFormObject bfo, BindingResult result) {
         if (result.hasErrors()) {
@@ -118,8 +118,6 @@ public class BatchController {
         Batch batch = addBatchToDatabase(bfo);
         return "redirect:/batch/" + batch.getId();
     }
-
-   
 
     @RequestMapping(value = "updateBatch/{id}")
     public String batchUpdateRequestCTRL(Model model, @PathVariable Long id) {
@@ -156,8 +154,8 @@ public class BatchController {
         updateBatch(id, bfm);
         return "redirect:/batch/" + id;
     }
-    
-     private Batch addBatchToDatabase(BatchFormObject bfo) {
+
+    private Batch addBatchToDatabase(BatchFormObject bfo) {
         Batch batch = createBatch(bfo);
         Batch temp = batchService.read(batch.getBatchNumber(), bfo.getSubstance());
         if (temp == null) {
@@ -169,7 +167,7 @@ public class BatchController {
         }
         return batch;
     }
-    
+
     private void addNames(Model model) {
         String names = "'";
         for (int i = 0; i < storageService.storageNamesList().size(); i++) {
@@ -182,16 +180,15 @@ public class BatchController {
         names += "'";
         model.addAttribute("storageNames", names);
     }
-    
-     /*******************
-     * HELPER FUNCTIONS *
-     ********************/
-    
-    
+
+    /**
+     * *****************
+     * HELPER FUNCTIONS * ******************
+     */
     private boolean totalAmountDiffers(BindingResult result, Batch temp, int newTotalAmount) {
         return result.hasErrors() || temp.getAmount() != newTotalAmount;
     }
-    
+
     private void removeItemsFromBatch(Long id, Integer[] amounts, String reason, String remover) {
         Batch temp = batchService.read(id);
         Substance substance = (Substance) substanceService.read(temp.getSubstance().getId());
@@ -214,14 +211,14 @@ public class BatchController {
         substance.setTotalAmount(substance.getTotalAmount() - totalRemoved);
         batchService.createOrUpdate(temp);
         substanceService.createOrUpdate(substance);
-        if(tempTotalAmount == 0){
+        if (tempTotalAmount == 0) {
             substance = checkSubstanceExpDate(substance);
             substanceService.createOrUpdate(substance);
         }
         Event event = EventHandler.removeFromBatchEvent(temp, remover, reason, totalRemoved);
         eventService.createOrUpdate(event);
     }
-    
+
     private int countAmount(BatchFormObject bfm) {
         //Checks if the new total amount differs from the old total amount and if it does, the update fails
         int newTotalAmount = 0;
@@ -239,7 +236,10 @@ public class BatchController {
         batch.setStorageLocations(bfo.getStorageLocations());
         batch.setSubstanceVolume(bfo.getSubstanceVolume());
         batch.setBatchNumber(bfo.getBatchNumber());
-        batch.setQualityCheck(bfo.getQualityCheck());
+        if (batch.getQualityCheck() != 1 && bfo.getQualityCheck() == 1) {
+            batch.setQualityCheckSignature(bfo.getSignature());
+            batch.setQualityCheck(bfo.getQualityCheck());
+        }
         batch.setNote(bfo.getNote());
         batch.setArrivalDate(Time.parseDate(bfo.getArrivalDate()));
         batch.setExpDate(Time.parseDate(bfo.getExpDate()));
@@ -344,16 +344,7 @@ public class BatchController {
         return batchService.createOrUpdate(batch);
 
     }
-    
-    private void setQualityCheck(Long id, Integer qualityCheck, String sig) {
-        Batch batch = batchService.read(id);
-        batch.setQualityCheck(qualityCheck);
-        batchService.createOrUpdate(batch);
-        updateSubstance(batch.getSubstance());
-        Event event = EventHandler.qualityCheckEvent(batch, sig);
-        eventService.createOrUpdate(event);
-    }
-    
+
     private void updateSubstance(Substance substance) {
         Substance temp = (Substance) substanceService.read(substance.getId());
         int status = temp.getQualityStatus();
@@ -390,20 +381,20 @@ public class BatchController {
     private Substance checkSubstanceExpDate(Substance substance) {
         System.out.println("Mentii checkkii");
         Timestamp oldestDate = Time.parseTimeStamp("13.6.2900 10:00");
-        System.out.println(" "+oldestDate);
+        System.out.println(" " + oldestDate);
         List<Batch> batches = batchService.listSubstanceBatches(substance.getId());
-        for(Batch batch : batches){
-            if(batch.getAmount() > 0){
+        for (Batch batch : batches) {
+            if (batch.getAmount() > 0) {
                 System.out.println("Erä suurempi ku 0");
-                if(batch.getExpDate().compareTo(oldestDate) < 0){
-                    System.out.println("Erän vanhenee "+batch.getExpDate()+" oldest "+oldestDate);
+                if (batch.getExpDate().compareTo(oldestDate) < 0) {
+                    System.out.println("Erän vanhenee " + batch.getExpDate() + " oldest " + oldestDate);
                     oldestDate = batch.getExpDate();
                 }
             }
         }
-        System.out.println("asetetaa "+oldestDate);
+        System.out.println("asetetaa " + oldestDate);
         substance.setOldestDate(oldestDate);
         return substance;
-        
+
     }
 }

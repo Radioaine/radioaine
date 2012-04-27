@@ -29,6 +29,7 @@ public class Batch implements Serializable {
     private Timestamp expDate;
     private int qualityCheck;
     private String signature;
+    private String qualityCheckSignature;
     private double strength;
     private String manufacturer;
     private String supplier;
@@ -36,7 +37,7 @@ public class Batch implements Serializable {
     private int storageLocationsCount = 100;
     private Long[][] storageLocations = new Long[storageLocationsCount][2];
     private int status;
-    
+
 //    @ManyToOne
 //    private List<Storage> storages;
 //
@@ -47,7 +48,14 @@ public class Batch implements Serializable {
 //    public void setStorages(List<Storage> storages) {
 //        this.storages = storages;
 //    }
-    
+    public String getQualityCheckSignature() {
+        return qualityCheckSignature;
+    }
+
+    public void setQualityCheckSignature(String qualityCheckSignature) {
+        this.qualityCheckSignature = qualityCheckSignature;
+    }
+
     public int getStatus() {
         return status;
     }
@@ -55,7 +63,7 @@ public class Batch implements Serializable {
     public void setStatus(int status) {
         this.status = status;
     }
-    
+
     public Eluate getEluate() {
         return eluate;
     }
@@ -192,14 +200,16 @@ public class Batch implements Serializable {
     public int getCurrentStorageLocationsCount() {
         int temp = 0;
         for (int i = 0; i < storageLocations.length; i++) {
-            if (/*storageLocations[i][1] > 0 || */storageLocations[i][1] != null) {
+            if (/*
+                     * storageLocations[i][1] > 0 ||
+                     */storageLocations[i][1] != null) {
                 temp++;
             }
         }
         return temp;
     }
-    
-    public void useOne(){
+
+    public void useOne() {
         amount--;
     }
 }

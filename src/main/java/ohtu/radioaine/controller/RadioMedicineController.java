@@ -69,20 +69,24 @@ public class RadioMedicineController {
         }
         updateRadioMed(id, rmfo);
         return "redirect:/RadioMedicine/" + id;
-    } 
+    }
 
     @RequestMapping(value = "createRadioMedicine", method = RequestMethod.POST)
     public String newRadioMedicineCTRL(@Valid @ModelAttribute("radioMedicine") RadioMedicineFormObject rmfo, BindingResult result, @RequestParam("storageIds") int[] storageIds) {
-        for(int i=0; i < storageIds.length; i++)    {
-            System.out.println("storage id " + (i+1) + ": " + storageIds[i]);
+        for (int i = 0; i < storageIds.length; i++) {
+            System.out.println("storage id " + (i + 1) + ": " + storageIds[i]);
         }
         if (result.hasErrors()) {
 //            System.out.println(result);
             return "createRadioMedicine";
         }
 
-        RadioMedicine newRadioMedicine = radioMedService.createOrUpdate(createRD(rmfo, storageIds));
-        return "redirect:/frontpage";
+        RadioMedicine newRadioMedicine = createRD(rmfo, storageIds);
+        if (newRadioMedicine != null) {
+            newRadioMedicine = radioMedService.createOrUpdate(newRadioMedicine);
+            return "redirect:/frontpage";
+        }
+        return "createRadioMedicine";
     }
 
     @RequestMapping("RadioMedicine/{id}")
@@ -91,18 +95,18 @@ public class RadioMedicineController {
         model.addAttribute("storages", storageService.list());
         return "radioMedicineView";
     }
-   
+
     @RequestMapping("removeRadioMedRequest/{id}")
-    public String removalRqeust(Model model, @PathVariable Long id) {     
+    public String removalRqeust(Model model, @PathVariable Long id) {
         model.addAttribute("radioMedicine", radioMedService.read(id));
         model.addAttribute("storages", storageService.list());
         return "radioMedRemovalView";
     }
-    
+
     @RequestMapping(value = "removeRadioMed/{id}", method = RequestMethod.POST)
     public String removeRadioMed(@RequestParam String reason,
-    @RequestParam String remover,
-    @PathVariable Long id) {     
+            @RequestParam String remover,
+            @PathVariable Long id) {
         Event event = EventHandler.removeRadioMedEvent(reason, remover, radioMedService.read(id));
         eventService.createOrUpdate(event);
         radioMedService.delete(id);
@@ -112,23 +116,8 @@ public class RadioMedicineController {
     private RadioMedicine createRD(RadioMedicineFormObject rmfo, int[] storageIds) {
         RadioMedicine radioMedicine = new RadioMedicine();
 
-        radioMedicine.setNote(rmfo.getNote());
-        radioMedicine.setSignature(rmfo.getSignature());
-        if (rmfo.getVolume().equals("")) {
-            radioMedicine.setVolume(0.0);
-        } else {
-            radioMedicine.setVolume(Double.parseDouble(rmfo.getVolume()));
-        }
-        radioMedicine.setDate(Time.parseDate(rmfo.getDate()));
-        if (rmfo.getStrength().equals("")) {
-            radioMedicine.setStrength(0.0);
-        } else {
-            radioMedicine.setStrength(Double.parseDouble(rmfo.getStrength()));
-        }
-        radioMedicine.setUnit(rmfo.getUnit());
-        radioMedicine.setStorageLocation(rmfo.getStorageLocation());
-        radioMedicine.setTimestamp(Time.parseTimeStamp(rmfo.getDate() + " " + rmfo.getHours() + ":" + rmfo.getMinutes()));
         List<Eluate> eluates = new ArrayList<Eluate>();
+
         Long[] eluatesTable = rmfo.getEluates();
         for (int i = 0; i < eluatesTable.length; ++i) {
             if (eluatesTable[i] != null) {
@@ -136,10 +125,14 @@ public class RadioMedicineController {
             }
         }
 
+        if (eluates.isEmpty()) {
+            return null;
+        }
+
         List<Batch> kits = new ArrayList<Batch>();
         Long[] kitsTable = rmfo.getKits();
         for (int i = 0; i < kitsTable.length; ++i) {
-            System.out.println("kitti indexi: " + i + " kittiTable koko: " + kitsTable.length +" storageIds koko: " + storageIds.length + " storage sisältö: " + storageIds[i]);
+ //           System.out.println("kitti indexi: " + i + " kittiTable koko: " + kitsTable.length + " storageIds koko: " + storageIds.length + " storage sisältö: " + storageIds[i]);
             if (kitsTable[i] != null) {
                 kits.add(batchService.read(kitsTable[i]));
                 decreaseKitAmountsOnCreation(i, kitsTable, storageIds);
@@ -158,13 +151,31 @@ public class RadioMedicineController {
         radioMedicine.setOthers(others);
         radioMedicine.setKits(kits);
 
+        radioMedicine.setNote(rmfo.getNote());
+        radioMedicine.setSignature(rmfo.getSignature());
+        if (rmfo.getVolume().equals("")) {
+            radioMedicine.setVolume(0.0);
+        } else {
+            radioMedicine.setVolume(Double.parseDouble(rmfo.getVolume()));
+        }
+        radioMedicine.setDate(Time.parseDate(rmfo.getDate()));
+        if (rmfo.getStrength().equals("")) {
+            radioMedicine.setStrength(0.0);
+        } else {
+            radioMedicine.setStrength(Double.parseDouble(rmfo.getStrength()));
+        }
+        radioMedicine.setUnit(rmfo.getUnit());
+        radioMedicine.setStorageLocation(rmfo.getStorageLocation());
+        radioMedicine.setTimestamp(Time.parseTimeStamp(rmfo.getDate() + " " + rmfo.getHours() + ":" + rmfo.getMinutes()));
+
+
         return radioMedicine;
     }
-    
-    private void decreaseKitAmountsOnCreation(int i, Long[] kitsTable, int[] storageIds)    {
-        for(int j=0; j < batchService.read(kitsTable[i]).getStorageLocations().length; j++) {
-            if(batchService.read(kitsTable[i]).getStorageLocations()[j][0] != null)    {
-                if(batchService.read(kitsTable[i]).getStorageLocations()[j][0] == storageIds[i])    {
+
+    private void decreaseKitAmountsOnCreation(int i, Long[] kitsTable, int[] storageIds) {
+        for (int j = 0; j < batchService.read(kitsTable[i]).getStorageLocations().length; j++) {
+            if (batchService.read(kitsTable[i]).getStorageLocations()[j][0] != null) {
+                if (batchService.read(kitsTable[i]).getStorageLocations()[j][0] == storageIds[i]) {
                     Batch temp = batchService.read(kitsTable[i]);
                     Long[][] tempStorages = temp.getStorageLocations();
                     tempStorages[j][1] = tempStorages[j][1] - 1;
@@ -174,11 +185,11 @@ public class RadioMedicineController {
                     Substance substanceTemp = temp.getSubstance();
                     substanceTemp.setTotalAmount(substanceTemp.getTotalAmount() - 1);
                     substanceService.createOrUpdate(substanceTemp);
-                }        
+                }
             }
         }
     }
-    
+
     private void updateRadioMed(Long id, RadioMedicineFormObject rmfo) {
         RadioMedicine radioMedicine = radioMedService.read(id);
 
@@ -223,4 +234,3 @@ public class RadioMedicineController {
         radioMedService.createOrUpdate(radioMedicine);
     }
 }
-

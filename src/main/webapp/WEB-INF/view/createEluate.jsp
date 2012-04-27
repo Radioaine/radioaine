@@ -19,7 +19,7 @@
         <table class="noborder">
             <tr>
                 <td class="name">Generaattori</td>
-                <td><select multiple="multiple" class="list">
+                <td><select required="required" multiple="multiple" class="list">
                         <c:forEach var="generator" items="${generators}">
                             <c:forEach var="location" items="${generator.storageLocations}">
                                 <c:if test="${location[1] != null}">
@@ -41,7 +41,7 @@
             </tr>
             <tr>
                 <td>Eluointiliuos</td>
-                <td><select multiple="multiple" class="list">
+                <td><select required="required" multiple="multiple" class="list">
                         <c:forEach var="other" items="${others}">
                             <c:forEach var="location" items="${other.storageLocations}">
                                 <c:if test="${location[1] != null}">

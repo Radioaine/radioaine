@@ -6,5 +6,5 @@
     <fmt:formatDate pattern="HH" value="${currentDate}" var="hours"/>
     <fmt:formatDate pattern="mm" value="${currentDate}" var="minutes"/>
     <fmt:formatDate pattern="dd.MM.yyyy" value="${currentDate}" var="date"/>
-    ${showDate}
+    sivu ladattu: ${showDate}
 </span>

@@ -139,6 +139,15 @@ public class EluateController {
 
     @RequestMapping("removeEluateRequest/{id}")
     public String removeEluate(Model model, @PathVariable Long id) {
+        model.addAttribute("eluate", eluateService.read(id));
+        model.addAttribute("storages", storageService.list());
+        return "eluateRemovalView";
+    }
+
+    @RequestMapping(value = "removeEluate/{id}", method = RequestMethod.POST)
+    public String removeRadioMed(Model model, @RequestParam String reason,
+            @RequestParam String remover,
+            @PathVariable Long id) {
         Eluate eluate = eluateService.read(id);
         List<RadioMedicine> radiomeds = radioMedicineService.list();
         boolean radiomedForEluateFound = false;
@@ -155,17 +164,11 @@ public class EluateController {
             }
         }
         if (radiomedForEluateFound) {
+            model.addAttribute("eluate", eluateService.read(id));
+            model.addAttribute("storages", storageService.list());
             model.addAttribute("removeError", 1);
-            return "eluate/" + id;
+            return "eluateRemovalView";
         }
-        eluateService.delete(id);
-        return "redirect:/frontpage";
-    }
-
-    @RequestMapping(value = "removeEluate/{id}", method = RequestMethod.POST)
-    public String removeRadioMed(@RequestParam String reason,
-            @RequestParam String remover,
-            @PathVariable Long id) {
         Event event = EventHandler.removeEluateEvent(reason, remover, eluateService.read(id));
         eventService.createOrUpdate(event);
         eluateService.delete(id);

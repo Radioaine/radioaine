@@ -78,15 +78,12 @@
             <td class="deleteButton">
                 <form action="${pageContext.servletContext.contextPath}/removeEluateRequest/${eluate.id}" method="GET">  
                     <input type="submit" value="Poista" /> 
-                    <c:if test="${removeError == 1}">
-                        <span style="background-color:red;"> Eluaatista on luotu radiol‰‰kkeit‰. Et voi poistaa eluaattia.</span>
-                    </c:if>
+
                 </form>
             </td>
             <td>
                 <input type="button" value="Palaa" onClick="parent.location = '${pageContext.servletContext.contextPath}/frontpage'" />
             </td>
-
         </tr>
     </table>
 

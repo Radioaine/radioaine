@@ -15,7 +15,7 @@
                     <a href="${pageContext.servletContext.contextPath}/substance/${generator.substance.id}">${generator.substance.name}</a>, 
                     <a href="${pageContext.servletContext.contextPath}/batch/${generator.id}">Er‰ ${generator.batchNumber}</a><br />
                 </c:forEach>
-                    
+
                 <c:forEach var="other" items="${eluate.others}">
                     <a href="${pageContext.servletContext.contextPath}/substance/${other.substance.id}">${other.substance.name}</a>, 
                     <a href="${pageContext.servletContext.contextPath}/batch/${other.id}">Er‰ ${other.batchNumber}</a><br />
@@ -69,7 +69,7 @@
     <br />
     <form action="${pageContext.servletContext.contextPath}/removeEluate/${eluate.id}" method="POST">
         <table class="noborder">
-       
+
             <tr>
                 <td>Poiston syy</td>
                 <td><input required="required" type="text" name="reason" /></td>
@@ -82,9 +82,12 @@
                 <td><input required="required" type="text" size="6" name="remover" /></td>
             </tr>
         </table><br/>
-        <input type="submit" value="Poista" /> &nbsp; &nbsp;<input type="button" value="Peruuta" onClick="parent.location = '${pageContext.servletContext.contextPath}/eluate/${eluate.id}'" />
+        <input type="submit" value="Poista" /> &nbsp; &nbsp;<input type="button" value="Peruuta" onClick="parent.location = '${pageContext.servletContext.contextPath}/eluate/${eluate.id}'" />   
+        <c:if test="${removeError == 1}">
+            <span style="color: red;"> Eluaatista on luotu radiol‰‰kkeit‰. Et voi poistaa eluaattia.</span>
+        </c:if>
     </form>
-            
+
 </div>
 
 

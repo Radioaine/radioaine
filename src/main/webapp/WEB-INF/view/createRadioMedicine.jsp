@@ -48,7 +48,7 @@
             </tr>
             <tr>
                 <td>Kitti</td>
-                <td><select multiple="multiple" class="list">
+                <td><select required="required" multiple="multiple" class="list">
                         <c:forEach var="kit" items="${kits}">
                             <c:forEach var="location" items="${kit.storageLocations}">
                                 <c:if test="${location[1] != null}">

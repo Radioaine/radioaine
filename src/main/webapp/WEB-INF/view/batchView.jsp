@@ -32,7 +32,7 @@
                         Hyväksytty / ${batch.qualityCheckSignature}
                     </c:when>
                     <c:when test="${batch.qualityCheck==2}">
-                        Hylätty
+                        Hylätty / ${batch.qualityCheckSignature}
                     </c:when>
                     <c:otherwise>
                         <form action="${pageContext.servletContext.contextPath}/doCheck/${batch.id}+0" method="POST">

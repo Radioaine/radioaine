@@ -150,7 +150,6 @@ public class BatchController {
 //            System.out.println(result);
             return "redirect:/updateBatch/" + id;
         }
-        System.out.println("ZZZ3");
         updateBatch(id, bfm);
         return "redirect:/batch/" + id;
     }
@@ -215,8 +214,10 @@ public class BatchController {
             substance = checkSubstanceExpDate(substance);
             substanceService.createOrUpdate(substance);
         }
-        Event event = EventHandler.removeFromBatchEvent(temp, remover, reason, totalRemoved);
-        eventService.createOrUpdate(event);
+        if(totalRemoved > 0)    {
+            Event event = EventHandler.removeFromBatchEvent(temp, remover, reason, totalRemoved);
+            eventService.createOrUpdate(event);
+        }
     }
 
     private int countAmount(BatchFormObject bfm) {
@@ -236,10 +237,10 @@ public class BatchController {
         batch.setStorageLocations(bfo.getStorageLocations());
         batch.setSubstanceVolume(bfo.getSubstanceVolume());
         batch.setBatchNumber(bfo.getBatchNumber());
-        if (batch.getQualityCheck() != 1 && bfo.getQualityCheck() == 1) {
-            batch.setQualityCheckSignature(bfo.getSignature());
-            batch.setQualityCheck(bfo.getQualityCheck());
-        }
+        //if (batch.getQualityCheck() != 1 && bfo.getQualityCheck() == 1) {
+        batch.setQualityCheckSignature(bfo.getSignature());
+        batch.setQualityCheck(bfo.getQualityCheck());
+        //}
         batch.setNote(bfo.getNote());
         batch.setArrivalDate(Time.parseDate(bfo.getArrivalDate()));
         batch.setExpDate(Time.parseDate(bfo.getExpDate()));

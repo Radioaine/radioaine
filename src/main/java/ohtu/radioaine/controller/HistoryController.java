@@ -52,6 +52,9 @@ public class HistoryController {
         Timestamp startDate = Time.parseTimeStamp(start + " 00:00");
         Timestamp endDate = Time.parseTimeStamp(end + " 23:59");
         model.addAttribute("events", eventService.list(startDate, endDate));
+        model.addAttribute("start", start);
+        model.addAttribute("end", end);
+        
         return "allEventsView";
     }
 

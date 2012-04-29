@@ -4,6 +4,7 @@
 <%@include file="headeradmin.jsp" %>
 
 <div id="contents">
+    <h1>Kaikki tapahtumat aikavälillä ${start} - ${end}</h1>
     <table class="noborder">
         <c:forEach var="event" items="${events}">
                     <tr>

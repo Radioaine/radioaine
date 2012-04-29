@@ -124,7 +124,7 @@
             </tr>
             <tr>
                 <td>Tilavuus</td>
-                <td><form:input path="volume" type="text" size="5"/><form:errors path="volume"/>ml</td>
+                <td><form:input pattern="^[0-9]{1,4}([,.][0-9]{1,4})?$" path="volume" type="text" size="5"/><form:errors path="volume"/>ml</td>
             </tr>
             <tr>
                 <td>Varastopaikka</td>

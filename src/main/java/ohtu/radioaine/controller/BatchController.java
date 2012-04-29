@@ -234,6 +234,7 @@ public class BatchController {
     private Batch updateBatch(Long id, BatchFormObject bfo) {
         Batch batch = batchService.read(id);
         Substance substance = batch.getSubstance();
+        
         batch.setStorageLocations(bfo.getStorageLocations());
         batch.setSubstanceVolume(bfo.getSubstanceVolume());
         batch.setBatchNumber(bfo.getBatchNumber());
@@ -266,12 +267,34 @@ public class BatchController {
             substance.setTotalAmount(substance.getTotalAmount() + amountChange);
         }
         batch = batchService.createOrUpdate(batch);
+        
+        if(checkOldestDate(batch.getSubstance().getId(), Time.parseDate(bfo.getExpDate()))) {
+            substance.setOldestDate(Time.parseDate(bfo.getExpDate()));
+            substance.setWarningDate(Time.parseWarningDate(Time.parseDate(bfo.getExpDate()), substance.getWarningBeforeDays()));
+        }
+        
         substanceService.createOrUpdate(substance);
         Event event = EventHandler.updateBatchEvent(batch, bfo.getSignature());
         eventService.createOrUpdate(event);
+        
         return batch;
     }
 
+    private boolean checkOldestDate(Long id, Timestamp newDate)   {
+        List<Batch> list = batchService.listSubstanceBatches(id);
+        boolean olderOrSame = false;
+        for(Batch batch : list) {
+            if(newDate.after(batch.getExpDate()) && (batch.getExpDate().equals(batch.getSubstance().getOldestDate()) || batch.getExpDate().before(batch.getSubstance().getOldestDate())))    {
+                olderOrSame = false;
+                break;
+            }
+            else    {
+                olderOrSame = true;
+            }
+        }
+        return olderOrSame;
+    }
+    
     private int amountChange(Batch batch, BatchFormObject bfm) {
         int tempAmount;
         for (int i = 0; i < bfm.getStorageLocations().length; i++) {

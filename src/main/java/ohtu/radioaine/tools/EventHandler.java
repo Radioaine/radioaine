@@ -104,7 +104,7 @@ public class EventHandler {
         Event event = new Event();
         event.setSignature(remover);
         event.setNote(reason);
-        event.setInfo("type=radioMedRemoved "+eluate.toString());
+        event.setInfo("type=eluateRemoved "+eluate.toString());
         return event;
     }
 }

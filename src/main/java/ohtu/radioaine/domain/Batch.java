@@ -178,7 +178,7 @@ public class Batch implements Serializable {
 
     @Override
     public String toString() {
-        return "Batch{" + "id=" + id + ", batchNumber=" + batchNumber + ", amount=" + amount + ", substanceVolume=" + substanceVolume + ", substance=" + substance + ", eluate=" + eluate + ", arrivalDate=" + arrivalDate + ", expDate=" + expDate + ", qualityCheck=" + qualityCheck + ", signature=" + signature + ", strength=" + strength + ", manufacturer=" + manufacturer + ", supplier=" + supplier + ", note=" + note + ", storageLocationsCount=" + storageLocationsCount + ", storageLocations=" + storageLocations + ", status=" + status + '}';
+        return "Batch{" + "id=" + id + ", batchNumber=" + batchNumber + ", amount=" + amount + ", volume=" + substanceVolume + ", substance=" + substance.getName() + ", eluate=" + eluate + ", arrivalDate=" + arrivalDate + ", expDate=" + expDate + ", qualityCheck=" + qualityCheck + ", signature=" + signature + ", strength=" + strength + ", manufacturer=" + manufacturer + ", supplier=" + supplier + ", note=" + note + ", status=" + status + '}';
     }
 
     public Substance getSubstance() {

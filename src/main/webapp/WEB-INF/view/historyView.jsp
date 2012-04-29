@@ -6,11 +6,11 @@
 <script>
     $(function() {
         $( "#start" ).datepicker();
+        $( "#end" ).datepicker();
+        $( "#start2" ).datepicker();
+        $( "#end2" ).datepicker();
     });
     
-    $(function() {
-        $( "#end" ).datepicker();
-    });
     
     
 </script>
@@ -46,7 +46,7 @@
 
 <h2>Tapahtumien haku</h2>
 </br>
-<form action="/radioaine/seek">Etsi aineen nimellä <input type="text" name="searchString"> <input type="submit" value="Hae"></form>
+<form action="${pageContext.servletContext.contextPath}/getAllEvents">Hae kaikki tapahtumat aikaväliltä <input id="start2" name="start" type="text" value="" required="required" pattern="^(0[1-9]|[1-2][0-9]|3[0-1])\.(0[1-9]|1[0-2])\.[0-9]{4}$"/> - <input id="end2" name="end" type="text" value="" required="required" pattern="^(0[1-9]|[1-2][0-9]|3[0-1])\.(0[1-9]|1[0-2])\.[0-9]{4}$"/> <input type="submit" value="Hae"></form>
 
 </div>
 <%@include file="footer.jsp" %>

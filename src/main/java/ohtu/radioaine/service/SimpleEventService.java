@@ -64,4 +64,9 @@ public class SimpleEventService implements EventService {
     public List<Event> listRemoved(Timestamp startDate, Timestamp endDate) {
         return storageDao.listRemoved(startDate, endDate);
     }
+
+    @Override
+    public List<Event> list(Timestamp start, Timestamp end) {
+        return storageDao.list(start, end);
+    }
 }

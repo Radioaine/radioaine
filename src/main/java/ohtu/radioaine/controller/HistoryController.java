@@ -44,6 +44,16 @@ public class HistoryController {
         model.addAttribute("modified", eventService.list("type=modify"));
         return "historyView";
     }
+    
+    @RequestMapping("getAllEvents")
+    public String allEventsCTRL(Model model, 
+            @RequestParam String start,
+            @RequestParam String end) {
+        Timestamp startDate = Time.parseTimeStamp(start + " 00:00");
+        Timestamp endDate = Time.parseTimeStamp(end + " 23:59");
+        model.addAttribute("events", eventService.list(startDate, endDate));
+        return "allEventsView";
+    }
 
     @RequestMapping("seek")
     public String seekByNameCTRL(@RequestParam String[] reports,

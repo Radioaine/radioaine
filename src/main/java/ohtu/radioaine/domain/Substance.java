@@ -42,6 +42,11 @@ public class Substance implements Serializable {
     private boolean inUse;
     private int countForReport = 0;
 
+    @Override
+    public String toString() {
+        return "Substance{" + "id=" + id + ", name=" + name + ", genericName=" + genericName + ", eluateName=" + eluateName + ", type=" + type + ", halflife=" + halflife + ", warningBeforeDays=" + warningBeforeDays + ", warningBeforeAmount=" + warningBeforeAmount + ", volume=" + volume + ", strength=" + strength + ", ordered=" + ordered + ", needsColdStorage=" + needsColdStorage + ", manufacturer=" + manufacturer + ", supplier=" + supplier + ", totalAmount=" + totalAmount + ", oldestDate=" + oldestDate + ", warningDate=" + warningDate + ", signature=" + signature + ", statusMessages=" + statusMessages + ", qualityStatus=" + qualityStatus + ", qualityControl=" + qualityControl + ", inUse=" + inUse + ", countForReport=" + countForReport + '}';
+    }
+
     public Timestamp getWarningDate() {
         return warningDate;
     }

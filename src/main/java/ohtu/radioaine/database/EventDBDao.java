@@ -16,6 +16,7 @@ import ohtu.radioaine.domain.Event3;
 public interface EventDBDao extends DAO<Event> {
     public List<Event> list();
     public List<Event> list(String name);
+    public List<Event> list(Timestamp start, Timestamp end);
     public List<Event> listArrived(Timestamp start, Timestamp end);
     public List<Event> listRemoved(Timestamp start, Timestamp end);
 }

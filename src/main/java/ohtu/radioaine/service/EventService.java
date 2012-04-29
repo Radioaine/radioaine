@@ -17,6 +17,7 @@ public interface EventService {
     public Event createOrUpdate(Event event);
     public List<Event> list();
     public List<Event> list(String name);
+    public List<Event>list(Timestamp start, Timestamp end);
     public List<Event>listArrived(Timestamp start, Timestamp end);
     public List<Event> listRemoved(Timestamp startDate, Timestamp endDate);
     public Event read(Long id);

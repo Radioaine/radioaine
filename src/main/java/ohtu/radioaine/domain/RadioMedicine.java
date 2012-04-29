@@ -42,6 +42,11 @@ public class RadioMedicine implements Serializable{
     private List<Batch> kits;
     private int countForReport = 0;
 
+    @Override
+    public String toString() {
+        return "RadioMedicine{" + "id=" + id + ", strength=" + strength + ", volume=" + volume + ", date=" + date + ", signature=" + signature + ", note=" + note + ", storageLocation=" + storageLocation + ", name=" + name + ", preparer=" + preparer + ", unit=" + unit + ", eluates=" + eluates + ", others=" + others + ", kits=" + kits + ", countForReport=" + countForReport + '}';
+    }
+
     public List<Eluate> getEluates() {
         return eluates;
     }

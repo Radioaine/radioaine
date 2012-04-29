@@ -42,6 +42,11 @@ public class Eluate implements Serializable {
 //    @JoinColumn(name = "ELUATE_KITS")
 //    private List<Batch> kits;
 
+    @Override
+    public String toString() {
+        return "Eluate{" + "id=" + id + ", strength=" + strength + ", unit=" + unit + ", volume=" + volume + ", date=" + date + ", signature=" + signature + ", note=" + note + ", storageLocation=" + storageLocation + ", name=" + name + ", generators=" + generators + ", others=" + others + '}';
+    }
+
     public Timestamp getDate() {
         return date;
     }

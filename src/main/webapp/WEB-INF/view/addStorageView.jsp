@@ -11,7 +11,7 @@
         <table class="noborder">
             <tr>
                 <td class="short">Nimi</td>
-                <td><input required name="name" type="text"/></td>
+                <td><input required name="name" type="text" size="60" /></td>
             </tr>
         </table>
         <br/>

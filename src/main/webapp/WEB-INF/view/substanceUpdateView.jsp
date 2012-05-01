@@ -17,11 +17,11 @@
             <tr>
                 <td>Tyyppi</td>
                 <td>
-                    <form:select path="type">
+                    <!--<form:select path="type">
                         <form:option value="0">Kitti</form:option>
                         <form:option value="1">Generaattori</form:option>
                         <form:option value="2">Muu</form:option>
-                    </form:select>
+                    </form:select>-->
                 </td>
                 <td class="infotext"><c:choose>
                         <c:when test="${substance.type=='0'}">

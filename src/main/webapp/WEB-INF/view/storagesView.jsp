@@ -12,7 +12,7 @@
                 <c:if test="${storage.hidden == false}">
                     <tr>
                         <form action="${pageContext.servletContext.contextPath}/updateStorageName/${storage.id}" method="POST">
-                                <td class="name">
+                                <td>
                                     <div id="name${storage.id}">${storage.name}</div>
                                     <input required name="name" id="inp${storage.id}" style="display: none;"></input>
                                 </td>

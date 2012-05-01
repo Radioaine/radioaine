@@ -53,13 +53,13 @@
                 <td>Vahvuus</td>
                 <td><form:input path="strength" type="text" class="substance"/><form:errors path="strength"/></td>
             </tr>
-            <c:if test="${substance.type=='1'}"><!--Tämä tarvitaan vain, jos tyyppi on generaattori-->
+            <!--<c:if test="${substance.type=='1'}"><!--Tämä tarvitaan vain, jos tyyppi on generaattori--><!--
                 <tr>
                     <td>Puoliintumisaika</td>
                     <td><form:input path="halflife" type="text" size="2"/><form:errors path="halflife"/> tuntia</td>
                 </tr>
             </c:if>
-            <!--<tr>
+            <tr>
                 <td>Säilytettävä kylmässä</td>
                 <td><select path="needsColdStorage" class="substance">
                         <option value="1" selected="selected">Kyllä</option>
@@ -73,7 +73,7 @@
                         <option value="1">Saman päivän aikana</option>
                         <option value="2">Poistettava erikseen</option>
                     </select></td>
-            </tr>-->
+            </tr>
             <tr>
                 <td>Laadunvarmistus</td>
                 <td><form:select path="qualityControl" name="qualityControl" class="substance">
@@ -83,7 +83,7 @@
 
                 </td>
             </tr>
-            <tr>
+            <tr>-->
                 <td>Huomautus vanhenemisesta</td>
                 <td><form:input path="warningBeforeDays" type="number"/><form:errors path="warningBeforeDays"/> päivää ennen viimeistä käyttöpäivää</td>
             </tr>

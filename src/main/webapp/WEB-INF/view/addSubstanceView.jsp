@@ -53,12 +53,7 @@
                 <td>Vahvuus</td>
                 <td><form:input path="strength" type="text" class="substance"/><form:errors path="strength"/></td>
             </tr>
-            <!--<c:if test="${substance.type=='1'}"><!--Tämä tarvitaan vain, jos tyyppi on generaattori--><!--
-                <tr>
-                    <td>Puoliintumisaika</td>
-                    <td><form:input path="halflife" type="text" size="2"/><form:errors path="halflife"/> tuntia</td>
-                </tr>
-            </c:if>
+            <!--
             <tr>
                 <td>Säilytettävä kylmässä</td>
                 <td><select path="needsColdStorage" class="substance">
@@ -76,10 +71,7 @@
             </tr>
             <tr>
                 <td>Laadunvarmistus</td>
-                <td><form:select path="qualityControl" name="qualityControl" class="substance">
-                        <form:option value="1" label="Huomautetaan puuttumisesta" selected="selected"></form:option>
-                        <form:option value="2" label="Ei huomauteta puuttumisesta"></form:option>
-                    </form:select>
+                <td>
 
                 </td>
             </tr>

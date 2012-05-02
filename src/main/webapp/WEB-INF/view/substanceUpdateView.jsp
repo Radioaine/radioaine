@@ -74,13 +74,7 @@
                 <td><form:input path="strength" type="text" value="${substance.strength}" class="substance"/><form:errors path="strength"/></td>
                 <td class="infotext">${substance.strength}</td>
             </tr>
-            <!--<c:if test="${substance.type=='1'}">
-                <tr>
-                    <td>Puoliintumisaika</td>
-                    <td><form:input path="halflife" type="text"/><form:errors path="halflife"/></td>
-                    <td class="infotext">${substance.halflife} tuntia</td>
-                </tr>   
-            </c:if>
+            <!--
             <tr>
                 <td>Laadunvarmistus</td>
                 <td><form:select path="qualityControl" name="qualityControl" class="substance">

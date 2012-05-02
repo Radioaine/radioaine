@@ -75,7 +75,7 @@ public class SubstanceController {
         substance.setStrength(sfo.getStrength());
         substance.setInUse(true);
         if (sfo.getType() == 1) {
-            substance.setHalflife(Double.parseDouble(sfo.getHalflife()));
+            //substance.setHalflife(Double.parseDouble(sfo.getHalflife()));
             substance.setEluateName(sfo.getEluateName());
         }
         substanceService.createOrUpdate(substance);

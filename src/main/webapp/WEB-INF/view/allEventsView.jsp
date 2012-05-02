@@ -9,7 +9,7 @@
     <table class="noborder">
         <c:forEach var="event" items="${events}">
                     <tr>
-                        <td style="padding-bottom: 1em;">${event.info}</td>
+                        <td style="padding-bottom: 1em;">${event.timestamp} ${event.info}</td>
                     </tr>
         </c:forEach>
     </table>

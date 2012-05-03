@@ -181,13 +181,34 @@ public class RadioMedicineController {
                     tempStorages[j][1] = tempStorages[j][1] - 1;
                     temp.setStorageLocations(tempStorages);
                     temp.setAmount(temp.getAmount() - 1);
+                    if(temp.getAmount() == 0)
+                        temp.setQualityCheck(0);
                     batchService.createOrUpdate(temp);
                     Substance substanceTemp = temp.getSubstance();
                     substanceTemp.setTotalAmount(substanceTemp.getTotalAmount() - 1);
+                    if(temp.getAmount() == 0)
+                        substanceTemp.setQualityStatus(updateSubstance(substanceTemp));
                     substanceService.createOrUpdate(substanceTemp);
                 }
             }
         }
+    }
+    
+    public int updateSubstance(Substance substance) {
+        Substance temp = (Substance) substanceService.read(substance.getId());
+        int status = temp.getQualityStatus();
+
+        List<Batch> batches = batchService.listSubstanceBatches(temp.getId());
+        for (Batch batch : batches) {
+            if (batch.getQualityCheck() == 2 || batch.getQualityCheck() == 0/* && status == 0*/) {
+                status = batch.getQualityCheck();
+            } else if (batch.getQualityCheck() == 1/* && (status == 0 | status == 2)*/) {
+                status = 1;
+                break;
+            }
+        }
+
+        return status;
     }
 
     private void updateRadioMed(Long id, RadioMedicineFormObject rmfo) {

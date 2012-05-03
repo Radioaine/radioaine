@@ -212,6 +212,7 @@ public class BatchController {
         substanceService.createOrUpdate(substance);
         if (tempTotalAmount == 0) {
             substance = checkSubstanceExpDate(substance);
+            substance.setQualityStatus(0);
             substanceService.createOrUpdate(substance);
         }
         if(totalRemoved > 0)    {
@@ -274,6 +275,7 @@ public class BatchController {
         }
         
         substanceService.createOrUpdate(substance);
+        updateSubstance(substance);
         Event event = EventHandler.updateBatchEvent(batch, bfo.getSignature());
         eventService.createOrUpdate(event);
         
@@ -369,16 +371,17 @@ public class BatchController {
 
     }
 
-    private void updateSubstance(Substance substance) {
+    public void updateSubstance(Substance substance) {
         Substance temp = (Substance) substanceService.read(substance.getId());
         int status = temp.getQualityStatus();
 
         List<Batch> batches = batchService.listSubstanceBatches(temp.getId());
         for (Batch batch : batches) {
-            if (batch.getQualityCheck() == 2 && status == 0) {
-                status = 2;
-            } else if (batch.getQualityCheck() == 1 && (status == 0 | status == 2)) {
+            if (batch.getQualityCheck() == 2 || batch.getQualityCheck() == 0/* && status == 0*/) {
+                status = batch.getQualityCheck();
+            } else if (batch.getQualityCheck() == 1/* && (status == 0 | status == 2)*/) {
                 status = 1;
+                break;
             }
         }
 

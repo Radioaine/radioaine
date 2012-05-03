@@ -110,7 +110,7 @@
                 <td>Luontiaika</td>
                 <td><input required name="hours" type="text" id="hours" size="2" value="${hours}"/>:<input required
                         name="minutes" type="text" id="minutes" size="2" value="${minutes}"/>
-                    <input required name="date" type="text" id="creationtime" value="${date}"/></td>
+                    <input required name="date" type="hidden" id="creationtime" value="${date}"/>${date}</td>
             </tr>
             <tr>
                 <td>Aktiivisuus</td>

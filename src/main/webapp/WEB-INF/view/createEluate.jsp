@@ -82,7 +82,7 @@
                 <td>Eluointiaika</td>
                 <td><input required name="hours" type="text" id="hours" value="${hours}" size="2"/>:<input
                         required name="minutes" type="text" id="minutes" size="2" value="${minutes}"/>
-                    <input required name="date" type="text" id="eluatingtime" value="${date}"/></td>
+                    <input required name="date" type="hidden" id="eluatingtime" value="${date}"/>${date}</td>
             </tr>
             <tr>
                 <td>Aktiivisuus</td>

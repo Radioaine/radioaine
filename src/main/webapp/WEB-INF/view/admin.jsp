@@ -27,7 +27,7 @@
                             <td><fmt:formatDate pattern="dd.MM.yyyy" value="${substance.oldestDate}"/></td>
                             <td>Eriä vanhentunut</td>
                             <td><form action="addStatusComment/${substance.id}+0" method="POST" >
-                                    <input name="comment" type="text" value="${substance.statusMessages[0]}" class="comm" />
+                                    <textarea rows="3" name="comment" value="${substance.statusMessages[0]}" class="comm" ></textarea>
                                     <button type="submit">Tallenna</button>
                                 </form>
                             </td>
@@ -40,7 +40,7 @@
                             <td><fmt:formatDate pattern="dd.MM.yyyy" value="${substance.oldestDate}"/></td>
                             <td>Eriä vanhenemassa</td>
                             <td><form action="addStatusComment/${substance.id}+0" method="POST" >
-                                    <input name="comment" type="text" value="${substance.statusMessages[0]}" class="comm" />
+                                    <textarea rows="3" name="comment" value="${substance.statusMessages[0]}" class="comm" ></textarea>
                                     <button type="submit">Tallenna</button>
                                 </form>
                             </td>
@@ -61,7 +61,7 @@
                             <td><fmt:formatDate pattern="dd.MM.yyyy" value="${substance.oldestDate}"/></td>
                             <td>Loppu</td>
                             <td><form action="addStatusComment/${substance.id}+1" method="POST" >
-                                    <input name="comment" type="text" value="${substance.statusMessages[1]}" class="comm"/>
+                                    <textarea rows="3" name="comment" value="${substance.statusMessages[0]}" class="comm" ></textarea>
                                     <button type="submit">Tallenna</button>
                                 </form>
                             </td>
@@ -74,7 +74,7 @@
                             <td><fmt:formatDate pattern="dd.MM.yyyy" value="${substance.oldestDate}"/></td>
                             <td>Vähissä</td>
                             <td><form action="addStatusComment/${substance.id}+1" method="POST" >
-                                    <input name="comment" type="text" value="${substance.statusMessages[1]}" class="comm" />
+                                    <textarea rows="3" name="comment" value="${substance.statusMessages[0]}" class="comm" ></textarea>
                                     <button type="submit">Tallenna</button>
                                 </form>
                             </td>
@@ -89,7 +89,7 @@
                     <td><fmt:formatDate pattern="dd.MM.yyyy" value="${substance.oldestDate}"/></td>
                     <td>Laadunvarmistus puuttuu</td>
                     <td><form action="addStatusComment/${substance.id}+2" method="POST" >
-                            <input name="comment" type="text" value="${substance.statusMessages[2]}" class="comm" />
+                            <textarea rows="3" name="comment" value="${substance.statusMessages[0]}" class="comm" ></textarea>
                             <button type="submit">Tallenna</button>
                         </form>
                     </td>

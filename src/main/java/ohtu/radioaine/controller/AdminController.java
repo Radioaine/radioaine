@@ -108,9 +108,9 @@ public class AdminController {
         return "redirect:/admin";
     }
     
-    /*******************
-     * HELPER FUNCTION *
-     *******************/
+    /********************
+     * HELPER FUNCTIONS *
+     ********************/
     
     private boolean addNewStorage(String name) {
         List<Storage> storageList = storageService.list();

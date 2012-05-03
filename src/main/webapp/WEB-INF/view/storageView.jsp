@@ -24,7 +24,7 @@
                     <td><a href="substance/${substance.id}">${substance.name}</a></td>
                     <td><fmt:formatDate pattern="dd.MM.yyyy" value="${substance.oldestDate}"/></td>
                     <td><b>
-                        <c:if test="${substance.warningDate < compareDate}">
+                        <c:if test="${substance.warningDate < compareDate && substance.totalAmount > 0}">
                             <c:choose>
                                 <c:when test="${substance.oldestDate < compareDate}">
                                     <font class="red">Eriä vanhentunut</font><br />

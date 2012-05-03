@@ -82,7 +82,7 @@
                     </c:otherwise>
                 </c:choose>             
             </c:if>
-                    <c:if test="${(substance.qualityStatus == 0 || substance.qualityStatus == 2) && substance.totalAmount > 0 && substance.inUse == true}">
+                    <c:if test="${(substance.qualityStatus == 0 || substance.qualityStatus == 2) && substance.inUse == true}">
                 <tr class="orange">
                     <td class="center">${date}</td>
                     <td><a href="substance/${substance.id}">${substance.name}</a></td>

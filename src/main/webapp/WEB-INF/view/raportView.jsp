@@ -6,7 +6,7 @@
 <div id="contents">
     <c:if test="${wantArrived == 1}">
         <div id="arrived">
-            <h2 id="reportHeader1" style="display: none;">Saapuneet radiolääkkeet <fmt:formatDate pattern="dd.MM.yyyy" value="${startDate}"/>  - <fmt:formatDate pattern="dd.MM.yyyy" value="${endDate}"/></h2>
+            <h2 id="reportHeader1" style="display: inline;">Saapuneet radiolääkkeet <fmt:formatDate pattern="dd.MM.yyyy" value="${startDate}"/>  - <fmt:formatDate pattern="dd.MM.yyyy" value="${endDate}"/></h2>
 
             <c:forEach var="substance" items="${substances}" varStatus="i">  
                 <table class="noborder" id="substance${i.index}" style="display: none;">        
@@ -40,7 +40,7 @@
 
     <c:if test="${wantRemoved == 1}">
         <div id="removed">
-            <h2 id="reportHeader2" style="display: none;">Poistuneet radiolääkkeet <fmt:formatDate pattern="dd.MM.yyyy" value="${startDate}"/>  - <fmt:formatDate pattern="dd.MM.yyyy" value="${endDate}"/></h2>
+            <h2 id="reportHeader2" style="display: inline;">Poistuneet radiolääkkeet <fmt:formatDate pattern="dd.MM.yyyy" value="${startDate}"/>  - <fmt:formatDate pattern="dd.MM.yyyy" value="${endDate}"/></h2>
 
             <c:forEach var="substance" items="${substances}" varStatus="j">
 
@@ -96,7 +96,7 @@
 
     <c:if test="${wantRadioMedDetails == 1}">
         <div id="RadioMedDetails">
-            <h2>Käyttökuntoon saatetut radiolääkkeet <fmt:formatDate pattern="dd.MM.yyyy" value="${startDate}"/>  - <fmt:formatDate pattern="dd.MM.yyyy" value="${endDate}"/></h2>  
+            <h2 style="display: inline;">Käyttökuntoon saatetut radiolääkkeet / tarkat tiedot <fmt:formatDate pattern="dd.MM.yyyy" value="${startDate}"/>  - <fmt:formatDate pattern="dd.MM.yyyy" value="${endDate}"/></h2>  
             <br/>
             
             <br/>

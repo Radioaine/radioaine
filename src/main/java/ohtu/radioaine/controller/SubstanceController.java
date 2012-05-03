@@ -72,6 +72,7 @@ public class SubstanceController {
         substance.setWarningBeforeAmount(sfo.getWarningBeforeAmount());
         substance.setVolume(sfo.getVolume());
         substance.setQualityControl(sfo.getQualityControl());
+        substance.setQualityStatus(0);
         substance.setStrength(sfo.getStrength());
         substance.setInUse(true);
         if (sfo.getType() == 1) {

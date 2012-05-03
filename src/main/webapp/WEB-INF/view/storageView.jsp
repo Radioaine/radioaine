@@ -44,7 +44,7 @@
                                 </c:otherwise>
                             </c:choose>
                         </c:if>
-                        <c:if test="${substance.qualityStatus == 0}">
+                        <c:if test="${substance.qualityStatus == 0 || substance.qualityStatus == 2}">
                             <font class="orange">Laadunvarmistus puuttuu</font>
                         </c:if>
                         </b></td>
@@ -93,7 +93,7 @@
                                 </c:otherwise>
                             </c:choose>
                         </c:if>
-                        <c:if test="${substance.qualityStatus == 0}">
+                        <c:if test="${substance.qualityStatus == 0 || substance.qualityStatus == 2}">
                             <font class="orange">Laadunvarmistus puuttuu</font>
                         </c:if>
                         </b>
@@ -142,7 +142,7 @@
                                 </c:otherwise>
                             </c:choose>
                         </c:if>
-                        <c:if test="${substance.qualityStatus == 0}">
+                        <c:if test="${substance.qualityStatus == 0 || substance.qualityStatus == 2}">
                             <font class="orange">Laadunvarmistus puuttuu</font>
                         </c:if>
                         </b>

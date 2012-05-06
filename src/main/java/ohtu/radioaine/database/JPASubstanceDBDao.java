@@ -40,7 +40,7 @@ public class JPASubstanceDBDao implements SubstanceDBDao {
 
     @Override
     public List<Substance> list() {
-        Query q = entityManager.createQuery("SELECT e FROM Substance e");
+        Query q = entityManager.createQuery("SELECT e FROM Substance e ORDER BY e.name");
         return q.getResultList();
     }
     

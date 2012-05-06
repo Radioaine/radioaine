@@ -40,13 +40,13 @@ public class JPASubstanceDBDao implements SubstanceDBDao {
 
     @Override
     public List<Substance> list() {
-        Query q = entityManager.createQuery("SELECT e FROM Substance e ORDER BY e.name");
+        Query q = entityManager.createQuery("SELECT e FROM Substance e ORDER BY e.name ASC");
         return q.getResultList();
     }
     
     @Override
     public List<Substance> listSpecificType(String type) {
-        Query q = entityManager.createQuery("SELECT e FROM Substance e WHERE e.type="+type);
+        Query q = entityManager.createQuery("SELECT e FROM Substance e WHERE e.type=" +type+ "ORDER BY e.name ASC");
         return q.getResultList(); 
         
     }

@@ -54,4 +54,9 @@ public class SimpleEluateService implements EluateService {
             storageDao.delete(e);
         }
     }
+
+    @Override
+    public List<Eluate> list(Timestamp startDate, Timestamp endDate) {
+        return storageDao.list(startDate, endDate);
+    }
 }

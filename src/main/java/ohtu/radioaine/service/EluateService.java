@@ -18,4 +18,5 @@ public interface EluateService {
     public Eluate read(Long id);
     public void delete(Long id);
     public List<Eluate> getAllByDate(Timestamp timestamp);
+    public List<Eluate> list(Timestamp startDate, Timestamp endDate);
 }

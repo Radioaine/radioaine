@@ -53,4 +53,10 @@ public class JPAEluateDBDao implements EluateDBDao {
         Query q = entityManager.createQuery("SELECT e FROM Eluate e WHERE e.date >'" + timestamp + "'");
         return q.getResultList();
     }
+
+    @Override
+    public List<Eluate> list(Timestamp startDate, Timestamp endDate) {
+        Query q = entityManager.createQuery("SELECT e FROM Eluate e WHERE e.date between '" + startDate + "' AND '" + endDate + "' ORDER BY e.date ASC");
+        return q.getResultList();
+    }
 }

@@ -15,6 +15,7 @@ import ohtu.radioaine.domain.Eluate;
 public interface EluateDBDao extends DAO<Eluate>{
     public List<Eluate> list();
     public List<Eluate> getAllByDate(Timestamp timestamp);
+    public List<Eluate> list(Timestamp startDate, Timestamp endDate);
 }
 
 
